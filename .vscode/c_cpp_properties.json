@@ -1,0 +1,23 @@
+{
+    "env": {
+        "defaultIncludePath": [
+            "${workspaceFolder}",
+            "${workspaceFolder}/include"
+        ]
+    },
+    "configurations": [
+        {
+            "name": "Vulkan dev",
+            "compilerPath": "gcc",
+            "intelliSenseMode": "gcc-x64",
+            "includePath": [
+                "${defaultIncludePath}",
+                "${VULKAN_SDK}/Include",
+                "${SDL2_PATH}/Include",
+                "${workspaceFolder}/external/glm"
+            ],
+            "cppStandard": "c++20"
+        }
+    ],
+    "version": 4
+}

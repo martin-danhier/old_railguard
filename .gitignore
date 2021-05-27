@@ -1,0 +1,6 @@
+# Build files
+Makefile
+*.make
+build
+bin
+*.log
