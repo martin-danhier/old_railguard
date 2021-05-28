@@ -1,4 +1,4 @@
-workspace "new_engine"
+workspace "railguard"
    configurations { "Debug", "Release" }
    location "build"
    -- Fix a bug on windows where this directory would not be created
@@ -16,12 +16,12 @@ workspace "new_engine"
 ---------------------------------
 
    -- Main Project
-   project "new_engine"
+   project "railguard"
       kind "ConsoleApp"
       language "C++"
       architecture "x64"
       targetdir "bin/%{cfg.buildcfg}"
-      location "build/new_engine"
+      location "build/railguard"
 
       -- Add header dependencies
       includedirs {
@@ -39,7 +39,7 @@ workspace "new_engine"
       links {"SDL2", "SDL2main"}
 
       -- Same as above, fix directory creation bug
-      os.mkdir "build/new_engine/obj"
+      os.mkdir "build/railguard/obj"
 
       -- Source files
 	   files { "src/**.cpp", "include/**.h", "include/**.hpp" }

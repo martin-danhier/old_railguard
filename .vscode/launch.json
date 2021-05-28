@@ -8,7 +8,7 @@
             "name": "Debug (Windows)",
             "type": "cppvsdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/bin/Debug/new_engine.exe",
+            "program": "${workspaceFolder}/bin/Debug/railguard.exe",
             "console": "integratedTerminal",
             "preLaunchTask": "Build (Debug)",
             "cwd": "${workspaceFolder}"
@@ -17,7 +17,7 @@
             "name": "Debug",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/bin/Debug/new_engine.exe",
+            "program": "${workspaceFolder}/bin/Debug/railguard.exe",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",

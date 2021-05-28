@@ -41,7 +41,7 @@
             "windows": {
                 "command": "MSBuild.exe",
                 "args": [
-                    "./build/new_engine.sln"
+                    "./build/railguard.sln"
                 ]
             }
         },
@@ -63,7 +63,7 @@
             "windows": {
                 "command": "MSBuild.exe",
                 "args": [
-                    "./build/new_engine.sln",
+                    "./build/railguard.sln",
                     "/property:Configuration=Release"
                 ]
             }
