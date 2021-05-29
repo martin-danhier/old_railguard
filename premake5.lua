@@ -23,20 +23,43 @@ workspace "railguard"
       targetdir "bin/%{cfg.buildcfg}"
       location "build/railguard"
 
+      -- Find SDL2
+      sdl_include_dir = os.findheader(
+         "SDL.h", {
+            "$(SDL2_PATH)/include/SDL2",
+            "/usr/include/SDL2",
+            "$(sdl2_image_DIR)/include/SDL2"
+         })
+      sdl_lib_dir = os.findlib(
+         "SDL2", {
+            "$(SDL2_PATH)/lib",
+            "/usr/lib/x86_64-linux-gnu/",
+            "$(sdl2_image_DIR)/lib",
+            "/usr/lib64"
+         }
+      )
+      if (sdl_include_dir == nil or sdl_lib_dir == nil) then
+         error("\n--> SDL2 must be installed.\n")
+      end
+
       -- Add header dependencies
       includedirs {
          "$(VULKAN_SDK)/Include",
-         "$(SDL2_PATH)/include",
+         sdl_include_dir,
          "external/glm"
       }
 
       -- Add lib dependencies
       libdirs {
          "$(VULKAN_SDK)/Lib",
-         "$(SDL2_PATH)/lib"
+         sdl_lib_dir
       }
 
-      links {"SDL2", "SDL2main"}
+      links {"SDL2"}
+      -- Only link SDL2main on windows
+      if (os.is("windows")) then
+         links { "SDL2main"}
+      end
 
       -- Same as above, fix directory creation bug
       os.mkdir "build/railguard/obj"
