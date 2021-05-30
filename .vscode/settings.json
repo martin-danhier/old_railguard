@@ -14,5 +14,8 @@
     ],
     "c-cpp-flylint.excludeFromWorkspacePaths": [
         "./external"
+    ],
+    "c-cpp-flylint.standard": [
+        "c++20"
     ]
 }
