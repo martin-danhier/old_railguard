@@ -66,4 +66,5 @@ workspace "railguard"
       os.mkdir "build/railguard/obj"
 
       -- Source files
-	   files { "src/**.cpp", "include/**.h", "include/**.hpp" }
+      includedirs { "include" }
+	   files { "src/**.cpp" }
