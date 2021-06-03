@@ -10,12 +10,14 @@
     "c-cpp-flylint.lizard.enable": false,
     "c-cpp-flylint.clang.extraArgs": ["-Wno-pragma-once-outside-header"],
     "c-cpp-flylint.includePaths": [
-        "${workspaceFolder}/include"
+        "${workspaceFolder}/include",
+        "${SDL2_PATH}/include"
     ],
     "c-cpp-flylint.excludeFromWorkspacePaths": [
         "./external"
     ],
     "c-cpp-flylint.standard": [
         "c++20"
-    ]
+    ],
+    "c-cpp-flylint.flawfinder.enable": false,
 }

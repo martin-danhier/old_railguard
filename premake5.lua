@@ -19,7 +19,7 @@ workspace "railguard"
    project "railguard"
       kind "ConsoleApp"
       language "C++"
-      buildoptions "--std=c++20"
+      buildoptions(iif(os.istarget("windows"), "/std:c++latest", "--std=c++20"))
       architecture "x64"
       targetdir "bin/%{cfg.buildcfg}"
       location "build/railguard"
@@ -28,8 +28,8 @@ workspace "railguard"
       sdl_include_dir = os.findheader(
          "SDL.h", {
             "$(SDL2_PATH)/include/SDL2",
-            "/usr/include/SDL2",
-            "$(sdl2_image_DIR)/include/SDL2"
+            "/usr/include",
+            "$(sdl2_image_DIR)/include"
          })
       sdl_lib_dir = os.findlib(
          "SDL2", {
@@ -39,6 +39,10 @@ workspace "railguard"
             "/usr/lib64"
          }
       )
+      if (sdl_include_dir == nil) then
+         print("Using default value for SDL")
+         sdl_include_dir = "$(SDL2_PATH)/include"
+      end
       if (sdl_include_dir == nil or sdl_lib_dir == nil) then
          error("\n--> SDL2 must be installed.\n")
       end
@@ -58,7 +62,7 @@ workspace "railguard"
 
       links {"SDL2"}
       -- Only link SDL2main on windows
-      if (os.is("windows")) then
+      if (os.istarget("windows")) then
          links { "SDL2main"}
       end
 
