@@ -1,4 +1,5 @@
 #pragma once
+
 #include "core/EntityManager.h"
 #include "WindowManager.h"
 #include <cmath>
@@ -19,6 +20,7 @@ namespace railguard::core
 
         void RunMainLoop();
 
+        void OnWindowResized(const Extent2D &newSize);
 
     };
 

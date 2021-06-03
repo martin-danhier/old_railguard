@@ -4,6 +4,12 @@
 
 namespace railguard::core
 {
+    struct Extent2D
+    {
+        uint32_t width;
+        uint32_t height;
+    };
+
     class WindowManager
     {
     private:
@@ -14,7 +20,8 @@ namespace railguard::core
         uint32_t _width{0};
         uint32_t _height{0};
         std::string _title{""};
-        EventSender<uint32_t> _resizeEvent;
+        // Event thrown when the window is resized
+        EventSender<Extent2D> _resizeEvent;
 
     public:
         WindowManager(int defaultWidth, int defaultHeight, const std::string &defaultTitle);
@@ -23,5 +30,7 @@ namespace railguard::core
         uint64_t GetPerformanceCounter();
         uint64_t GetPerformanceFrequency();
         bool HandleEvents();
+
+        EventSender<Extent2D> &ResizeEvent();
     };
 } // namespace railguard::core
