@@ -20,4 +20,12 @@
         "c++20"
     ],
     "c-cpp-flylint.flawfinder.enable": false,
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/CVS": true,
+        "**/.DS_Store": true
+    },
+    "explorerExclude.backup": null,
 }
