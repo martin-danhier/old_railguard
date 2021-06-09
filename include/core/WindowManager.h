@@ -1,3 +1,5 @@
+#pragma once
+
 #include "SDL2/SDL.h"
 #include "EventSender.h"
 #include <string>
@@ -25,12 +27,14 @@ namespace railguard::core
 
     public:
         WindowManager(int defaultWidth, int defaultHeight, const std::string &defaultTitle);
+        static void HandleError();
         void CreateWindow();
         void DestroyWindow();
-        uint64_t GetPerformanceCounter();
-        uint64_t GetPerformanceFrequency();
+        [[nodiscard]] uint64_t GetPerformanceCounter();
+        [[nodiscard]] uint64_t GetPerformanceFrequency();
+        [[nodiscard]] std::vector<const char*> GetRequiredVulkanExtensions() const;
         bool HandleEvents();
 
-        EventSender<Extent2D> &ResizeEvent();
+        [[nodiscard]] EventSender<Extent2D> &ResizeEvent();
     };
 } // namespace railguard::core

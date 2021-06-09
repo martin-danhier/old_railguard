@@ -8,10 +8,10 @@ namespace railguard::core
 {
     Engine::Engine() : _entityManager(DEFAULT_ENTITY_MANAGER_CAPACITY),
                        _windowManager(500, 500, "Railguard"),
+                       _renderer(750),
                        _deltaTime{0}
     {
-        _windowManager.ResizeEvent().RegisterListener("test", std::bind(&Engine::OnWindowResized, this, std::placeholders::_1));
-        
+        _renderer.Init(_windowManager);
         std::cout << "Engine initialized successfully.\n";
     }
 
@@ -42,10 +42,6 @@ namespace railguard::core
             // Call components
             
         }
-    }
-
-    void Engine::OnWindowResized(const Extent2D &newSize) {
-        std::cout << "New size: " << newSize.width << ", " << newSize.height << '\n';
     }
 
 } // namespace core

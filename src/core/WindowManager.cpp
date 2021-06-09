@@ -1,5 +1,6 @@
 #include "core/WindowManager.h"
 #include <iostream>
+#include <SDL2/SDL_vulkan.h>
 
 namespace railguard::core
 {
@@ -12,6 +13,10 @@ namespace railguard::core
         CreateWindow();
     }
 
+    void WindowManager::HandleError() {
+        std::cerr << "[SDL Error]\n" << SDL_GetError() << '\n'; 
+    }
+
     void WindowManager::CreateWindow()
     {
         // Create a window
@@ -19,11 +24,7 @@ namespace railguard::core
         _window = SDL_CreateWindow(_title.c_str(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, _width, _height, windowFlags);
         SDL_SetWindowResizable(_window, SDL_TRUE);
 
-        if (_window == nullptr)
-        {
-            // Error
-            std::cerr << "Error creating window\n";
-        }
+        if (_window == nullptr) HandleError();
     }
 
     void WindowManager::DestroyWindow()
@@ -40,6 +41,21 @@ namespace railguard::core
     uint64_t WindowManager::GetPerformanceFrequency()
     {
         return SDL_GetPerformanceFrequency();
+    }
+
+    std::vector<const char*> WindowManager::GetRequiredVulkanExtensions() const {
+        // Get the number of required extensions
+        uint32_t sdlRequiredExtensionsCount = 0;
+        if (!SDL_Vulkan_GetInstanceExtensions(_window, &sdlRequiredExtensionsCount, nullptr))
+            core::WindowManager::HandleError();
+
+        // Create a vector with that number and fetch said extensions
+        std::vector<const char *> sdlRequiredExtensions(sdlRequiredExtensionsCount);
+        if (!SDL_Vulkan_GetInstanceExtensions(_window, &sdlRequiredExtensionsCount, sdlRequiredExtensions.data()))
+            core::WindowManager::HandleError();
+
+        // Return the vector
+        return sdlRequiredExtensions;
     }
 
     bool WindowManager::HandleEvents()
