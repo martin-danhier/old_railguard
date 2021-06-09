@@ -3,7 +3,7 @@
 #define SDL_MAIN_HANDLED
 
 #include <SDL2/SDL.h>
-#include "core/Engine.h"
+#include "../include/core/Engine.h"
 
 using namespace railguard::core;
 

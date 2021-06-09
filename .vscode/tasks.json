@@ -17,7 +17,7 @@
             "windows": {
                 "command": "premake5",
                 "args": [
-                    "vs2019"
+                    "vs2019",
                 ]
             },
             "problemMatcher": []
@@ -33,7 +33,7 @@
             "args": [
                 "-C",
                 "build",
-                "config=debug"
+                "config=debug_linux"
             ],
             "problemMatcher": [],
             "group": "build",
@@ -41,7 +41,9 @@
             "windows": {
                 "command": "MSBuild.exe",
                 "args": [
-                    "./build/railguard.sln"
+                    "./build/railguard.sln",
+                    "/property:Configuration=Debug",
+                    "/property:Platform=Win64"
                 ]
             }
         },
@@ -55,7 +57,7 @@
             "args": [
                 "-C",
                 "build",
-                "config=release"
+                "config=release_linux"
             ],
             "problemMatcher": [],
             "group": "build",
@@ -64,7 +66,8 @@
                 "command": "MSBuild.exe",
                 "args": [
                     "./build/railguard.sln",
-                    "/property:Configuration=Release"
+                    "/property:Configuration=Release",
+                    "/property:Platform=Win64"
                 ]
             }
         }

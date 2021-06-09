@@ -1,4 +1,4 @@
-#include "core/ComponentMatch.h"
+#include "../../include/core/ComponentMatch.h"
 #include <cassert>
 
 namespace railguard::core

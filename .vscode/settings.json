@@ -12,7 +12,8 @@
     "c-cpp-flylint.includePaths": [
         "${workspaceFolder}/include",
         "${SDL2_PATH}/include",
-        "${workspaceFolder}/external/vk-bootstrap/src"
+        "${workspaceFolder}/external/vk-bootstrap/src",
+        "${VULKAN_SDK}/include"
     ],
     "c-cpp-flylint.excludeFromWorkspacePaths": [
         "./external"

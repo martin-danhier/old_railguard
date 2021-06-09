@@ -1,4 +1,4 @@
-#include "core/Entity.h"
+#include "../../include/core/Entity.h"
 
 namespace railguard::core
 {

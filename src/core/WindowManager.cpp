@@ -1,4 +1,4 @@
-#include "core/WindowManager.h"
+#include "../../include/core/WindowManager.h"
 #include <iostream>
 #include <SDL2/SDL_vulkan.h>
 
@@ -56,6 +56,13 @@ namespace railguard::core
 
         // Return the vector
         return sdlRequiredExtensions;
+    }
+
+    vk::SurfaceKHR WindowManager::GetVulkanSurface(vk::Instance instance) const {
+        VkSurfaceKHR surface;
+        // Generate surface
+        if (!SDL_Vulkan_CreateSurface(_window, instance, &surface)) HandleError();
+        return vk::SurfaceKHR(surface);
     }
 
     bool WindowManager::HandleEvents()

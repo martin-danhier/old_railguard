@@ -1,8 +1,8 @@
 #pragma once
 
-#include "core/EntityManager.h"
+#include "EntityManager.h"
 #include "WindowManager.h"
-#include "rendering/Renderer.h"
+#include "../rendering/Renderer.h"
 #include <cmath>
 
 namespace railguard::core

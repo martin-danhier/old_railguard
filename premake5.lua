@@ -1,5 +1,6 @@
 workspace "railguard"
    configurations { "Debug", "Release" }
+   platforms {"Win64", "Linux"}
    location "build"
    -- Fix a bug on windows where this directory would not be created
    os.mkdir "./bin"
@@ -12,6 +13,13 @@ workspace "railguard"
    filter "configurations:Release"
       defines { "NDEBUG" }
       optimize "On"
+   -- Windows platform
+   filter "platforms:Win64"
+      system "windows"
+   -- Linux platform
+   filter "platforms:Linux"
+      system "linux"
+   filter {}
 
 ---------------------------------
    project "vkbootstrap"
@@ -20,10 +28,11 @@ workspace "railguard"
       architecture "x64"
       location "build/vkbootstrap"
       files {"./external/vk-bootstrap/src/**.cpp", "./external/vk-bootstrap/src/**.h"}
-      
+      includedirs {"$(VULKAN_SDK)/include"}
+      libdirs {"$(VULKAN_SDK)/Lib"}
 
-      -- Main Project
-      project "railguard"
+   -- Main Project
+   project "railguard"
       kind "ConsoleApp"
       language "C++"
       buildoptions(iif(os.istarget("windows"), "/std:c++latest", "--std=c++20"))
@@ -56,7 +65,7 @@ workspace "railguard"
          
          -- Add header dependencies
          includedirs {
-            "$(VULKAN_SDK)/Include",
+            "$(VULKAN_SDK)/include",
             sdl_include_dir,
             "external/glm",
             "./external/vk-bootstrap/src"
@@ -69,15 +78,21 @@ workspace "railguard"
          sdl_lib_dir
       }
 
-      links {"SDL2", "vkbootstrap", "dl"}
+      links {"SDL2", "vkbootstrap"}
+
       -- Only link SDL2main on windows
-      if (os.istarget("windows")) then
+      filter {"platforms:Win64"}
          links { "SDL2main"}
-      end
+
+      -- Only link dl on Linux
+      filter {"platforms:Linux"}
+         links {"dl"}
+      -- Reset filter
+      filter{}
 
       -- Same as above, fix directory creation bug
       os.mkdir "build/railguard/obj"
 
       -- Source files
-      includedirs { "include" }
+      files { "include/**.h" }
 	   files { "src/**.cpp" }

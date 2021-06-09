@@ -1,4 +1,4 @@
-#include "core/EntityManager.h"
+#include "../../include/core/EntityManager.h"
 #include <cassert>
 
 #define MIN_FREED_INDICES_BEFORE_REUSE 1024

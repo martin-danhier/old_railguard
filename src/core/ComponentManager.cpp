@@ -1,7 +1,7 @@
 #include <cassert>
 #include <random>
 #include <iostream>
-#include "core/ComponentManager.h"
+#include "../../include/core/ComponentManager.h"
 
 #define REQUIRED_FOUND_ALIVE_TO_END_GC 5
 

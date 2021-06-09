@@ -4,6 +4,10 @@
 #include "EventSender.h"
 #include <string>
 
+// We want to dynamically load Vulkan functions
+#define VULKAN_HPP_DISPATCH_LOADER_DYNAMIC 1
+#include <vulkan/vulkan.hpp>
+
 namespace railguard::core
 {
     struct Extent2D
@@ -33,6 +37,7 @@ namespace railguard::core
         [[nodiscard]] uint64_t GetPerformanceCounter();
         [[nodiscard]] uint64_t GetPerformanceFrequency();
         [[nodiscard]] std::vector<const char*> GetRequiredVulkanExtensions() const;
+        [[nodiscard]] vk::SurfaceKHR GetVulkanSurface(vk::Instance instance) const;
         bool HandleEvents();
 
         [[nodiscard]] EventSender<Extent2D> &ResizeEvent();
