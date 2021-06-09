@@ -11,6 +11,8 @@
     "c-cpp-flylint.clang.extraArgs": ["-Wno-pragma-once-outside-header"],
     "c-cpp-flylint.includePaths": [
         "${workspaceFolder}/include",
+        "${workspaceFolder}/external/glm",
+        "${workspaceFolder}/external/vma",
         "${SDL2_PATH}/include",
         "${workspaceFolder}/external/vk-bootstrap/src",
         "${VULKAN_SDK}/include"

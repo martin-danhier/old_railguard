@@ -68,7 +68,8 @@ workspace "railguard"
             "$(VULKAN_SDK)/include",
             sdl_include_dir,
             "external/glm",
-            "./external/vk-bootstrap/src"
+            "external/vk-bootstrap/src",
+            "external/vma"
          }
          
          

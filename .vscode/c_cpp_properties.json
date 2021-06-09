@@ -14,6 +14,7 @@
                 "${defaultIncludePath}",
                 "${VULKAN_SDK}/Include",
                 "${workspaceFolder}/external/glm",
+                "${workspaceFolder}/external/vma",
                 "${workspaceFolder}/external/vk-bootstrap/src",
                 "${SDL2_PATH}/include"
             ],
