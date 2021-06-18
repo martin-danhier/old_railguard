@@ -1,9 +1,8 @@
 #pragma once
 #include "../core/ComponentManager.h"
 #include "../core/WindowManager.h"
-#define VMA_STATIC_VULKAN_FUNCTIONS 0
-#define VMA_DYNAMIC_VULKAN_FUNCTIONS 0
-#include <vk_mem_alloc.h>
+
+#include "init/VulkanInit.h"
 
 namespace railguard::rendering
 {
@@ -21,7 +20,7 @@ namespace railguard::rendering
         vk::Queue _graphicsQueue{nullptr};
         uint32_t _graphicsQueueFamily{0};
         VmaAllocator _allocator{nullptr};
-        
+
     public:
         void Init(const core::WindowManager &windowManager);
         explicit Renderer(const size_t defaultComponentCapacity);

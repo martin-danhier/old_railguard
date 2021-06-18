@@ -99,4 +99,11 @@ namespace railguard::core
         return _resizeEvent;
     }
 
+    Extent2D WindowManager::GetWindowExtent() const {
+        return Extent2D {
+            .width = _width,
+            .height = _height,
+        };
+    }
+
 } // namespace core

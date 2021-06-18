@@ -38,6 +38,7 @@ namespace railguard::core
         [[nodiscard]] uint64_t GetPerformanceFrequency();
         [[nodiscard]] std::vector<const char*> GetRequiredVulkanExtensions() const;
         [[nodiscard]] vk::SurfaceKHR GetVulkanSurface(vk::Instance instance) const;
+        [[nodiscard]] Extent2D GetWindowExtent() const;
         bool HandleEvents();
 
         [[nodiscard]] EventSender<Extent2D> &ResizeEvent();
