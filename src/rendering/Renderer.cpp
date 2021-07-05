@@ -43,7 +43,7 @@ namespace railguard::rendering
 		_instance.destroy();
 	}
 
-	core::ComponentMatch Renderer::CreateComponent(const core::Entity& entity)
+	core::Match Renderer::CreateComponent(const core::Entity& entity)
 	{
 		// TODO insert values
 

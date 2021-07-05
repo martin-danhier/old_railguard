@@ -112,20 +112,51 @@ namespace railguard::rendering::init
 		vmaCreateAllocator(&allocatorInfo, initInfo.allocator);
 	}
 
-	void InitSwapchain(const SwapchainInitInfo &initInfo)
+	void InitWindowSwapchain(const SwapchainInitInfo &initInfo)
 	{
 		// Get window extent
 		auto windowExtent = initInfo.windowManager.GetWindowExtent();
 
 		// Init swapchain with vk bootstrap
-		vkb::SwapchainBuilder swapchainBuilder { initInfo.physicalDevice, initInfo.device, initInfo.surface };
+		vkb::SwapchainBuilder swapchainBuilder{initInfo.physicalDevice, initInfo.device, initInfo.surface};
 		auto vkbSwapchain = swapchainBuilder.use_default_format_selection()
-			.set_desired_present_mode(VK_PRESENT_MODE_FIFO_KHR)
-			.set_desired_extent(windowExtent.width, windowExtent.height)
-			.build()
-			.value();
+								.set_desired_present_mode(VK_PRESENT_MODE_FIFO_KHR)
+								.set_desired_extent(windowExtent.width, windowExtent.height)
+								.build()
+								.value();
 
 		// Store swapchain and images
-		
+		*initInfo.swapchain = vkbSwapchain.swapchain;
+		*initInfo.swapchainImages = initInfo.device.getSwapchainImagesKHR(*initInfo.swapchain);
+		*initInfo.swapchainImageFormat = vk::Format(vkbSwapchain.image_format);
+
+		// Get image views
+		initInfo.swapchainImageViews->resize(initInfo.swapchainImages->size());
+
+		for (uint32_t i = 0; i < static_cast<uint32_t>(initInfo.swapchainImages->size()); i++)
+		{
+			vk::ImageViewCreateInfo createInfo{
+				.image = (*initInfo.swapchainImages)[i],
+				.viewType = vk::ImageViewType::e2D,
+				.format = *initInfo.swapchainImageFormat,
+				.components{
+					.r = vk::ComponentSwizzle::eIdentity,
+					.g = vk::ComponentSwizzle::eIdentity,
+					.b = vk::ComponentSwizzle::eIdentity,
+					.a = vk::ComponentSwizzle::eIdentity,
+				},
+				.subresourceRange{
+					.aspectMask = vk::ImageAspectFlagBits::eColor,
+					.baseMipLevel = 0,
+					.levelCount = 1,
+					.baseArrayLayer = 0,
+					.layerCount = 1,
+				},
+			};
+
+			(*initInfo.swapchainImageViews)[i] = initInfo.device.createImageView(createInfo);
+		}
+
+		// TODO depth image
 	}
 }

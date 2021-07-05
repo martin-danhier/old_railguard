@@ -25,7 +25,7 @@ namespace railguard::rendering
         void Init(const core::WindowManager &windowManager);
         explicit Renderer(const size_t defaultComponentCapacity);
         ~Renderer();
-        core::ComponentMatch CreateComponent(const core::Entity &entity);
+        core::Match CreateComponent(const core::Entity &entity);
         void DestroyComponent(size_t index) override;
     };
 

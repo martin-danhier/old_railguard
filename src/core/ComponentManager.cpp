@@ -15,7 +15,7 @@ namespace railguard::core
         _entityLookUpMap.reserve(defaultComponentCapacity);
     }
 
-    ComponentMatch ComponentManager::RegisterComponent(const Entity &entity)
+    Match ComponentManager::RegisterComponent(const Entity &entity)
     {
         // Add the entity in the list
         _entities.push_back(entity);
@@ -25,21 +25,21 @@ namespace railguard::core
         _entityLookUpMap[entity.eid] = _entities.size();
 
         // Other managers should also push values to the respective vectors
-        return ComponentMatch(_entities.size());
+        return Match(_entities.size());
     }
 
-    const ComponentMatch ComponentManager::FindComponentOfEntity(const Entity &entity)
+    const Match ComponentManager::FindComponentOfEntity(const Entity &entity)
     {
         size_t index = _entityLookUpMap[entity.eid];
-        return ComponentMatch(index);
+        return Match(index);
     }
 
-    const Entity ComponentManager::GetCorrespondingEntity(const ComponentMatch &match)
+    const Entity ComponentManager::GetCorrespondingEntity(const Match &match)
     {
         return _entities[match.GetIndex()];
     }
 
-    void ComponentManager::DestroyComponent(const ComponentMatch &match)
+    void ComponentManager::DestroyComponent(const Match &match)
     {
         size_t index = match.GetIndex();
         DestroyComponent(index);

@@ -84,7 +84,8 @@
         "mutex": "cpp",
         "ratio": "cpp",
         "shared_mutex": "cpp",
-        "thread": "cpp"
+        "thread": "cpp",
+        "variant": "cpp"
     },
     "c-cpp-flylint.cppcheck.enable": false
 }

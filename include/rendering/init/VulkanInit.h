@@ -15,6 +15,6 @@ namespace railguard::rendering::init
          * @param initInfo A struct containing destination pointers for the various handles.
          */
         static void InitVulkan(const VulkanInitInfo &initInfo);
-        static void InitSwapchain(const SwapchainInitInfo &initInfo);
+        static void InitWindowSwapchain(const SwapchainInitInfo &initInfo);
     };
 }

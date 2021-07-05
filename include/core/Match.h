@@ -6,7 +6,7 @@ namespace railguard::core {
     // Created for example by calling ComponentManager.FindComponentOfEntity or by creating a component
     // Contains either the index of the corresponding component or nothing (in case no component was found)
     // Thus, the HasResult function should be called before the GetIndex value is used
-    class ComponentMatch
+    class Match
     {
     private:
         // Index of the corresponding component in the manager + 1
@@ -14,7 +14,7 @@ namespace railguard::core {
         size_t _index;
 
     public:
-        explicit ComponentMatch(size_t index);
+        explicit Match(size_t index);
 
         // Returns true if a component was found, false otherwise
         [[nodiscard]] bool HasResult() const;
