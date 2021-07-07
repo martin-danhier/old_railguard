@@ -13,29 +13,39 @@ namespace railguard::rendering
     {
     private:
 
+        // Device handle to avoid requiring it everywhere
+        vk::Device _vulkanDevice = nullptr;
+        vk::PhysicalDevice _vulkanPhysicalDevice= nullptr;
+
         std::unordered_map<swapchain_id_t, size_t> _idLookupMap;
-        std::vector<swapchain_id_t> _id;
-        std::vector<vk::SwapchainKHR> _swapchain;
-        std::vector<vk::Format> _swapchainImageFormat;
+        std::vector<swapchain_id_t> _ids;
+        std::vector<vk::SwapchainKHR> _swapchains;
+        std::vector<vk::Format> _swapchainImageFormats;
         // std::vector<vk::Format> _depthImageFormat;
-        std::vector<std::vector<vk::Image>> _swapchainImages;
-        std::vector<std::vector<vk::ImageView>> _swapchainImageViews;
+        std::vector<std::vector<vk::Image>> _swapchainsImages;
+        std::vector<std::vector<vk::ImageView>> _swapchainsImageViews;
 
         swapchain_id_t _lastUsedId = 0;
 
     public:
-        explicit SwapchainManager(size_t defaultCapacity = 1);
+        explicit SwapchainManager();
+        SwapchainManager(vk::Device device, vk::PhysicalDevice physicalDevice, size_t defaultCapacity = 1);
+
+        /**
+         * @brief Destroys every remaining swapchain.
+         */
+        void Clear();
 
         /**
          * @brief Create a swapchain that will be used to render on a window.
          *
          * @return swapchain_id_t The id of the new swapchain
          */
-        swapchain_id_t CreateWindowSwapchain(const vk::Device &device, const vk::PhysicalDevice &physicalDevice, const vk::SurfaceKHR &surface, const core::WindowManager &windowManager);
-    
+        swapchain_id_t CreateWindowSwapchain(const vk::SurfaceKHR &surface, const core::WindowManager &windowManager);
+
         [[nodiscard]] core::Match LookupId(swapchain_id_t id);
 
-        void DestroySwapchain(const vk::Device &device, const core::Match &match);
+        void DestroySwapchain(const core::Match &match);
 
         /**
          * @brief Destroy and recreate the given swapchain at the same slot. Invalidates vulkan objects that used this swapchain.
@@ -46,7 +56,7 @@ namespace railguard::rendering
          * @param surface Vulkan surface
          * @param windowManager Window manager
          */
-        void RecreateWindowSwapchain(const core::Match &match, const vk::Device &device, const vk::PhysicalDevice &physicalDevice, const vk::SurfaceKHR &surface, const core::WindowManager &windowManager);
+        void RecreateWindowSwapchain(const core::Match &match, const vk::SurfaceKHR &surface, const core::WindowManager &windowManager);
 
         // Getters
 

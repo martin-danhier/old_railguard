@@ -20,7 +20,10 @@ namespace railguard::rendering::init
 		vkb::InstanceBuilder vkbInstanceBuilder;
 #ifndef NDEBUG
 		// Enable validation layers and debug messenger in debug mode
-		vkbInstanceBuilder.request_validation_layers(true).use_default_debug_messenger();
+		vkbInstanceBuilder
+			.request_validation_layers(true)
+			.enable_validation_layers()
+			.use_default_debug_messenger();
 #endif
 
 		// Get required SDL extensions
@@ -56,6 +59,7 @@ namespace railguard::rendering::init
 		vkb::PhysicalDeviceSelector gpuSelector{vkbInstance};
 		auto vkbPhysicalDevice = gpuSelector.set_minimum_version(1, 1)
 									 .set_surface(*initInfo.surface)
+									 .add_required_extension(VK_KHR_SWAPCHAIN_EXTENSION_NAME)
 									 .select()
 									 .value();
 		// Get logical device
@@ -112,7 +116,7 @@ namespace railguard::rendering::init
 		vmaCreateAllocator(&allocatorInfo, initInfo.allocator);
 	}
 
-	void InitWindowSwapchain(const SwapchainInitInfo &initInfo)
+	void VulkanInit::InitWindowSwapchain(const SwapchainInitInfo &initInfo)
 	{
 		// Get window extent
 		auto windowExtent = initInfo.windowManager.GetWindowExtent();

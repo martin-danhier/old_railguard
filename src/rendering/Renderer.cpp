@@ -3,12 +3,12 @@
 namespace railguard::rendering
 {
 
-	void Renderer::Init(const core::WindowManager& windowManager)
+	Renderer::Renderer(const core::WindowManager &windowManager)
 	{
 		// === Init Vulkan ===
 
 		// Init instance
-		init::VulkanInitInfo vulkanInitInfo {
+		init::VulkanInitInfo vulkanInitInfo{
 			.windowManager = windowManager,
 			.instance = &_instance,
 			.debugMessenger = &_debugMessenger,
@@ -22,41 +22,32 @@ namespace railguard::rendering
 		};
 		init::VulkanInit::InitVulkan(vulkanInitInfo);
 
-	}
+		// Init swapchain for window
+		_swapchainManager = SwapchainManager(_device, _physicalDevice, 1);
+		_mainWindowSwapchain = _swapchainManager.CreateWindowSwapchain(_surface, windowManager);
 
-	Renderer::Renderer(const size_t defaultComponentCapacity)
-		: ComponentManager(defaultComponentCapacity)
-	{
-		// Init vectors
+		// Init camera managers
+		_swapchainCameraManager = SwapchainCameraManager(1);
 	}
 
 	Renderer::~Renderer()
 	{
+		// Destroy swapchains
+		_swapchainManager.Clear();
 		// Destroy allocator
-		// vmaDestroyAllocator(_allocator);
-		// // Destroy device
-		// _device.destroy();
-		// // Destroy surface
-		// _instance.destroySurfaceKHR(_surface);
+		vmaDestroyAllocator(_allocator);
+		// Destroy device
+		_device.destroy();
+		// Destroy surface
+		_instance.destroySurfaceKHR(_surface);
 		// Destroy instance
 		_instance.destroyDebugUtilsMessengerEXT(_debugMessenger);
 		_instance.destroy();
 	}
 
-	core::Match Renderer::CreateComponent(const core::Entity& entity)
+	void Renderer::Draw()
 	{
-		// TODO insert values
-
-		// Run boilerplate for entity management
-		return this->RegisterComponent(entity);
-	}
-
-	void Renderer::DestroyComponent(size_t index)
-	{
-		// Run boilerplate deletion
-		core::ComponentManager::DestroyComponent(index);
-
-		// Move the last item of vectors to the destroyed index
+		
 	}
 
 } // namespace railguard::rendering

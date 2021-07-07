@@ -8,10 +8,9 @@ namespace railguard::core
 {
     Engine::Engine() : _entityManager(DEFAULT_ENTITY_MANAGER_CAPACITY),
                        _windowManager(500, 500, "Railguard"),
-                       _renderer(750),
+                       _renderer(_windowManager),
                        _deltaTime{0}
     {
-        _renderer.Init(_windowManager);
         std::cout << "Engine initialized successfully.\n";
     }
 

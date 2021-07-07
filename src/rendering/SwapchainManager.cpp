@@ -4,17 +4,52 @@
 namespace railguard::rendering
 {
 
-    SwapchainManager::SwapchainManager(size_t defaultCapacity)
+    SwapchainManager::SwapchainManager() : _vulkanDevice(nullptr),
+                                           _vulkanPhysicalDevice(nullptr) {}
+
+    SwapchainManager::SwapchainManager(vk::Device device, vk::PhysicalDevice physicalDevice, size_t defaultCapacity)
     {
+        _vulkanDevice = device;
+        _vulkanPhysicalDevice = physicalDevice;
+
         // Allocate space in the vectors
-        _id.reserve(defaultCapacity);
-        _swapchain.reserve(defaultCapacity);
-        _swapchainImageFormat.reserve(defaultCapacity);
-        _swapchainImages.reserve(defaultCapacity);
-        _swapchainImageViews.reserve(defaultCapacity);
+        _ids.reserve(defaultCapacity);
+        _swapchains.reserve(defaultCapacity);
+        _swapchainImageFormats.reserve(defaultCapacity);
+        _swapchainsImages.reserve(defaultCapacity);
+        _swapchainsImageViews.reserve(defaultCapacity);
     }
 
-    swapchain_id_t SwapchainManager::CreateWindowSwapchain(const vk::Device &device, const vk::PhysicalDevice &physicalDevice, const vk::SurfaceKHR &surface, const core::WindowManager &windowManager)
+    void SwapchainManager::Clear()
+    {
+
+        // Destroy image views
+        for (auto imageViewVector : _swapchainsImageViews)
+        {
+            for (auto imageView : imageViewVector)
+            {
+                _vulkanDevice.destroyImageView(imageView);
+            }
+        }
+
+        // We need to destroy every swapchain
+        // No need to do other operations on the vectors, since they will be destroyed anyway
+        // We also iterate in reverse to destroy the first created swapchains last
+        for (auto swapchain : _swapchains)
+        {
+            _vulkanDevice.destroySwapchainKHR(swapchain);
+        }
+
+        // Clear everything
+        _ids.clear();
+        _swapchains.clear();
+        _swapchainImageFormats.clear();
+        _swapchainsImageViews.clear();
+        _swapchainsImages.clear();
+        _idLookupMap.clear();
+    }
+
+    swapchain_id_t SwapchainManager::CreateWindowSwapchain(const vk::SurfaceKHR &surface, const core::WindowManager &windowManager)
     {
         // Get new id for the swapchain
         swapchain_id_t newId = _lastUsedId++;
@@ -27,8 +62,8 @@ namespace railguard::rendering
 
         // Create the swapchain
         init::SwapchainInitInfo swapchainInitInfo{
-            .device = device,
-            .physicalDevice = physicalDevice,
+            .device = _vulkanDevice,
+            .physicalDevice = _vulkanPhysicalDevice,
             .surface = surface,
             .windowManager = windowManager,
             .swapchain = &newSwapchain,
@@ -38,14 +73,14 @@ namespace railguard::rendering
         init::VulkanInit::InitWindowSwapchain(swapchainInitInfo);
 
         // Push the new swapchain to vectors
-        _id.push_back(newId);
-        _swapchain.push_back(newSwapchain);
-        _swapchainImageFormat.push_back(newSwapchainImageFormat);
-        _swapchainImages.push_back(newSwapchainImages);
-        _swapchainImageViews.push_back(newSwapchainImageViews);
+        _ids.push_back(newId);
+        _swapchains.push_back(newSwapchain);
+        _swapchainImageFormats.push_back(newSwapchainImageFormat);
+        _swapchainsImages.push_back(newSwapchainImages);
+        _swapchainsImageViews.push_back(newSwapchainImageViews);
 
         // Save id in the map
-        _idLookupMap[newId] = _id.size();
+        _idLookupMap[newId] = _ids.size();
 
         return newId;
     }
@@ -56,75 +91,78 @@ namespace railguard::rendering
         return core::Match(index);
     }
 
-    void SwapchainManager::DestroySwapchain(const vk::Device &device, const core::Match &match)
+    void SwapchainManager::DestroySwapchain(const core::Match &match)
     {
         // Get index
-        swapchain_id_t index = match.GetIndex();
+        swapchain_id_t index = static_cast<swapchain_id_t>(match.GetIndex());
 
         // Destroy the swapchain
-        device.destroySwapchainKHR(_swapchain[index]);
+        _vulkanDevice.destroySwapchainKHR(_swapchains[index]);
 
         // Remove entry from map
-        _idLookupMap.erase(_id[index]);
+        _idLookupMap.erase(_ids[index]);
 
         // Move the last item of the vectors
-        size_t lastIndex = _id.size() - 1;
+        size_t lastIndex = _ids.size() - 1;
         if (index < lastIndex)
         {
-            swapchain_id_t movedId = _id[lastIndex];
-            _id[index] = movedId;
-            _swapchain[index] = _swapchain[lastIndex];
-            _swapchainImageFormat[index] = _swapchainImageFormat[lastIndex];
-            _swapchainImages[index] = _swapchainImages[lastIndex];
-            _swapchainImageViews[index] = _swapchainImageViews[lastIndex];
+            swapchain_id_t movedId = _ids[lastIndex];
+            _ids[index] = movedId;
+            _swapchains[index] = _swapchains[lastIndex];
+            _swapchainImageFormats[index] = _swapchainImageFormats[lastIndex];
+            _swapchainsImages[index] = _swapchainsImages[lastIndex];
+            _swapchainsImageViews[index] = _swapchainsImageViews[lastIndex];
             // Update id in map
             _idLookupMap[movedId] = index;
         }
 
         // Remove last elements
-        _id.pop_back();
-        _swapchain.pop_back();
-        _swapchainImageFormat.pop_back();
-        _swapchainImages.pop_back();
-        _swapchainImageViews.pop_back();
+        _ids.pop_back();
+        _swapchains.pop_back();
+        _swapchainImageFormats.pop_back();
+        _swapchainsImages.pop_back();
+        _swapchainsImageViews.pop_back();
     }
 
-    void SwapchainManager::RecreateWindowSwapchain(const core::Match &match, const vk::Device &device, const vk::PhysicalDevice &physicalDevice, const vk::SurfaceKHR &surface, const core::WindowManager &windowManager) {
+    void SwapchainManager::RecreateWindowSwapchain(const core::Match &match, const vk::SurfaceKHR &surface, const core::WindowManager &windowManager)
+    {
 
         // Get index
         auto index = match.GetIndex();
 
         // Destroy old swapchain
-        device.destroySwapchainKHR(_swapchain[index]);
+        _vulkanDevice.destroySwapchainKHR(_swapchains[index]);
 
         // Create new one at the same slot
         init::SwapchainInitInfo swapchainInitInfo{
-            .device = device,
-            .physicalDevice = physicalDevice,
+            .device = _vulkanDevice,
+            .physicalDevice = _vulkanPhysicalDevice,
             .surface = surface,
             .windowManager = windowManager,
-            .swapchain = &_swapchain[index],
-            .swapchainImages = &_swapchainImages[index],
-            .swapchainImageFormat = &_swapchainImageFormat[index],
-            .swapchainImageViews = &_swapchainImageViews[index]
-        };
+            .swapchain = &_swapchains[index],
+            .swapchainImages = &_swapchainsImages[index],
+            .swapchainImageFormat = &_swapchainImageFormats[index],
+            .swapchainImageViews = &_swapchainsImageViews[index]};
         init::VulkanInit::InitWindowSwapchain(swapchainInitInfo);
-
     }
 
-    vk::SwapchainKHR SwapchainManager::GetSwapchain(const core::Match &match) const {
-        return _swapchain[match.GetIndex()];
+    vk::SwapchainKHR SwapchainManager::GetSwapchain(const core::Match &match) const
+    {
+        return _swapchains[match.GetIndex()];
     }
 
-    vk::Format SwapchainManager::GetSwapchainImageFormat(const core::Match &match) const {
-        return _swapchainImageFormat[match.GetIndex()];
+    vk::Format SwapchainManager::GetSwapchainImageFormat(const core::Match &match) const
+    {
+        return _swapchainImageFormats[match.GetIndex()];
     }
 
-    std::vector<vk::Image> SwapchainManager::GetSwapchainImages(const core::Match &match) const {
-        return _swapchainImages[match.GetIndex()];
+    std::vector<vk::Image> SwapchainManager::GetSwapchainImages(const core::Match &match) const
+    {
+        return _swapchainsImages[match.GetIndex()];
     }
 
-    std::vector<vk::ImageView> SwapchainManager::GetSwapchainImageViews(const core::Match &match) const {
-        return _swapchainImageViews[match.GetIndex()];
+    std::vector<vk::ImageView> SwapchainManager::GetSwapchainImageViews(const core::Match &match) const
+    {
+        return _swapchainsImageViews[match.GetIndex()];
     }
 }

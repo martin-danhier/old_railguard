@@ -27,6 +27,7 @@ namespace railguard::core
         uint32_t _width{0};
         uint32_t _height{0};
         std::string _title{""};
+        
         // Event thrown when the window is resized
         EventSender<Extent2D> _resizeEvent;
 

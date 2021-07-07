@@ -6,7 +6,10 @@
 
 namespace railguard::core
 {
-
+    /**
+     * @brief Type representing an index of a component.
+     */
+    typedef size_t component_id_t;
 
     class ComponentManager
     {
@@ -15,7 +18,7 @@ namespace railguard::core
 
         // Map that can be used for fast search of a component given an entity
         // Entity -> Component
-        std::unordered_map<eid_t, size_t> _entityLookUpMap;
+        std::unordered_map<eid_t, component_id_t> _entityLookUpMap;
 
         // === Component data ===
 
@@ -29,10 +32,10 @@ namespace railguard::core
         Match RegisterComponent(const Entity &entity);
     public:
         // Inits the manager and preallocate space in the vectors and maps
-        explicit ComponentManager(const size_t defaultComponentCapacity);
+        explicit ComponentManager(const component_id_t defaultComponentCapacity);
         // Destroys the given component
         void DestroyComponent(const Match &match);
-        virtual void DestroyComponent(size_t index);
+        virtual void DestroyComponent(component_id_t index);
         // Finds the component
         [[nodiscard]] const Match FindComponentOfEntity(const Entity &entity);
         // Finds the entity linked to this component

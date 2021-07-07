@@ -8,7 +8,7 @@
 namespace railguard::core
 {
 
-    ComponentManager::ComponentManager(const size_t defaultComponentCapacity)
+    ComponentManager::ComponentManager(const component_id_t defaultComponentCapacity)
     {
         // Pre allocate the given size
         _entities.reserve(defaultComponentCapacity);
@@ -30,7 +30,7 @@ namespace railguard::core
 
     const Match ComponentManager::FindComponentOfEntity(const Entity &entity)
     {
-        size_t index = _entityLookUpMap[entity.eid];
+        component_id_t index = _entityLookUpMap[entity.eid];
         return Match(index);
     }
 
@@ -41,10 +41,10 @@ namespace railguard::core
 
     void ComponentManager::DestroyComponent(const Match &match)
     {
-        size_t index = match.GetIndex();
+        component_id_t index = match.GetIndex();
         DestroyComponent(index);
     }
-    void ComponentManager::DestroyComponent(size_t index)
+    void ComponentManager::DestroyComponent(component_id_t index)
     {
         assert(index < _entities.size());
 
