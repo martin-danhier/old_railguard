@@ -4,6 +4,7 @@ namespace railguard::rendering
 {
 
 	Renderer::Renderer(const core::WindowManager &windowManager)
+		: _swapchainCameraManager(1)
 	{
 		// === Init Vulkan ===
 
@@ -23,15 +24,17 @@ namespace railguard::rendering
 		init::VulkanInit::InitVulkan(vulkanInitInfo);
 
 		// Init swapchain for window
-		_swapchainManager = SwapchainManager(_device, _physicalDevice, 1);
+		_swapchainManager.Init(_device, _physicalDevice, 1);
 		_mainWindowSwapchain = _swapchainManager.CreateWindowSwapchain(_surface, windowManager);
 
-		// Init camera managers
-		_swapchainCameraManager = SwapchainCameraManager(1);
+		// Init frame manager
+		_frameManager.Init(_device, _graphicsQueueFamily);
 	}
 
 	Renderer::~Renderer()
 	{
+		// Destroy frame manager
+		_frameManager.Cleanup();
 		// Destroy swapchains
 		_swapchainManager.Clear();
 		// Destroy allocator
@@ -47,7 +50,6 @@ namespace railguard::rendering
 
 	void Renderer::Draw()
 	{
-		
 	}
 
 } // namespace railguard::rendering

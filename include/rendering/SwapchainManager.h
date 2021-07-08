@@ -27,9 +27,13 @@ namespace railguard::rendering
 
         swapchain_id_t _lastUsedId = 0;
 
+#ifndef NDEBUG
+        // In debug mode, keep track of the init status to ensure that Init is called first
+        bool _initialized = false;
+#endif
+
     public:
-        explicit SwapchainManager();
-        SwapchainManager(vk::Device device, vk::PhysicalDevice physicalDevice, size_t defaultCapacity = 1);
+        void Init(const vk::Device &device, const vk::PhysicalDevice &physicalDevice, size_t defaultCapacity = 1);
 
         /**
          * @brief Destroys every remaining swapchain.

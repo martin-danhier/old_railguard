@@ -19,7 +19,10 @@
                 "${SDL2_PATH}/include"
             ],
             "cppStandard": "c++20",
-            "configurationProvider": "numaru.vscode-cmake-lite"
+            "configurationProvider": "numaru.vscode-cmake-lite",
+            "defines": [
+                "DEBUG"
+            ]
         }
     ],
     "version": 4

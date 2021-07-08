@@ -1,5 +1,10 @@
 #include "../../include/core/Match.h"
-#include <cassert>
+#include "../../include/utils/DebugAssert.h"
+
+#ifndef NDEBUG
+// Define error messages
+#define NO_RESULT_ERROR "The provided Match has no result. Please use Match::HasResult before calling this method."
+#endif
 
 namespace railguard::core
 {
@@ -7,7 +12,8 @@ namespace railguard::core
     size_t Match::GetIndex() const
     {
         // We suppose that there is a result
-        assert(HasResult());
+        DEBUG_ASSERT(HasResult(), NO_RESULT_ERROR);
+
         // Else it will underflow
         return _index - 1;
     }

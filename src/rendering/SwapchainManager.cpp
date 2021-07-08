@@ -1,16 +1,22 @@
 #include "../../../include/rendering/SwapchainManager.h"
 #include "../../../include/rendering/init/VulkanInit.h"
+#include "../../include/utils/DebugAssert.h"
+
+#ifndef NDEBUG
+// Define local error messages
+#define INITIALIZED_TWICE_ERROR "SwapchainManager should not be initialized twice."
+#define NOT_INITIALIZED_ERROR "SwapchainManager should be initialized with Init before calling this method."
+#endif
 
 namespace railguard::rendering
 {
 
-    SwapchainManager::SwapchainManager() : _vulkanDevice(nullptr),
-                                           _vulkanPhysicalDevice(nullptr) {}
-
-    SwapchainManager::SwapchainManager(vk::Device device, vk::PhysicalDevice physicalDevice, size_t defaultCapacity)
+    void SwapchainManager::Init(const vk::Device &device, const vk::PhysicalDevice &physicalDevice, size_t defaultCapacity)
     {
-        _vulkanDevice = device;
-        _vulkanPhysicalDevice = physicalDevice;
+        DEBUG_ASSERT(!_initialized, INITIALIZED_TWICE_ERROR);
+
+        _vulkanDevice = vk::Device(device);
+        _vulkanPhysicalDevice = vk::PhysicalDevice(physicalDevice);
 
         // Allocate space in the vectors
         _ids.reserve(defaultCapacity);
@@ -18,10 +24,15 @@ namespace railguard::rendering
         _swapchainImageFormats.reserve(defaultCapacity);
         _swapchainsImages.reserve(defaultCapacity);
         _swapchainsImageViews.reserve(defaultCapacity);
+
+#ifndef NDEBUG
+        _initialized = true;
+#endif
     }
 
     void SwapchainManager::Clear()
     {
+        DEBUG_ASSERT(_initialized, NOT_INITIALIZED_ERROR);
 
         // Destroy image views
         for (auto imageViewVector : _swapchainsImageViews)
@@ -51,6 +62,8 @@ namespace railguard::rendering
 
     swapchain_id_t SwapchainManager::CreateWindowSwapchain(const vk::SurfaceKHR &surface, const core::WindowManager &windowManager)
     {
+        DEBUG_ASSERT(_initialized, NOT_INITIALIZED_ERROR);
+
         // Get new id for the swapchain
         swapchain_id_t newId = _lastUsedId++;
 
@@ -87,12 +100,16 @@ namespace railguard::rendering
 
     core::Match SwapchainManager::LookupId(swapchain_id_t id)
     {
+        DEBUG_ASSERT(_initialized, NOT_INITIALIZED_ERROR);
+
         size_t index = _idLookupMap[id];
         return core::Match(index);
     }
 
     void SwapchainManager::DestroySwapchain(const core::Match &match)
     {
+        DEBUG_ASSERT(_initialized, NOT_INITIALIZED_ERROR);
+
         // Get index
         swapchain_id_t index = static_cast<swapchain_id_t>(match.GetIndex());
 
@@ -126,6 +143,7 @@ namespace railguard::rendering
 
     void SwapchainManager::RecreateWindowSwapchain(const core::Match &match, const vk::SurfaceKHR &surface, const core::WindowManager &windowManager)
     {
+        DEBUG_ASSERT(!_initialized, NOT_INITIALIZED_ERROR);
 
         // Get index
         auto index = match.GetIndex();
@@ -148,21 +166,29 @@ namespace railguard::rendering
 
     vk::SwapchainKHR SwapchainManager::GetSwapchain(const core::Match &match) const
     {
+        DEBUG_ASSERT(!_initialized, NOT_INITIALIZED_ERROR);
+
         return _swapchains[match.GetIndex()];
     }
 
     vk::Format SwapchainManager::GetSwapchainImageFormat(const core::Match &match) const
     {
+        DEBUG_ASSERT(!_initialized, NOT_INITIALIZED_ERROR);
+
         return _swapchainImageFormats[match.GetIndex()];
     }
 
     std::vector<vk::Image> SwapchainManager::GetSwapchainImages(const core::Match &match) const
     {
+        DEBUG_ASSERT(!_initialized, NOT_INITIALIZED_ERROR);
+
         return _swapchainsImages[match.GetIndex()];
     }
 
     std::vector<vk::ImageView> SwapchainManager::GetSwapchainImageViews(const core::Match &match) const
     {
+        DEBUG_ASSERT(!_initialized, NOT_INITIALIZED_ERROR);
+
         return _swapchainsImageViews[match.GetIndex()];
     }
 }

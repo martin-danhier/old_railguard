@@ -16,5 +16,6 @@ namespace railguard::rendering::init
          */
         static void InitVulkan(const VulkanInitInfo &initInfo);
         static void InitWindowSwapchain(const SwapchainInitInfo &initInfo);
+        
     };
 }

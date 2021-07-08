@@ -2,7 +2,9 @@
 
 #include "../core/WindowManager.h"
 #include "./SwapchainCameraManager.h"
-#include "init/VulkanInit.h"
+#include "./init/VulkanInit.h"
+#include "./FrameManager.h"
+#include "./Settings.h"
 
 namespace railguard::rendering
 {
@@ -27,6 +29,7 @@ namespace railguard::rendering
         // Various managers for core objects
         SwapchainManager _swapchainManager;
         SwapchainCameraManager _swapchainCameraManager;
+        FrameManager _frameManager;
 
     public:
         explicit Renderer(const core::WindowManager &windowManager);
