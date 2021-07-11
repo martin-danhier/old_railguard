@@ -22,6 +22,7 @@ namespace railguard::rendering
         vk::Queue _graphicsQueue = nullptr;
         uint32_t _graphicsQueueFamily = 0;
         VmaAllocator _allocator = nullptr;
+        vk::RenderPass _mainRenderPass = nullptr;
 
         // Other internal variables
         swapchain_id_t _mainWindowSwapchain = 0;

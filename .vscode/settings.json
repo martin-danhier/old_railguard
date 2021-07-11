@@ -3,6 +3,7 @@
         "Railguard",
         "Vulkan",
         "premake",
+        "renderpasses",
         "submodule",
         "submodules"
     ],

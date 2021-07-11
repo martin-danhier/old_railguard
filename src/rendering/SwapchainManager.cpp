@@ -143,7 +143,7 @@ namespace railguard::rendering
 
     void SwapchainManager::RecreateWindowSwapchain(const core::Match &match, const vk::SurfaceKHR &surface, const core::WindowManager &windowManager)
     {
-        DEBUG_ASSERT(!_initialized, NOT_INITIALIZED_ERROR);
+        DEBUG_ASSERT(_initialized, NOT_INITIALIZED_ERROR);
 
         // Get index
         auto index = match.GetIndex();
@@ -166,28 +166,28 @@ namespace railguard::rendering
 
     vk::SwapchainKHR SwapchainManager::GetSwapchain(const core::Match &match) const
     {
-        DEBUG_ASSERT(!_initialized, NOT_INITIALIZED_ERROR);
+        DEBUG_ASSERT(_initialized, NOT_INITIALIZED_ERROR);
 
         return _swapchains[match.GetIndex()];
     }
 
     vk::Format SwapchainManager::GetSwapchainImageFormat(const core::Match &match) const
     {
-        DEBUG_ASSERT(!_initialized, NOT_INITIALIZED_ERROR);
+        DEBUG_ASSERT(_initialized, NOT_INITIALIZED_ERROR);
 
         return _swapchainImageFormats[match.GetIndex()];
     }
 
     std::vector<vk::Image> SwapchainManager::GetSwapchainImages(const core::Match &match) const
     {
-        DEBUG_ASSERT(!_initialized, NOT_INITIALIZED_ERROR);
+        DEBUG_ASSERT(_initialized, NOT_INITIALIZED_ERROR);
 
         return _swapchainsImages[match.GetIndex()];
     }
 
     std::vector<vk::ImageView> SwapchainManager::GetSwapchainImageViews(const core::Match &match) const
     {
-        DEBUG_ASSERT(!_initialized, NOT_INITIALIZED_ERROR);
+        DEBUG_ASSERT(_initialized, NOT_INITIALIZED_ERROR);
 
         return _swapchainsImageViews[match.GetIndex()];
     }
