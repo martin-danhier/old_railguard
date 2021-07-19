@@ -24,6 +24,7 @@ namespace railguard::rendering
         // std::vector<vk::Format> _depthImageFormat;
         std::vector<std::vector<vk::Image>> _swapchainsImages;
         std::vector<std::vector<vk::ImageView>> _swapchainsImageViews;
+        std::vector<std::vector<vk::Framebuffer>> _frameBuffers;
 
         swapchain_id_t _lastUsedId = 0;
 
@@ -45,7 +46,7 @@ namespace railguard::rendering
          *
          * @return swapchain_id_t The id of the new swapchain
          */
-        swapchain_id_t CreateWindowSwapchain(const vk::SurfaceKHR &surface, const core::WindowManager &windowManager);
+        swapchain_id_t CreateWindowSwapchain(const vk::SurfaceKHR &surface, const core::WindowManager &windowManager, const vk::RenderPass &renderPass);
 
         [[nodiscard]] core::Match LookupId(swapchain_id_t id);
 
@@ -60,7 +61,7 @@ namespace railguard::rendering
          * @param surface Vulkan surface
          * @param windowManager Window manager
          */
-        void RecreateWindowSwapchain(const core::Match &match, const vk::SurfaceKHR &surface, const core::WindowManager &windowManager);
+        void RecreateWindowSwapchain(const core::Match &match, const vk::SurfaceKHR &surface, const core::WindowManager &windowManager, const vk::RenderPass &renderPass);
 
         // Getters
 
@@ -68,5 +69,6 @@ namespace railguard::rendering
         [[nodiscard]] vk::Format GetSwapchainImageFormat(const core::Match &match) const;
         [[nodiscard]] std::vector<vk::Image> GetSwapchainImages(const core::Match &match) const;
         [[nodiscard]] std::vector<vk::ImageView> GetSwapchainImageViews(const core::Match &match) const;
+        [[nodiscard]] std::vector<vk::Framebuffer> GetFramebuffers(const core::Match &match) const;
     };
 }

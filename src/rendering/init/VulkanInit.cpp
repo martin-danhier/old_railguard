@@ -1,5 +1,6 @@
 
 #include "../../include/rendering/init/VulkanInit.h"
+#include "../../include/rendering/Settings.h"
 #include <VkBootstrap.h>
 
 namespace railguard::rendering::init
@@ -118,7 +119,8 @@ namespace railguard::rendering::init
 
 		// Init swapchain with vk bootstrap
 		vkb::SwapchainBuilder swapchainBuilder{initInfo.physicalDevice, initInfo.device, initInfo.surface};
-		auto vkbSwapchain = swapchainBuilder.use_default_format_selection()
+		auto vkbSwapchain = swapchainBuilder
+								.set_desired_format({SWAPCHAIN_FORMAT, SWAPCHAIN_COLOR_SPACE})
 								.set_desired_present_mode(VK_PRESENT_MODE_FIFO_KHR)
 								.set_desired_extent(windowExtent.width, windowExtent.height)
 								.build()
@@ -130,9 +132,10 @@ namespace railguard::rendering::init
 		*initInfo.swapchainImageFormat = vk::Format(vkbSwapchain.image_format);
 
 		// Get image views
-		initInfo.swapchainImageViews->resize(initInfo.swapchainImages->size());
+		const uint32_t swapchainImageCount = initInfo.swapchainImages->size();
+		initInfo.swapchainImageViews->resize(swapchainImageCount);
 
-		for (uint32_t i = 0; i < static_cast<uint32_t>(initInfo.swapchainImages->size()); i++)
+		for (uint32_t i = 0; i < static_cast<uint32_t>(swapchainImageCount); i++)
 		{
 			vk::ImageViewCreateInfo createInfo{
 				.image = (*initInfo.swapchainImages)[i],
@@ -157,5 +160,30 @@ namespace railguard::rendering::init
 		}
 
 		// TODO depth image
+
+		// Create framebuffers
+
+#define ATTACHMENTS_COUNT 1
+		vk::ImageView attachments[ATTACHMENTS_COUNT];
+		// TODO insert depth image view when done
+
+		// Define the init info
+		vk::FramebufferCreateInfo framebufferCreateInfo{
+			.renderPass = initInfo.renderPass,
+			.attachmentCount = ATTACHMENTS_COUNT,
+			.pAttachments = attachments,
+			.width = windowExtent.width,
+			.height = windowExtent.height,
+			.layers = 1,
+		};
+
+		initInfo.swapchainFramebuffers->resize(swapchainImageCount);
+
+		// Create a framebuffer for each image
+		for (uint32_t i = 0; i < swapchainImageCount; i++)
+		{
+			attachments[0] = (*initInfo.swapchainImageViews)[i];
+			(*initInfo.swapchainFramebuffers)[i] = initInfo.device.createFramebuffer(framebufferCreateInfo);
+		}
 	}
 }

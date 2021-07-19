@@ -1,3 +1,4 @@
+#include "../../include/rendering/Settings.h"
 #include "../../include/rendering/Renderer.h"
 #include "../../include/rendering/init/RenderPassBuilder.h"
 
@@ -24,12 +25,6 @@ namespace railguard::rendering
 		};
 		init::VulkanInit::InitVulkan(vulkanInitInfo);
 
-		// Init swapchain for window
-		_swapchainManager.Init(_device, _physicalDevice, 1);
-		_mainWindowSwapchain = _swapchainManager.CreateWindowSwapchain(_surface, windowManager);
-		// Get the format of that swapchain
-		auto mainWindowSwapchainFormat = _swapchainManager.GetSwapchainImageFormat(_swapchainManager.LookupId(_mainWindowSwapchain));
-
 		// Init frame manager
 		_frameManager.Init(_device, _graphicsQueueFamily);
 
@@ -37,12 +32,17 @@ namespace railguard::rendering
 		_mainRenderPass = init::RenderPassBuilder()
 							  .SetPipelineBindPoint(vk::PipelineBindPoint::eGraphics)
 							  .AddColorAttachment(init::AttachmentBuilder()
-													  .SetFormat(mainWindowSwapchainFormat)
+													  .SetFormat(static_cast<vk::Format>(SWAPCHAIN_FORMAT))
 													  .ClearOnLoad()
 													  .StoreAtEnd()
 													  .SetFinalLayout(vk::ImageLayout::ePresentSrcKHR)
 													  .Build())
 							  .Build(_device);
+
+		// Init swapchain for window
+		_swapchainManager.Init(_device, _physicalDevice, 1);
+		_mainWindowSwapchain = _swapchainManager.CreateWindowSwapchain(_surface, windowManager, _mainRenderPass);
+
 	}
 
 	Renderer::~Renderer()

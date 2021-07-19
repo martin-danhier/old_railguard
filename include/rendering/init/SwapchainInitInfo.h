@@ -28,6 +28,10 @@ namespace railguard::rendering::init
          */
         const railguard::core::WindowManager &windowManager;
         /**
+         * @brief Pointer to the renderpass that should be linked to the framebuffers
+         * */
+        const vk::RenderPass &renderPass;
+        /**
          * @brief Pointer to the destination variable for the swapchain
          */
         vk::SwapchainKHR *swapchain;
@@ -43,6 +47,10 @@ namespace railguard::rendering::init
          * @brief Pointer to the destination variable of the swapchain image views
          */
         std::vector<vk::ImageView> *swapchainImageViews;
+        /**
+         * @brief Pointer to the destination variable of the framebuffers
+         */
+        std::vector<vk::Framebuffer> *swapchainFramebuffers;
     };
 
 }

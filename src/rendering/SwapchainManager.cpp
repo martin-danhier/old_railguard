@@ -24,6 +24,7 @@ namespace railguard::rendering
         _swapchainImageFormats.reserve(defaultCapacity);
         _swapchainsImages.reserve(defaultCapacity);
         _swapchainsImageViews.reserve(defaultCapacity);
+        _frameBuffers.reserve(defaultCapacity);
 
 #ifndef NDEBUG
         _initialized = true;
@@ -33,6 +34,15 @@ namespace railguard::rendering
     void SwapchainManager::Clear()
     {
         DEBUG_ASSERT(_initialized, NOT_INITIALIZED_ERROR);
+
+        // Destroy the framebuffers
+        for (auto framebufferVector : _frameBuffers)
+        {
+            for (auto framebuffer : framebufferVector)
+            {
+                _vulkanDevice.destroyFramebuffer(framebuffer);
+            }
+        }
 
         // Destroy image views
         for (auto imageViewVector : _swapchainsImageViews)
@@ -45,7 +55,6 @@ namespace railguard::rendering
 
         // We need to destroy every swapchain
         // No need to do other operations on the vectors, since they will be destroyed anyway
-        // We also iterate in reverse to destroy the first created swapchains last
         for (auto swapchain : _swapchains)
         {
             _vulkanDevice.destroySwapchainKHR(swapchain);
@@ -60,7 +69,7 @@ namespace railguard::rendering
         _idLookupMap.clear();
     }
 
-    swapchain_id_t SwapchainManager::CreateWindowSwapchain(const vk::SurfaceKHR &surface, const core::WindowManager &windowManager)
+    swapchain_id_t SwapchainManager::CreateWindowSwapchain(const vk::SurfaceKHR &surface, const core::WindowManager &windowManager, const vk::RenderPass &renderPass)
     {
         DEBUG_ASSERT(_initialized, NOT_INITIALIZED_ERROR);
 
@@ -72,6 +81,7 @@ namespace railguard::rendering
         vk::Format newSwapchainImageFormat;
         std::vector<vk::Image> newSwapchainImages;
         std::vector<vk::ImageView> newSwapchainImageViews;
+        std::vector<vk::Framebuffer> newSwapchainFramebuffers;
 
         // Create the swapchain
         init::SwapchainInitInfo swapchainInitInfo{
@@ -79,10 +89,13 @@ namespace railguard::rendering
             .physicalDevice = _vulkanPhysicalDevice,
             .surface = surface,
             .windowManager = windowManager,
+            .renderPass = renderPass,
             .swapchain = &newSwapchain,
             .swapchainImages = &newSwapchainImages,
             .swapchainImageFormat = &newSwapchainImageFormat,
-            .swapchainImageViews = &newSwapchainImageViews};
+            .swapchainImageViews = &newSwapchainImageViews,
+            .swapchainFramebuffers = &newSwapchainFramebuffers,
+        };
         init::VulkanInit::InitWindowSwapchain(swapchainInitInfo);
 
         // Push the new swapchain to vectors
@@ -91,6 +104,7 @@ namespace railguard::rendering
         _swapchainImageFormats.push_back(newSwapchainImageFormat);
         _swapchainsImages.push_back(newSwapchainImages);
         _swapchainsImageViews.push_back(newSwapchainImageViews);
+        _frameBuffers.push_back(newSwapchainFramebuffers);
 
         // Save id in the map
         _idLookupMap[newId] = _ids.size();
@@ -113,6 +127,18 @@ namespace railguard::rendering
         // Get index
         swapchain_id_t index = static_cast<swapchain_id_t>(match.GetIndex());
 
+        // Destroy the framebuffers
+        for (auto framebuffer : _frameBuffers[index])
+        {
+            _vulkanDevice.destroyFramebuffer(framebuffer);
+        }
+
+        // Destroy the image views
+        for (auto imageView : _swapchainsImageViews[index])
+        {
+            _vulkanDevice.destroyImageView(imageView);
+        }
+
         // Destroy the swapchain
         _vulkanDevice.destroySwapchainKHR(_swapchains[index]);
 
@@ -129,6 +155,7 @@ namespace railguard::rendering
             _swapchainImageFormats[index] = _swapchainImageFormats[lastIndex];
             _swapchainsImages[index] = _swapchainsImages[lastIndex];
             _swapchainsImageViews[index] = _swapchainsImageViews[lastIndex];
+            _frameBuffers[index] = _frameBuffers[lastIndex];
             // Update id in map
             _idLookupMap[movedId] = index;
         }
@@ -139,14 +166,28 @@ namespace railguard::rendering
         _swapchainImageFormats.pop_back();
         _swapchainsImages.pop_back();
         _swapchainsImageViews.pop_back();
+        _frameBuffers.pop_back();
     }
 
-    void SwapchainManager::RecreateWindowSwapchain(const core::Match &match, const vk::SurfaceKHR &surface, const core::WindowManager &windowManager)
+    void SwapchainManager::RecreateWindowSwapchain(const core::Match &match, const vk::SurfaceKHR &surface, const core::WindowManager &windowManager, const vk::RenderPass &renderPass)
     {
         DEBUG_ASSERT(_initialized, NOT_INITIALIZED_ERROR);
 
         // Get index
         auto index = match.GetIndex();
+
+        // Destroy the framebuffers
+        for (auto framebuffer : _frameBuffers[index])
+        {
+            _vulkanDevice.destroyFramebuffer(framebuffer);
+        }
+
+        // Destroy image views
+
+        for (auto imageView : _swapchainsImageViews[index])
+        {
+            _vulkanDevice.destroyImageView(imageView);
+        }
 
         // Destroy old swapchain
         _vulkanDevice.destroySwapchainKHR(_swapchains[index]);
@@ -157,10 +198,13 @@ namespace railguard::rendering
             .physicalDevice = _vulkanPhysicalDevice,
             .surface = surface,
             .windowManager = windowManager,
+            .renderPass = renderPass,
             .swapchain = &_swapchains[index],
             .swapchainImages = &_swapchainsImages[index],
             .swapchainImageFormat = &_swapchainImageFormats[index],
-            .swapchainImageViews = &_swapchainsImageViews[index]};
+            .swapchainImageViews = &_swapchainsImageViews[index],
+            .swapchainFramebuffers = &_frameBuffers[index],
+        };
         init::VulkanInit::InitWindowSwapchain(swapchainInitInfo);
     }
 
@@ -190,5 +234,11 @@ namespace railguard::rendering
         DEBUG_ASSERT(_initialized, NOT_INITIALIZED_ERROR);
 
         return _swapchainsImageViews[match.GetIndex()];
+    }
+
+    std::vector<vk::Framebuffer> SwapchainManager::GetFramebuffers(const core::Match &match) const {
+        DEBUG_ASSERT(_initialized, NOT_INITIALIZED_ERROR);
+
+        return _frameBuffers[match.GetIndex()];
     }
 }
