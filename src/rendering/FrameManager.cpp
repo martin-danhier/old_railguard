@@ -116,7 +116,7 @@ namespace railguard::rendering
         ADVANCED_CHECK(!_initialized, NOT_CLEANED_ERROR);
     }
 
-    FrameData FrameManager::GetFrame(uint32_t index) const
+    const FrameData FrameManager::GetFrame(uint32_t index) const
     {
         ADVANCED_CHECK(_initialized, NOT_INITIALIZED_ERROR);
         ADVANCED_CHECK(index < NB_OVERLAPPING_FRAMES, INDEX_OUT_OF_RANGE_ERROR);
@@ -132,35 +132,35 @@ namespace railguard::rendering
 
     // Getters
 
-    vk::CommandPool FrameManager::GetCommandPool(uint32_t index) const
+    const vk::CommandPool FrameManager::GetCommandPool(uint32_t index) const
     {
         ADVANCED_CHECK(_initialized, NOT_INITIALIZED_ERROR);
         ADVANCED_CHECK(index < NB_OVERLAPPING_FRAMES, INDEX_OUT_OF_RANGE_ERROR);
 
         return _commandPools[index];
     }
-    vk::CommandBuffer FrameManager::GetCommandBuffer(uint32_t index) const
+    const vk::CommandBuffer FrameManager::GetCommandBuffer(uint32_t index) const
     {
         ADVANCED_CHECK(_initialized, NOT_INITIALIZED_ERROR);
         ADVANCED_CHECK(index < NB_OVERLAPPING_FRAMES, INDEX_OUT_OF_RANGE_ERROR);
 
         return _commandBuffers[index];
     }
-    vk::Fence FrameManager::GetRenderFence(uint32_t index) const
+    const vk::Fence FrameManager::GetRenderFence(uint32_t index) const
     {
         ADVANCED_CHECK(_initialized, NOT_INITIALIZED_ERROR);
         ADVANCED_CHECK(index < NB_OVERLAPPING_FRAMES, INDEX_OUT_OF_RANGE_ERROR);
 
         return _renderFences[index];
     }
-    vk::Semaphore FrameManager::GetRenderSemaphore(uint32_t index) const
+    const vk::Semaphore FrameManager::GetRenderSemaphore(uint32_t index) const
     {
         ADVANCED_CHECK(_initialized, NOT_INITIALIZED_ERROR);
         ADVANCED_CHECK(index < NB_OVERLAPPING_FRAMES, INDEX_OUT_OF_RANGE_ERROR);
 
         return _renderSemaphores[index];
     }
-    vk::Semaphore FrameManager::GetPresentSemaphore(uint32_t index) const
+    const vk::Semaphore FrameManager::GetPresentSemaphore(uint32_t index) const
     {
         ADVANCED_CHECK(_initialized, NOT_INITIALIZED_ERROR);
         ADVANCED_CHECK(index < NB_OVERLAPPING_FRAMES, INDEX_OUT_OF_RANGE_ERROR);

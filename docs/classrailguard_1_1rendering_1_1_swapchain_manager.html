@@ -118,6 +118,12 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr class="memitem:a643275df503e4302293082a33c6ffd7a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrailguard_1_1rendering_1_1_swapchain_manager.html#a643275df503e4302293082a33c6ffd7a">RecreateWindowSwapchain</a> (const <a class="el" href="classrailguard_1_1core_1_1_match.html">core::Match</a> &amp;match, const <a class="elRef" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkSurfaceKHR.html">vk::SurfaceKHR</a> &amp;surface, const <a class="el" href="classrailguard_1_1core_1_1_window_manager.html">core::WindowManager</a> &amp;windowManager, const <a class="elRef" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkRenderPass.html">vk::RenderPass</a> &amp;renderPass)</td></tr>
 <tr class="memdesc:a643275df503e4302293082a33c6ffd7a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroy and recreate the given swapchain at the same slot. Invalidates vulkan objects that used this swapchain.  <a href="classrailguard_1_1rendering_1_1_swapchain_manager.html#a643275df503e4302293082a33c6ffd7a">More...</a><br /></td></tr>
 <tr class="separator:a643275df503e4302293082a33c6ffd7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada6eadbf6b1af08e2d2600220101097a"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrailguard_1_1rendering_1_1_swapchain_manager.html#ada6eadbf6b1af08e2d2600220101097a">RequestNextImageIndex</a> (const <a class="el" href="classrailguard_1_1core_1_1_match.html">core::Match</a> &amp;match, const <a class="elRef" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkSemaphore.html">vk::Semaphore</a> &amp;presentSemaphore)</td></tr>
+<tr class="memdesc:ada6eadbf6b1af08e2d2600220101097a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Requests the next image of the given swapchain.  <a href="classrailguard_1_1rendering_1_1_swapchain_manager.html#ada6eadbf6b1af08e2d2600220101097a">More...</a><br /></td></tr>
+<tr class="separator:ada6eadbf6b1af08e2d2600220101097a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acbe8eb05f1b365dbf7147a3c405b3140"><td class="memItemLeft" align="right" valign="top"><a id="acbe8eb05f1b365dbf7147a3c405b3140"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>PresentImage</b> (const <a class="el" href="classrailguard_1_1core_1_1_match.html">core::Match</a> &amp;match, uint32_t imageIndex, const <a class="elRef" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkSemaphore.html">vk::Semaphore</a> &amp;renderSemaphore, const vk::Queue &amp;graphicsQueue)</td></tr>
+<tr class="separator:acbe8eb05f1b365dbf7147a3c405b3140"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aec5b2d6e8f6d9f177c1060b657983de9"><td class="memItemLeft" align="right" valign="top"><a id="aec5b2d6e8f6d9f177c1060b657983de9"></a>
 <a class="elRef" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkSwapchainKHR.html">vk::SwapchainKHR</a>&#160;</td><td class="memItemRight" valign="bottom"><b>GetSwapchain</b> (const <a class="el" href="classrailguard_1_1core_1_1_match.html">core::Match</a> &amp;match) const</td></tr>
 <tr class="separator:aec5b2d6e8f6d9f177c1060b657983de9"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -285,6 +291,50 @@ std::vector&lt; T &gt;&#160;</td><td class="memItemRight" valign="bottom"><a cla
     <tr><td class="paramname">physicalDevice</td><td>Vulkan physical device </td></tr>
     <tr><td class="paramname">surface</td><td>Vulkan surface </td></tr>
     <tr><td class="paramname">windowManager</td><td>Window manager </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ada6eadbf6b1af08e2d2600220101097a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ada6eadbf6b1af08e2d2600220101097a">&#9670;&nbsp;</a></span>RequestNextImageIndex()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t railguard::rendering::SwapchainManager::RequestNextImageIndex </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classrailguard_1_1core_1_1_match.html">core::Match</a> &amp;&#160;</td>
+          <td class="paramname"><em>match</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="elRef" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkSemaphore.html">vk::Semaphore</a> &amp;&#160;</td>
+          <td class="paramname"><em>presentSemaphore</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Requests the next image of the given swapchain. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">match</td><td>Match mapping the swapchain id to its slot. </td></tr>
+    <tr><td class="paramname">presentSemaphore</td><td>Present Semaphore of the current frame, used for synchronisation. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>uint32_t Index of the next image</dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">runtime_error</td><td>If the image could not be acquired. </td></tr>
   </table>
   </dd>
 </dl>

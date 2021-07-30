@@ -9,5 +9,6 @@ var searchData=
   ['renderpass_62',['renderPass',['../structrailguard_1_1rendering_1_1init_1_1_swapchain_init_info.html#a7f8324824374e880465faac6c56e5521',1,'railguard::rendering::init::SwapchainInitInfo']]],
   ['renderpass_63',['RenderPass',['https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkRenderPass.html',1,'vk']]],
   ['renderpassbuilder_64',['RenderPassBuilder',['../classrailguard_1_1rendering_1_1init_1_1_render_pass_builder.html',1,'railguard::rendering::init']]],
-  ['runmainloop_65',['RunMainLoop',['../classrailguard_1_1core_1_1_engine.html#a0b1c1ea362459838d6a7092425e4fb74',1,'railguard::core::Engine']]]
+  ['requestnextimageindex_65',['RequestNextImageIndex',['../classrailguard_1_1rendering_1_1_swapchain_manager.html#ada6eadbf6b1af08e2d2600220101097a',1,'railguard::rendering::SwapchainManager']]],
+  ['runmainloop_66',['RunMainLoop',['../classrailguard_1_1core_1_1_engine.html#a0b1c1ea362459838d6a7092425e4fb74',1,'railguard::core::Engine']]]
 ];

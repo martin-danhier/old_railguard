@@ -57,6 +57,19 @@ namespace railguard::rendering
          */
         void RecreateWindowSwapchain(const core::Match &match, const vk::SurfaceKHR &surface, const core::WindowManager &windowManager, const vk::RenderPass &renderPass);
 
+        /**
+         * @brief Requests the next image of the given swapchain.
+         *
+         * @param match Match mapping the swapchain id to its slot.
+         * @param presentSemaphore Present Semaphore of the current frame, used for synchronisation.
+         * @return uint32_t Index of the next image
+         *
+         * @throws runtime_error If the image could not be acquired.
+         */
+        [[nodiscard]] uint32_t RequestNextImageIndex(const core::Match &match, const vk::Semaphore &presentSemaphore);
+
+        void PresentImage(const core::Match &match, uint32_t imageIndex, const vk::Semaphore &renderSemaphore, const vk::Queue &graphicsQueue);
+
         // Getters
 
         [[nodiscard]] vk::SwapchainKHR GetSwapchain(const core::Match &match) const;

@@ -38,11 +38,11 @@ namespace railguard::rendering
         void Cleanup();
         ~FrameManager();
 
-        [[nodiscard]] FrameData GetFrame(uint32_t index) const;
-        [[nodiscard]] vk::CommandPool GetCommandPool(uint32_t index) const;
-        [[nodiscard]] vk::CommandBuffer GetCommandBuffer(uint32_t index) const;
-        [[nodiscard]] vk::Fence GetRenderFence(uint32_t index) const;
-        [[nodiscard]] vk::Semaphore GetRenderSemaphore(uint32_t index) const;
-        [[nodiscard]] vk::Semaphore GetPresentSemaphore(uint32_t index) const;
+        [[nodiscard]] const FrameData GetFrame(uint32_t index) const;
+        [[nodiscard]] const vk::CommandPool GetCommandPool(uint32_t index) const;
+        [[nodiscard]] const vk::CommandBuffer GetCommandBuffer(uint32_t index) const;
+        [[nodiscard]] const vk::Fence GetRenderFence(uint32_t index) const;
+        [[nodiscard]] const vk::Semaphore GetRenderSemaphore(uint32_t index) const;
+        [[nodiscard]] const vk::Semaphore GetPresentSemaphore(uint32_t index) const;
     };
 }

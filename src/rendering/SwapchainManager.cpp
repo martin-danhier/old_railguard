@@ -1,6 +1,7 @@
-#include "../../../include/rendering/SwapchainManager.h"
-#include "../../../include/rendering/init/VulkanInit.h"
+#include "../../include/rendering/SwapchainManager.h"
+#include "../../include/rendering/init/VulkanInit.h"
 #include "../../include/utils/AdvancedCheck.h"
+#include "../../include/rendering/Settings.h"
 
 #ifdef USE_ADVANCED_CHECKS
 // Define local error messages
@@ -10,7 +11,7 @@
 namespace railguard::rendering
 {
 
-    void SwapchainManager::Init(structs::FullDeviceStorage storage,  size_t defaultCapacity)
+    void SwapchainManager::Init(structs::FullDeviceStorage storage, size_t defaultCapacity)
     {
         // Call parent function
         super::Init(storage, defaultCapacity);
@@ -175,37 +176,86 @@ namespace railguard::rendering
         init::VulkanInit::InitWindowSwapchain(swapchainInitInfo);
     }
 
+    uint32_t SwapchainManager::RequestNextImageIndex(const core::Match &match, const vk::Semaphore &presentSemaphore)
+    {
+        // Get index of swapchain
+        auto index = match.GetIndex();
+
+        // Call the swapchain and request the next image.
+        auto nextImageResult = _storage.vulkanDevice.acquireNextImageKHR(_swapchains[index], SEMAPHORE_TIMEOUT, presentSemaphore, nullptr);
+
+        switch (nextImageResult.result)
+        {
+        case vk::Result::eSuccess:
+            // Success, keep it
+            return nextImageResult.value;
+
+        case vk::Result::eTimeout:
+        case vk::Result::eNotReady:
+        case vk::Result::eSuboptimalKHR:
+            // These cases should be handled.
+            // For now, we will fall back to the error below.
+            // TODO one day, perhaps
+
+        default:
+            // Default: error. vk-hpp already throws an exception, so there is nothing
+            // to do
+            throw std::runtime_error("Error while getting next image");
+        }
+    }
+
+    void SwapchainManager::PresentImage(const core::Match &match, uint32_t imageIndex, const vk::Semaphore &renderSemaphore, const vk::Queue &graphicsQueue)
+    {
+        // Get index
+        auto index = match.GetIndex();
+
+        // Present the image on the screen
+        vk::PresentInfoKHR presentInfo{
+            // Wait until the rendering is complete
+            .waitSemaphoreCount = 1,
+            .pWaitSemaphores = &renderSemaphore,
+            // Specify the swapchain to present
+            .swapchainCount = 1,
+            .pSwapchains = &_swapchains[index],
+            // Specify the index of the image
+            .pImageIndices = &imageIndex,
+        };
+        auto result = graphicsQueue.presentKHR(presentInfo);
+        switch (result)
+        {
+        case vk::Result::eSuccess:
+        case vk::Result::eSuboptimalKHR:
+            // Success
+            break;
+
+        default:
+            // Error
+            throw std::runtime_error("Failed to present image.");
+        }
+    }
+
     vk::SwapchainKHR SwapchainManager::GetSwapchain(const core::Match &match) const
     {
-        ADVANCED_CHECK(_initialized, NOT_INITIALIZED_ERROR);
-
         return _swapchains[match.GetIndex()];
     }
 
     vk::Format SwapchainManager::GetSwapchainImageFormat(const core::Match &match) const
     {
-        ADVANCED_CHECK(_initialized, NOT_INITIALIZED_ERROR);
-
         return _swapchainImageFormats[match.GetIndex()];
     }
 
     std::vector<vk::Image> SwapchainManager::GetSwapchainImages(const core::Match &match) const
     {
-        ADVANCED_CHECK(_initialized, NOT_INITIALIZED_ERROR);
-
         return _swapchainsImages[match.GetIndex()];
     }
 
     std::vector<vk::ImageView> SwapchainManager::GetSwapchainImageViews(const core::Match &match) const
     {
-        ADVANCED_CHECK(_initialized, NOT_INITIALIZED_ERROR);
-
         return _swapchainsImageViews[match.GetIndex()];
     }
 
-    std::vector<vk::Framebuffer> SwapchainManager::GetFramebuffers(const core::Match &match) const {
-        ADVANCED_CHECK(_initialized, NOT_INITIALIZED_ERROR);
-
+    std::vector<vk::Framebuffer> SwapchainManager::GetFramebuffers(const core::Match &match) const
+    {
         return _frameBuffers[match.GetIndex()];
     }
 }

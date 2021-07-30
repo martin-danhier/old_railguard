@@ -28,6 +28,7 @@ namespace railguard::rendering
 
         // Other internal variables
         swapchain_id_t _mainWindowSwapchain = 0;
+        uint64_t _drawnFramesCount = 0;
 
         // Various managers for core objects
         SwapchainManager _swapchainManager;
@@ -39,6 +40,8 @@ namespace railguard::rendering
         // Test
         shader_effect_id_t _triangleEffect;
 
+        // Internal methods
+        [[nodiscard]] const FrameData GetCurrentFrame() const;
     public:
         explicit Renderer(const core::WindowManager &windowManager);
 

@@ -31,7 +31,12 @@
         "**/.svn": true,
         "**/.hg": true,
         "**/CVS": true,
-        "**/.DS_Store": true
+        "**/.DS_Store": true,
+        ".vs": true,
+        "build": true,
+        "bin": true,
+        ".vscode": true,
+        ".gitmodules": true
     },
     "c-cpp-flylint.cppcheck.force": true,
     "files.associations": {
@@ -118,5 +123,6 @@
         "USE_VK_VALIDATION_LAYERS",
         "USE_ADVANCED_CHECKS",
         "DEBUG"
-    ]
+    ],
+    "explorerExclude.backup": null
 }

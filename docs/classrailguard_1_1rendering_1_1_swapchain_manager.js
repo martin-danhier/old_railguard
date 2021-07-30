@@ -9,5 +9,7 @@ var classrailguard_1_1rendering_1_1_swapchain_manager =
     [ "GetSwapchainImages", "classrailguard_1_1rendering_1_1_swapchain_manager.html#ab31acedc2b027fd2099d087803e7ea86", null ],
     [ "GetSwapchainImageViews", "classrailguard_1_1rendering_1_1_swapchain_manager.html#a7c06fa2dc26f71fdc4f94d79a3690129", null ],
     [ "Init", "classrailguard_1_1rendering_1_1_swapchain_manager.html#a89edca6415e0ca9a166411852a817397", null ],
-    [ "RecreateWindowSwapchain", "classrailguard_1_1rendering_1_1_swapchain_manager.html#a643275df503e4302293082a33c6ffd7a", null ]
+    [ "PresentImage", "classrailguard_1_1rendering_1_1_swapchain_manager.html#acbe8eb05f1b365dbf7147a3c405b3140", null ],
+    [ "RecreateWindowSwapchain", "classrailguard_1_1rendering_1_1_swapchain_manager.html#a643275df503e4302293082a33c6ffd7a", null ],
+    [ "RequestNextImageIndex", "classrailguard_1_1rendering_1_1_swapchain_manager.html#ada6eadbf6b1af08e2d2600220101097a", null ]
 ];
