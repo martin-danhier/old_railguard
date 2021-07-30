@@ -1,7 +1,7 @@
 #include "../../include/core/Match.h"
-#include "../../include/utils/DebugAssert.h"
+#include "../../include/utils/AdvancedCheck.h"
 
-#ifndef NDEBUG
+#ifdef USE_ADVANCED_CHECKS
 // Define error messages
 #define NO_RESULT_ERROR "The provided Match has no result. Please use Match::HasResult before calling this method."
 #endif
@@ -12,7 +12,7 @@ namespace railguard::core
     size_t Match::GetIndex() const
     {
         // We suppose that there is a result
-        DEBUG_ASSERT(HasResult(), NO_RESULT_ERROR);
+        ADVANCED_CHECK(HasResult(), NO_RESULT_ERROR);
 
         // Else it will underflow
         return _index - 1;

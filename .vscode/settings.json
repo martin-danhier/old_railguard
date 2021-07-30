@@ -1,6 +1,7 @@
 {
     "cSpell.words": [
         "Railguard",
+        "Rasterization",
         "Vulkan",
         "premake",
         "renderpasses",
@@ -86,7 +87,36 @@
         "ratio": "cpp",
         "shared_mutex": "cpp",
         "thread": "cpp",
-        "variant": "cpp"
+        "variant": "cpp",
+        "algorithm": "cpp",
+        "charconv": "cpp",
+        "format": "cpp",
+        "forward_list": "cpp",
+        "iomanip": "cpp",
+        "ios": "cpp",
+        "iterator": "cpp",
+        "locale": "cpp",
+        "stop_token": "cpp",
+        "xfacet": "cpp",
+        "xhash": "cpp",
+        "xiosbase": "cpp",
+        "xlocale": "cpp",
+        "xlocbuf": "cpp",
+        "xlocinfo": "cpp",
+        "xlocmes": "cpp",
+        "xlocmon": "cpp",
+        "xlocnum": "cpp",
+        "xloctime": "cpp",
+        "xstddef": "cpp",
+        "xstring": "cpp",
+        "xtr1common": "cpp",
+        "xtree": "cpp",
+        "xutility": "cpp"
     },
-    "c-cpp-flylint.cppcheck.enable": false
+    "c-cpp-flylint.cppcheck.enable": false,
+    "c-cpp-flylint.defines": [
+        "USE_VK_VALIDATION_LAYERS",
+        "USE_ADVANCED_CHECKS",
+        "DEBUG"
+    ]
 }

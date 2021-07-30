@@ -14,7 +14,7 @@ namespace railguard::rendering::init
 
 		// Create instance
 		vkb::InstanceBuilder vkbInstanceBuilder;
-#ifndef NDEBUG
+#ifdef USE_VK_VALIDATION_LAYERS
 		// Enable validation layers and debug messenger in debug mode
 		vkbInstanceBuilder
 			.request_validation_layers(true)

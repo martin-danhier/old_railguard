@@ -2,6 +2,8 @@
 
 #include "../core/WindowManager.h"
 #include "../core/Match.h"
+#include "../core/StandaloneManager.h"
+#include "./structs/Storages.h"
 
 namespace railguard::rendering
 {
@@ -9,16 +11,12 @@ namespace railguard::rendering
     // That way, if we need to change that type, we only need to do it here
     typedef uint32_t swapchain_id_t;
 
-    class SwapchainManager
+    class SwapchainManager : public core::StandaloneManager<swapchain_id_t, structs::FullDeviceStorage>
     {
     private:
+        // Typedef the parent type to make it easier to call from the methods
+        typedef core::StandaloneManager<swapchain_id_t, structs::FullDeviceStorage> super;
 
-        // Device handle to avoid requiring it everywhere
-        vk::Device _vulkanDevice = nullptr;
-        vk::PhysicalDevice _vulkanPhysicalDevice= nullptr;
-
-        std::unordered_map<swapchain_id_t, size_t> _idLookupMap;
-        std::vector<swapchain_id_t> _ids;
         std::vector<vk::SwapchainKHR> _swapchains;
         std::vector<vk::Format> _swapchainImageFormats;
         // std::vector<vk::Format> _depthImageFormat;
@@ -26,15 +24,8 @@ namespace railguard::rendering
         std::vector<std::vector<vk::ImageView>> _swapchainsImageViews;
         std::vector<std::vector<vk::Framebuffer>> _frameBuffers;
 
-        swapchain_id_t _lastUsedId = 0;
-
-#ifndef NDEBUG
-        // In debug mode, keep track of the init status to ensure that Init is called first
-        bool _initialized = false;
-#endif
-
     public:
-        void Init(const vk::Device &device, const vk::PhysicalDevice &physicalDevice, size_t defaultCapacity = 1);
+        void Init(structs::FullDeviceStorage storage, size_t defaultCapacity = 1);
 
         /**
          * @brief Destroys every remaining swapchain.
@@ -46,10 +37,13 @@ namespace railguard::rendering
          *
          * @return swapchain_id_t The id of the new swapchain
          */
-        swapchain_id_t CreateWindowSwapchain(const vk::SurfaceKHR &surface, const core::WindowManager &windowManager, const vk::RenderPass &renderPass);
+        core::CompleteMatch<swapchain_id_t> CreateWindowSwapchain(const vk::SurfaceKHR &surface, const core::WindowManager &windowManager, const vk::RenderPass &renderPass);
 
-        [[nodiscard]] core::Match LookupId(swapchain_id_t id);
-
+        /**
+         * @brief Destroys the swapchain pointed by the given match
+         *
+         * @param match match representing the position of the swapchain
+         */
         void DestroySwapchain(const core::Match &match);
 
         /**

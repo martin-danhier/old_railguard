@@ -95,12 +95,12 @@ namespace railguard::core
         return shouldQuit;
     }
 
-    EventSender<Extent2D> & WindowManager::ResizeEvent() {
+    EventSender<vk::Extent2D> & WindowManager::ResizeEvent() {
         return _resizeEvent;
     }
 
-    Extent2D WindowManager::GetWindowExtent() const {
-        return Extent2D {
+    vk::Extent2D WindowManager::GetWindowExtent() const {
+        return vk::Extent2D {
             .width = _width,
             .height = _height,
         };

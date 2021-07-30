@@ -9,7 +9,7 @@
     "configurations": [
         {
             "name": "Vulkan dev",
-            "intelliSenseMode": "gcc-x64",
+            "intelliSenseMode": "msvc-x64",
             "includePath": [
                 "${defaultIncludePath}",
                 "${VULKAN_SDK}/Include",
@@ -21,8 +21,11 @@
             "cppStandard": "c++20",
             "configurationProvider": "numaru.vscode-cmake-lite",
             "defines": [
-                "DEBUG"
-            ]
+                "DEBUG",
+                "USE_VK_VALIDATION_LAYERS",
+                "USE_ADVANCED_CHECKS"
+            ],
+            "compilerPath": "C:/Program Files (x86)/Microsoft Visual Studio/2019/BuildTools/VC/Tools/MSVC/14.29.30037/bin/Hostx64/x64/cl.exe"
         }
     ],
     "version": 4

@@ -22,7 +22,7 @@ namespace railguard::core
 
         void RunMainLoop();
 
-        void OnWindowResized(const Extent2D &newSize);
+        void OnWindowResized(const vk::Extent2D &newSize);
 
     };
 

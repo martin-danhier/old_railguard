@@ -28,7 +28,7 @@ namespace railguard::rendering
         vk::Semaphore _renderSemaphores[NB_OVERLAPPING_FRAMES];
         vk::Fence _renderFences[NB_OVERLAPPING_FRAMES];
 
-#ifndef NDEBUG
+#ifdef USE_ADVANCED_CHECKS
         // In debug mode, keep track of the init status to ensure that Init is called first
         bool _initialized = false;
 #endif

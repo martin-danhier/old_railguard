@@ -1,6 +1,7 @@
 #include "../../include/rendering/Settings.h"
 #include "../../include/rendering/Renderer.h"
 #include "../../include/rendering/init/RenderPassBuilder.h"
+#include "../../include/rendering/structs/Storages.h"
 
 namespace railguard::rendering
 {
@@ -40,9 +41,8 @@ namespace railguard::rendering
 							  .Build(_device);
 
 		// Init swapchain for window
-		_swapchainManager.Init(_device, _physicalDevice, 1);
-		_mainWindowSwapchain = _swapchainManager.CreateWindowSwapchain(_surface, windowManager, _mainRenderPass);
-
+		_swapchainManager.Init(structs::FullDeviceStorage{_device, _physicalDevice}, 1);
+		_mainWindowSwapchain = _swapchainManager.CreateWindowSwapchain(_surface, windowManager, _mainRenderPass).GetId();
 	}
 
 	Renderer::~Renderer()
@@ -59,8 +59,10 @@ namespace railguard::rendering
 		_device.destroy();
 		// Destroy surface
 		_instance.destroySurfaceKHR(_surface);
-		// Destroy instance
+// Destroy instance
+#ifdef USE_VK_VALIDATION_LAYERS
 		_instance.destroyDebugUtilsMessengerEXT(_debugMessenger);
+#endif
 		_instance.destroy();
 	}
 

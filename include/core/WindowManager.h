@@ -8,11 +8,6 @@
 
 namespace railguard::core
 {
-    struct Extent2D
-    {
-        uint32_t width;
-        uint32_t height;
-    };
 
     class WindowManager
     {
@@ -26,7 +21,7 @@ namespace railguard::core
         std::string _title{""};
         
         // Event thrown when the window is resized
-        EventSender<Extent2D> _resizeEvent;
+        EventSender<vk::Extent2D> _resizeEvent;
 
     public:
         WindowManager(int defaultWidth, int defaultHeight, const std::string &defaultTitle);
@@ -37,9 +32,9 @@ namespace railguard::core
         [[nodiscard]] uint64_t GetPerformanceFrequency();
         [[nodiscard]] std::vector<const char*> GetRequiredVulkanExtensions() const;
         [[nodiscard]] vk::SurfaceKHR GetVulkanSurface(vk::Instance instance) const;
-        [[nodiscard]] Extent2D GetWindowExtent() const;
+        [[nodiscard]] vk::Extent2D GetWindowExtent() const;
         bool HandleEvents();
 
-        [[nodiscard]] EventSender<Extent2D> &ResizeEvent();
+        [[nodiscard]] EventSender<vk::Extent2D> &ResizeEvent();
     };
 } // namespace railguard::core

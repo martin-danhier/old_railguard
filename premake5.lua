@@ -7,7 +7,7 @@ workspace "railguard"
 
    -- Debug config
    filter "configurations:Debug"
-      defines { "DEBUG" }
+      defines { "DEBUG", "USE_ADVANCED_CHECKS", "USE_VK_VALIDATION_LAYERS" }
       symbols "On"
    -- Release config
    filter "configurations:Release"

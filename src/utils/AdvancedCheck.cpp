@@ -1,17 +1,17 @@
-#include "../../include/utils/DebugAssert.h"
+#include "../../include/utils/AdvancedCheck.h"
 
-#ifndef NDEBUG
+#ifdef USE_ADVANCED_CHECKS
 
 #include <iostream>
 
 namespace railguard::utils
 {
-    void DebugAssert(bool condition, const std::string &message)
+    void AdvancedCheck(bool condition, const std::string &message)
     {
         // The condition must be true
         if (condition == false)
         {
-            std::cerr << "\n[Assertion Error]\n"
+            std::cerr << "\n[Error]\n"
                       << message << std::endl;
             throw std::runtime_error(message);
         }

@@ -1,15 +1,15 @@
 #pragma once
 
-#ifndef NDEBUG
+#ifdef USE_ADVANCED_CHECKS
 
 #include <string>
 
-// In debug mode, call the debug assert method
+// Call the advanced check method if the USE_ADVANCED_CHECKS variable is set
 
 /**
  * @brief In debug mode, throws an error with MSG as message if COND is false. Doesn't do anything in release mode. (Currently in debug mode)
  */
-#define DEBUG_ASSERT(COND, MSG) railguard::utils::DebugAssert(COND, MSG)
+#define ADVANCED_CHECK(COND, MSG) railguard::utils::AdvancedCheck(COND, MSG)
 
 namespace railguard::utils
 {
@@ -19,7 +19,7 @@ namespace railguard::utils
      * @param condition The condition that must be true.
      * @param message The message of the error thrown if the condition is false.
      */
-    void DebugAssert(bool condition, const std::string &message);
+    void AdvancedCheck(bool condition, const std::string &message);
 }
 
 #else
@@ -30,6 +30,6 @@ namespace railguard::utils
 /**
  * @brief In debug mode, throws an error with MSG as message if COND is false. Doesn't do anything in release mode. (Currently in release mode)
  */
-#define DEBUG_ASSERT(COND, MSG)
+#define ADVANCED_CHECK(COND, MSG)
 
 #endif

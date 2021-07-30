@@ -1,7 +1,7 @@
 #include "../../include/rendering/FrameManager.h"
-#include "../../include/utils/DebugAssert.h"
+#include "../../include/utils/AdvancedCheck.h"
 
-#ifndef NDEBUG
+#ifdef USE_ADVANCED_CHECKS
 #include <iostream>
 
 // Define local error messages
@@ -15,7 +15,7 @@ namespace railguard::rendering
 {
     void FrameManager::Init(const vk::Device &device, uint32_t graphicsQueueFamily)
     {
-        DEBUG_ASSERT(!_initialized, INITIALIZED_TWICE_ERROR);
+        ADVANCED_CHECK(!_initialized, INITIALIZED_TWICE_ERROR);
 
         _device = vk::Device(device);
 
@@ -67,14 +67,14 @@ namespace railguard::rendering
             renderSemaphore = device.createSemaphore(semaphoreCreateInfo);
         }
 
-#ifndef NDEBUG
+#ifdef USE_ADVANCED_CHECKS
         _initialized = true;
 #endif
     }
 
     void FrameManager::Cleanup()
     {
-        DEBUG_ASSERT(_initialized, NOT_INITIALIZED_ERROR);
+        ADVANCED_CHECK(_initialized, NOT_INITIALIZED_ERROR);
 
         // Destroy semaphores
 
@@ -105,7 +105,7 @@ namespace railguard::rendering
             pool = nullptr;
         }
 
-#ifndef NDEBUG
+#ifdef USE_ADVANCED_CHECKS
         // Back to the beginning
         _initialized = false;
 #endif
@@ -113,13 +113,13 @@ namespace railguard::rendering
 
     FrameManager::~FrameManager()
     {
-        DEBUG_ASSERT(!_initialized, NOT_CLEANED_ERROR);
+        ADVANCED_CHECK(!_initialized, NOT_CLEANED_ERROR);
     }
 
     FrameData FrameManager::GetFrame(uint32_t index) const
     {
-        DEBUG_ASSERT(_initialized, NOT_INITIALIZED_ERROR);
-        DEBUG_ASSERT(index < NB_OVERLAPPING_FRAMES, INDEX_OUT_OF_RANGE_ERROR);
+        ADVANCED_CHECK(_initialized, NOT_INITIALIZED_ERROR);
+        ADVANCED_CHECK(index < NB_OVERLAPPING_FRAMES, INDEX_OUT_OF_RANGE_ERROR);
 
         return FrameData{
             .commandPool = _commandPools[index],
@@ -134,36 +134,36 @@ namespace railguard::rendering
 
     vk::CommandPool FrameManager::GetCommandPool(uint32_t index) const
     {
-        DEBUG_ASSERT(_initialized, NOT_INITIALIZED_ERROR);
-        DEBUG_ASSERT(index < NB_OVERLAPPING_FRAMES, INDEX_OUT_OF_RANGE_ERROR);
+        ADVANCED_CHECK(_initialized, NOT_INITIALIZED_ERROR);
+        ADVANCED_CHECK(index < NB_OVERLAPPING_FRAMES, INDEX_OUT_OF_RANGE_ERROR);
 
         return _commandPools[index];
     }
     vk::CommandBuffer FrameManager::GetCommandBuffer(uint32_t index) const
     {
-        DEBUG_ASSERT(_initialized, NOT_INITIALIZED_ERROR);
-        DEBUG_ASSERT(index < NB_OVERLAPPING_FRAMES, INDEX_OUT_OF_RANGE_ERROR);
+        ADVANCED_CHECK(_initialized, NOT_INITIALIZED_ERROR);
+        ADVANCED_CHECK(index < NB_OVERLAPPING_FRAMES, INDEX_OUT_OF_RANGE_ERROR);
 
         return _commandBuffers[index];
     }
     vk::Fence FrameManager::GetRenderFence(uint32_t index) const
     {
-        DEBUG_ASSERT(_initialized, NOT_INITIALIZED_ERROR);
-        DEBUG_ASSERT(index < NB_OVERLAPPING_FRAMES, INDEX_OUT_OF_RANGE_ERROR);
+        ADVANCED_CHECK(_initialized, NOT_INITIALIZED_ERROR);
+        ADVANCED_CHECK(index < NB_OVERLAPPING_FRAMES, INDEX_OUT_OF_RANGE_ERROR);
 
         return _renderFences[index];
     }
     vk::Semaphore FrameManager::GetRenderSemaphore(uint32_t index) const
     {
-        DEBUG_ASSERT(_initialized, NOT_INITIALIZED_ERROR);
-        DEBUG_ASSERT(index < NB_OVERLAPPING_FRAMES, INDEX_OUT_OF_RANGE_ERROR);
+        ADVANCED_CHECK(_initialized, NOT_INITIALIZED_ERROR);
+        ADVANCED_CHECK(index < NB_OVERLAPPING_FRAMES, INDEX_OUT_OF_RANGE_ERROR);
 
         return _renderSemaphores[index];
     }
     vk::Semaphore FrameManager::GetPresentSemaphore(uint32_t index) const
     {
-        DEBUG_ASSERT(_initialized, NOT_INITIALIZED_ERROR);
-        DEBUG_ASSERT(index < NB_OVERLAPPING_FRAMES, INDEX_OUT_OF_RANGE_ERROR);
+        ADVANCED_CHECK(_initialized, NOT_INITIALIZED_ERROR);
+        ADVANCED_CHECK(index < NB_OVERLAPPING_FRAMES, INDEX_OUT_OF_RANGE_ERROR);
 
         return _presentSemaphores[index];
     }
