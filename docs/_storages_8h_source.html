@@ -9,6 +9,10 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -47,6 +51,23 @@ $(function() {
 });
 /* @license-end */</script>
 <div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('_storages_8h_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -61,11 +82,6 @@ $(function() {
 </iframe>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_27636f4d4b2113f82b513d65146ca471.html">rendering</a></li><li class="navelem"><a class="el" href="dir_85a5c468d49342ad8b1e443c689588e7.html">structs</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
   <div class="headertitle">
 <div class="title">Storages.h</div>  </div>
@@ -80,22 +96,28 @@ $(function() {
 <div class="line"><a name="l00010"></a><span class="lineno"><a class="line" href="structrailguard_1_1rendering_1_1structs_1_1_device_storage.html">   10</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="structrailguard_1_1rendering_1_1structs_1_1_device_storage.html">DeviceStorage</a></div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    {</div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;        vk::Device vulkanDevice = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;        <a class="codeRef" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkDevice.html">vk::Device</a> vulkanDevice = <span class="keyword">nullptr</span>;</div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    };</div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
 <div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="structrailguard_1_1rendering_1_1structs_1_1_full_device_storage.html">   19</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="structrailguard_1_1rendering_1_1structs_1_1_full_device_storage.html">FullDeviceStorage</a> : <a class="code" href="structrailguard_1_1rendering_1_1structs_1_1_device_storage.html">DeviceStorage</a></div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    {</div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;        vk::PhysicalDevice vulkanPhysicalDevice = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;        <a class="codeRef" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDevice.html">vk::PhysicalDevice</a> vulkanPhysicalDevice = <span class="keyword">nullptr</span>;</div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    };</div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;} <span class="comment">// namespace railguard::rendering::structs</span></div>
+<div class="ttc" id="aVkDevice_html"><div class="ttname"><a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkDevice.html">vk::Device</a></div></div>
+<div class="ttc" id="aVkPhysicalDevice_html"><div class="ttname"><a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDevice.html">vk::PhysicalDevice</a></div></div>
 <div class="ttc" id="astructrailguard_1_1rendering_1_1structs_1_1_device_storage_html"><div class="ttname"><a href="structrailguard_1_1rendering_1_1structs_1_1_device_storage.html">railguard::rendering::structs::DeviceStorage</a></div><div class="ttdoc">Common Storage used with StandaloneManagers to store the vulkan device.</div><div class="ttdef"><b>Definition:</b> Storages.h:11</div></div>
 <div class="ttc" id="astructrailguard_1_1rendering_1_1structs_1_1_full_device_storage_html"><div class="ttname"><a href="structrailguard_1_1rendering_1_1structs_1_1_full_device_storage.html">railguard::rendering::structs::FullDeviceStorage</a></div><div class="ttdoc">Common Storage used with StandaloneManagers to store the vulkan device and the physical device.</div><div class="ttdef"><b>Definition:</b> Storages.h:20</div></div>
 </div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_27636f4d4b2113f82b513d65146ca471.html">rendering</a></li><li class="navelem"><a class="el" href="dir_85a5c468d49342ad8b1e443c689588e7.html">structs</a></li><li class="navelem"><b>Storages.h</b></li>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+  </ul>
+</div>
 </body>
 </html>

@@ -9,6 +9,10 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -47,6 +51,23 @@ $(function() {
 });
 /* @license-end */</script>
 <div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('_swapchain_init_info_8h_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -61,11 +82,6 @@ $(function() {
 </iframe>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_27636f4d4b2113f82b513d65146ca471.html">rendering</a></li><li class="navelem"><a class="el" href="dir_f7fe3af0c37ed16cfc4a02ad265f46c1.html">init</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
   <div class="headertitle">
 <div class="title">SwapchainInitInfo.h</div>  </div>
@@ -79,19 +95,25 @@ $(function() {
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;{</div>
 <div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="structrailguard_1_1rendering_1_1init_1_1_swapchain_init_info.html">   12</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="structrailguard_1_1rendering_1_1init_1_1_swapchain_init_info.html">SwapchainInitInfo</a></div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    {</div>
-<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="structrailguard_1_1rendering_1_1init_1_1_swapchain_init_info.html#a6d422b82606dc5db2aa85bf27da504b4">   17</a></span>&#160;        <span class="keyword">const</span> vk::Device &amp;<a class="code" href="structrailguard_1_1rendering_1_1init_1_1_swapchain_init_info.html#a6d422b82606dc5db2aa85bf27da504b4">device</a>;</div>
-<div class="line"><a name="l00021"></a><span class="lineno"><a class="line" href="structrailguard_1_1rendering_1_1init_1_1_swapchain_init_info.html#a3a163e574a3a667e92f7ec88d062b448">   21</a></span>&#160;        <span class="keyword">const</span> vk::PhysicalDevice &amp;<a class="code" href="structrailguard_1_1rendering_1_1init_1_1_swapchain_init_info.html#a3a163e574a3a667e92f7ec88d062b448">physicalDevice</a>;</div>
-<div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="structrailguard_1_1rendering_1_1init_1_1_swapchain_init_info.html#ad17a558f9bade027f1b042dde9b28f7b">   25</a></span>&#160;        <span class="keyword">const</span> vk::SurfaceKHR &amp;<a class="code" href="structrailguard_1_1rendering_1_1init_1_1_swapchain_init_info.html#ad17a558f9bade027f1b042dde9b28f7b">surface</a>;</div>
+<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="structrailguard_1_1rendering_1_1init_1_1_swapchain_init_info.html#a6d422b82606dc5db2aa85bf27da504b4">   17</a></span>&#160;        <span class="keyword">const</span> <a class="codeRef" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkDevice.html">vk::Device</a> &amp;<a class="code" href="structrailguard_1_1rendering_1_1init_1_1_swapchain_init_info.html#a6d422b82606dc5db2aa85bf27da504b4">device</a>;</div>
+<div class="line"><a name="l00021"></a><span class="lineno"><a class="line" href="structrailguard_1_1rendering_1_1init_1_1_swapchain_init_info.html#a3a163e574a3a667e92f7ec88d062b448">   21</a></span>&#160;        <span class="keyword">const</span> <a class="codeRef" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDevice.html">vk::PhysicalDevice</a> &amp;<a class="code" href="structrailguard_1_1rendering_1_1init_1_1_swapchain_init_info.html#a3a163e574a3a667e92f7ec88d062b448">physicalDevice</a>;</div>
+<div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="structrailguard_1_1rendering_1_1init_1_1_swapchain_init_info.html#ad17a558f9bade027f1b042dde9b28f7b">   25</a></span>&#160;        <span class="keyword">const</span> <a class="codeRef" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkSurfaceKHR.html">vk::SurfaceKHR</a> &amp;<a class="code" href="structrailguard_1_1rendering_1_1init_1_1_swapchain_init_info.html#ad17a558f9bade027f1b042dde9b28f7b">surface</a>;</div>
 <div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="structrailguard_1_1rendering_1_1init_1_1_swapchain_init_info.html#af6f8ce7d62aa1605393ff2b6da4104a7">   29</a></span>&#160;        <span class="keyword">const</span> <a class="code" href="classrailguard_1_1core_1_1_window_manager.html">railguard::core::WindowManager</a> &amp;<a class="code" href="structrailguard_1_1rendering_1_1init_1_1_swapchain_init_info.html#af6f8ce7d62aa1605393ff2b6da4104a7">windowManager</a>;</div>
-<div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="structrailguard_1_1rendering_1_1init_1_1_swapchain_init_info.html#a7f8324824374e880465faac6c56e5521">   33</a></span>&#160;        <span class="keyword">const</span> vk::RenderPass &amp;<a class="code" href="structrailguard_1_1rendering_1_1init_1_1_swapchain_init_info.html#a7f8324824374e880465faac6c56e5521">renderPass</a>;</div>
-<div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="structrailguard_1_1rendering_1_1init_1_1_swapchain_init_info.html#a3ad95fd64edbe8728d440677275d0171">   37</a></span>&#160;        vk::SwapchainKHR *<a class="code" href="structrailguard_1_1rendering_1_1init_1_1_swapchain_init_info.html#a3ad95fd64edbe8728d440677275d0171">swapchain</a>;</div>
+<div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="structrailguard_1_1rendering_1_1init_1_1_swapchain_init_info.html#a7f8324824374e880465faac6c56e5521">   33</a></span>&#160;        <span class="keyword">const</span> <a class="codeRef" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkRenderPass.html">vk::RenderPass</a> &amp;<a class="code" href="structrailguard_1_1rendering_1_1init_1_1_swapchain_init_info.html#a7f8324824374e880465faac6c56e5521">renderPass</a>;</div>
+<div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="structrailguard_1_1rendering_1_1init_1_1_swapchain_init_info.html#a3ad95fd64edbe8728d440677275d0171">   37</a></span>&#160;        <a class="codeRef" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkSwapchainKHR.html">vk::SwapchainKHR</a> *<a class="code" href="structrailguard_1_1rendering_1_1init_1_1_swapchain_init_info.html#a3ad95fd64edbe8728d440677275d0171">swapchain</a>;</div>
 <div class="line"><a name="l00041"></a><span class="lineno"><a class="line" href="structrailguard_1_1rendering_1_1init_1_1_swapchain_init_info.html#afdf59ec21ca6982eb87cee28a0e9812a">   41</a></span>&#160;        std::vector&lt;vk::Image&gt; *<a class="code" href="structrailguard_1_1rendering_1_1init_1_1_swapchain_init_info.html#afdf59ec21ca6982eb87cee28a0e9812a">swapchainImages</a>;</div>
-<div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="structrailguard_1_1rendering_1_1init_1_1_swapchain_init_info.html#a5e585b97ecb27fdd75fdd09b26bacbe4">   45</a></span>&#160;        vk::Format *<a class="code" href="structrailguard_1_1rendering_1_1init_1_1_swapchain_init_info.html#a5e585b97ecb27fdd75fdd09b26bacbe4">swapchainImageFormat</a>;</div>
+<div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="structrailguard_1_1rendering_1_1init_1_1_swapchain_init_info.html#a5e585b97ecb27fdd75fdd09b26bacbe4">   45</a></span>&#160;        <a class="codeRef" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkFormat.html">vk::Format</a> *<a class="code" href="structrailguard_1_1rendering_1_1init_1_1_swapchain_init_info.html#a5e585b97ecb27fdd75fdd09b26bacbe4">swapchainImageFormat</a>;</div>
 <div class="line"><a name="l00049"></a><span class="lineno"><a class="line" href="structrailguard_1_1rendering_1_1init_1_1_swapchain_init_info.html#a0d057e06f9dabaceb676178770923d23">   49</a></span>&#160;        std::vector&lt;vk::ImageView&gt; *<a class="code" href="structrailguard_1_1rendering_1_1init_1_1_swapchain_init_info.html#a0d057e06f9dabaceb676178770923d23">swapchainImageViews</a>;</div>
 <div class="line"><a name="l00053"></a><span class="lineno"><a class="line" href="structrailguard_1_1rendering_1_1init_1_1_swapchain_init_info.html#a45a6ff348819c2c83c2a6e3f91965590">   53</a></span>&#160;        std::vector&lt;vk::Framebuffer&gt; *<a class="code" href="structrailguard_1_1rendering_1_1init_1_1_swapchain_init_info.html#a45a6ff348819c2c83c2a6e3f91965590">swapchainFramebuffers</a>;</div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    };</div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;}</div>
+<div class="ttc" id="aVkDevice_html"><div class="ttname"><a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkDevice.html">vk::Device</a></div></div>
+<div class="ttc" id="aVkFormat_html"><div class="ttname"><a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkFormat.html">vk::Format</a></div></div>
+<div class="ttc" id="aVkPhysicalDevice_html"><div class="ttname"><a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDevice.html">vk::PhysicalDevice</a></div></div>
+<div class="ttc" id="aVkRenderPass_html"><div class="ttname"><a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkRenderPass.html">vk::RenderPass</a></div></div>
+<div class="ttc" id="aVkSurfaceKHR_html"><div class="ttname"><a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkSurfaceKHR.html">vk::SurfaceKHR</a></div></div>
+<div class="ttc" id="aVkSwapchainKHR_html"><div class="ttname"><a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkSwapchainKHR.html">vk::SwapchainKHR</a></div></div>
 <div class="ttc" id="aclassrailguard_1_1core_1_1_window_manager_html"><div class="ttname"><a href="classrailguard_1_1core_1_1_window_manager.html">railguard::core::WindowManager</a></div><div class="ttdef"><b>Definition:</b> WindowManager.h:13</div></div>
 <div class="ttc" id="astructrailguard_1_1rendering_1_1init_1_1_swapchain_init_info_html"><div class="ttname"><a href="structrailguard_1_1rendering_1_1init_1_1_swapchain_init_info.html">railguard::rendering::init::SwapchainInitInfo</a></div><div class="ttdoc">Contains pointers to the destination variable of vulkan handles. They will be filled when VulkanInit:...</div><div class="ttdef"><b>Definition:</b> SwapchainInitInfo.h:13</div></div>
 <div class="ttc" id="astructrailguard_1_1rendering_1_1init_1_1_swapchain_init_info_html_a0d057e06f9dabaceb676178770923d23"><div class="ttname"><a href="structrailguard_1_1rendering_1_1init_1_1_swapchain_init_info.html#a0d057e06f9dabaceb676178770923d23">railguard::rendering::init::SwapchainInitInfo::swapchainImageViews</a></div><div class="ttdeci">std::vector&lt; vk::ImageView &gt; * swapchainImageViews</div><div class="ttdoc">Pointer to the destination variable of the swapchain image views.</div><div class="ttdef"><b>Definition:</b> SwapchainInitInfo.h:49</div></div>
@@ -105,9 +127,13 @@ $(function() {
 <div class="ttc" id="astructrailguard_1_1rendering_1_1init_1_1_swapchain_init_info_html_af6f8ce7d62aa1605393ff2b6da4104a7"><div class="ttname"><a href="structrailguard_1_1rendering_1_1init_1_1_swapchain_init_info.html#af6f8ce7d62aa1605393ff2b6da4104a7">railguard::rendering::init::SwapchainInitInfo::windowManager</a></div><div class="ttdeci">const railguard::core::WindowManager &amp; windowManager</div><div class="ttdoc">Readonly reference to the window manager.</div><div class="ttdef"><b>Definition:</b> SwapchainInitInfo.h:29</div></div>
 <div class="ttc" id="astructrailguard_1_1rendering_1_1init_1_1_swapchain_init_info_html_afdf59ec21ca6982eb87cee28a0e9812a"><div class="ttname"><a href="structrailguard_1_1rendering_1_1init_1_1_swapchain_init_info.html#afdf59ec21ca6982eb87cee28a0e9812a">railguard::rendering::init::SwapchainInitInfo::swapchainImages</a></div><div class="ttdeci">std::vector&lt; vk::Image &gt; * swapchainImages</div><div class="ttdoc">Pointer to the destination variable of the swapchain images.</div><div class="ttdef"><b>Definition:</b> SwapchainInitInfo.h:41</div></div>
 </div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_27636f4d4b2113f82b513d65146ca471.html">rendering</a></li><li class="navelem"><a class="el" href="dir_f7fe3af0c37ed16cfc4a02ad265f46c1.html">init</a></li><li class="navelem"><b>SwapchainInitInfo.h</b></li>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+  </ul>
+</div>
 </body>
 </html>

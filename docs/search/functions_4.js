@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['recreatewindowswapchain_115',['RecreateWindowSwapchain',['../classrailguard_1_1rendering_1_1_swapchain_manager.html#a643275df503e4302293082a33c6ffd7a',1,'railguard::rendering::SwapchainManager']]]
+  ['onwindowresized_150',['OnWindowResized',['../classrailguard_1_1core_1_1_engine.html#a8c91756e67a3df9fdb32714cf73d1578',1,'railguard::core::Engine']]]
 ];

@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8' standalone='yes'?>
+<tagfile doxygen_version="1.9.1" doxygen_gitid="ef9b20ac7f8a8621fcfc299f8bd0b80422390f4b">
+    <!-- Links to the Vulkan docs from doxygen -->
+    <compound kind="class">
+        <name>vk::Device</name>
+        <filename>VkDevice.html</filename>
+    </compound>
+    <compound kind="class">
+        <name>vk::PhysicalDevice</name>
+        <filename>VkPhysicalDevice.html</filename>
+    </compound>
+    <compound kind="class">
+        <name>vk::RenderPass</name>
+        <filename>VkRenderPass.html</filename>
+    </compound>
+    <compound kind="class">
+        <name>vk::CommandPool</name>
+        <filename>VkCommandPool.html</filename>
+    </compound>
+    <compound kind="class">
+        <name>vk::CommandBuffer</name>
+        <filename>VkCommandBuffer.html</filename>
+    </compound>
+    <compound kind="class">
+        <name>vk::Fence</name>
+        <filename>VkFence.html</filename>
+    </compound>
+    <compound kind="class">
+        <name>vk::Semaphore</name>
+        <filename>VkSemaphore.html</filename>
+    </compound>
+    <compound kind="class">
+        <name>vk::Instance</name>
+        <filename>VkInstance.html</filename>
+    </compound>
+    <compound kind="class">
+        <name>vk::ImageView</name>
+        <filename>VkImageView.html</filename>
+    </compound>
+    <compound kind="class">
+        <name>vk::Image</name>
+        <filename>VkImage.html</filename>
+    </compound>
+    <compound kind="class">
+        <name>vk::Framebuffer</name>
+        <filename>VkFramebuffer.html</filename>
+    </compound>
+    <compound kind="class">
+        <name>vk::SwapchainKHR</name>
+        <filename>VkSwapchainKHR.html</filename>
+    </compound>
+    <compound kind="class">
+        <name>vk::Format</name>
+        <filename>VkFormat.html</filename>
+    </compound>
+    <compound kind="class">
+        <name>vk::SurfaceKHR</name>
+        <filename>VkSurfaceKHR.html</filename>
+    </compound>
+</tagfile>
