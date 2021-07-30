@@ -10,6 +10,10 @@ Uses Vulkan and SDL2.
    1. If you forgot the flag, you should run `git submodule update --init`
 2. Install `premake5`.
 
+## API reference
+
+Docs are available here: https://martin-danhier.github.io/railguard/.
+
 ## Doubts
 
 Choices that were taken but that may or may not be a good idea. These matters should be investigated later to see if there actually were good or not.
