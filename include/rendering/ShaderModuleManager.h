@@ -30,7 +30,7 @@ namespace railguard::rendering
          * @param codeBuffer SPIR-V bytecode for the shader.
          * @return core::CompleteMatch<shader_module_id_t> match containing the Id of the created module, to be able to retreive it later.
          */
-        core::CompleteMatch<shader_module_id_t> LoadShaderModule(vk::ShaderStageFlagBits stage, const std::vector<uint32_t> &codeBuffer);
+        [[nodiscard]] core::CompleteMatch<shader_module_id_t> LoadShaderModule(vk::ShaderStageFlagBits stage, const std::vector<uint32_t> &codeBuffer);
         /**
          * @brief Creates a shader module from a SPIR-V file of which the path is passed as an argument.
          *
@@ -38,7 +38,7 @@ namespace railguard::rendering
          * @param filePath Path to a SPIR-V file containing the shader code.
          * @return core::CompleteMatch<shader_module_id_t> match containing the Id of the created module, to be able to retreive it later.
          */
-        core::CompleteMatch<shader_module_id_t> LoadShaderModule(vk::ShaderStageFlagBits stage, const std::string &filePath);
+        [[nodiscard]] core::CompleteMatch<shader_module_id_t> LoadShaderModule(vk::ShaderStageFlagBits stage, const std::string &filePath);
 
         /**
          * @brief Destroys the shader module pointed by the given match

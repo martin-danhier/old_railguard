@@ -55,7 +55,7 @@ namespace railguard::rendering
          *
          * @return CompleteMatch A match allowing either to retreive the ID of the effect or to use it with another function
          */
-        core::CompleteMatch<shader_effect_id_t> CreateShaderEffect(init::ShaderEffectInitInfo initInfo, bool buildEffectAfterCreation = false);
+        [[nodiscard]] core::CompleteMatch<shader_effect_id_t> CreateShaderEffect(init::ShaderEffectInitInfo initInfo, bool buildEffectAfterCreation = false);
 
         vk::Pipeline BuildEffect(const core::Match &match);
 

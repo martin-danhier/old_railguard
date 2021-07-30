@@ -36,6 +36,9 @@ namespace railguard::rendering
         ShaderModuleManager _shaderModuleManager;
         ShaderEffectManager _shaderEffectManager;
 
+        // Test
+        shader_effect_id_t _triangleEffect;
+
     public:
         explicit Renderer(const core::WindowManager &windowManager);
 

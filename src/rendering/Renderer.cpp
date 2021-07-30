@@ -2,6 +2,7 @@
 #include "../../include/rendering/Renderer.h"
 #include "../../include/rendering/init/RenderPassBuilder.h"
 #include "../../include/rendering/structs/Storages.h"
+#include "../../include/rendering/init/PipelineLayoutBuilder.h"
 
 namespace railguard::rendering
 {
@@ -9,7 +10,6 @@ namespace railguard::rendering
 	Renderer::Renderer(const core::WindowManager &windowManager)
 		: _swapchainCameraManager(1)
 	{
-		// === Init Vulkan ===
 
 		// Init instance
 		init::VulkanInitInfo vulkanInitInfo{
@@ -49,6 +49,16 @@ namespace railguard::rendering
 
 		// Init shader effect manager
 		_shaderEffectManager.Init(ShaderEffectManagerStorage{_device, _mainRenderPass, &_shaderModuleManager, &windowManager}, 5);
+
+		// Test
+		auto vertexModule = _shaderModuleManager.LoadShaderModule(vk::ShaderStageFlagBits::eVertex, "./bin/shaders/triangle.vert.spv").GetId();
+		auto fragmentModule = _shaderModuleManager.LoadShaderModule(vk::ShaderStageFlagBits::eFragment, "./bin/shaders/triangle.frag.spv").GetId();
+		_triangleEffect = _shaderEffectManager.CreateShaderEffect(init::ShaderEffectInitInfo {
+			.pipelineLayout = init::PipelineLayoutBuilder().Build(_device),
+			.shaderStages = {vertexModule, fragmentModule}
+		}, true).GetId(); // Build the effect after creation
+
+
 	}
 
 	Renderer::~Renderer()

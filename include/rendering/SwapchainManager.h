@@ -37,7 +37,7 @@ namespace railguard::rendering
          *
          * @return swapchain_id_t The id of the new swapchain
          */
-        core::CompleteMatch<swapchain_id_t> CreateWindowSwapchain(const vk::SurfaceKHR &surface, const core::WindowManager &windowManager, const vk::RenderPass &renderPass);
+        [[nodiscard]] core::CompleteMatch<swapchain_id_t> CreateWindowSwapchain(const vk::SurfaceKHR &surface, const core::WindowManager &windowManager, const vk::RenderPass &renderPass);
 
         /**
          * @brief Destroys the swapchain pointed by the given match

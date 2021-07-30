@@ -32,6 +32,17 @@ workspace "railguard"
       includedirs {"$(VULKAN_SDK)/include"}
       libdirs {"$(VULKAN_SDK)/Lib"}
 
+   project "shaders"
+      kind "Utility"
+      location "build/shaders"
+      -- Build shaders with glslangValidator
+      filter {"files:**"}
+      buildcommands { '"$(VULKAN_SDK)/Bin/glslangValidator.exe" -V "%{file.relpath}" -o "../../bin/shaders/%{file.name}.spv"' }
+      buildoutputs {"bin/shaders/%{file.name}.spv"}
+      filter {}
+      -- Take all shader files
+      files { "shaders/**.vert", "shaders/**.frag", "shaders/**.glsl", "shaders/**.comp" }
+
    -- Main Project
    project "railguard"
       kind "ConsoleApp"
@@ -98,3 +109,4 @@ workspace "railguard"
       -- Source files
       files { "include/**.h" }
 	   files { "src/**.cpp" }
+
