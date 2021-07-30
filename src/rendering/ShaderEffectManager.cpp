@@ -81,6 +81,11 @@ namespace railguard::rendering
         return pipeline;
     }
 
+    void ShaderEffectManager::DestroyShaderEffect(const core::Match &match) {
+        super::DestroyItem(match);
+
+        
+    }
 
 
 }

@@ -11,7 +11,7 @@ int main() {
     // Init SDL2
     SDL_SetMainReady();
     SDL_Init(SDL_INIT_VIDEO);
-    
+
     // Init engine
     auto engine = Engine();
 

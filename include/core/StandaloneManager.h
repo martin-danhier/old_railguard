@@ -78,8 +78,37 @@ namespace railguard::core
         * @brief Destroy an item but keep everything tightly packed in the vectors.
         *
         * Meant to be used from derivated classes. Call this method to execute the boilerplate,
-        * then move the lest item of the custom vectors at the location of the destroyed item, then pop_back
+        * then move the last item of the custom vectors at the location of the destroyed item, then pop_back
         * every custom vectors.
+        *
+        * Here is an example of code for a derived function:
+        *
+        * @code{.cpp}
+        * void ShaderModuleManager::DestroyShaderModule(const core::Match &match)
+        * {
+        *    super::DestroyItem(match);
+        *
+        *    // Get index
+        *    auto index = match.GetIndex();
+        *    size_t lastIndex = _ids.size() - 1;
+        *
+        *    // Destroy the module
+        *    _storage.vulkanDevice.destroyShaderModule(_modules[index]);
+        *
+        *    // If the index is smaller then, the destroyed item is not the last and the last one should be moved where
+        *    // the destroyed item was
+        *    if (index < lastIndex)
+        *    {
+        *       _stages[index] = _stages[lastIndex];
+        *       _modules[index] = _modules[lastIndex];
+        *    }
+        *
+        *    // Destroy the last item
+        *    _stages.pop_back();
+        *    _modules.pop_back();
+        * }
+        *
+        * @endcode
         *
         * @param match Match pointing to the item
         */
