@@ -61,11 +61,12 @@ namespace railguard::rendering
         auto index = match.GetIndex();
 
         auto builder = init::PipelineBuilder()
-            .WithPipelineLayout(_pipelineLayouts[index])
-            .GetDefaultsForExtent(_storage.windowManager->GetWindowExtent());
+                           .WithPipelineLayout(_pipelineLayouts[index])
+                           .GetDefaultsForExtent(_storage.windowManager->GetWindowExtent());
 
         // Register shader stages
-        for (shader_module_id_t shaderModuleId : _shaderStages[index]) {
+        for (shader_module_id_t shaderModuleId : _shaderStages[index])
+        {
             // Find that module
             auto match = _storage.shaderModuleManager->LookupId(shaderModuleId);
             // Register the stage
@@ -81,11 +82,45 @@ namespace railguard::rendering
         return pipeline;
     }
 
-    void ShaderEffectManager::DestroyShaderEffect(const core::Match &match) {
+    void ShaderEffectManager::DestroyShaderEffect(const core::Match &match)
+    {
         super::DestroyItem(match);
 
-        
+        // Get index
+        auto index = match.GetIndex();
+        size_t lastIndex = _ids.size() - 1;
+
+        // Destroy the pipeline if needed
+        if (_pipelines[index] != static_cast<vk::Pipeline>(nullptr))
+        {
+            _storage.vulkanDevice.destroyPipeline(_pipelines[index]);
+        }
+        // Destroy the pipeline layout
+        _storage.vulkanDevice.destroyPipelineLayout(_pipelineLayouts[index]);
+
+        // If the index is smaller then, the destroyed item is not the last and the last one should be moved where
+        // the destroyed item was
+        if (index < lastIndex)
+        {
+            _pipelineLayouts[index] = _pipelineLayouts[lastIndex];
+            _pipelines[index] = _pipelines[lastIndex];
+            _shaderStages[index] = _shaderStages[lastIndex];
+        }
+
+        // Destroy the last item
+        _pipelineLayouts.pop_back();
+        _pipelines.pop_back();
+        _shaderStages.pop_back();
     }
 
+    const vk::PipelineLayout ShaderEffectManager::GetPipelineLayout(const core::Match &match) const {
+        return _pipelineLayouts[match.GetIndex()];
+    }
+    const vk::Pipeline ShaderEffectManager::GetPipeline(const core::Match &match) const {
+        return _pipelines[match.GetIndex()];
+    }
+    const std::vector<shader_module_id_t> ShaderEffectManager::GetShaderStages(const core::Match &match) const {
+        return _shaderStages[match.GetIndex()];
+    }
 
 }

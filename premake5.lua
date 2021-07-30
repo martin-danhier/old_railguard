@@ -1,3 +1,4 @@
+
 workspace "railguard"
    configurations { "Debug", "Release" }
    platforms {"Win64", "Linux"}

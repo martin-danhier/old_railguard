@@ -1,10 +1,12 @@
 #pragma once
 
 #include "../core/WindowManager.h"
-#include "./SwapchainCameraManager.h"
-#include "./init/VulkanInit.h"
-#include "./FrameManager.h"
-#include "./Settings.h"
+#include "SwapchainCameraManager.h"
+#include "init/VulkanInit.h"
+#include "FrameManager.h"
+#include "Settings.h"
+#include "ShaderModuleManager.h"
+#include "ShaderEffectManager.h"
 
 namespace railguard::rendering
 {
@@ -31,6 +33,8 @@ namespace railguard::rendering
         SwapchainManager _swapchainManager;
         SwapchainCameraManager _swapchainCameraManager;
         FrameManager _frameManager;
+        ShaderModuleManager _shaderModuleManager;
+        ShaderEffectManager _shaderEffectManager;
 
     public:
         explicit Renderer(const core::WindowManager &windowManager);

@@ -132,7 +132,7 @@ namespace railguard::rendering::init
 		*initInfo.swapchainImageFormat = vk::Format(vkbSwapchain.image_format);
 
 		// Get image views
-		const uint32_t swapchainImageCount = initInfo.swapchainImages->size();
+		const uint32_t swapchainImageCount = static_cast<uint32_t>(initInfo.swapchainImages->size());
 		initInfo.swapchainImageViews->resize(swapchainImageCount);
 
 		for (uint32_t i = 0; i < static_cast<uint32_t>(swapchainImageCount); i++)

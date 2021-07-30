@@ -83,32 +83,7 @@ namespace railguard::core
         *
         * Here is an example of code for a derived function:
         *
-        * @code{.cpp}
-        * void ShaderModuleManager::DestroyShaderModule(const core::Match &match)
-        * {
-        *    super::DestroyItem(match);
-        *
-        *    // Get index
-        *    auto index = match.GetIndex();
-        *    size_t lastIndex = _ids.size() - 1;
-        *
-        *    // Destroy the module
-        *    _storage.vulkanDevice.destroyShaderModule(_modules[index]);
-        *
-        *    // If the index is smaller then, the destroyed item is not the last and the last one should be moved where
-        *    // the destroyed item was
-        *    if (index < lastIndex)
-        *    {
-        *       _stages[index] = _stages[lastIndex];
-        *       _modules[index] = _modules[lastIndex];
-        *    }
-        *
-        *    // Destroy the last item
-        *    _stages.pop_back();
-        *    _modules.pop_back();
-        * }
-        *
-        * @endcode
+        * @snippet ShaderModuleManager.cpp Example of derivation of StandaloneManager::DestroyItem
         *
         * @param match Match pointing to the item
         */

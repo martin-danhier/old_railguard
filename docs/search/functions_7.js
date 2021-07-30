@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['tomatch_156',['ToMatch',['../classrailguard_1_1core_1_1_complete_match.html#a46eb57b644159a7a4c3dec5c7ff628ae',1,'railguard::core::CompleteMatch']]]
+  ['sendevent_167',['SendEvent',['../classrailguard_1_1core_1_1_event_sender.html#a385ea5af42282f3cb04904694abd1c02',1,'railguard::core::EventSender']]]
 ];

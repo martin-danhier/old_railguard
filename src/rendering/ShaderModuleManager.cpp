@@ -1,4 +1,5 @@
 #include "../../include/rendering/ShaderModuleManager.h"
+#include "../../include/utils/GetError.h"
 #include <fstream>
 #include <iostream>
 
@@ -56,7 +57,7 @@ namespace railguard::rendering
         if (!file.is_open())
         {
             // Display error
-            std::cerr << "Couldn't load shader \"" << std::string(filePath) << "\": " << strerror(errno) << '\n';
+            std::cerr << "Couldn't load shader \"" << std::string(filePath) << "\": " << utils::GetError() << '\n';
             throw std::runtime_error("Couldn't load shader " + std::string(filePath));
         }
 
@@ -74,6 +75,7 @@ namespace railguard::rendering
         return LoadShaderModule(stage, buffer);
     }
 
+//! [Example of derivation of StandaloneManager::DestroyItem]
     void ShaderModuleManager::DestroyShaderModule(const core::Match &match)
     {
         super::DestroyItem(match);
@@ -97,13 +99,14 @@ namespace railguard::rendering
         _stages.pop_back();
         _modules.pop_back();
     }
+//! [Example of derivation of StandaloneManager::DestroyItem]
 
     vk::ShaderStageFlagBits ShaderModuleManager::GetStage(const core::Match &match) const
     {
         return _stages[match.GetIndex()];
     }
 
-    vk::ShaderModule ShaderModuleManager::GetModule(const core::Match &match) const
+    const vk::ShaderModule ShaderModuleManager::GetModule(const core::Match &match) const
     {
         return _modules[match.GetIndex()];
     }

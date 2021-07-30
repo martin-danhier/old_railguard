@@ -48,7 +48,7 @@ namespace railguard::rendering
         void DestroyShaderModule(const core::Match &match);
 
         [[nodiscard]] vk::ShaderStageFlagBits GetStage(const core::Match &match) const;
-        [[nodiscard]] vk::ShaderModule GetModule(const core::Match &match) const;
+        [[nodiscard]] const vk::ShaderModule GetModule(const core::Match &match) const;
 
         
     };

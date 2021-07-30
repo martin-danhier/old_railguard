@@ -43,16 +43,26 @@ namespace railguard::rendering
 		// Init swapchain for window
 		_swapchainManager.Init(structs::FullDeviceStorage{_device, _physicalDevice}, 1);
 		_mainWindowSwapchain = _swapchainManager.CreateWindowSwapchain(_surface, windowManager, _mainRenderPass).GetId();
+
+		// Init shader module manager
+		_shaderModuleManager.Init(structs::DeviceStorage{_device}, 5);
+
+		// Init shader effect manager
+		_shaderEffectManager.Init(ShaderEffectManagerStorage{_device, _mainRenderPass, &_shaderModuleManager, &windowManager}, 5);
 	}
 
 	Renderer::~Renderer()
 	{
+		// Destroy shader effect manager
+		_shaderEffectManager.Clear();
+		// Destroy shader module manager
+		_shaderModuleManager.Clear();
+		// Destroy swapchains
+		_swapchainManager.Clear();
 		// Destroy main render pass
 		_device.destroyRenderPass(_mainRenderPass);
 		// Destroy frame manager
 		_frameManager.Cleanup();
-		// Destroy swapchains
-		_swapchainManager.Clear();
 		// Destroy allocator
 		vmaDestroyAllocator(_allocator);
 		// Destroy device

@@ -215,32 +215,32 @@ template&lt;std::integral T, typename U  = nullptr_t&gt; </div>
 <p>Destroy an item but keep everything tightly packed in the vectors. </p>
 <p>Meant to be used from derivated classes. Call this method to execute the boilerplate, then move the last item of the custom vectors at the location of the destroyed item, then pop_back every custom vectors.</p>
 <p>Here is an example of code for a derived function:</p>
-<div class="fragment"><div class="line"><span class="keywordtype">void</span> ShaderModuleManager::DestroyShaderModule(<span class="keyword">const</span> core::Match &amp;match)</div>
-<div class="line">{</div>
-<div class="line">   super::DestroyItem(match);</div>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> ShaderModuleManager::DestroyShaderModule(<span class="keyword">const</span> core::Match &amp;match)</div>
+<div class="line">    {</div>
+<div class="line">        super::DestroyItem(match);</div>
 <div class="line"> </div>
-<div class="line">   <span class="comment">// Get index</span></div>
-<div class="line">   <span class="keyword">auto</span> index = match.GetIndex();</div>
-<div class="line">   <span class="keywordtype">size_t</span> lastIndex = <a class="code" href="classrailguard_1_1core_1_1_standalone_manager.html#afd6fc5ea6bb2bbb4fecb82ce5b5fb6a6">_ids</a>.size() - 1;</div>
+<div class="line">        <span class="comment">// Get index</span></div>
+<div class="line">        <span class="keyword">auto</span> index = match.GetIndex();</div>
+<div class="line">        <span class="keywordtype">size_t</span> lastIndex = <a class="code" href="classrailguard_1_1core_1_1_standalone_manager.html#afd6fc5ea6bb2bbb4fecb82ce5b5fb6a6">_ids</a>.size() - 1;</div>
 <div class="line"> </div>
-<div class="line">   <span class="comment">// Destroy the module</span></div>
-<div class="line">   <a class="code" href="classrailguard_1_1core_1_1_standalone_manager.html#accd358d2466a0a04e9f02a2c77cc370d">_storage</a>.vulkanDevice.destroyShaderModule(_modules[index]);</div>
+<div class="line">        <span class="comment">// Destroy the module</span></div>
+<div class="line">        <a class="code" href="classrailguard_1_1core_1_1_standalone_manager.html#accd358d2466a0a04e9f02a2c77cc370d">_storage</a>.vulkanDevice.destroyShaderModule(_modules[index]);</div>
 <div class="line"> </div>
-<div class="line">   <span class="comment">// If the index is smaller then, the destroyed item is not the last and the last one should be moved where</span></div>
-<div class="line">   <span class="comment">// the destroyed item was</span></div>
-<div class="line">   <span class="keywordflow">if</span> (index &lt; lastIndex)</div>
-<div class="line">   {</div>
-<div class="line">      _stages[index] = _stages[lastIndex];</div>
-<div class="line">      _modules[index] = _modules[lastIndex];</div>
-<div class="line">   }</div>
+<div class="line">        <span class="comment">// If the index is smaller then, the destroyed item is not the last and the last one should be moved where</span></div>
+<div class="line">        <span class="comment">// the destroyed item was</span></div>
+<div class="line">        <span class="keywordflow">if</span> (index &lt; lastIndex)</div>
+<div class="line">        {</div>
+<div class="line">            _stages[index] = _stages[lastIndex];</div>
+<div class="line">            _modules[index] = _modules[lastIndex];</div>
+<div class="line">        }</div>
 <div class="line"> </div>
-<div class="line">   <span class="comment">// Destroy the last item</span></div>
-<div class="line">   _stages.pop_back();</div>
-<div class="line">   _modules.pop_back();</div>
-<div class="line">}</div>
+<div class="line">        <span class="comment">// Destroy the last item</span></div>
+<div class="line">        _stages.pop_back();</div>
+<div class="line">        _modules.pop_back();</div>
+<div class="line">    }</div>
 <div class="ttc" id="aclassrailguard_1_1core_1_1_standalone_manager_html_accd358d2466a0a04e9f02a2c77cc370d"><div class="ttname"><a href="classrailguard_1_1core_1_1_standalone_manager.html#accd358d2466a0a04e9f02a2c77cc370d">railguard::core::StandaloneManager::_storage</a></div><div class="ttdeci">U _storage</div><div class="ttdoc">Optional storage for data that is passed in the Init method.</div><div class="ttdef"><b>Definition:</b> StandaloneManager.h:33</div></div>
 <div class="ttc" id="aclassrailguard_1_1core_1_1_standalone_manager_html_afd6fc5ea6bb2bbb4fecb82ce5b5fb6a6"><div class="ttname"><a href="classrailguard_1_1core_1_1_standalone_manager.html#afd6fc5ea6bb2bbb4fecb82ce5b5fb6a6">railguard::core::StandaloneManager::_ids</a></div><div class="ttdeci">std::vector&lt; T &gt; _ids</div><div class="ttdoc">Allows to quickly retreive the id of an item from its index.</div><div class="ttdef"><b>Definition:</b> StandaloneManager.h:49</div></div>
-</div><!-- fragment --><dl class="params"><dt>Parameters</dt><dd>
+</div><!-- fragment --> <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">match</td><td><a class="el" href="classrailguard_1_1core_1_1_match.html">Match</a> pointing to the item </td></tr>
   </table>
