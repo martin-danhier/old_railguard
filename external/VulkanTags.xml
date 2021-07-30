@@ -62,6 +62,10 @@
         <filename>VkPipeline.html</filename>
     </compound>
     <compound kind="class">
+        <name>vk::PipelineLayout</name>
+        <filename>VkPipelineLayout.html</filename>
+    </compound>
+    <compound kind="class">
         <name>vk::Viewport</name>
         <filename>VkViewport.html</filename>
     </compound>
