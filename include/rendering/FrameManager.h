@@ -38,6 +38,7 @@ namespace railguard::rendering
         void Cleanup();
         ~FrameManager();
 
+        void WaitForAllFences() const;
         [[nodiscard]] const FrameData GetFrame(uint32_t index) const;
         [[nodiscard]] const vk::CommandPool GetCommandPool(uint32_t index) const;
         [[nodiscard]] const vk::CommandBuffer GetCommandBuffer(uint32_t index) const;

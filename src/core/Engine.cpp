@@ -38,7 +38,8 @@ namespace railguard::core
             // Handle window events
             shouldQuit = _windowManager.HandleEvents();
 
-            // Call components
+            // Render objects
+            _renderer.Draw();
             
         }
     }

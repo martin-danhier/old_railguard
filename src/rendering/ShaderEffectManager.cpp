@@ -113,13 +113,21 @@ namespace railguard::rendering
         _shaderStages.pop_back();
     }
 
-    const vk::PipelineLayout ShaderEffectManager::GetPipelineLayout(const core::Match &match) const {
+    void ShaderEffectManager::Bind(const core::Match &match, const vk::CommandBuffer &cmd) const
+    {
+        cmd.bindPipeline(vk::PipelineBindPoint::eGraphics, _pipelines[match.GetIndex()]);
+    }
+
+    const vk::PipelineLayout ShaderEffectManager::GetPipelineLayout(const core::Match &match) const
+    {
         return _pipelineLayouts[match.GetIndex()];
     }
-    const vk::Pipeline ShaderEffectManager::GetPipeline(const core::Match &match) const {
+    const vk::Pipeline ShaderEffectManager::GetPipeline(const core::Match &match) const
+    {
         return _pipelines[match.GetIndex()];
     }
-    const std::vector<shader_module_id_t> ShaderEffectManager::GetShaderStages(const core::Match &match) const {
+    const std::vector<shader_module_id_t> ShaderEffectManager::GetShaderStages(const core::Match &match) const
+    {
         return _shaderStages[match.GetIndex()];
     }
 

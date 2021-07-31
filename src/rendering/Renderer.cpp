@@ -3,6 +3,7 @@
 #include "../../include/rendering/init/RenderPassBuilder.h"
 #include "../../include/rendering/structs/Storages.h"
 #include "../../include/rendering/init/PipelineLayoutBuilder.h"
+#include "../../include/utils/Colors.h"
 
 namespace railguard::rendering
 {
@@ -10,6 +11,8 @@ namespace railguard::rendering
 	Renderer::Renderer(const core::WindowManager &windowManager)
 		: _swapchainCameraManager(1)
 	{
+		// Save current extent
+		_windowExtent = windowManager.GetWindowExtent();
 
 		// Init instance
 		init::VulkanInitInfo vulkanInitInfo{
@@ -62,6 +65,9 @@ namespace railguard::rendering
 
 	Renderer::~Renderer()
 	{
+		// Wait for all fences
+		_frameManager.WaitForAllFences();
+
 		// Destroy shader effect manager
 		_shaderEffectManager.Clear();
 		// Destroy shader module manager
@@ -90,17 +96,22 @@ namespace railguard::rendering
 		return _frameManager.GetFrame(_drawnFramesCount % NB_OVERLAPPING_FRAMES);
 	}
 
+	void Renderer::WaitForFence(const vk::Fence &fence) const {
+		// Wait for fences
+		auto waitResult = _device.waitForFences(fence, true, WAIT_FOR_FENCES_TIMEOUT);
+		if (waitResult != vk::Result::eSuccess)
+		{
+			throw std::runtime_error("Error while waiting for fences");
+		}
+	}
+
 	void Renderer::Draw()
 	{
 		// Get current frame
 		auto currentFrame = GetCurrentFrame();
 
 		// Wait for fences
-		auto waitResult = _device.waitForFences(currentFrame.renderFence, true, WAIT_FOR_FENCES_TIMEOUT);
-		if (waitResult != vk::Result::eSuccess)
-		{
-			throw std::runtime_error("Error while waiting for fences");
-		}
+		WaitForFence(currentFrame.renderFence);
 		_device.resetFences(currentFrame.renderFence);
 
 		// Request image index from swapchain
@@ -119,11 +130,27 @@ namespace railguard::rendering
 		// Create RenderPassBeginInfo
 		// TODO with camera
 
+		vk::ClearValue clearColorValue(utils::GetColorHex(0x1f2959ff));
+		vk::RenderPassBeginInfo rpBeginInfo {
+			.renderPass = _mainRenderPass,
+			.framebuffer = _swapchainManager.GetFramebuffers(swapchain)[imageIndex],
+			.renderArea = {
+				.offset = {0, 0},
+				.extent = _windowExtent,
+			},
+			.clearValueCount = 1,
+			.pClearValues = &clearColorValue,
+		};
+
 		// Begin recording of commands in the render pass
+		currentFrame.commandBuffer.beginRenderPass(rpBeginInfo, vk::SubpassContents::eInline);
 
 		// Draw each object
+		_shaderEffectManager.Bind(_shaderEffectManager.LookupId(_triangleEffect), currentFrame.commandBuffer);
+		currentFrame.commandBuffer.draw(3, 1, 0, 0);
 
 		// End the render pass and the command buffer
+		currentFrame.commandBuffer.endRenderPass();
 		currentFrame.commandBuffer.end();
 
 		// Submit command buffer to the graphics queue

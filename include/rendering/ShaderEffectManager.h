@@ -66,6 +66,8 @@ namespace railguard::rendering
          */
         void DestroyShaderEffect(const core::Match &match);
 
+        void Bind(const core::Match &match, const vk::CommandBuffer &cmd) const;
+
         [[nodiscard]] const vk::PipelineLayout GetPipelineLayout(const core::Match &match) const;
         [[nodiscard]] const vk::Pipeline GetPipeline(const core::Match &match) const;
         [[nodiscard]] const std::vector<shader_module_id_t> GetShaderStages(const core::Match &match) const;

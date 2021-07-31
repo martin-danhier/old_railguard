@@ -29,6 +29,7 @@ namespace railguard::rendering
         // Other internal variables
         swapchain_id_t _mainWindowSwapchain = 0;
         uint64_t _drawnFramesCount = 0;
+        vk::Extent2D _windowExtent;
 
         // Various managers for core objects
         SwapchainManager _swapchainManager;
@@ -42,6 +43,7 @@ namespace railguard::rendering
 
         // Internal methods
         [[nodiscard]] const FrameData GetCurrentFrame() const;
+        void WaitForFence(const vk::Fence &fence) const;
     public:
         explicit Renderer(const core::WindowManager &windowManager);
 

@@ -130,6 +130,14 @@ namespace railguard::rendering
         };
     }
 
+    void FrameManager::WaitForAllFences() const {
+        auto waitResult = _device.waitForFences(NB_OVERLAPPING_FRAMES, _renderFences, true, WAIT_FOR_FENCES_TIMEOUT);
+        if (waitResult != vk::Result::eSuccess)
+		{
+			throw std::runtime_error("Error while waiting for fences");
+		}
+    }
+
     // Getters
 
     const vk::CommandPool FrameManager::GetCommandPool(uint32_t index) const
