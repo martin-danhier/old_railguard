@@ -8,5 +8,6 @@ var classrailguard_1_1rendering_1_1_frame_manager =
     [ "GetPresentSemaphore", "classrailguard_1_1rendering_1_1_frame_manager.html#a4571e18911d925fbcc1b4b2e34d135e8", null ],
     [ "GetRenderFence", "classrailguard_1_1rendering_1_1_frame_manager.html#a246ca8905d459881679dbb69966a3e69", null ],
     [ "GetRenderSemaphore", "classrailguard_1_1rendering_1_1_frame_manager.html#ad2d6ec61018d7323128e38fd3e793b49", null ],
-    [ "Init", "classrailguard_1_1rendering_1_1_frame_manager.html#a60de3683077ee1451687a460df118a85", null ]
+    [ "Init", "classrailguard_1_1rendering_1_1_frame_manager.html#a60de3683077ee1451687a460df118a85", null ],
+    [ "WaitForAllFences", "classrailguard_1_1rendering_1_1_frame_manager.html#a2dfe210b1fdec895c77f21fede8599fa", null ]
 ];

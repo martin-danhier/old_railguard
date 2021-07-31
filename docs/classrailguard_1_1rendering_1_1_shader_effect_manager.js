@@ -1,5 +1,6 @@
 var classrailguard_1_1rendering_1_1_shader_effect_manager =
 [
+    [ "Bind", "classrailguard_1_1rendering_1_1_shader_effect_manager.html#a479400eeaa716e63eac96ed08b433fa0", null ],
     [ "BuildEffect", "classrailguard_1_1rendering_1_1_shader_effect_manager.html#ad46ebf9cd260f8fc4f5851f0f3a42cc3", null ],
     [ "Clear", "classrailguard_1_1rendering_1_1_shader_effect_manager.html#aa9092152db24793dcd21fb1170debe1e", null ],
     [ "CreateShaderEffect", "classrailguard_1_1rendering_1_1_shader_effect_manager.html#a1510f2a91bcf0eff801d824f6c4a7be7", null ],
