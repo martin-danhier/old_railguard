@@ -1,0 +1,3 @@
+docs/* linguist-vendored
+external/* linguist-vendored
+premake5.lua linguist-vendored
