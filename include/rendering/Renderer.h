@@ -11,6 +11,14 @@
 namespace railguard::rendering
 {
 
+    /**
+     * @brief Main class of the rendering system.
+     *
+     * The renderer handles the entirety of the rendering process.
+     * It manages Vulkan object handles, internal managers and components used for the rendering.
+     *
+     * However, it doesn't manage the window itself, and only connects to one that is provided at initialization.
+     */
     class Renderer
     {
     private:
@@ -28,7 +36,6 @@ namespace railguard::rendering
 
         // Other internal variables
         swapchain_id_t _mainWindowSwapchain = 0;
-        uint64_t _drawnFramesCount = 0;
         vk::Extent2D _windowExtent;
 
         // Various managers for core objects
@@ -42,8 +49,6 @@ namespace railguard::rendering
         shader_effect_id_t _triangleEffect;
 
         // Internal methods
-        [[nodiscard]] const FrameData GetCurrentFrame() const;
-        void WaitForFence(const vk::Fence &fence) const;
     public:
         explicit Renderer(const core::WindowManager &windowManager);
 
@@ -51,6 +56,10 @@ namespace railguard::rendering
          * @brief Renders an image for every camera
          */
         void Draw();
+
+        // === Components ===
+
+        SwapchainCameraManager *GetSwapchainCameraManager();
 
         ~Renderer();
     };

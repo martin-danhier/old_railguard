@@ -87,36 +87,40 @@ $(document).ready(function(){initNavTree('_storages_8h_source.html',''); initRes
 <div class="title">Storages.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div>
+<a href="_storages_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &quot;../../../include/includes/Vulkan.h&quot;</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="keyword">namespace </span>railguard::rendering::structs</div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacerailguard_1_1rendering_1_1structs.html">railguard::rendering::structs</a></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;{</div>
 <div class="line"><a name="l00010"></a><span class="lineno"><a class="line" href="structrailguard_1_1rendering_1_1structs_1_1_device_storage.html">   10</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="structrailguard_1_1rendering_1_1structs_1_1_device_storage.html">DeviceStorage</a></div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    {</div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;        <a class="codeRef" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkDevice.html">vk::Device</a> vulkanDevice = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="structrailguard_1_1rendering_1_1structs_1_1_device_storage.html#ac0ecb8d85d173c7da4735fbfe1bb943e">   13</a></span>&#160;        <a class="codeRef" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkDevice.html">vk::Device</a> <a class="code" href="structrailguard_1_1rendering_1_1structs_1_1_device_storage.html#ac0ecb8d85d173c7da4735fbfe1bb943e">vulkanDevice</a> = <span class="keyword">nullptr</span>;</div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    };</div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
 <div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="structrailguard_1_1rendering_1_1structs_1_1_full_device_storage.html">   19</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="structrailguard_1_1rendering_1_1structs_1_1_full_device_storage.html">FullDeviceStorage</a></div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    {</div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;        <a class="codeRef" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkDevice.html">vk::Device</a> vulkanDevice = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        <a class="codeRef" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDevice.html">vk::PhysicalDevice</a> vulkanPhysicalDevice = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="structrailguard_1_1rendering_1_1structs_1_1_full_device_storage.html#a51f65f95c214213915d9508dc796a6d8">   22</a></span>&#160;        <a class="codeRef" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkDevice.html">vk::Device</a> <a class="code" href="structrailguard_1_1rendering_1_1structs_1_1_full_device_storage.html#a51f65f95c214213915d9508dc796a6d8">vulkanDevice</a> = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="structrailguard_1_1rendering_1_1structs_1_1_full_device_storage.html#af9d1694284dccc4b37e4d456d3fd64a1">   23</a></span>&#160;        <a class="codeRef" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDevice.html">vk::PhysicalDevice</a> <a class="code" href="structrailguard_1_1rendering_1_1structs_1_1_full_device_storage.html#af9d1694284dccc4b37e4d456d3fd64a1">vulkanPhysicalDevice</a> = <span class="keyword">nullptr</span>;</div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    };</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;} <span class="comment">// namespace railguard::rendering::structs</span></div>
 <div class="ttc" id="aVkDevice_html"><div class="ttname"><a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkDevice.html">vk::Device</a></div></div>
 <div class="ttc" id="aVkPhysicalDevice_html"><div class="ttname"><a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDevice.html">vk::PhysicalDevice</a></div></div>
+<div class="ttc" id="anamespacerailguard_1_1rendering_1_1structs_html"><div class="ttname"><a href="namespacerailguard_1_1rendering_1_1structs.html">railguard::rendering::structs</a></div><div class="ttdef"><b>Definition:</b> CameraRenderInfo.h:8</div></div>
 <div class="ttc" id="astructrailguard_1_1rendering_1_1structs_1_1_device_storage_html"><div class="ttname"><a href="structrailguard_1_1rendering_1_1structs_1_1_device_storage.html">railguard::rendering::structs::DeviceStorage</a></div><div class="ttdoc">Common Storage used with StandaloneManagers to store the vulkan device.</div><div class="ttdef"><b>Definition:</b> Storages.h:11</div></div>
+<div class="ttc" id="astructrailguard_1_1rendering_1_1structs_1_1_device_storage_html_ac0ecb8d85d173c7da4735fbfe1bb943e"><div class="ttname"><a href="structrailguard_1_1rendering_1_1structs_1_1_device_storage.html#ac0ecb8d85d173c7da4735fbfe1bb943e">railguard::rendering::structs::DeviceStorage::vulkanDevice</a></div><div class="ttdeci">vk::Device vulkanDevice</div><div class="ttdef"><b>Definition:</b> Storages.h:13</div></div>
 <div class="ttc" id="astructrailguard_1_1rendering_1_1structs_1_1_full_device_storage_html"><div class="ttname"><a href="structrailguard_1_1rendering_1_1structs_1_1_full_device_storage.html">railguard::rendering::structs::FullDeviceStorage</a></div><div class="ttdoc">Common Storage used with StandaloneManagers to store the vulkan device and the physical device.</div><div class="ttdef"><b>Definition:</b> Storages.h:20</div></div>
+<div class="ttc" id="astructrailguard_1_1rendering_1_1structs_1_1_full_device_storage_html_a51f65f95c214213915d9508dc796a6d8"><div class="ttname"><a href="structrailguard_1_1rendering_1_1structs_1_1_full_device_storage.html#a51f65f95c214213915d9508dc796a6d8">railguard::rendering::structs::FullDeviceStorage::vulkanDevice</a></div><div class="ttdeci">vk::Device vulkanDevice</div><div class="ttdef"><b>Definition:</b> Storages.h:22</div></div>
+<div class="ttc" id="astructrailguard_1_1rendering_1_1structs_1_1_full_device_storage_html_af9d1694284dccc4b37e4d456d3fd64a1"><div class="ttname"><a href="structrailguard_1_1rendering_1_1structs_1_1_full_device_storage.html#af9d1694284dccc4b37e4d456d3fd64a1">railguard::rendering::structs::FullDeviceStorage::vulkanPhysicalDevice</a></div><div class="ttdeci">vk::PhysicalDevice vulkanPhysicalDevice</div><div class="ttdef"><b>Definition:</b> Storages.h:23</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_27636f4d4b2113f82b513d65146ca471.html">rendering</a></li><li class="navelem"><a class="el" href="dir_85a5c468d49342ad8b1e443c689588e7.html">structs</a></li><li class="navelem"><b>Storages.h</b></li>
+    <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_27636f4d4b2113f82b513d65146ca471.html">rendering</a></li><li class="navelem"><a class="el" href="dir_85a5c468d49342ad8b1e443c689588e7.html">structs</a></li><li class="navelem"><a class="el" href="_storages_8h.html">Storages.h</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>

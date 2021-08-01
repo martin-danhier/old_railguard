@@ -1,14 +1,12 @@
 var searchData=
 [
-  ['railguard_20engine_56',['Railguard Engine',['../index.html',1,'']]],
-  ['recreatewindowswapchain_57',['RecreateWindowSwapchain',['../classrailguard_1_1rendering_1_1_swapchain_manager.html#a643275df503e4302293082a33c6ffd7a',1,'railguard::rendering::SwapchainManager']]],
-  ['rect2d_58',['Rect2D',['https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkRect2D.html',1,'vk']]],
-  ['registerlistener_59',['RegisterListener',['../classrailguard_1_1core_1_1_event_sender.html#a4236b9357853cc167220bbcc5fe431b9',1,'railguard::core::EventSender']]],
-  ['removelistener_60',['RemoveListener',['../classrailguard_1_1core_1_1_event_sender.html#a50f5bfad2cf98597acaaa83fca589286',1,'railguard::core::EventSender']]],
-  ['renderer_61',['Renderer',['../classrailguard_1_1rendering_1_1_renderer.html',1,'railguard::rendering']]],
-  ['renderpass_62',['renderPass',['../structrailguard_1_1rendering_1_1init_1_1_swapchain_init_info.html#a7f8324824374e880465faac6c56e5521',1,'railguard::rendering::init::SwapchainInitInfo']]],
-  ['renderpass_63',['RenderPass',['https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkRenderPass.html',1,'vk']]],
-  ['renderpassbuilder_64',['RenderPassBuilder',['../classrailguard_1_1rendering_1_1init_1_1_render_pass_builder.html',1,'railguard::rendering::init']]],
-  ['requestnextimageindex_65',['RequestNextImageIndex',['../classrailguard_1_1rendering_1_1_swapchain_manager.html#ada6eadbf6b1af08e2d2600220101097a',1,'railguard::rendering::SwapchainManager']]],
-  ['runmainloop_66',['RunMainLoop',['../classrailguard_1_1core_1_1_engine.html#a0b1c1ea362459838d6a7092425e4fb74',1,'railguard::core::Engine']]]
+  ['main_163',['main',['../main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4',1,'main.cpp']]],
+  ['main_2ecpp_164',['main.cpp',['../main_8cpp.html',1,'']]],
+  ['match_165',['Match',['../classrailguard_1_1core_1_1_match.html#a88003e216057414af2f755a838372252',1,'railguard::core::Match::Match()'],['../classrailguard_1_1core_1_1_match.html',1,'railguard::core::Match']]],
+  ['match_2ecpp_166',['Match.cpp',['../_match_8cpp.html',1,'']]],
+  ['match_2eh_167',['Match.h',['../_match_8h.html',1,'']]],
+  ['min_5ffreed_5findices_5fbefore_5freuse_168',['MIN_FREED_INDICES_BEFORE_REUSE',['../_entity_manager_8cpp.html#a2787fd94efe92ae8ca8fd58740ce0e05',1,'EntityManager.cpp']]],
+  ['mode_169',['mode',['../structrailguard_1_1rendering_1_1init_1_1_swapchain_camera_init_info.html#aa5b2f21514bb824b1d4ba29e2458549a',1,'railguard::rendering::init::SwapchainCameraInitInfo']]],
+  ['modeparam1_170',['modeParam1',['../structrailguard_1_1rendering_1_1init_1_1_swapchain_camera_init_info.html#a40b134e49ba987f37092aa42c690f386',1,'railguard::rendering::init::SwapchainCameraInitInfo']]],
+  ['modeparam2_171',['modeParam2',['../structrailguard_1_1rendering_1_1init_1_1_swapchain_camera_init_info.html#a3d687960bdd211bcf4596ca5a27fe6dd',1,'railguard::rendering::init::SwapchainCameraInitInfo']]]
 ];

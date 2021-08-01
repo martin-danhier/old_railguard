@@ -40,8 +40,10 @@ namespace railguard::core
         /**
          * @brief Keeps track of the last used ID for an item.
          * Incremented each time a new item is created.
+         *
+         * We start at 1, so that we can use 0 as the "NULL" id.
          */
-        T _lastUsedId = 0;
+        T _lastUsedId = 1;
 
         /**
          * @brief Allows to quickly retreive the id of an item from its index.
@@ -118,6 +120,7 @@ namespace railguard::core
         /**
          * @brief Inits the vectors to the default capacity.
          *
+         * @param storage Optional storage required by the derived class
          * @param defaultCapacity Number of items that will have pre allocated space in the vectors
          */
         void Init(U storage = nullptr, size_t defaultCapacity = 1)
@@ -126,6 +129,7 @@ namespace railguard::core
 
             // Reserve space in the vector
             _ids.reserve(defaultCapacity);
+            _idLookupMap.reserve(defaultCapacity);
 
             // Save the storage
             _storage = storage;

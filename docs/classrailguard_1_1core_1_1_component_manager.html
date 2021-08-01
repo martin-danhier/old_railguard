@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Railguard: railguard::core::ComponentManager Class Reference</title>
+<title>Railguard: railguard::core::ComponentManager&lt; T &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -86,58 +86,346 @@ $(document).ready(function(){initNavTree('classrailguard_1_1core_1_1_component_m
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
+<a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classrailguard_1_1core_1_1_component_manager-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">railguard::core::ComponentManager Class Reference</div>  </div>
+<div class="title">railguard::core::ComponentManager&lt; T &gt; Class Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="dynheader">
-Inheritance diagram for railguard::core::ComponentManager:</div>
-<div class="dyncontent">
- <div class="center">
-  <img src="classrailguard_1_1core_1_1_component_manager.png" usemap="#railguard::core::ComponentManager_map" alt=""/>
-  <map id="railguard::core::ComponentManager_map" name="railguard::core::ComponentManager_map">
-<area href="classrailguard_1_1rendering_1_1_swapchain_camera_manager.html" alt="railguard::rendering::SwapchainCameraManager" shape="rect" coords="0,56,287,80"/>
-  </map>
-</div></div>
+
+<p><code>#include &lt;<a class="el" href="_component_manager_8h_source.html">ComponentManager.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a4ea8a423ace342d48ca9693a0658fe37"><td class="memItemLeft" align="right" valign="top"><a id="a4ea8a423ace342d48ca9693a0658fe37"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>ComponentManager</b> (const component_id_t defaultComponentCapacity)</td></tr>
-<tr class="separator:a4ea8a423ace342d48ca9693a0658fe37"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a55f5f5138a21866de4baab719ec33c28"><td class="memItemLeft" align="right" valign="top"><a id="a55f5f5138a21866de4baab719ec33c28"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>DestroyComponent</b> (const <a class="el" href="classrailguard_1_1core_1_1_match.html">Match</a> &amp;match)</td></tr>
-<tr class="separator:a55f5f5138a21866de4baab719ec33c28"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9b69d01b3355451d0817cedfc248c00c"><td class="memItemLeft" align="right" valign="top"><a id="a9b69d01b3355451d0817cedfc248c00c"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>DestroyComponent</b> (component_id_t index)</td></tr>
-<tr class="separator:a9b69d01b3355451d0817cedfc248c00c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaefd9c76a9aabdb3c949bf9913f47f9a"><td class="memItemLeft" align="right" valign="top"><a id="aaefd9c76a9aabdb3c949bf9913f47f9a"></a>
-const <a class="el" href="classrailguard_1_1core_1_1_match.html">Match</a>&#160;</td><td class="memItemRight" valign="bottom"><b>FindComponentOfEntity</b> (const <a class="el" href="structrailguard_1_1core_1_1_entity.html">Entity</a> &amp;entity)</td></tr>
-<tr class="separator:aaefd9c76a9aabdb3c949bf9913f47f9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a48df7c31c83bf91b62e1a81fe7f19d88"><td class="memItemLeft" align="right" valign="top"><a id="a48df7c31c83bf91b62e1a81fe7f19d88"></a>
-const <a class="el" href="structrailguard_1_1core_1_1_entity.html">Entity</a>&#160;</td><td class="memItemRight" valign="bottom"><b>GetCorrespondingEntity</b> (const <a class="el" href="classrailguard_1_1core_1_1_match.html">Match</a> &amp;match)</td></tr>
-<tr class="separator:a48df7c31c83bf91b62e1a81fe7f19d88"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae8d5c6c76853cad62ff626d89e0a9680"><td class="memItemLeft" align="right" valign="top"><a id="ae8d5c6c76853cad62ff626d89e0a9680"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>RunGarbageCollection</b> (const <a class="el" href="classrailguard_1_1core_1_1_entity_manager.html">EntityManager</a> &amp;em)</td></tr>
-<tr class="separator:ae8d5c6c76853cad62ff626d89e0a9680"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4fad59eb44d94715c2c97b351692d598"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrailguard_1_1core_1_1_component_manager.html#a4fad59eb44d94715c2c97b351692d598">Init</a> (T storage=nullptr, const <a class="el" href="namespacerailguard_1_1core.html#a2db01d5c9b9a38bf72f4e38738c7ed58">component_id_t</a> defaultComponentCapacity=10)</td></tr>
+<tr class="memdesc:a4fad59eb44d94715c2c97b351692d598"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inits the vectors to the default capacity.  <a href="classrailguard_1_1core_1_1_component_manager.html#a4fad59eb44d94715c2c97b351692d598">More...</a><br /></td></tr>
+<tr class="separator:a4fad59eb44d94715c2c97b351692d598"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4d65051368855e60e0da5c664000df92"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrailguard_1_1core_1_1_component_manager.html#a4d65051368855e60e0da5c664000df92">DestroyComponent</a> (const <a class="el" href="classrailguard_1_1core_1_1_match.html">Match</a> &amp;match)</td></tr>
+<tr class="memdesc:a4d65051368855e60e0da5c664000df92"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroy a component but keep everything tightly packed in the vectors.  <a href="classrailguard_1_1core_1_1_component_manager.html#a4d65051368855e60e0da5c664000df92">More...</a><br /></td></tr>
+<tr class="separator:a4d65051368855e60e0da5c664000df92"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a678b29c90c66333080844e3630b4a4d6"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrailguard_1_1core_1_1_component_manager.html#a678b29c90c66333080844e3630b4a4d6">DestroyComponent</a> (<a class="el" href="namespacerailguard_1_1core.html#a2db01d5c9b9a38bf72f4e38738c7ed58">component_id_t</a> index)</td></tr>
+<tr class="memdesc:a678b29c90c66333080844e3630b4a4d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroy a component but keep everything tightly packed in the vectors.  <a href="classrailguard_1_1core_1_1_component_manager.html#a678b29c90c66333080844e3630b4a4d6">More...</a><br /></td></tr>
+<tr class="separator:a678b29c90c66333080844e3630b4a4d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1d74c6bd5a4e6ceb81720c95ad683929"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classrailguard_1_1core_1_1_match.html">Match</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrailguard_1_1core_1_1_component_manager.html#a1d74c6bd5a4e6ceb81720c95ad683929">FindComponentOfEntity</a> (const <a class="el" href="structrailguard_1_1core_1_1_entity.html">Entity</a> &amp;entity)</td></tr>
+<tr class="memdesc:a1d74c6bd5a4e6ceb81720c95ad683929"><td class="mdescLeft">&#160;</td><td class="mdescRight">Searches for an component attached to the given entity.  <a href="classrailguard_1_1core_1_1_component_manager.html#a1d74c6bd5a4e6ceb81720c95ad683929">More...</a><br /></td></tr>
+<tr class="separator:a1d74c6bd5a4e6ceb81720c95ad683929"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5fc01db602444c5273e44ef51d74393a"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="structrailguard_1_1core_1_1_entity.html">Entity</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrailguard_1_1core_1_1_component_manager.html#a5fc01db602444c5273e44ef51d74393a">GetCorrespondingEntity</a> (const <a class="el" href="classrailguard_1_1core_1_1_match.html">Match</a> &amp;match)</td></tr>
+<tr class="memdesc:a5fc01db602444c5273e44ef51d74393a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the entity attached to the given component.  <a href="classrailguard_1_1core_1_1_component_manager.html#a5fc01db602444c5273e44ef51d74393a">More...</a><br /></td></tr>
+<tr class="separator:a5fc01db602444c5273e44ef51d74393a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0889240f83b1ea5976f3f9df1a121863"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrailguard_1_1core_1_1_component_manager.html#a0889240f83b1ea5976f3f9df1a121863">RunGarbageCollection</a> (const <a class="el" href="classrailguard_1_1core_1_1_entity_manager.html">EntityManager</a> &amp;em)</td></tr>
+<tr class="separator:a0889240f83b1ea5976f3f9df1a121863"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:ac9b4dbfc65acde0a5a3b1de94ad22775"><td class="memItemLeft" align="right" valign="top"><a id="ac9b4dbfc65acde0a5a3b1de94ad22775"></a>
-<a class="el" href="classrailguard_1_1core_1_1_match.html">Match</a>&#160;</td><td class="memItemRight" valign="bottom"><b>RegisterComponent</b> (const <a class="el" href="structrailguard_1_1core_1_1_entity.html">Entity</a> &amp;entity)</td></tr>
-<tr class="separator:ac9b4dbfc65acde0a5a3b1de94ad22775"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aee1c22a23663b5b4c1e48227fdbd0d1c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classrailguard_1_1core_1_1_match.html">Match</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrailguard_1_1core_1_1_component_manager.html#aee1c22a23663b5b4c1e48227fdbd0d1c">RegisterComponent</a> (const <a class="el" href="structrailguard_1_1core_1_1_entity.html">Entity</a> &amp;entity)</td></tr>
+<tr class="memdesc:aee1c22a23663b5b4c1e48227fdbd0d1c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new component. Derived function should append values to the vectors.  <a href="classrailguard_1_1core_1_1_component_manager.html#aee1c22a23663b5b4c1e48227fdbd0d1c">More...</a><br /></td></tr>
+<tr class="separator:aee1c22a23663b5b4c1e48227fdbd0d1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
+Protected Attributes</h2></td></tr>
+<tr class="memitem:a0a4c06487729d7f6ffea2ea493549653"><td class="memItemLeft" align="right" valign="top">T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrailguard_1_1core_1_1_component_manager.html#a0a4c06487729d7f6ffea2ea493549653">_storage</a></td></tr>
+<tr class="memdesc:a0a4c06487729d7f6ffea2ea493549653"><td class="mdescLeft">&#160;</td><td class="mdescRight">Optional storage for data that is passed in the Init method.  <a href="classrailguard_1_1core_1_1_component_manager.html#a0a4c06487729d7f6ffea2ea493549653">More...</a><br /></td></tr>
+<tr class="separator:a0a4c06487729d7f6ffea2ea493549653"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<hr/>The documentation for this class was generated from the following files:<ul>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a678b29c90c66333080844e3630b4a4d6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a678b29c90c66333080844e3630b4a4d6">&#9670;&nbsp;</a></span>DestroyComponent() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T  = nullptr_t&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void <a class="el" href="classrailguard_1_1core_1_1_component_manager.html">railguard::core::ComponentManager</a>&lt; T &gt;::DestroyComponent </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacerailguard_1_1core.html#a2db01d5c9b9a38bf72f4e38738c7ed58">component_id_t</a>&#160;</td>
+          <td class="paramname"><em>index</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Destroy a component but keep everything tightly packed in the vectors. </p>
+<p>Meant to be used from derivated classes. Call this method to execute the boilerplate, then move the last item of the custom vectors at the location of the destroyed item, then pop_back every custom vectors.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">index</td><td>index of the component. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Reimplemented in <a class="el" href="classrailguard_1_1rendering_1_1_swapchain_camera_manager.html#ae05b3393a489f47b0c202ffa2d695843">railguard::rendering::SwapchainCameraManager</a>.</p>
+
+</div>
+</div>
+<a id="a4d65051368855e60e0da5c664000df92"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4d65051368855e60e0da5c664000df92">&#9670;&nbsp;</a></span>DestroyComponent() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T  = nullptr_t&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classrailguard_1_1core_1_1_component_manager.html">railguard::core::ComponentManager</a>&lt; T &gt;::DestroyComponent </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classrailguard_1_1core_1_1_match.html">Match</a> &amp;&#160;</td>
+          <td class="paramname"><em>match</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Destroy a component but keep everything tightly packed in the vectors. </p>
+<p>Meant to be used from derivated classes. Call this method to execute the boilerplate, then move the last item of the custom vectors at the location of the destroyed item, then pop_back every custom vectors.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">match</td><td><a class="el" href="classrailguard_1_1core_1_1_match.html">Match</a> pointing to the component. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a1d74c6bd5a4e6ceb81720c95ad683929"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1d74c6bd5a4e6ceb81720c95ad683929">&#9670;&nbsp;</a></span>FindComponentOfEntity()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T  = nullptr_t&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="classrailguard_1_1core_1_1_match.html">Match</a> <a class="el" href="classrailguard_1_1core_1_1_component_manager.html">railguard::core::ComponentManager</a>&lt; T &gt;::FindComponentOfEntity </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structrailguard_1_1core_1_1_entity.html">Entity</a> &amp;&#160;</td>
+          <td class="paramname"><em>entity</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Searches for an component attached to the given entity. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">entity</td><td><a class="el" href="structrailguard_1_1core_1_1_entity.html">Entity</a> for the search. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classrailguard_1_1core_1_1_match.html">Match</a> a match representing the position of the component in the arrays. </dd></dl>
+
+</div>
+</div>
+<a id="a5fc01db602444c5273e44ef51d74393a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5fc01db602444c5273e44ef51d74393a">&#9670;&nbsp;</a></span>GetCorrespondingEntity()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T  = nullptr_t&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="structrailguard_1_1core_1_1_entity.html">Entity</a> <a class="el" href="classrailguard_1_1core_1_1_component_manager.html">railguard::core::ComponentManager</a>&lt; T &gt;::GetCorrespondingEntity </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classrailguard_1_1core_1_1_match.html">Match</a> &amp;&#160;</td>
+          <td class="paramname"><em>match</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the entity attached to the given component. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">match</td><td><a class="el" href="classrailguard_1_1core_1_1_match.html">Match</a> pointing to the component of which the entity is queried. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The <a class="el" href="structrailguard_1_1core_1_1_entity.html">Entity</a> attached to the given component. </dd></dl>
+
+</div>
+</div>
+<a id="a4fad59eb44d94715c2c97b351692d598"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4fad59eb44d94715c2c97b351692d598">&#9670;&nbsp;</a></span>Init()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T  = nullptr_t&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classrailguard_1_1core_1_1_component_manager.html">railguard::core::ComponentManager</a>&lt; T &gt;::Init </td>
+          <td>(</td>
+          <td class="paramtype">T&#160;</td>
+          <td class="paramname"><em>storage</em> = <code>nullptr</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="namespacerailguard_1_1core.html#a2db01d5c9b9a38bf72f4e38738c7ed58">component_id_t</a>&#160;</td>
+          <td class="paramname"><em>defaultComponentCapacity</em> = <code>10</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Inits the vectors to the default capacity. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">storage</td><td>Optional storage required by the derived class </td></tr>
+    <tr><td class="paramname">defaultComponentCapacity</td><td>Number of items that will have pre allocated space in the vectors </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aee1c22a23663b5b4c1e48227fdbd0d1c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aee1c22a23663b5b4c1e48227fdbd0d1c">&#9670;&nbsp;</a></span>RegisterComponent()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T  = nullptr_t&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classrailguard_1_1core_1_1_match.html">Match</a> <a class="el" href="classrailguard_1_1core_1_1_component_manager.html">railguard::core::ComponentManager</a>&lt; T &gt;::RegisterComponent </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structrailguard_1_1core_1_1_entity.html">Entity</a> &amp;&#160;</td>
+          <td class="paramname"><em>entity</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Creates a new component. Derived function should append values to the vectors. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">entity</td><td><a class="el" href="structrailguard_1_1core_1_1_entity.html">Entity</a> to which the new component should be linked. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classrailguard_1_1core_1_1_match.html">Match</a> mapping the new component with its index in the component. </dd></dl>
+
+</div>
+</div>
+<a id="a0889240f83b1ea5976f3f9df1a121863"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0889240f83b1ea5976f3f9df1a121863">&#9670;&nbsp;</a></span>RunGarbageCollection()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T  = nullptr_t&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classrailguard_1_1core_1_1_component_manager.html">railguard::core::ComponentManager</a>&lt; T &gt;::RunGarbageCollection </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classrailguard_1_1core_1_1_entity_manager.html">EntityManager</a> &amp;&#160;</td>
+          <td class="paramname"><em>em</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a0a4c06487729d7f6ffea2ea493549653"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0a4c06487729d7f6ffea2ea493549653">&#9670;&nbsp;</a></span>_storage</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T  = nullptr_t&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">T <a class="el" href="classrailguard_1_1core_1_1_component_manager.html">railguard::core::ComponentManager</a>&lt; T &gt;::_storage</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Optional storage for data that is passed in the Init method. </p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
 <li>include/core/<a class="el" href="_component_manager_8h_source.html">ComponentManager.h</a></li>
-<li>src/core/ComponentManager.cpp</li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><b>railguard</b></li><li class="navelem"><b>core</b></li><li class="navelem"><a class="el" href="classrailguard_1_1core_1_1_component_manager.html">ComponentManager</a></li>
+    <li class="navelem"><a class="el" href="namespacerailguard.html">railguard</a></li><li class="navelem"><a class="el" href="namespacerailguard_1_1core.html">core</a></li><li class="navelem"><a class="el" href="classrailguard_1_1core_1_1_component_manager.html">ComponentManager</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>

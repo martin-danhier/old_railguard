@@ -1,4 +1,7 @@
 var searchData=
 [
-  ['tomatch_174',['ToMatch',['../classrailguard_1_1core_1_1_complete_match.html#a46eb57b644159a7a4c3dec5c7ff628ae',1,'railguard::core::CompleteMatch']]]
+  ['init_531',['Init',['../classrailguard_1_1core_1_1_component_manager.html#a4fad59eb44d94715c2c97b351692d598',1,'railguard::core::ComponentManager::Init()'],['../classrailguard_1_1core_1_1_standalone_manager.html#a603e5154475595b84678ed189c6b260d',1,'railguard::core::StandaloneManager::Init()'],['../classrailguard_1_1rendering_1_1_frame_manager.html#a60de3683077ee1451687a460df118a85',1,'railguard::rendering::FrameManager::Init()'],['../classrailguard_1_1rendering_1_1_shader_effect_manager.html#ae8550d579775d1b19fbb93fbb471e4dd',1,'railguard::rendering::ShaderEffectManager::Init()'],['../classrailguard_1_1rendering_1_1_shader_module_manager.html#a9100692e63717a818462f7251de3e2b3',1,'railguard::rendering::ShaderModuleManager::Init()'],['../classrailguard_1_1rendering_1_1_swapchain_camera_manager.html#a936248329d491018c27bcf7bd92b323e',1,'railguard::rendering::SwapchainCameraManager::Init()'],['../classrailguard_1_1rendering_1_1_swapchain_manager.html#ab9c9417f70caeb5923115ce0a1c151c0',1,'railguard::rendering::SwapchainManager::Init()']]],
+  ['initvulkan_532',['InitVulkan',['../classrailguard_1_1rendering_1_1init_1_1_vulkan_init.html#ada096de99392227baffc756a3e3e3359',1,'railguard::rendering::init::VulkanInit']]],
+  ['initwindowswapchain_533',['InitWindowSwapchain',['../classrailguard_1_1rendering_1_1init_1_1_vulkan_init.html#a315c14daa6c8bdafe4bda4a6f691bb55',1,'railguard::rendering::init::VulkanInit']]],
+  ['isentityalive_534',['IsEntityAlive',['../classrailguard_1_1core_1_1_entity_manager.html#a983d5d9498431408d10831612fe7de7c',1,'railguard::core::EntityManager']]]
 ];

@@ -87,61 +87,177 @@ $(document).ready(function(){initNavTree('_component_manager_8h_source.html','')
 <div class="title">ComponentManager.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#include &lt;unordered_map&gt;</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &quot;Entity.h&quot;</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;Match.h&quot;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;EntityManager.h&quot;</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keyword">namespace </span>railguard::core</div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;{</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    <span class="keyword">typedef</span> <span class="keywordtype">size_t</span> component_id_t;</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
-<div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="classrailguard_1_1core_1_1_component_manager.html">   14</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classrailguard_1_1core_1_1_component_manager.html">ComponentManager</a></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    {</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;        <span class="comment">// === Manager data ===</span></div>
+<a href="_component_manager_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;unordered_map&gt;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_entity_8h.html">Entity.h</a>&quot;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_match_8h.html">Match.h</a>&quot;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_entity_manager_8h.html">EntityManager.h</a>&quot;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;../utils/AdvancedCheck.h&quot;</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
+<div class="line"><a name="l00010"></a><span class="lineno"><a class="line" href="_component_manager_8h.html#a5a35fce356c4ba8e629eff549e2fd243">   10</a></span>&#160;<span class="preprocessor">#define REQUIRED_FOUND_ALIVE_TO_END_GC 5</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
+<div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="namespacerailguard.html">   12</a></span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacerailguard_1_1core.html">railguard::core</a></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;{</div>
+<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="namespacerailguard_1_1core.html#a2db01d5c9b9a38bf72f4e38738c7ed58">   17</a></span>&#160;    <span class="keyword">typedef</span> <span class="keywordtype">size_t</span> <a class="code" href="namespacerailguard_1_1core.html#a2db01d5c9b9a38bf72f4e38738c7ed58">component_id_t</a>;</div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;        <span class="comment">// Map that can be used for fast search of a component given an entity</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        <span class="comment">// Entity -&gt; Component</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        std::unordered_map&lt;eid_t, component_id_t&gt; _entityLookUpMap;</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        <span class="comment">// === Component data ===</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T = <span class="keywordtype">nullptr</span>_t&gt;</div>
+<div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="classrailguard_1_1core_1_1_component_manager.html">   20</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classrailguard_1_1core_1_1_component_manager.html">ComponentManager</a></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    {</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        <span class="comment">// === Manager data ===</span></div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        <span class="comment">// For a given component, the entity linked to it</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        <span class="comment">// Component -&gt; Entity</span></div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        std::vector&lt;Entity&gt; _entities;</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        <span class="comment">// Map that can be used for fast search of a component given an entity</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        <span class="comment">// Entity -&gt; Component</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        std::unordered_map&lt;eid_t, component_id_t&gt; _entityLookUpMap;</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        <span class="comment">// Create a new component for the given entity</span></div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        <span class="comment">// It is protected because &quot;real&quot; component managers will add additional parameters</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        <a class="code" href="classrailguard_1_1core_1_1_match.html">Match</a> RegisterComponent(<span class="keyword">const</span> <a class="code" href="structrailguard_1_1core_1_1_entity.html">Entity</a> &amp;entity);</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        <span class="comment">// Inits the manager and preallocate space in the vectors and maps</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        <span class="keyword">explicit</span> <a class="code" href="classrailguard_1_1core_1_1_component_manager.html">ComponentManager</a>(<span class="keyword">const</span> component_id_t defaultComponentCapacity);</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        <span class="comment">// Destroys the given component</span></div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        <span class="keywordtype">void</span> DestroyComponent(<span class="keyword">const</span> <a class="code" href="classrailguard_1_1core_1_1_match.html">Match</a> &amp;match);</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> DestroyComponent(component_id_t index);</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        <span class="comment">// Finds the component</span></div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        [[nodiscard]] <span class="keyword">const</span> <a class="code" href="classrailguard_1_1core_1_1_match.html">Match</a> FindComponentOfEntity(<span class="keyword">const</span> <a class="code" href="structrailguard_1_1core_1_1_entity.html">Entity</a> &amp;entity);</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        <span class="comment">// Finds the entity linked to this component</span></div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        <span class="keyword">const</span> <a class="code" href="structrailguard_1_1core_1_1_entity.html">Entity</a> GetCorrespondingEntity(<span class="keyword">const</span> <a class="code" href="classrailguard_1_1core_1_1_match.html">Match</a> &amp;match);</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        <span class="comment">// Checks random components to check if the corresponding entities are still alive</span></div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        <span class="comment">// Can be useful when there are a lot of entities</span></div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        <span class="keywordtype">void</span> RunGarbageCollection(<span class="keyword">const</span> <a class="code" href="classrailguard_1_1core_1_1_entity_manager.html">EntityManager</a> &amp;em);</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    };</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        <span class="comment">// === Component data ===</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        <span class="comment">// For a given component, the entity linked to it</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        <span class="comment">// Component -&gt; Entity</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        std::vector&lt;Entity&gt; _entities;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="preprocessor">#ifdef USE_ADVANCED_CHECKS</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        <span class="keywordtype">bool</span> _initialized = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00046"></a><span class="lineno"><a class="line" href="classrailguard_1_1core_1_1_component_manager.html#a0a4c06487729d7f6ffea2ea493549653">   46</a></span>&#160;        T <a class="code" href="classrailguard_1_1core_1_1_component_manager.html#a0a4c06487729d7f6ffea2ea493549653">_storage</a>;</div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;}</div>
-<div class="ttc" id="aclassrailguard_1_1core_1_1_component_manager_html"><div class="ttname"><a href="classrailguard_1_1core_1_1_component_manager.html">railguard::core::ComponentManager</a></div><div class="ttdef"><b>Definition:</b> ComponentManager.h:15</div></div>
+<div class="line"><a name="l00054"></a><span class="lineno"><a class="line" href="classrailguard_1_1core_1_1_component_manager.html#aee1c22a23663b5b4c1e48227fdbd0d1c">   54</a></span>&#160;        <a class="code" href="classrailguard_1_1core_1_1_match.html">Match</a> <a class="code" href="classrailguard_1_1core_1_1_component_manager.html#aee1c22a23663b5b4c1e48227fdbd0d1c">RegisterComponent</a>(<span class="keyword">const</span> <a class="code" href="structrailguard_1_1core_1_1_entity.html">Entity</a> &amp;entity)</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        {</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;            <a class="code" href="_advanced_check_8h.html#a520474e3d88ca67122948437e77d305f">ADVANCED_CHECK</a>(_initialized, <span class="stringliteral">&quot;ComponentManager should be initialized with Init before calling this method.&quot;</span>);</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;            <span class="comment">// Add the entity in the list</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;            _entities.push_back(entity);</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;            <span class="comment">// Store the index of the new variable + 1</span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;            <span class="comment">// + 1 because the maps returns 0 if a value does not exist in the map</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;            <span class="comment">// Thus, we reserve 0 for the &quot;no entity&quot; case</span></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;            _entityLookUpMap[entity.<a class="code" href="structrailguard_1_1core_1_1_entity.html#a7f27dab07fb80e0a41ea0c7c92ab7b47">eid</a>] = _entities.size();</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;            <span class="comment">// Other managers should also push values to the respective vectors</span></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;            <span class="keywordflow">return</span> <a class="code" href="classrailguard_1_1core_1_1_match.html">Match</a>(_entities.size());</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        }</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00076"></a><span class="lineno"><a class="line" href="classrailguard_1_1core_1_1_component_manager.html#a4fad59eb44d94715c2c97b351692d598">   76</a></span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classrailguard_1_1core_1_1_component_manager.html#a4fad59eb44d94715c2c97b351692d598">Init</a>(T storage = <span class="keyword">nullptr</span>, <span class="keyword">const</span> <a class="code" href="namespacerailguard_1_1core.html#a2db01d5c9b9a38bf72f4e38738c7ed58">component_id_t</a> defaultComponentCapacity = 10)</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;        {</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;            <a class="code" href="_advanced_check_8h.html#a520474e3d88ca67122948437e77d305f">ADVANCED_CHECK</a>(!_initialized, <span class="stringliteral">&quot;ComponentManager should not be initialized twice.&quot;</span>);</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; </div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;            <span class="comment">// Pre allocate the given size</span></div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;            _entities.reserve(defaultComponentCapacity);</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;            _entityLookUpMap.reserve(defaultComponentCapacity);</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;            <span class="comment">// Save the storage</span></div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;            <a class="code" href="classrailguard_1_1core_1_1_component_manager.html#a0a4c06487729d7f6ffea2ea493549653">_storage</a> = storage;</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; </div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="preprocessor">#ifdef USE_ADVANCED_CHECKS</span></div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;            _initialized = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        }</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160; </div>
+<div class="line"><a name="l00101"></a><span class="lineno"><a class="line" href="classrailguard_1_1core_1_1_component_manager.html#a4d65051368855e60e0da5c664000df92">  101</a></span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classrailguard_1_1core_1_1_component_manager.html#a4d65051368855e60e0da5c664000df92">DestroyComponent</a>(<span class="keyword">const</span> <a class="code" href="classrailguard_1_1core_1_1_match.html">Match</a> &amp;match)</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;        {</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;            <a class="code" href="namespacerailguard_1_1core.html#a2db01d5c9b9a38bf72f4e38738c7ed58">component_id_t</a> index = match.<a class="code" href="classrailguard_1_1core_1_1_match.html#a1dcf3429f42a399bf245c8ddd0c1f117">GetIndex</a>();</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;            <a class="code" href="classrailguard_1_1core_1_1_component_manager.html#a4d65051368855e60e0da5c664000df92">DestroyComponent</a>(index);</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;        }</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160; </div>
+<div class="line"><a name="l00116"></a><span class="lineno"><a class="line" href="classrailguard_1_1core_1_1_component_manager.html#a678b29c90c66333080844e3630b4a4d6">  116</a></span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classrailguard_1_1core_1_1_component_manager.html#a678b29c90c66333080844e3630b4a4d6">DestroyComponent</a>(<a class="code" href="namespacerailguard_1_1core.html#a2db01d5c9b9a38bf72f4e38738c7ed58">component_id_t</a> index)</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;        {</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;            <a class="code" href="_advanced_check_8h.html#a520474e3d88ca67122948437e77d305f">ADVANCED_CHECK</a>(_initialized, <span class="stringliteral">&quot;ComponentManager should be initialized with Init before calling this method.&quot;</span>);</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;            <a class="code" href="_advanced_check_8h.html#a520474e3d88ca67122948437e77d305f">ADVANCED_CHECK</a>(index &lt; _entities.size(), <span class="stringliteral">&quot;The index should exist in the vectors.&quot;</span>);</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160; </div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;            <span class="comment">// Remove the match from the lookup map</span></div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;            _entityLookUpMap.erase(_entities[index].eid);</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160; </div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;            <span class="comment">// Remove the component data when it is not at the end</span></div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;            <span class="keywordtype">size_t</span> lastIndex = _entities.size() - 1;</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;            <span class="keywordflow">if</span> (index &lt; lastIndex)</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;            {</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;                <span class="comment">// To keep everything tightly packed, we move the last element to the deleted slot</span></div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;                <span class="keyword">auto</span> movedEntity = _entities[lastIndex];</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;                _entities[index] = movedEntity;</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;                <span class="comment">// Update the map for the updated index</span></div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;                _entityLookUpMap[movedEntity.eid] = index;</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;            }</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;            _entities.pop_back();</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;        }</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160; </div>
+<div class="line"><a name="l00143"></a><span class="lineno"><a class="line" href="classrailguard_1_1core_1_1_component_manager.html#a1d74c6bd5a4e6ceb81720c95ad683929">  143</a></span>&#160;        [[nodiscard]] <span class="keyword">const</span> <a class="code" href="classrailguard_1_1core_1_1_match.html">Match</a> <a class="code" href="classrailguard_1_1core_1_1_component_manager.html#a1d74c6bd5a4e6ceb81720c95ad683929">FindComponentOfEntity</a>(<span class="keyword">const</span> <a class="code" href="structrailguard_1_1core_1_1_entity.html">Entity</a> &amp;entity)</div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;        {</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;            <a class="code" href="_advanced_check_8h.html#a520474e3d88ca67122948437e77d305f">ADVANCED_CHECK</a>(_initialized, <span class="stringliteral">&quot;ComponentManager should be initialized with Init before calling this method.&quot;</span>);</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160; </div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;            <a class="code" href="namespacerailguard_1_1core.html#a2db01d5c9b9a38bf72f4e38738c7ed58">component_id_t</a> index = _entityLookUpMap[entity.<a class="code" href="structrailguard_1_1core_1_1_entity.html#a7f27dab07fb80e0a41ea0c7c92ab7b47">eid</a>];</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;            <span class="keywordflow">return</span> <a class="code" href="classrailguard_1_1core_1_1_match.html">Match</a>(index);</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;        }</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160; </div>
+<div class="line"><a name="l00157"></a><span class="lineno"><a class="line" href="classrailguard_1_1core_1_1_component_manager.html#a5fc01db602444c5273e44ef51d74393a">  157</a></span>&#160;        <span class="keyword">const</span> <a class="code" href="structrailguard_1_1core_1_1_entity.html">Entity</a> <a class="code" href="classrailguard_1_1core_1_1_component_manager.html#a5fc01db602444c5273e44ef51d74393a">GetCorrespondingEntity</a>(<span class="keyword">const</span> <a class="code" href="classrailguard_1_1core_1_1_match.html">Match</a> &amp;match)</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;        {</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;            <a class="code" href="_advanced_check_8h.html#a520474e3d88ca67122948437e77d305f">ADVANCED_CHECK</a>(_initialized, <span class="stringliteral">&quot;ComponentManager should be initialized with Init before calling this method.&quot;</span>);</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160; </div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;            <span class="keywordflow">return</span> _entities[match.<a class="code" href="classrailguard_1_1core_1_1_match.html#a1dcf3429f42a399bf245c8ddd0c1f117">GetIndex</a>()];</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;        }</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160; </div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;        <span class="comment">// Checks random components to check if the corresponding entities are still alive</span></div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;        <span class="comment">// Can be useful when there are a lot of entities</span></div>
+<div class="line"><a name="l00166"></a><span class="lineno"><a class="line" href="classrailguard_1_1core_1_1_component_manager.html#a0889240f83b1ea5976f3f9df1a121863">  166</a></span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classrailguard_1_1core_1_1_component_manager.html#a0889240f83b1ea5976f3f9df1a121863">RunGarbageCollection</a>(<span class="keyword">const</span> <a class="code" href="classrailguard_1_1core_1_1_entity_manager.html">EntityManager</a> &amp;em)</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;        {</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;            <a class="code" href="_advanced_check_8h.html#a520474e3d88ca67122948437e77d305f">ADVANCED_CHECK</a>(_initialized, <span class="stringliteral">&quot;ComponentManager should be initialized with Init before calling this method.&quot;</span>);</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;            </div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;            uint8_t foundAliveInARow = 0;</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160; </div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;            <span class="keywordflow">while</span> (foundAliveInARow &lt; <a class="code" href="_component_manager_8h.html#a5a35fce356c4ba8e629eff549e2fd243">REQUIRED_FOUND_ALIVE_TO_END_GC</a> &amp;&amp; _entities.size() &gt; 0)</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;            {</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;                <span class="comment">// Select an entity</span></div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;                <span class="keyword">auto</span> i = std::rand() % _entities.size();</div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;                <a class="code" href="structrailguard_1_1core_1_1_entity.html">Entity</a> e = _entities[i];</div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160; </div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;                <span class="comment">// Check if it is still alive</span></div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;                <span class="keywordflow">if</span> (em.<a class="code" href="classrailguard_1_1core_1_1_entity_manager.html#a983d5d9498431408d10831612fe7de7c">IsEntityAlive</a>(e))</div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;                {</div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;                    foundAliveInARow++;</div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;                }</div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;                <span class="comment">// Not alive</span></div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;                <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;                {</div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;                    <span class="comment">// Delete it</span></div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;                    this-&gt;<a class="code" href="classrailguard_1_1core_1_1_component_manager.html#a4d65051368855e60e0da5c664000df92">DestroyComponent</a>(i);</div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;                    foundAliveInARow = 0;</div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;                }</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;            }</div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;        }</div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;    };</div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160; </div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;}</div>
+<div class="ttc" id="a_advanced_check_8h_html_a520474e3d88ca67122948437e77d305f"><div class="ttname"><a href="_advanced_check_8h.html#a520474e3d88ca67122948437e77d305f">ADVANCED_CHECK</a></div><div class="ttdeci">#define ADVANCED_CHECK(COND, MSG)</div><div class="ttdoc">In debug mode, throws an error with MSG as message if COND is false. Doesn't do anything in release m...</div><div class="ttdef"><b>Definition:</b> AdvancedCheck.h:33</div></div>
+<div class="ttc" id="a_component_manager_8h_html_a5a35fce356c4ba8e629eff549e2fd243"><div class="ttname"><a href="_component_manager_8h.html#a5a35fce356c4ba8e629eff549e2fd243">REQUIRED_FOUND_ALIVE_TO_END_GC</a></div><div class="ttdeci">#define REQUIRED_FOUND_ALIVE_TO_END_GC</div><div class="ttdef"><b>Definition:</b> ComponentManager.h:10</div></div>
+<div class="ttc" id="a_entity_8h_html"><div class="ttname"><a href="_entity_8h.html">Entity.h</a></div></div>
+<div class="ttc" id="a_entity_manager_8h_html"><div class="ttname"><a href="_entity_manager_8h.html">EntityManager.h</a></div></div>
+<div class="ttc" id="a_match_8h_html"><div class="ttname"><a href="_match_8h.html">Match.h</a></div></div>
+<div class="ttc" id="aclassrailguard_1_1core_1_1_component_manager_html"><div class="ttname"><a href="classrailguard_1_1core_1_1_component_manager.html">railguard::core::ComponentManager</a></div><div class="ttdef"><b>Definition:</b> ComponentManager.h:21</div></div>
+<div class="ttc" id="aclassrailguard_1_1core_1_1_component_manager_html_a0889240f83b1ea5976f3f9df1a121863"><div class="ttname"><a href="classrailguard_1_1core_1_1_component_manager.html#a0889240f83b1ea5976f3f9df1a121863">railguard::core::ComponentManager::RunGarbageCollection</a></div><div class="ttdeci">void RunGarbageCollection(const EntityManager &amp;em)</div><div class="ttdef"><b>Definition:</b> ComponentManager.h:166</div></div>
+<div class="ttc" id="aclassrailguard_1_1core_1_1_component_manager_html_a0a4c06487729d7f6ffea2ea493549653"><div class="ttname"><a href="classrailguard_1_1core_1_1_component_manager.html#a0a4c06487729d7f6ffea2ea493549653">railguard::core::ComponentManager::_storage</a></div><div class="ttdeci">T _storage</div><div class="ttdoc">Optional storage for data that is passed in the Init method.</div><div class="ttdef"><b>Definition:</b> ComponentManager.h:46</div></div>
+<div class="ttc" id="aclassrailguard_1_1core_1_1_component_manager_html_a1d74c6bd5a4e6ceb81720c95ad683929"><div class="ttname"><a href="classrailguard_1_1core_1_1_component_manager.html#a1d74c6bd5a4e6ceb81720c95ad683929">railguard::core::ComponentManager::FindComponentOfEntity</a></div><div class="ttdeci">const Match FindComponentOfEntity(const Entity &amp;entity)</div><div class="ttdoc">Searches for an component attached to the given entity.</div><div class="ttdef"><b>Definition:</b> ComponentManager.h:143</div></div>
+<div class="ttc" id="aclassrailguard_1_1core_1_1_component_manager_html_a4d65051368855e60e0da5c664000df92"><div class="ttname"><a href="classrailguard_1_1core_1_1_component_manager.html#a4d65051368855e60e0da5c664000df92">railguard::core::ComponentManager::DestroyComponent</a></div><div class="ttdeci">void DestroyComponent(const Match &amp;match)</div><div class="ttdoc">Destroy a component but keep everything tightly packed in the vectors.</div><div class="ttdef"><b>Definition:</b> ComponentManager.h:101</div></div>
+<div class="ttc" id="aclassrailguard_1_1core_1_1_component_manager_html_a4fad59eb44d94715c2c97b351692d598"><div class="ttname"><a href="classrailguard_1_1core_1_1_component_manager.html#a4fad59eb44d94715c2c97b351692d598">railguard::core::ComponentManager::Init</a></div><div class="ttdeci">void Init(T storage=nullptr, const component_id_t defaultComponentCapacity=10)</div><div class="ttdoc">Inits the vectors to the default capacity.</div><div class="ttdef"><b>Definition:</b> ComponentManager.h:76</div></div>
+<div class="ttc" id="aclassrailguard_1_1core_1_1_component_manager_html_a5fc01db602444c5273e44ef51d74393a"><div class="ttname"><a href="classrailguard_1_1core_1_1_component_manager.html#a5fc01db602444c5273e44ef51d74393a">railguard::core::ComponentManager::GetCorrespondingEntity</a></div><div class="ttdeci">const Entity GetCorrespondingEntity(const Match &amp;match)</div><div class="ttdoc">Get the entity attached to the given component.</div><div class="ttdef"><b>Definition:</b> ComponentManager.h:157</div></div>
+<div class="ttc" id="aclassrailguard_1_1core_1_1_component_manager_html_a678b29c90c66333080844e3630b4a4d6"><div class="ttname"><a href="classrailguard_1_1core_1_1_component_manager.html#a678b29c90c66333080844e3630b4a4d6">railguard::core::ComponentManager::DestroyComponent</a></div><div class="ttdeci">virtual void DestroyComponent(component_id_t index)</div><div class="ttdoc">Destroy a component but keep everything tightly packed in the vectors.</div><div class="ttdef"><b>Definition:</b> ComponentManager.h:116</div></div>
+<div class="ttc" id="aclassrailguard_1_1core_1_1_component_manager_html_aee1c22a23663b5b4c1e48227fdbd0d1c"><div class="ttname"><a href="classrailguard_1_1core_1_1_component_manager.html#aee1c22a23663b5b4c1e48227fdbd0d1c">railguard::core::ComponentManager::RegisterComponent</a></div><div class="ttdeci">Match RegisterComponent(const Entity &amp;entity)</div><div class="ttdoc">Creates a new component. Derived function should append values to the vectors.</div><div class="ttdef"><b>Definition:</b> ComponentManager.h:54</div></div>
 <div class="ttc" id="aclassrailguard_1_1core_1_1_entity_manager_html"><div class="ttname"><a href="classrailguard_1_1core_1_1_entity_manager.html">railguard::core::EntityManager</a></div><div class="ttdef"><b>Definition:</b> EntityManager.h:11</div></div>
+<div class="ttc" id="aclassrailguard_1_1core_1_1_entity_manager_html_a983d5d9498431408d10831612fe7de7c"><div class="ttname"><a href="classrailguard_1_1core_1_1_entity_manager.html#a983d5d9498431408d10831612fe7de7c">railguard::core::EntityManager::IsEntityAlive</a></div><div class="ttdeci">bool IsEntityAlive(Entity entity) const</div><div class="ttdef"><b>Definition:</b> EntityManager.cpp:53</div></div>
 <div class="ttc" id="aclassrailguard_1_1core_1_1_match_html"><div class="ttname"><a href="classrailguard_1_1core_1_1_match.html">railguard::core::Match</a></div><div class="ttdef"><b>Definition:</b> Match.h:16</div></div>
+<div class="ttc" id="aclassrailguard_1_1core_1_1_match_html_a1dcf3429f42a399bf245c8ddd0c1f117"><div class="ttname"><a href="classrailguard_1_1core_1_1_match.html#a1dcf3429f42a399bf245c8ddd0c1f117">railguard::core::Match::GetIndex</a></div><div class="ttdeci">size_t GetIndex() const</div><div class="ttdef"><b>Definition:</b> Match.cpp:12</div></div>
+<div class="ttc" id="anamespacerailguard_1_1core_html"><div class="ttname"><a href="namespacerailguard_1_1core.html">railguard::core</a></div><div class="ttdef"><b>Definition:</b> ComponentManager.h:13</div></div>
+<div class="ttc" id="anamespacerailguard_1_1core_html_a2db01d5c9b9a38bf72f4e38738c7ed58"><div class="ttname"><a href="namespacerailguard_1_1core.html#a2db01d5c9b9a38bf72f4e38738c7ed58">railguard::core::component_id_t</a></div><div class="ttdeci">size_t component_id_t</div><div class="ttdoc">Type representing an index of a component.</div><div class="ttdef"><b>Definition:</b> ComponentManager.h:17</div></div>
 <div class="ttc" id="astructrailguard_1_1core_1_1_entity_html"><div class="ttname"><a href="structrailguard_1_1core_1_1_entity.html">railguard::core::Entity</a></div><div class="ttdef"><b>Definition:</b> Entity.h:56</div></div>
+<div class="ttc" id="astructrailguard_1_1core_1_1_entity_html_a7f27dab07fb80e0a41ea0c7c92ab7b47"><div class="ttname"><a href="structrailguard_1_1core_1_1_entity.html#a7f27dab07fb80e0a41ea0c7c92ab7b47">railguard::core::Entity::eid</a></div><div class="ttdeci">eid_t eid</div><div class="ttdef"><b>Definition:</b> Entity.h:58</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_3d69f64eaf81436fe2b22361382717e5.html">core</a></li><li class="navelem"><b>ComponentManager.h</b></li>
+    <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_3d69f64eaf81436fe2b22361382717e5.html">core</a></li><li class="navelem"><a class="el" href="_component_manager_8h.html">ComponentManager.h</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>

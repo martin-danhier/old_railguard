@@ -90,39 +90,83 @@ $(document).ready(function(){initNavTree('classrailguard_1_1rendering_1_1_swapch
 <div class="title">railguard::rendering::SwapchainCameraManager Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>A swapchain camera is a camera that renders to a swapchain.  
+ <a href="classrailguard_1_1rendering_1_1_swapchain_camera_manager.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_swapchain_camera_manager_8h_source.html">SwapchainCameraManager.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for railguard::rendering::SwapchainCameraManager:</div>
 <div class="dyncontent">
  <div class="center">
   <img src="classrailguard_1_1rendering_1_1_swapchain_camera_manager.png" usemap="#railguard::rendering::SwapchainCameraManager_map" alt=""/>
   <map id="railguard::rendering::SwapchainCameraManager_map" name="railguard::rendering::SwapchainCameraManager_map">
-<area href="classrailguard_1_1core_1_1_component_manager.html" alt="railguard::core::ComponentManager" shape="rect" coords="0,0,287,24"/>
+<area href="classrailguard_1_1core_1_1_component_manager.html" alt="railguard::core::ComponentManager&lt; SwapchainCameraManagerStorage &gt;" shape="rect" coords="0,0,440,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:abc55e4220071ef60d607c5c9c2c34be1"><td class="memItemLeft" align="right" valign="top"><a id="abc55e4220071ef60d607c5c9c2c34be1"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>SwapchainCameraManager</b> (const core::component_id_t defaultComponentCapacity=1)</td></tr>
-<tr class="separator:abc55e4220071ef60d607c5c9c2c34be1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a936248329d491018c27bcf7bd92b323e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrailguard_1_1rendering_1_1_swapchain_camera_manager.html#a936248329d491018c27bcf7bd92b323e">Init</a> (<a class="el" href="structrailguard_1_1rendering_1_1_swapchain_camera_manager_storage.html">SwapchainCameraManagerStorage</a> storage, const <a class="el" href="namespacerailguard_1_1core.html#a2db01d5c9b9a38bf72f4e38738c7ed58">core::component_id_t</a> defaultComponentCapacity=1)</td></tr>
+<tr class="separator:a936248329d491018c27bcf7bd92b323e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8e7c0fa11c1bd37b85eb08c8fe4e67b2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrailguard_1_1rendering_1_1_swapchain_camera_manager.html#a8e7c0fa11c1bd37b85eb08c8fe4e67b2">Clear</a> ()</td></tr>
+<tr class="separator:a8e7c0fa11c1bd37b85eb08c8fe4e67b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4bb0511dafdf2d00d51defcb69cf964d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classrailguard_1_1core_1_1_match.html">core::Match</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrailguard_1_1rendering_1_1_swapchain_camera_manager.html#a4bb0511dafdf2d00d51defcb69cf964d">CreateComponent</a> (const <a class="el" href="structrailguard_1_1core_1_1_entity.html">core::Entity</a> &amp;entity, const <a class="el" href="structrailguard_1_1rendering_1_1init_1_1_swapchain_camera_init_info.html">init::SwapchainCameraInitInfo</a> &amp;initInfo)</td></tr>
 <tr class="memdesc:a4bb0511dafdf2d00d51defcb69cf964d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new Camera component for the given entity.  <a href="classrailguard_1_1rendering_1_1_swapchain_camera_manager.html#a4bb0511dafdf2d00d51defcb69cf964d">More...</a><br /></td></tr>
 <tr class="separator:a4bb0511dafdf2d00d51defcb69cf964d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae05b3393a489f47b0c202ffa2d695843"><td class="memItemLeft" align="right" valign="top"><a id="ae05b3393a489f47b0c202ffa2d695843"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>DestroyComponent</b> (core::component_id_t index) override</td></tr>
+<tr class="memitem:ae05b3393a489f47b0c202ffa2d695843"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrailguard_1_1rendering_1_1_swapchain_camera_manager.html#ae05b3393a489f47b0c202ffa2d695843">DestroyComponent</a> (<a class="el" href="namespacerailguard_1_1core.html#a2db01d5c9b9a38bf72f4e38738c7ed58">core::component_id_t</a> index) override</td></tr>
+<tr class="memdesc:ae05b3393a489f47b0c202ffa2d695843"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroy a component but keep everything tightly packed in the vectors.  <a href="classrailguard_1_1rendering_1_1_swapchain_camera_manager.html#ae05b3393a489f47b0c202ffa2d695843">More...</a><br /></td></tr>
 <tr class="separator:ae05b3393a489f47b0c202ffa2d695843"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3576687957cdab10996f05508c49c220"><td class="memItemLeft" align="right" valign="top"><a id="a3576687957cdab10996f05508c49c220"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>GetEnabled</b> (const <a class="el" href="classrailguard_1_1core_1_1_match.html">core::Match</a> &amp;match) const</td></tr>
+<tr class="memitem:a3576687957cdab10996f05508c49c220"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrailguard_1_1rendering_1_1_swapchain_camera_manager.html#a3576687957cdab10996f05508c49c220">GetEnabled</a> (const <a class="el" href="classrailguard_1_1core_1_1_match.html">core::Match</a> &amp;match) const</td></tr>
 <tr class="separator:a3576687957cdab10996f05508c49c220"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2f8fc48690e091fc7c2118375d142705"><td class="memItemLeft" align="right" valign="top"><a id="a2f8fc48690e091fc7c2118375d142705"></a>
-swapchain_id_t&#160;</td><td class="memItemRight" valign="bottom"><b>GetSwapchainId</b> (const <a class="el" href="classrailguard_1_1core_1_1_match.html">core::Match</a> &amp;match) const</td></tr>
+<tr class="memitem:a2f8fc48690e091fc7c2118375d142705"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacerailguard_1_1rendering.html#a01c788a6c07f456661b63ed00e284a69">swapchain_id_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrailguard_1_1rendering_1_1_swapchain_camera_manager.html#a2f8fc48690e091fc7c2118375d142705">GetSwapchainId</a> (const <a class="el" href="classrailguard_1_1core_1_1_match.html">core::Match</a> &amp;match) const</td></tr>
 <tr class="separator:a2f8fc48690e091fc7c2118375d142705"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac02b4f4f5169582ad88c2f03ce8db839"><td class="memItemLeft" align="right" valign="top"><a id="ac02b4f4f5169582ad88c2f03ce8db839"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrailguard_1_1rendering_1_1_swapchain_camera_manager.html#ac02b4f4f5169582ad88c2f03ce8db839">Draw</a> ()</td></tr>
-<tr class="memdesc:ac02b4f4f5169582ad88c2f03ce8db839"><td class="mdescLeft">&#160;</td><td class="mdescRight">For each camera, render an image. <br /></td></tr>
-<tr class="separator:ac02b4f4f5169582ad88c2f03ce8db839"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a47bfce8b282c7897d858ecbc4a19b51d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacerailguard_1_1rendering_1_1enums.html#aec7446ff5e9c436f99ba91656f403c82">enums::CameraMode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrailguard_1_1rendering_1_1_swapchain_camera_manager.html#a47bfce8b282c7897d858ecbc4a19b51d">GetCameraMode</a> (const <a class="el" href="classrailguard_1_1core_1_1_match.html">core::Match</a> &amp;match) const</td></tr>
+<tr class="separator:a47bfce8b282c7897d858ecbc4a19b51d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac14e432ab8b2a3b43cd8ceebe5364fd9"><td class="memItemLeft" align="right" valign="top">glm::vec3&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrailguard_1_1rendering_1_1_swapchain_camera_manager.html#ac14e432ab8b2a3b43cd8ceebe5364fd9">GetPosition</a> (const <a class="el" href="classrailguard_1_1core_1_1_match.html">core::Match</a> &amp;match) const</td></tr>
+<tr class="separator:ac14e432ab8b2a3b43cd8ceebe5364fd9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a95fb2f27c5609f7a9ea4134d8f0a032f"><td class="memItemLeft" align="right" valign="top">glm::quat&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrailguard_1_1rendering_1_1_swapchain_camera_manager.html#a95fb2f27c5609f7a9ea4134d8f0a032f">GetRotation</a> (const <a class="el" href="classrailguard_1_1core_1_1_match.html">core::Match</a> &amp;match) const</td></tr>
+<tr class="separator:a95fb2f27c5609f7a9ea4134d8f0a032f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aae86e89d4a4e0f8d3e24dd4e51ad39d7"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrailguard_1_1rendering_1_1_swapchain_camera_manager.html#aae86e89d4a4e0f8d3e24dd4e51ad39d7">GetFieldOfView</a> (const <a class="el" href="classrailguard_1_1core_1_1_match.html">core::Match</a> &amp;match) const</td></tr>
+<tr class="separator:aae86e89d4a4e0f8d3e24dd4e51ad39d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad4dd19907b018fce0e06817fc3932ebb"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrailguard_1_1rendering_1_1_swapchain_camera_manager.html#ad4dd19907b018fce0e06817fc3932ebb">GetModeParam1</a> (const <a class="el" href="classrailguard_1_1core_1_1_match.html">core::Match</a> &amp;match) const</td></tr>
+<tr class="separator:ad4dd19907b018fce0e06817fc3932ebb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7aa226f749602bf0d68bc1a7a9f6d9db"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrailguard_1_1rendering_1_1_swapchain_camera_manager.html#a7aa226f749602bf0d68bc1a7a9f6d9db">GetModeParam2</a> (const <a class="el" href="classrailguard_1_1core_1_1_match.html">core::Match</a> &amp;match) const</td></tr>
+<tr class="separator:a7aa226f749602bf0d68bc1a7a9f6d9db"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abde9f76fe147d25de19b48e0b1644abf"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrailguard_1_1rendering_1_1_swapchain_camera_manager.html#abde9f76fe147d25de19b48e0b1644abf">GetAspectRatio</a> (const <a class="el" href="classrailguard_1_1core_1_1_match.html">core::Match</a> &amp;match) const</td></tr>
+<tr class="separator:abde9f76fe147d25de19b48e0b1644abf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a636ba0bb3b8e84f4d798bf3d78ae3502"><td class="memItemLeft" align="right" valign="top">vk::ClearValue&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrailguard_1_1rendering_1_1_swapchain_camera_manager.html#a636ba0bb3b8e84f4d798bf3d78ae3502">GetClearColor</a> (const <a class="el" href="classrailguard_1_1core_1_1_match.html">core::Match</a> &amp;match) const</td></tr>
+<tr class="separator:a636ba0bb3b8e84f4d798bf3d78ae3502"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a34ace3df0dc3e04de73961bc43fd0218"><td class="memItemLeft" align="right" valign="top">glm::mat4&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrailguard_1_1rendering_1_1_swapchain_camera_manager.html#a34ace3df0dc3e04de73961bc43fd0218">GetProjectionMatrix</a> (const <a class="el" href="classrailguard_1_1core_1_1_match.html">core::Match</a> &amp;match) const</td></tr>
+<tr class="separator:a34ace3df0dc3e04de73961bc43fd0218"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a73fb982b9880b34badc96fb1130092d8"><td class="memItemLeft" align="right" valign="top">glm::mat4&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrailguard_1_1rendering_1_1_swapchain_camera_manager.html#a73fb982b9880b34badc96fb1130092d8">GetProjectionMatrix</a> (size_t index) const</td></tr>
+<tr class="separator:a73fb982b9880b34badc96fb1130092d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8224dd33cca45979be95770967d5470f"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="structrailguard_1_1rendering_1_1structs_1_1_camera_render_info.html">structs::CameraRenderInfo</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrailguard_1_1rendering_1_1_swapchain_camera_manager.html#a8224dd33cca45979be95770967d5470f">GetRenderInfos</a> (const <a class="elRef" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkRenderPass.html">vk::RenderPass</a> &amp;renderPass)</td></tr>
+<tr class="memdesc:a8224dd33cca45979be95770967d5470f"><td class="mdescLeft">&#160;</td><td class="mdescRight">For each active camera, generate render infos.  <a href="classrailguard_1_1rendering_1_1_swapchain_camera_manager.html#a8224dd33cca45979be95770967d5470f">More...</a><br /></td></tr>
+<tr class="separator:a8224dd33cca45979be95770967d5470f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>A swapchain camera is a camera that renders to a swapchain. </p>
+<p>This component can be attached to entities in order to give them a camera.</p>
+<p>These cameras can be used to render images to the window, for example. To render to a texture, see RenderTextureCameraManager (TODO). </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a8e7c0fa11c1bd37b85eb08c8fe4e67b2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8e7c0fa11c1bd37b85eb08c8fe4e67b2">&#9670;&nbsp;</a></span>Clear()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void railguard::rendering::SwapchainCameraManager::Clear </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a4bb0511dafdf2d00d51defcb69cf964d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a4bb0511dafdf2d00d51defcb69cf964d">&#9670;&nbsp;</a></span>CreateComponent()</h2>
 
@@ -161,16 +205,318 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 
 </div>
 </div>
+<a id="ae05b3393a489f47b0c202ffa2d695843"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae05b3393a489f47b0c202ffa2d695843">&#9670;&nbsp;</a></span>DestroyComponent()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void railguard::rendering::SwapchainCameraManager::DestroyComponent </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacerailguard_1_1core.html#a2db01d5c9b9a38bf72f4e38738c7ed58">core::component_id_t</a>&#160;</td>
+          <td class="paramname"><em>index</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Destroy a component but keep everything tightly packed in the vectors. </p>
+<p>Meant to be used from derivated classes. Call this method to execute the boilerplate, then move the last item of the custom vectors at the location of the destroyed item, then pop_back every custom vectors.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">index</td><td>index of the component. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Reimplemented from <a class="el" href="classrailguard_1_1core_1_1_component_manager.html#a678b29c90c66333080844e3630b4a4d6">railguard::core::ComponentManager&lt; SwapchainCameraManagerStorage &gt;</a>.</p>
+
+</div>
+</div>
+<a id="abde9f76fe147d25de19b48e0b1644abf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abde9f76fe147d25de19b48e0b1644abf">&#9670;&nbsp;</a></span>GetAspectRatio()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float railguard::rendering::SwapchainCameraManager::GetAspectRatio </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classrailguard_1_1core_1_1_match.html">core::Match</a> &amp;&#160;</td>
+          <td class="paramname"><em>match</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a47bfce8b282c7897d858ecbc4a19b51d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a47bfce8b282c7897d858ecbc4a19b51d">&#9670;&nbsp;</a></span>GetCameraMode()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacerailguard_1_1rendering_1_1enums.html#aec7446ff5e9c436f99ba91656f403c82">enums::CameraMode</a> railguard::rendering::SwapchainCameraManager::GetCameraMode </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classrailguard_1_1core_1_1_match.html">core::Match</a> &amp;&#160;</td>
+          <td class="paramname"><em>match</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a636ba0bb3b8e84f4d798bf3d78ae3502"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a636ba0bb3b8e84f4d798bf3d78ae3502">&#9670;&nbsp;</a></span>GetClearColor()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">vk::ClearValue railguard::rendering::SwapchainCameraManager::GetClearColor </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classrailguard_1_1core_1_1_match.html">core::Match</a> &amp;&#160;</td>
+          <td class="paramname"><em>match</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3576687957cdab10996f05508c49c220"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3576687957cdab10996f05508c49c220">&#9670;&nbsp;</a></span>GetEnabled()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool railguard::rendering::SwapchainCameraManager::GetEnabled </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classrailguard_1_1core_1_1_match.html">core::Match</a> &amp;&#160;</td>
+          <td class="paramname"><em>match</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aae86e89d4a4e0f8d3e24dd4e51ad39d7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aae86e89d4a4e0f8d3e24dd4e51ad39d7">&#9670;&nbsp;</a></span>GetFieldOfView()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float railguard::rendering::SwapchainCameraManager::GetFieldOfView </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classrailguard_1_1core_1_1_match.html">core::Match</a> &amp;&#160;</td>
+          <td class="paramname"><em>match</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad4dd19907b018fce0e06817fc3932ebb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad4dd19907b018fce0e06817fc3932ebb">&#9670;&nbsp;</a></span>GetModeParam1()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float railguard::rendering::SwapchainCameraManager::GetModeParam1 </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classrailguard_1_1core_1_1_match.html">core::Match</a> &amp;&#160;</td>
+          <td class="paramname"><em>match</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7aa226f749602bf0d68bc1a7a9f6d9db"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7aa226f749602bf0d68bc1a7a9f6d9db">&#9670;&nbsp;</a></span>GetModeParam2()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float railguard::rendering::SwapchainCameraManager::GetModeParam2 </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classrailguard_1_1core_1_1_match.html">core::Match</a> &amp;&#160;</td>
+          <td class="paramname"><em>match</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac14e432ab8b2a3b43cd8ceebe5364fd9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac14e432ab8b2a3b43cd8ceebe5364fd9">&#9670;&nbsp;</a></span>GetPosition()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">glm::vec3 railguard::rendering::SwapchainCameraManager::GetPosition </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classrailguard_1_1core_1_1_match.html">core::Match</a> &amp;&#160;</td>
+          <td class="paramname"><em>match</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a34ace3df0dc3e04de73961bc43fd0218"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a34ace3df0dc3e04de73961bc43fd0218">&#9670;&nbsp;</a></span>GetProjectionMatrix() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">glm::mat4 railguard::rendering::SwapchainCameraManager::GetProjectionMatrix </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classrailguard_1_1core_1_1_match.html">core::Match</a> &amp;&#160;</td>
+          <td class="paramname"><em>match</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a73fb982b9880b34badc96fb1130092d8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a73fb982b9880b34badc96fb1130092d8">&#9670;&nbsp;</a></span>GetProjectionMatrix() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">glm::mat4 railguard::rendering::SwapchainCameraManager::GetProjectionMatrix </td>
+          <td>(</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>index</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8224dd33cca45979be95770967d5470f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8224dd33cca45979be95770967d5470f">&#9670;&nbsp;</a></span>GetRenderInfos()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; <a class="el" href="structrailguard_1_1rendering_1_1structs_1_1_camera_render_info.html">structs::CameraRenderInfo</a> &gt; railguard::rendering::SwapchainCameraManager::GetRenderInfos </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="elRef" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkRenderPass.html">vk::RenderPass</a> &amp;&#160;</td>
+          <td class="paramname"><em>renderPass</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>For each active camera, generate render infos. </p>
+<dl class="section return"><dt>Returns</dt><dd>A vector containing, for each active camera, a struct containing the data that the <a class="el" href="classrailguard_1_1rendering_1_1_renderer.html" title="Main class of the rendering system.">Renderer</a> needs to render to this camera. </dd></dl>
+
+</div>
+</div>
+<a id="a95fb2f27c5609f7a9ea4134d8f0a032f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a95fb2f27c5609f7a9ea4134d8f0a032f">&#9670;&nbsp;</a></span>GetRotation()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">glm::quat railguard::rendering::SwapchainCameraManager::GetRotation </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classrailguard_1_1core_1_1_match.html">core::Match</a> &amp;&#160;</td>
+          <td class="paramname"><em>match</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2f8fc48690e091fc7c2118375d142705"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2f8fc48690e091fc7c2118375d142705">&#9670;&nbsp;</a></span>GetSwapchainId()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacerailguard_1_1rendering.html#a01c788a6c07f456661b63ed00e284a69">swapchain_id_t</a> railguard::rendering::SwapchainCameraManager::GetSwapchainId </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classrailguard_1_1core_1_1_match.html">core::Match</a> &amp;&#160;</td>
+          <td class="paramname"><em>match</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a936248329d491018c27bcf7bd92b323e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a936248329d491018c27bcf7bd92b323e">&#9670;&nbsp;</a></span>Init()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void railguard::rendering::SwapchainCameraManager::Init </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structrailguard_1_1rendering_1_1_swapchain_camera_manager_storage.html">SwapchainCameraManagerStorage</a>&#160;</td>
+          <td class="paramname"><em>storage</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="namespacerailguard_1_1core.html#a2db01d5c9b9a38bf72f4e38738c7ed58">core::component_id_t</a>&#160;</td>
+          <td class="paramname"><em>defaultComponentCapacity</em> = <code>1</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>include/rendering/<a class="el" href="_swapchain_camera_manager_8h_source.html">SwapchainCameraManager.h</a></li>
-<li>src/rendering/SwapchainCameraManager.cpp</li>
+<li>src/rendering/<a class="el" href="_swapchain_camera_manager_8cpp.html">SwapchainCameraManager.cpp</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><b>railguard</b></li><li class="navelem"><b>rendering</b></li><li class="navelem"><a class="el" href="classrailguard_1_1rendering_1_1_swapchain_camera_manager.html">SwapchainCameraManager</a></li>
+    <li class="navelem"><a class="el" href="namespacerailguard.html">railguard</a></li><li class="navelem"><a class="el" href="namespacerailguard_1_1rendering.html">rendering</a></li><li class="navelem"><a class="el" href="classrailguard_1_1rendering_1_1_swapchain_camera_manager.html">SwapchainCameraManager</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>

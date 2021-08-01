@@ -1,0 +1,24 @@
+var searchData=
+[
+  ['vertexinputdescription_284',['VertexInputDescription',['../structrailguard_1_1rendering_1_1structs_1_1_vertex_input_description.html',1,'railguard::rendering::structs']]],
+  ['vertexinputdescription_2eh_285',['VertexInputDescription.h',['../_vertex_input_description_8h.html',1,'']]],
+  ['viewport_286',['Viewport',['https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkViewport.html',1,'vk']]],
+  ['vk_287',['vk',['https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkDevice.html',1,'']]],
+  ['vkinitincludes_2eh_288',['VkInitIncludes.h',['../_vk_init_includes_8h.html',1,'']]],
+  ['vma_2ecpp_289',['Vma.cpp',['../_vma_8cpp.html',1,'']]],
+  ['vma_2eh_290',['Vma.h',['../_vma_8h.html',1,'']]],
+  ['vma_5fdynamic_5fvulkan_5ffunctions_291',['VMA_DYNAMIC_VULKAN_FUNCTIONS',['../_vma_8h.html#af4b1f7fb1f444978626506ebf78c5222',1,'VMA_DYNAMIC_VULKAN_FUNCTIONS():&#160;Vma.h'],['../_vma_8cpp.html#af4b1f7fb1f444978626506ebf78c5222',1,'VMA_DYNAMIC_VULKAN_FUNCTIONS():&#160;Vma.cpp']]],
+  ['vma_5fimplementation_292',['VMA_IMPLEMENTATION',['../_vma_8cpp.html#abea80547807da765ebe9fce1c6dd6a8d',1,'Vma.cpp']]],
+  ['vma_5fstatic_5fvulkan_5ffunctions_293',['VMA_STATIC_VULKAN_FUNCTIONS',['../_vma_8h.html#a95b1c7528a1c18cffad6ec26332213a5',1,'VMA_STATIC_VULKAN_FUNCTIONS():&#160;Vma.h'],['../_vma_8cpp.html#a95b1c7528a1c18cffad6ec26332213a5',1,'VMA_STATIC_VULKAN_FUNCTIONS():&#160;Vma.cpp']]],
+  ['vulkan_2ecpp_294',['Vulkan.cpp',['../_vulkan_8cpp.html',1,'']]],
+  ['vulkan_2eh_295',['Vulkan.h',['../_vulkan_8h.html',1,'']]],
+  ['vulkan_5fhpp_5fdispatch_5floader_5fdynamic_296',['VULKAN_HPP_DISPATCH_LOADER_DYNAMIC',['../_vulkan_8h.html#a8a27aa48a7a8781a30ab45040cb1dea7',1,'Vulkan.h']]],
+  ['vulkan_5fhpp_5fno_5fstruct_5fconstructors_297',['VULKAN_HPP_NO_STRUCT_CONSTRUCTORS',['../_vulkan_8h.html#ac7b5ddfbd5f00530d938523572900720',1,'Vulkan.h']]],
+  ['vulkandevice_298',['vulkanDevice',['../structrailguard_1_1rendering_1_1_shader_effect_manager_storage.html#aed1307563e4f060898bf5ab442b370db',1,'railguard::rendering::ShaderEffectManagerStorage::vulkanDevice()'],['../structrailguard_1_1rendering_1_1structs_1_1_device_storage.html#ac0ecb8d85d173c7da4735fbfe1bb943e',1,'railguard::rendering::structs::DeviceStorage::vulkanDevice()'],['../structrailguard_1_1rendering_1_1structs_1_1_full_device_storage.html#a51f65f95c214213915d9508dc796a6d8',1,'railguard::rendering::structs::FullDeviceStorage::vulkanDevice()'],['../structrailguard_1_1rendering_1_1_swapchain_manager_storage.html#a4aa52de3c8befe87ae7fdc489e166d6c',1,'railguard::rendering::SwapchainManagerStorage::vulkanDevice()']]],
+  ['vulkaninit_299',['VulkanInit',['../classrailguard_1_1rendering_1_1init_1_1_vulkan_init.html',1,'railguard::rendering::init']]],
+  ['vulkaninit_2ecpp_300',['VulkanInit.cpp',['../_vulkan_init_8cpp.html',1,'']]],
+  ['vulkaninit_2eh_301',['VulkanInit.h',['../_vulkan_init_8h.html',1,'']]],
+  ['vulkaninitinfo_302',['VulkanInitInfo',['../structrailguard_1_1rendering_1_1init_1_1_vulkan_init_info.html',1,'railguard::rendering::init']]],
+  ['vulkaninitinfo_2eh_303',['VulkanInitInfo.h',['../_vulkan_init_info_8h.html',1,'']]],
+  ['vulkanphysicaldevice_304',['vulkanPhysicalDevice',['../structrailguard_1_1rendering_1_1structs_1_1_full_device_storage.html#af9d1694284dccc4b37e4d456d3fd64a1',1,'railguard::rendering::structs::FullDeviceStorage::vulkanPhysicalDevice()'],['../structrailguard_1_1rendering_1_1_swapchain_manager_storage.html#ad31dea418aa258ba7fa0f11ce1ad0cd0',1,'railguard::rendering::SwapchainManagerStorage::vulkanPhysicalDevice()']]]
+];

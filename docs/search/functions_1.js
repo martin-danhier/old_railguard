@@ -1,8 +1,7 @@
 var searchData=
 [
-  ['destroyitem_157',['DestroyItem',['../classrailguard_1_1core_1_1_standalone_manager.html#a2504265d6f30797ae6bab54e5399c3ed',1,'railguard::core::StandaloneManager']]],
-  ['destroyshadereffect_158',['DestroyShaderEffect',['../classrailguard_1_1rendering_1_1_shader_effect_manager.html#a16bb9d3611e1fb113294f34f19d636fc',1,'railguard::rendering::ShaderEffectManager']]],
-  ['destroyshadermodule_159',['DestroyShaderModule',['../classrailguard_1_1rendering_1_1_shader_module_manager.html#acd5413e4bdda1ae94c1e57dc0a7e5ae7',1,'railguard::rendering::ShaderModuleManager']]],
-  ['destroyswapchain_160',['DestroySwapchain',['../classrailguard_1_1rendering_1_1_swapchain_manager.html#aa43c6160e2e6bddfe8b591fd6c9bae7e',1,'railguard::rendering::SwapchainManager']]],
-  ['draw_161',['Draw',['../classrailguard_1_1rendering_1_1_renderer.html#a565ba2cb4acb52c6b3b08732e641b27f',1,'railguard::rendering::Renderer::Draw()'],['../classrailguard_1_1rendering_1_1_swapchain_camera_manager.html#ac02b4f4f5169582ad88c2f03ce8db839',1,'railguard::rendering::SwapchainCameraManager::Draw()']]]
+  ['beginrecording_448',['BeginRecording',['../classrailguard_1_1rendering_1_1_frame_manager.html#a55c5ec819d8c5448e3638ccc7b1a8498',1,'railguard::rendering::FrameManager']]],
+  ['bind_449',['Bind',['../classrailguard_1_1rendering_1_1_shader_effect_manager.html#a479400eeaa716e63eac96ed08b433fa0',1,'railguard::rendering::ShaderEffectManager']]],
+  ['build_450',['Build',['../classrailguard_1_1rendering_1_1init_1_1_pipeline_builder.html#a2ac3279a05ce105970eb0abb14aee902',1,'railguard::rendering::init::PipelineBuilder::Build()'],['../classrailguard_1_1rendering_1_1init_1_1_pipeline_layout_builder.html#aa548f8ae486ac9471eb7247bc5c67807',1,'railguard::rendering::init::PipelineLayoutBuilder::Build()'],['../classrailguard_1_1rendering_1_1init_1_1_attachment_builder.html#a3e8bfc7dc76349e4508eed7aeca6b287',1,'railguard::rendering::init::AttachmentBuilder::Build()'],['../classrailguard_1_1rendering_1_1init_1_1_render_pass_builder.html#a7247033f6d86f908e51cf548b6c9ec56',1,'railguard::rendering::init::RenderPassBuilder::Build()']]],
+  ['buildeffect_451',['BuildEffect',['../classrailguard_1_1rendering_1_1_shader_effect_manager.html#ad46ebf9cd260f8fc4f5851f0f3a42cc3',1,'railguard::rendering::ShaderEffectManager']]]
 ];

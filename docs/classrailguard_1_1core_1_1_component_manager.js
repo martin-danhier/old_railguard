@@ -1,10 +1,11 @@
 var classrailguard_1_1core_1_1_component_manager =
 [
-    [ "ComponentManager", "classrailguard_1_1core_1_1_component_manager.html#a4ea8a423ace342d48ca9693a0658fe37", null ],
-    [ "DestroyComponent", "classrailguard_1_1core_1_1_component_manager.html#a9b69d01b3355451d0817cedfc248c00c", null ],
-    [ "DestroyComponent", "classrailguard_1_1core_1_1_component_manager.html#a55f5f5138a21866de4baab719ec33c28", null ],
-    [ "FindComponentOfEntity", "classrailguard_1_1core_1_1_component_manager.html#aaefd9c76a9aabdb3c949bf9913f47f9a", null ],
-    [ "GetCorrespondingEntity", "classrailguard_1_1core_1_1_component_manager.html#a48df7c31c83bf91b62e1a81fe7f19d88", null ],
-    [ "RegisterComponent", "classrailguard_1_1core_1_1_component_manager.html#ac9b4dbfc65acde0a5a3b1de94ad22775", null ],
-    [ "RunGarbageCollection", "classrailguard_1_1core_1_1_component_manager.html#ae8d5c6c76853cad62ff626d89e0a9680", null ]
+    [ "DestroyComponent", "classrailguard_1_1core_1_1_component_manager.html#a678b29c90c66333080844e3630b4a4d6", null ],
+    [ "DestroyComponent", "classrailguard_1_1core_1_1_component_manager.html#a4d65051368855e60e0da5c664000df92", null ],
+    [ "FindComponentOfEntity", "classrailguard_1_1core_1_1_component_manager.html#a1d74c6bd5a4e6ceb81720c95ad683929", null ],
+    [ "GetCorrespondingEntity", "classrailguard_1_1core_1_1_component_manager.html#a5fc01db602444c5273e44ef51d74393a", null ],
+    [ "Init", "classrailguard_1_1core_1_1_component_manager.html#a4fad59eb44d94715c2c97b351692d598", null ],
+    [ "RegisterComponent", "classrailguard_1_1core_1_1_component_manager.html#aee1c22a23663b5b4c1e48227fdbd0d1c", null ],
+    [ "RunGarbageCollection", "classrailguard_1_1core_1_1_component_manager.html#a0889240f83b1ea5976f3f9df1a121863", null ],
+    [ "_storage", "classrailguard_1_1core_1_1_component_manager.html#a0a4c06487729d7f6ffea2ea493549653", null ]
 ];

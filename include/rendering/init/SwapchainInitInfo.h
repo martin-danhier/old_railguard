@@ -24,9 +24,9 @@ namespace railguard::rendering::init
          */
         const vk::SurfaceKHR &surface;
         /**
-         * @brief Readonly reference to the window manager
+         * @brief Readonly reference to the extent of the window
          */
-        const railguard::core::WindowManager &windowManager;
+        const vk::Extent2D &windowExtent;
         /**
          * @brief Pointer to the renderpass that should be linked to the framebuffers
          * */

@@ -11,7 +11,7 @@
 namespace railguard::rendering
 {
 
-    void SwapchainManager::Init(structs::FullDeviceStorage storage, size_t defaultCapacity)
+    void SwapchainManager::Init(SwapchainManagerStorage storage, size_t defaultCapacity)
     {
         // Call parent function
         super::Init(storage, defaultCapacity);
@@ -22,6 +22,9 @@ namespace railguard::rendering
         _swapchainsImages.reserve(defaultCapacity);
         _swapchainsImageViews.reserve(defaultCapacity);
         _frameBuffers.reserve(defaultCapacity);
+        _viewportExtents.reserve(defaultCapacity);
+        _lastTimeSubmitted.reserve(defaultCapacity);
+        _imageIndex.reserve(defaultCapacity);
     }
 
     void SwapchainManager::Clear()
@@ -58,11 +61,16 @@ namespace railguard::rendering
         _swapchainImageFormats.clear();
         _swapchainsImageViews.clear();
         _swapchainsImages.clear();
+        _viewportExtents.clear();
+        _lastTimeSubmitted.clear();
+        _imageIndex.clear();
     }
 
     core::CompleteMatch<swapchain_id_t> SwapchainManager::CreateWindowSwapchain(const vk::SurfaceKHR &surface, const core::WindowManager &windowManager, const vk::RenderPass &renderPass)
     {
         auto match = super::CreateItem();
+
+        vk::Extent2D windowExtent = windowManager.GetWindowExtent();
 
         // Create temporary destination variables
         vk::SwapchainKHR newSwapchain;
@@ -76,7 +84,7 @@ namespace railguard::rendering
             .device = _storage.vulkanDevice,
             .physicalDevice = _storage.vulkanPhysicalDevice,
             .surface = surface,
-            .windowManager = windowManager,
+            .windowExtent = windowExtent,
             .renderPass = renderPass,
             .swapchain = &newSwapchain,
             .swapchainImages = &newSwapchainImages,
@@ -92,6 +100,9 @@ namespace railguard::rendering
         _swapchainsImages.push_back(newSwapchainImages);
         _swapchainsImageViews.push_back(newSwapchainImageViews);
         _frameBuffers.push_back(newSwapchainFramebuffers);
+        _viewportExtents.push_back(windowExtent);
+        _lastTimeSubmitted.push_back(0);
+        _imageIndex.push_back(0);
 
         return match;
     }
@@ -127,6 +138,9 @@ namespace railguard::rendering
             _swapchainsImages[index] = _swapchainsImages[lastIndex];
             _swapchainsImageViews[index] = _swapchainsImageViews[lastIndex];
             _frameBuffers[index] = _frameBuffers[lastIndex];
+            _viewportExtents[index] = _viewportExtents[lastIndex];
+            _lastTimeSubmitted[index] = _lastTimeSubmitted[lastIndex];
+            _imageIndex[index] = _imageIndex[lastIndex];
         }
 
         // Remove last elements
@@ -135,9 +149,12 @@ namespace railguard::rendering
         _swapchainsImages.pop_back();
         _swapchainsImageViews.pop_back();
         _frameBuffers.pop_back();
+        _viewportExtents.pop_back();
+        _lastTimeSubmitted.pop_back();
+        _imageIndex.pop_back();
     }
 
-    void SwapchainManager::RecreateWindowSwapchain(const core::Match &match, const vk::SurfaceKHR &surface, const core::WindowManager &windowManager, const vk::RenderPass &renderPass)
+    void SwapchainManager::RecreateWindowSwapchain(const core::Match &match, const vk::SurfaceKHR &surface, const vk::Extent2D &newExtent, const vk::RenderPass &renderPass)
     {
         ADVANCED_CHECK(_initialized, NOT_INITIALIZED_ERROR);
 
@@ -165,7 +182,7 @@ namespace railguard::rendering
             .device = _storage.vulkanDevice,
             .physicalDevice = _storage.vulkanPhysicalDevice,
             .surface = surface,
-            .windowManager = windowManager,
+            .windowExtent = newExtent,
             .renderPass = renderPass,
             .swapchain = &_swapchains[index],
             .swapchainImages = &_swapchainsImages[index],
@@ -174,52 +191,98 @@ namespace railguard::rendering
             .swapchainFramebuffers = &_frameBuffers[index],
         };
         init::VulkanInit::InitWindowSwapchain(swapchainInitInfo);
+
+        // Update extent
+        _viewportExtents[index] = newExtent;
     }
 
-    uint32_t SwapchainManager::RequestNextImageIndex(const core::Match &match, const vk::Semaphore &presentSemaphore)
+    uint32_t SwapchainManager::RequestNextImageIndex(const core::Match &match)
     {
         // Get index of swapchain
         auto index = match.GetIndex();
 
-        // Call the swapchain and request the next image.
-        auto nextImageResult = _storage.vulkanDevice.acquireNextImageKHR(_swapchains[index], SEMAPHORE_TIMEOUT, presentSemaphore, nullptr);
+        auto currentFrameNumber = _storage.frameManager->GetFrameNumber();
 
-        switch (nextImageResult.result)
+        // First time queried this frame
+        if (currentFrameNumber != _lastTimeSubmitted[index])
         {
-        case vk::Result::eSuccess:
-            // Success, keep it
-            return nextImageResult.value;
+            auto presentSemaphore = *_storage.frameManager->GetCurrentPresentSemaphore();
 
-        case vk::Result::eTimeout:
-        case vk::Result::eNotReady:
-        case vk::Result::eSuboptimalKHR:
-            // These cases should be handled.
-            // For now, we will fall back to the error below.
-            // TODO one day, perhaps
+            // Call the swapchain and request the next image.
+            auto nextImageResult = _storage.vulkanDevice.acquireNextImageKHR(_swapchains[index], SEMAPHORE_TIMEOUT, presentSemaphore, nullptr);
 
-        default:
-            // Default: error. vk-hpp already throws an exception, so there is nothing
-            // to do
-            throw std::runtime_error("Error while getting next image");
+            if (nextImageResult.result == vk::Result::eSuccess)
+            {
+                // Success, keep it
+                auto imageIndex = nextImageResult.value;
+
+                // Cache it
+                _imageIndex[index] = imageIndex;
+                _lastTimeSubmitted[index] = currentFrameNumber;
+
+                return imageIndex;
+
+                // TODO handle these cases:
+                // vk::Result::eTimeout
+                // vk::Result::eNotReady
+                // vk::Result::eSuboptimalKHR
+            }
+            else
+            {
+
+                // Default: error. vk-hpp already throws an exception, so there is nothing
+                // to do
+                throw std::runtime_error("Error while getting next image");
+            }
+        }
+        // It was already queried this frame. Get it from cache
+        else
+        {
+            return _imageIndex[index];
         }
     }
 
-    void SwapchainManager::PresentImage(const core::Match &match, uint32_t imageIndex, const vk::Semaphore &renderSemaphore, const vk::Queue &graphicsQueue)
+    void SwapchainManager::PresentUsedImages(const vk::Queue &graphicsQueue) {
+        // Get frame number
+        auto currentFrameNumber = _storage.frameManager->GetFrameNumber();
+
+        // For each swapchain that was used this frame
+        for (uint32_t i = 0; i < _lastTimeSubmitted.size(); i++) {
+            if (currentFrameNumber == _lastTimeSubmitted[i]) {
+                // Present it
+                PresentImage(i, graphicsQueue);
+            }
+        }
+    }
+
+    void SwapchainManager::PresentImage(const core::Match &match, const vk::Queue &graphicsQueue)
     {
         // Get index
         auto index = match.GetIndex();
+        PresentImage(index, graphicsQueue);
+    }
+
+    void SwapchainManager::PresentImage(swapchain_id_t index, const vk::Queue &graphicsQueue)
+    {
+
+#ifdef USE_ADVANCED_CHECKS
+        // Get frame number
+        auto currentFrameNumber = _storage.frameManager->GetFrameNumber();
+        ADVANCED_CHECK(currentFrameNumber == _lastTimeSubmitted[index], "This swapchain shouldn't be presented, no image was requested this frame.");
+#endif
 
         // Present the image on the screen
         vk::PresentInfoKHR presentInfo{
             // Wait until the rendering is complete
             .waitSemaphoreCount = 1,
-            .pWaitSemaphores = &renderSemaphore,
+            .pWaitSemaphores = _storage.frameManager->GetCurrentRenderSemaphore(),
             // Specify the swapchain to present
             .swapchainCount = 1,
             .pSwapchains = &_swapchains[index],
             // Specify the index of the image
-            .pImageIndices = &imageIndex,
+            .pImageIndices = &_imageIndex[index],
         };
+
         auto result = graphicsQueue.presentKHR(presentInfo);
         switch (result)
         {
@@ -257,5 +320,10 @@ namespace railguard::rendering
     std::vector<vk::Framebuffer> SwapchainManager::GetFramebuffers(const core::Match &match) const
     {
         return _frameBuffers[match.GetIndex()];
+    }
+
+    const vk::Extent2D SwapchainManager::GetViewportExtent(const core::Match &match) const
+    {
+        return _viewportExtents[match.GetIndex()];
     }
 }

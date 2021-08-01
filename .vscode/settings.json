@@ -36,7 +36,10 @@
         "build": true,
         "bin": true,
         ".vscode": true,
-        ".gitmodules": true
+        ".gitmodules": true,
+        ".gitattributes": true,
+        "Doxyfile": true,
+        ".gitignore": true
     },
     "c-cpp-flylint.cppcheck.force": true,
     "files.associations": {
@@ -124,5 +127,5 @@
         "USE_ADVANCED_CHECKS",
         "DEBUG"
     ],
-    "explorerExclude.backup": null
+    "explorerExclude.backup": null,
 }

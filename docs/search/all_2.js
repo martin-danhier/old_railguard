@@ -1,12 +1,8 @@
 var searchData=
 [
-  ['clear_6',['Clear',['../classrailguard_1_1core_1_1_standalone_manager.html#a8620a3b0a2d29c5d5ecd9205292b1244',1,'railguard::core::StandaloneManager::Clear()'],['../classrailguard_1_1rendering_1_1_shader_effect_manager.html#aa9092152db24793dcd21fb1170debe1e',1,'railguard::rendering::ShaderEffectManager::Clear()'],['../classrailguard_1_1rendering_1_1_swapchain_manager.html#a618ff33c12343a99817cc37fce05c996',1,'railguard::rendering::SwapchainManager::Clear()']]],
-  ['commandbuffer_7',['CommandBuffer',['https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkCommandBuffer.html',1,'vk']]],
-  ['commandpool_8',['CommandPool',['https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkCommandPool.html',1,'vk']]],
-  ['completematch_9',['CompleteMatch',['../classrailguard_1_1core_1_1_complete_match.html',1,'railguard::core']]],
-  ['componentmanager_10',['ComponentManager',['../classrailguard_1_1core_1_1_component_manager.html',1,'railguard::core']]],
-  ['createcomponent_11',['CreateComponent',['../classrailguard_1_1rendering_1_1_swapchain_camera_manager.html#a4bb0511dafdf2d00d51defcb69cf964d',1,'railguard::rendering::SwapchainCameraManager']]],
-  ['createitem_12',['CreateItem',['../classrailguard_1_1core_1_1_standalone_manager.html#aec995772a0f090219b854c1b5e812eab',1,'railguard::core::StandaloneManager']]],
-  ['createshadereffect_13',['CreateShaderEffect',['../classrailguard_1_1rendering_1_1_shader_effect_manager.html#a1510f2a91bcf0eff801d824f6c4a7be7',1,'railguard::rendering::ShaderEffectManager']]],
-  ['createwindowswapchain_14',['CreateWindowSwapchain',['../classrailguard_1_1rendering_1_1_swapchain_manager.html#a5fa1e0905ea27545d3955b433dd411c2',1,'railguard::rendering::SwapchainManager']]]
+  ['beginrecording_16',['BeginRecording',['../classrailguard_1_1rendering_1_1_frame_manager.html#a55c5ec819d8c5448e3638ccc7b1a8498',1,'railguard::rendering::FrameManager']]],
+  ['bind_17',['Bind',['../classrailguard_1_1rendering_1_1_shader_effect_manager.html#a479400eeaa716e63eac96ed08b433fa0',1,'railguard::rendering::ShaderEffectManager']]],
+  ['bindings_18',['bindings',['../structrailguard_1_1rendering_1_1structs_1_1_vertex_input_description.html#a899b0a39dfcc3fddb8192247fbedf51d',1,'railguard::rendering::structs::VertexInputDescription']]],
+  ['build_19',['Build',['../classrailguard_1_1rendering_1_1init_1_1_pipeline_builder.html#a2ac3279a05ce105970eb0abb14aee902',1,'railguard::rendering::init::PipelineBuilder::Build()'],['../classrailguard_1_1rendering_1_1init_1_1_pipeline_layout_builder.html#aa548f8ae486ac9471eb7247bc5c67807',1,'railguard::rendering::init::PipelineLayoutBuilder::Build()'],['../classrailguard_1_1rendering_1_1init_1_1_attachment_builder.html#a3e8bfc7dc76349e4508eed7aeca6b287',1,'railguard::rendering::init::AttachmentBuilder::Build()'],['../classrailguard_1_1rendering_1_1init_1_1_render_pass_builder.html#a7247033f6d86f908e51cf548b6c9ec56',1,'railguard::rendering::init::RenderPassBuilder::Build()']]],
+  ['buildeffect_20',['BuildEffect',['../classrailguard_1_1rendering_1_1_shader_effect_manager.html#ad46ebf9cd260f8fc4f5851f0f3a42cc3',1,'railguard::rendering::ShaderEffectManager']]]
 ];

@@ -1,7 +1,7 @@
 var annotated_dup =
 [
-    [ "railguard", null, [
-      [ "core", null, [
+    [ "railguard", "namespacerailguard.html", [
+      [ "core", "namespacerailguard_1_1core.html", [
         [ "ComponentManager", "classrailguard_1_1core_1_1_component_manager.html", "classrailguard_1_1core_1_1_component_manager" ],
         [ "Engine", "classrailguard_1_1core_1_1_engine.html", "classrailguard_1_1core_1_1_engine" ],
         [ "Entity", "structrailguard_1_1core_1_1_entity.html", "structrailguard_1_1core_1_1_entity" ],
@@ -12,8 +12,8 @@ var annotated_dup =
         [ "StandaloneManager", "classrailguard_1_1core_1_1_standalone_manager.html", "classrailguard_1_1core_1_1_standalone_manager" ],
         [ "WindowManager", "classrailguard_1_1core_1_1_window_manager.html", "classrailguard_1_1core_1_1_window_manager" ]
       ] ],
-      [ "rendering", null, [
-        [ "init", null, [
+      [ "rendering", "namespacerailguard_1_1rendering.html", [
+        [ "init", "namespacerailguard_1_1rendering_1_1init.html", [
           [ "SwapchainCameraInitInfo", "structrailguard_1_1rendering_1_1init_1_1_swapchain_camera_init_info.html", "structrailguard_1_1rendering_1_1init_1_1_swapchain_camera_init_info" ],
           [ "PipelineBuilder", "classrailguard_1_1rendering_1_1init_1_1_pipeline_builder.html", "classrailguard_1_1rendering_1_1init_1_1_pipeline_builder" ],
           [ "PipelineLayoutBuilder", "classrailguard_1_1rendering_1_1init_1_1_pipeline_layout_builder.html", "classrailguard_1_1rendering_1_1init_1_1_pipeline_layout_builder" ],
@@ -24,7 +24,8 @@ var annotated_dup =
           [ "VulkanInit", "classrailguard_1_1rendering_1_1init_1_1_vulkan_init.html", null ],
           [ "VulkanInitInfo", "structrailguard_1_1rendering_1_1init_1_1_vulkan_init_info.html", "structrailguard_1_1rendering_1_1init_1_1_vulkan_init_info" ]
         ] ],
-        [ "structs", null, [
+        [ "structs", "namespacerailguard_1_1rendering_1_1structs.html", [
+          [ "CameraRenderInfo", "structrailguard_1_1rendering_1_1structs_1_1_camera_render_info.html", "structrailguard_1_1rendering_1_1structs_1_1_camera_render_info" ],
           [ "DeviceStorage", "structrailguard_1_1rendering_1_1structs_1_1_device_storage.html", "structrailguard_1_1rendering_1_1structs_1_1_device_storage" ],
           [ "FullDeviceStorage", "structrailguard_1_1rendering_1_1structs_1_1_full_device_storage.html", "structrailguard_1_1rendering_1_1structs_1_1_full_device_storage" ],
           [ "VertexInputDescription", "structrailguard_1_1rendering_1_1structs_1_1_vertex_input_description.html", "structrailguard_1_1rendering_1_1structs_1_1_vertex_input_description" ]
@@ -35,7 +36,9 @@ var annotated_dup =
         [ "ShaderEffectManagerStorage", "structrailguard_1_1rendering_1_1_shader_effect_manager_storage.html", "structrailguard_1_1rendering_1_1_shader_effect_manager_storage" ],
         [ "ShaderEffectManager", "classrailguard_1_1rendering_1_1_shader_effect_manager.html", "classrailguard_1_1rendering_1_1_shader_effect_manager" ],
         [ "ShaderModuleManager", "classrailguard_1_1rendering_1_1_shader_module_manager.html", "classrailguard_1_1rendering_1_1_shader_module_manager" ],
+        [ "SwapchainCameraManagerStorage", "structrailguard_1_1rendering_1_1_swapchain_camera_manager_storage.html", "structrailguard_1_1rendering_1_1_swapchain_camera_manager_storage" ],
         [ "SwapchainCameraManager", "classrailguard_1_1rendering_1_1_swapchain_camera_manager.html", "classrailguard_1_1rendering_1_1_swapchain_camera_manager" ],
+        [ "SwapchainManagerStorage", "structrailguard_1_1rendering_1_1_swapchain_manager_storage.html", "structrailguard_1_1rendering_1_1_swapchain_manager_storage" ],
         [ "SwapchainManager", "classrailguard_1_1rendering_1_1_swapchain_manager.html", "classrailguard_1_1rendering_1_1_swapchain_manager" ]
       ] ]
     ] ]

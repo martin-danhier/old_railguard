@@ -1,13 +1,26 @@
 var classrailguard_1_1rendering_1_1_frame_manager =
 [
     [ "~FrameManager", "classrailguard_1_1rendering_1_1_frame_manager.html#ad922ab4c538c1ba8ef10978d5328ff06", null ],
+    [ "BeginRecording", "classrailguard_1_1rendering_1_1_frame_manager.html#a55c5ec819d8c5448e3638ccc7b1a8498", null ],
     [ "Cleanup", "classrailguard_1_1rendering_1_1_frame_manager.html#a83c952f29ff8aec657462d6563759776", null ],
+    [ "EndRecordingAndSubmit", "classrailguard_1_1rendering_1_1_frame_manager.html#a16dd67b9ec82c04d894c0594b95b52c6", null ],
+    [ "FinishFrame", "classrailguard_1_1rendering_1_1_frame_manager.html#aff5dc6c2dc4ae728b10ad13c7783c4a6", null ],
     [ "GetCommandBuffer", "classrailguard_1_1rendering_1_1_frame_manager.html#a25dd99ccbe3cf523f95c4214c3aa1f14", null ],
     [ "GetCommandPool", "classrailguard_1_1rendering_1_1_frame_manager.html#af92ea920211fcd6cffde18fdc97aa2dd", null ],
+    [ "GetCurrentCommandBuffer", "classrailguard_1_1rendering_1_1_frame_manager.html#ac91ddaae01432030df2d362dec8482a4", null ],
+    [ "GetCurrentCommandPool", "classrailguard_1_1rendering_1_1_frame_manager.html#a3ea73e07dd282b756246f9a3c03f041e", null ],
+    [ "GetCurrentFrame", "classrailguard_1_1rendering_1_1_frame_manager.html#a1ac4e83d8e07a5ebf44d85315d31e02b", null ],
+    [ "GetCurrentFrameIndex", "classrailguard_1_1rendering_1_1_frame_manager.html#a4a4aa3331050463707b0666b9c76c94c", null ],
+    [ "GetCurrentPresentSemaphore", "classrailguard_1_1rendering_1_1_frame_manager.html#a577bb0c83b4b589ee43d040ad788134a", null ],
+    [ "GetCurrentRenderFence", "classrailguard_1_1rendering_1_1_frame_manager.html#abfd862a08294490ee8b51a7567b3dc4c", null ],
+    [ "GetCurrentRenderSemaphore", "classrailguard_1_1rendering_1_1_frame_manager.html#aba33f311a499ba3eee0c3f68d1f48aa2", null ],
     [ "GetFrame", "classrailguard_1_1rendering_1_1_frame_manager.html#ad460577c171ecc0b7e1a604366ef5d9b", null ],
-    [ "GetPresentSemaphore", "classrailguard_1_1rendering_1_1_frame_manager.html#a4571e18911d925fbcc1b4b2e34d135e8", null ],
+    [ "GetFrameNumber", "classrailguard_1_1rendering_1_1_frame_manager.html#a40b928f0ed2228f49b5e18c4dbe3971f", null ],
+    [ "GetPresentSemaphore", "classrailguard_1_1rendering_1_1_frame_manager.html#ae0c35691d14f7e1a2f6465b2b3d9a30b", null ],
     [ "GetRenderFence", "classrailguard_1_1rendering_1_1_frame_manager.html#a246ca8905d459881679dbb69966a3e69", null ],
-    [ "GetRenderSemaphore", "classrailguard_1_1rendering_1_1_frame_manager.html#ad2d6ec61018d7323128e38fd3e793b49", null ],
+    [ "GetRenderSemaphore", "classrailguard_1_1rendering_1_1_frame_manager.html#a8c164ddf697adfe95ffd6567d492d24a", null ],
     [ "Init", "classrailguard_1_1rendering_1_1_frame_manager.html#a60de3683077ee1451687a460df118a85", null ],
-    [ "WaitForAllFences", "classrailguard_1_1rendering_1_1_frame_manager.html#a2dfe210b1fdec895c77f21fede8599fa", null ]
+    [ "WaitForAllFences", "classrailguard_1_1rendering_1_1_frame_manager.html#a2dfe210b1fdec895c77f21fede8599fa", null ],
+    [ "WaitForCurrentFence", "classrailguard_1_1rendering_1_1_frame_manager.html#a50d722e1ca28ca5f4ae88e8ccee13469", null ],
+    [ "WaitForFence", "classrailguard_1_1rendering_1_1_frame_manager.html#a5e2ed7231a3a6fde4ba4b74f3bf511bf", null ]
 ];

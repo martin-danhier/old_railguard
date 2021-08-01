@@ -2,14 +2,15 @@
 
 namespace railguard::utils
 {
-    std::array<float, 4> GetColor(float r, float g, float b, float a)
+
+    Color GetColor(float r, float g, float b, float a)
     {
-        return std::array<float, 4>{r, g, b, a};
+        return Color{r, g, b, a};
     }
 
-    std::array<float, 4> GetColorInt(uint8_t r, uint8_t g, uint8_t b, uint8_t a)
+    Color GetColorInt(uint8_t r, uint8_t g, uint8_t b, uint8_t a)
     {
-        return std::array<float, 4>{
+        return Color{
             r / 255.0f,
             g / 255.0f,
             b / 255.0f,
@@ -17,8 +18,8 @@ namespace railguard::utils
         };
     }
 
-    std::array<float, 4> GetColorHex(uint32_t rgba){
-        return std::array<float, 4>{
+    Color GetColorHex(uint32_t rgba){
+        return Color{
             ((rgba >> 24) & 0xFF) / 255.0f,
             ((rgba >> 16) & 0xFF) / 255.0f,
             ((rgba >> 8) & 0xFF) / 255.0f,

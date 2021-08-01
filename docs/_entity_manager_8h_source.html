@@ -87,13 +87,13 @@ $(document).ready(function(){initNavTree('_entity_manager_8h_source.html',''); i
 <div class="title">EntityManager.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div>
+<a href="_entity_manager_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &quot;Entity.h&quot;</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_entity_8h.html">Entity.h</a>&quot;</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;deque&gt;</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keyword">namespace </span>railguard::core</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacerailguard_1_1core.html">railguard::core</a></div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;{</div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
 <div class="line"><a name="l00010"></a><span class="lineno"><a class="line" href="classrailguard_1_1core_1_1_entity_manager.html">   10</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classrailguard_1_1core_1_1_entity_manager.html">EntityManager</a></div>
@@ -108,23 +108,29 @@ $(document).ready(function(){initNavTree('_entity_manager_8h_source.html',''); i
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <span class="keyword">public</span>:</div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        <span class="comment">// Inits the entity manager</span></div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        <span class="comment">// The defaultCapacity parameter defines how many entities will be able to be stored without resizing the array</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;        <span class="keyword">explicit</span> <a class="code" href="classrailguard_1_1core_1_1_entity_manager.html">EntityManager</a>(<span class="keywordtype">size_t</span> defaultCapacity);</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;        <span class="keyword">explicit</span> <a class="code" href="classrailguard_1_1core_1_1_entity_manager.html#ad004f8881272dcaf73c20dc71990a5f7">EntityManager</a>(<span class="keywordtype">size_t</span> defaultCapacity);</div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        <span class="comment">// Create and register a new entity</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        <a class="code" href="structrailguard_1_1core_1_1_entity.html">Entity</a> CreateEntity();</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        <a class="code" href="structrailguard_1_1core_1_1_entity.html">Entity</a> <a class="code" href="classrailguard_1_1core_1_1_entity_manager.html#a3ca91376d8b81977b17fbf0d4a6c9fc0">CreateEntity</a>();</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        <span class="comment">// Kills the given entity and frees its id slot</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        <span class="keywordtype">void</span> KillEntity(<a class="code" href="structrailguard_1_1core_1_1_entity.html">Entity</a> entity);</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classrailguard_1_1core_1_1_entity_manager.html#aa535c17973edef1de961ab0e5b2fdae8">KillEntity</a>(<a class="code" href="structrailguard_1_1core_1_1_entity.html">Entity</a> entity);</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        <span class="comment">// Check if the given entity is alive</span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        [[nodiscard]] <span class="keywordtype">bool</span> IsEntityAlive(<a class="code" href="structrailguard_1_1core_1_1_entity.html">Entity</a> entity) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        [[nodiscard]] <span class="keywordtype">bool</span> <a class="code" href="classrailguard_1_1core_1_1_entity_manager.html#a983d5d9498431408d10831612fe7de7c">IsEntityAlive</a>(<a class="code" href="structrailguard_1_1core_1_1_entity.html">Entity</a> entity) <span class="keyword">const</span>;</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    };</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;}</div>
+<div class="ttc" id="a_entity_8h_html"><div class="ttname"><a href="_entity_8h.html">Entity.h</a></div></div>
 <div class="ttc" id="aclassrailguard_1_1core_1_1_entity_manager_html"><div class="ttname"><a href="classrailguard_1_1core_1_1_entity_manager.html">railguard::core::EntityManager</a></div><div class="ttdef"><b>Definition:</b> EntityManager.h:11</div></div>
+<div class="ttc" id="aclassrailguard_1_1core_1_1_entity_manager_html_a3ca91376d8b81977b17fbf0d4a6c9fc0"><div class="ttname"><a href="classrailguard_1_1core_1_1_entity_manager.html#a3ca91376d8b81977b17fbf0d4a6c9fc0">railguard::core::EntityManager::CreateEntity</a></div><div class="ttdeci">Entity CreateEntity()</div><div class="ttdef"><b>Definition:</b> EntityManager.cpp:14</div></div>
+<div class="ttc" id="aclassrailguard_1_1core_1_1_entity_manager_html_a983d5d9498431408d10831612fe7de7c"><div class="ttname"><a href="classrailguard_1_1core_1_1_entity_manager.html#a983d5d9498431408d10831612fe7de7c">railguard::core::EntityManager::IsEntityAlive</a></div><div class="ttdeci">bool IsEntityAlive(Entity entity) const</div><div class="ttdef"><b>Definition:</b> EntityManager.cpp:53</div></div>
+<div class="ttc" id="aclassrailguard_1_1core_1_1_entity_manager_html_aa535c17973edef1de961ab0e5b2fdae8"><div class="ttname"><a href="classrailguard_1_1core_1_1_entity_manager.html#aa535c17973edef1de961ab0e5b2fdae8">railguard::core::EntityManager::KillEntity</a></div><div class="ttdeci">void KillEntity(Entity entity)</div><div class="ttdef"><b>Definition:</b> EntityManager.cpp:39</div></div>
+<div class="ttc" id="aclassrailguard_1_1core_1_1_entity_manager_html_ad004f8881272dcaf73c20dc71990a5f7"><div class="ttname"><a href="classrailguard_1_1core_1_1_entity_manager.html#ad004f8881272dcaf73c20dc71990a5f7">railguard::core::EntityManager::EntityManager</a></div><div class="ttdeci">EntityManager(size_t defaultCapacity)</div><div class="ttdef"><b>Definition:</b> EntityManager.cpp:9</div></div>
+<div class="ttc" id="anamespacerailguard_1_1core_html"><div class="ttname"><a href="namespacerailguard_1_1core.html">railguard::core</a></div><div class="ttdef"><b>Definition:</b> ComponentManager.h:13</div></div>
 <div class="ttc" id="astructrailguard_1_1core_1_1_entity_html"><div class="ttname"><a href="structrailguard_1_1core_1_1_entity.html">railguard::core::Entity</a></div><div class="ttdef"><b>Definition:</b> Entity.h:56</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_3d69f64eaf81436fe2b22361382717e5.html">core</a></li><li class="navelem"><b>EntityManager.h</b></li>
+    <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_3d69f64eaf81436fe2b22361382717e5.html">core</a></li><li class="navelem"><a class="el" href="_entity_manager_8h.html">EntityManager.h</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>

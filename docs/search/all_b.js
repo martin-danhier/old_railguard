@@ -1,10 +1,5 @@
 var searchData=
 [
-  ['physicaldevice_49',['physicalDevice',['../structrailguard_1_1rendering_1_1init_1_1_swapchain_init_info.html#a3a163e574a3a667e92f7ec88d062b448',1,'railguard::rendering::init::SwapchainInitInfo::physicalDevice()'],['../structrailguard_1_1rendering_1_1init_1_1_vulkan_init_info.html#a2f363490a701900b86c4762138a6eeb7',1,'railguard::rendering::init::VulkanInitInfo::physicalDevice()']]],
-  ['physicaldevice_50',['PhysicalDevice',['https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDevice.html',1,'vk']]],
-  ['physicaldeviceproperties_51',['physicalDeviceProperties',['../structrailguard_1_1rendering_1_1init_1_1_vulkan_init_info.html#a261d88f39b36a785084d8af712934c09',1,'railguard::rendering::init::VulkanInitInfo']]],
-  ['pipeline_52',['Pipeline',['https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPipeline.html',1,'vk']]],
-  ['pipelinebuilder_53',['PipelineBuilder',['../classrailguard_1_1rendering_1_1init_1_1_pipeline_builder.html',1,'railguard::rendering::init']]],
-  ['pipelinelayout_54',['PipelineLayout',['https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPipelineLayout.html',1,'vk']]],
-  ['pipelinelayoutbuilder_55',['PipelineLayoutBuilder',['../classrailguard_1_1rendering_1_1init_1_1_pipeline_layout_builder.html',1,'railguard::rendering::init']]]
+  ['loadshadermodule_161',['LoadShaderModule',['../classrailguard_1_1rendering_1_1_shader_module_manager.html#ab93d9ac940836861fbd2596cbda35349',1,'railguard::rendering::ShaderModuleManager::LoadShaderModule(vk::ShaderStageFlagBits stage, const std::vector&lt; uint32_t &gt; &amp;codeBuffer)'],['../classrailguard_1_1rendering_1_1_shader_module_manager.html#acf9db5b8d1317df57cb43ccb9c698325',1,'railguard::rendering::ShaderModuleManager::LoadShaderModule(vk::ShaderStageFlagBits stage, const std::string &amp;filePath)']]],
+  ['lookupid_162',['LookupId',['../classrailguard_1_1core_1_1_standalone_manager.html#a2852649ed4b0d293e2236ab1ef0314f1',1,'railguard::core::StandaloneManager']]]
 ];

@@ -8,8 +8,11 @@ var classrailguard_1_1rendering_1_1_swapchain_manager =
     [ "GetSwapchainImageFormat", "classrailguard_1_1rendering_1_1_swapchain_manager.html#a22322921c6a0d6f1e9ae41bb55150ca9", null ],
     [ "GetSwapchainImages", "classrailguard_1_1rendering_1_1_swapchain_manager.html#ab31acedc2b027fd2099d087803e7ea86", null ],
     [ "GetSwapchainImageViews", "classrailguard_1_1rendering_1_1_swapchain_manager.html#a7c06fa2dc26f71fdc4f94d79a3690129", null ],
-    [ "Init", "classrailguard_1_1rendering_1_1_swapchain_manager.html#a89edca6415e0ca9a166411852a817397", null ],
-    [ "PresentImage", "classrailguard_1_1rendering_1_1_swapchain_manager.html#acbe8eb05f1b365dbf7147a3c405b3140", null ],
-    [ "RecreateWindowSwapchain", "classrailguard_1_1rendering_1_1_swapchain_manager.html#a643275df503e4302293082a33c6ffd7a", null ],
-    [ "RequestNextImageIndex", "classrailguard_1_1rendering_1_1_swapchain_manager.html#ada6eadbf6b1af08e2d2600220101097a", null ]
+    [ "GetViewportExtent", "classrailguard_1_1rendering_1_1_swapchain_manager.html#a971df08af6b4ea61d63b488caab774fb", null ],
+    [ "Init", "classrailguard_1_1rendering_1_1_swapchain_manager.html#ab9c9417f70caeb5923115ce0a1c151c0", null ],
+    [ "PresentImage", "classrailguard_1_1rendering_1_1_swapchain_manager.html#ab8db28e0c6bf25a25a14432450956ecc", null ],
+    [ "PresentImage", "classrailguard_1_1rendering_1_1_swapchain_manager.html#a29aef4397dff2b2c8572771793d4c1be", null ],
+    [ "PresentUsedImages", "classrailguard_1_1rendering_1_1_swapchain_manager.html#a5ada0d326a214f267ad1d3bdb08d7bdb", null ],
+    [ "RecreateWindowSwapchain", "classrailguard_1_1rendering_1_1_swapchain_manager.html#ad8aab948cbabf816e9c32f7d4978503f", null ],
+    [ "RequestNextImageIndex", "classrailguard_1_1rendering_1_1_swapchain_manager.html#a21ce5deb5b9294cef36956814af18941", null ]
 ];

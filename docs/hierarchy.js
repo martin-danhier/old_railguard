@@ -1,7 +1,9 @@
 var hierarchy =
 [
     [ "railguard::rendering::init::AttachmentBuilder", "classrailguard_1_1rendering_1_1init_1_1_attachment_builder.html", null ],
-    [ "railguard::core::ComponentManager", "classrailguard_1_1core_1_1_component_manager.html", [
+    [ "railguard::rendering::structs::CameraRenderInfo", "structrailguard_1_1rendering_1_1structs_1_1_camera_render_info.html", null ],
+    [ "railguard::core::ComponentManager< T >", "classrailguard_1_1core_1_1_component_manager.html", null ],
+    [ "railguard::core::ComponentManager< SwapchainCameraManagerStorage >", "classrailguard_1_1core_1_1_component_manager.html", [
       [ "railguard::rendering::SwapchainCameraManager", "classrailguard_1_1rendering_1_1_swapchain_camera_manager.html", null ]
     ] ],
     [ "railguard::rendering::structs::DeviceStorage", "structrailguard_1_1rendering_1_1structs_1_1_device_storage.html", null ],
@@ -29,11 +31,13 @@ var hierarchy =
     [ "railguard::core::StandaloneManager< shader_module_id_t, structs::DeviceStorage >", "classrailguard_1_1core_1_1_standalone_manager.html", [
       [ "railguard::rendering::ShaderModuleManager", "classrailguard_1_1rendering_1_1_shader_module_manager.html", null ]
     ] ],
-    [ "railguard::core::StandaloneManager< swapchain_id_t, structs::FullDeviceStorage >", "classrailguard_1_1core_1_1_standalone_manager.html", [
+    [ "railguard::core::StandaloneManager< swapchain_id_t, SwapchainManagerStorage >", "classrailguard_1_1core_1_1_standalone_manager.html", [
       [ "railguard::rendering::SwapchainManager", "classrailguard_1_1rendering_1_1_swapchain_manager.html", null ]
     ] ],
     [ "railguard::rendering::init::SwapchainCameraInitInfo", "structrailguard_1_1rendering_1_1init_1_1_swapchain_camera_init_info.html", null ],
+    [ "railguard::rendering::SwapchainCameraManagerStorage", "structrailguard_1_1rendering_1_1_swapchain_camera_manager_storage.html", null ],
     [ "railguard::rendering::init::SwapchainInitInfo", "structrailguard_1_1rendering_1_1init_1_1_swapchain_init_info.html", null ],
+    [ "railguard::rendering::SwapchainManagerStorage", "structrailguard_1_1rendering_1_1_swapchain_manager_storage.html", null ],
     [ "railguard::rendering::structs::VertexInputDescription", "structrailguard_1_1rendering_1_1structs_1_1_vertex_input_description.html", null ],
     [ "railguard::rendering::init::VulkanInit", "classrailguard_1_1rendering_1_1init_1_1_vulkan_init.html", null ],
     [ "railguard::rendering::init::VulkanInitInfo", "structrailguard_1_1rendering_1_1init_1_1_vulkan_init_info.html", null ],

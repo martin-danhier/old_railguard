@@ -9,5 +9,5 @@ var structrailguard_1_1rendering_1_1init_1_1_swapchain_init_info =
     [ "swapchainImageFormat", "structrailguard_1_1rendering_1_1init_1_1_swapchain_init_info.html#a5e585b97ecb27fdd75fdd09b26bacbe4", null ],
     [ "swapchainImages", "structrailguard_1_1rendering_1_1init_1_1_swapchain_init_info.html#afdf59ec21ca6982eb87cee28a0e9812a", null ],
     [ "swapchainImageViews", "structrailguard_1_1rendering_1_1init_1_1_swapchain_init_info.html#a0d057e06f9dabaceb676178770923d23", null ],
-    [ "windowManager", "structrailguard_1_1rendering_1_1init_1_1_swapchain_init_info.html#af6f8ce7d62aa1605393ff2b6da4104a7", null ]
+    [ "windowExtent", "structrailguard_1_1rendering_1_1init_1_1_swapchain_init_info.html#af89acfd1a06f4e29c02f80dab438f36e", null ]
 ];

@@ -6,6 +6,11 @@
 namespace railguard::utils
 {
     /**
+     * @brief R, G, B, A color format. Each value is a float between 0 and 1.
+     */
+    typedef std::array<float, 4> Color;
+
+    /**
      * @brief Returns the array representation of the given color.
      *
      * @param r Red component between 0 and 1

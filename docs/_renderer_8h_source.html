@@ -87,83 +87,94 @@ $(document).ready(function(){initNavTree('_renderer_8h_source.html',''); initRes
 <div class="title">Renderer.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div>
+<a href="_renderer_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &quot;../core/WindowManager.h&quot;</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;SwapchainCameraManager.h&quot;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;init/VulkanInit.h&quot;</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;FrameManager.h&quot;</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;Settings.h&quot;</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;ShaderModuleManager.h&quot;</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &quot;ShaderEffectManager.h&quot;</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_swapchain_camera_manager_8h.html">SwapchainCameraManager.h</a>&quot;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_vulkan_init_8h.html">init/VulkanInit.h</a>&quot;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_frame_manager_8h.html">FrameManager.h</a>&quot;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_settings_8h.html">Settings.h</a>&quot;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_shader_module_manager_8h.html">ShaderModuleManager.h</a>&quot;</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_shader_effect_manager_8h.html">ShaderEffectManager.h</a>&quot;</span></div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">namespace </span>railguard::rendering</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacerailguard_1_1rendering.html">railguard::rendering</a></div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;{</div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
-<div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="classrailguard_1_1rendering_1_1_renderer.html">   14</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classrailguard_1_1rendering_1_1_renderer.html">Renderer</a></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    {</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;        <span class="comment">// Vulkan global objects</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;        <a class="codeRef" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkInstance.html">vk::Instance</a> _instance = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;        vk::DebugUtilsMessengerEXT _debugMessenger = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        <a class="codeRef" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkSurfaceKHR.html">vk::SurfaceKHR</a> _surface = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        <a class="codeRef" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDevice.html">vk::PhysicalDevice</a> _physicalDevice = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;        vk::PhysicalDeviceProperties _physicalDeviceProperties = {};</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        <a class="codeRef" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkDevice.html">vk::Device</a> _device = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        vk::Queue _graphicsQueue = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        uint32_t _graphicsQueueFamily = 0;</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        VmaAllocator _allocator = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        <a class="codeRef" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkRenderPass.html">vk::RenderPass</a> _mainRenderPass = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        <span class="comment">// Other internal variables</span></div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        swapchain_id_t _mainWindowSwapchain = 0;</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        uint64_t _drawnFramesCount = 0;</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        <a class="codeRef" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkExtent2D.html">vk::Extent2D</a> _windowExtent;</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        <span class="comment">// Various managers for core objects</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        <a class="code" href="classrailguard_1_1rendering_1_1_swapchain_manager.html">SwapchainManager</a> _swapchainManager;</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        <a class="code" href="classrailguard_1_1rendering_1_1_swapchain_camera_manager.html">SwapchainCameraManager</a> _swapchainCameraManager;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        <a class="code" href="classrailguard_1_1rendering_1_1_frame_manager.html">FrameManager</a> _frameManager;</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        <a class="code" href="classrailguard_1_1rendering_1_1_shader_module_manager.html">ShaderModuleManager</a> _shaderModuleManager;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        <a class="code" href="classrailguard_1_1rendering_1_1_shader_effect_manager.html">ShaderEffectManager</a> _shaderEffectManager;</div>
+<div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="classrailguard_1_1rendering_1_1_renderer.html">   22</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classrailguard_1_1rendering_1_1_renderer.html">Renderer</a></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    {</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        <span class="comment">// Vulkan global objects</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        <a class="codeRef" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkInstance.html">vk::Instance</a> _instance = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        vk::DebugUtilsMessengerEXT _debugMessenger = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        <a class="codeRef" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkSurfaceKHR.html">vk::SurfaceKHR</a> _surface = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        <a class="codeRef" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDevice.html">vk::PhysicalDevice</a> _physicalDevice = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        vk::PhysicalDeviceProperties _physicalDeviceProperties = {};</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        <a class="codeRef" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkDevice.html">vk::Device</a> _device = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        vk::Queue _graphicsQueue = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        uint32_t _graphicsQueueFamily = 0;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        VmaAllocator _allocator = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        <a class="codeRef" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkRenderPass.html">vk::RenderPass</a> _mainRenderPass = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        <span class="comment">// Other internal variables</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        <a class="code" href="namespacerailguard_1_1rendering.html#a01c788a6c07f456661b63ed00e284a69">swapchain_id_t</a> _mainWindowSwapchain = 0;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        <a class="codeRef" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkExtent2D.html">vk::Extent2D</a> _windowExtent;</div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        <span class="comment">// Test</span></div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        shader_effect_id_t _triangleEffect;</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        <span class="comment">// Internal methods</span></div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        [[nodiscard]] <span class="keyword">const</span> <a class="code" href="structrailguard_1_1rendering_1_1_frame_data.html">FrameData</a> GetCurrentFrame() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        <span class="keywordtype">void</span> WaitForFence(<span class="keyword">const</span> <a class="codeRef" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkFence.html">vk::Fence</a> &amp;fence) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        <span class="keyword">explicit</span> <a class="code" href="classrailguard_1_1rendering_1_1_renderer.html">Renderer</a>(<span class="keyword">const</span> <a class="code" href="classrailguard_1_1core_1_1_window_manager.html">core::WindowManager</a> &amp;windowManager);</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classrailguard_1_1rendering_1_1_renderer.html#a565ba2cb4acb52c6b3b08732e641b27f">Draw</a>();</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        <span class="comment">// Various managers for core objects</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        <a class="code" href="classrailguard_1_1rendering_1_1_swapchain_manager.html">SwapchainManager</a> _swapchainManager;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        <a class="code" href="classrailguard_1_1rendering_1_1_swapchain_camera_manager.html">SwapchainCameraManager</a> _swapchainCameraManager;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        <a class="code" href="classrailguard_1_1rendering_1_1_frame_manager.html">FrameManager</a> _frameManager;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        <a class="code" href="classrailguard_1_1rendering_1_1_shader_module_manager.html">ShaderModuleManager</a> _shaderModuleManager;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        <a class="code" href="classrailguard_1_1rendering_1_1_shader_effect_manager.html">ShaderEffectManager</a> _shaderEffectManager;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        <span class="comment">// Test</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        <a class="code" href="namespacerailguard_1_1rendering.html#ad8ec5b314f0afac2be19c6d3a8129984">shader_effect_id_t</a> _triangleEffect;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        <span class="comment">// Internal methods</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        <span class="keyword">explicit</span> <a class="code" href="classrailguard_1_1rendering_1_1_renderer.html#a3665090272137632603ceaae1d5b4ff0">Renderer</a>(<span class="keyword">const</span> <a class="code" href="classrailguard_1_1core_1_1_window_manager.html">core::WindowManager</a> &amp;windowManager);</div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        ~<a class="code" href="classrailguard_1_1rendering_1_1_renderer.html">Renderer</a>();</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    };</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;} <span class="comment">// namespace railguard::rendering</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classrailguard_1_1rendering_1_1_renderer.html#a565ba2cb4acb52c6b3b08732e641b27f">Draw</a>();</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        <span class="comment">// === Components ===</span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        <a class="code" href="classrailguard_1_1rendering_1_1_swapchain_camera_manager.html">SwapchainCameraManager</a> *<a class="code" href="classrailguard_1_1rendering_1_1_renderer.html#a3fcf8d651f3d4192fcf36c6fa5758afc">GetSwapchainCameraManager</a>();</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        <a class="code" href="classrailguard_1_1rendering_1_1_renderer.html#a75260f957e0481968691898ee31c989c">~Renderer</a>();</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    };</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;} <span class="comment">// namespace railguard::rendering</span></div>
 <div class="ttc" id="aVkDevice_html"><div class="ttname"><a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkDevice.html">vk::Device</a></div></div>
 <div class="ttc" id="aVkExtent2D_html"><div class="ttname"><a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkExtent2D.html">vk::Extent2D</a></div></div>
-<div class="ttc" id="aVkFence_html"><div class="ttname"><a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkFence.html">vk::Fence</a></div></div>
 <div class="ttc" id="aVkInstance_html"><div class="ttname"><a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkInstance.html">vk::Instance</a></div></div>
 <div class="ttc" id="aVkPhysicalDevice_html"><div class="ttname"><a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDevice.html">vk::PhysicalDevice</a></div></div>
 <div class="ttc" id="aVkRenderPass_html"><div class="ttname"><a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkRenderPass.html">vk::RenderPass</a></div></div>
 <div class="ttc" id="aVkSurfaceKHR_html"><div class="ttname"><a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkSurfaceKHR.html">vk::SurfaceKHR</a></div></div>
+<div class="ttc" id="a_frame_manager_8h_html"><div class="ttname"><a href="_frame_manager_8h.html">FrameManager.h</a></div></div>
+<div class="ttc" id="a_settings_8h_html"><div class="ttname"><a href="_settings_8h.html">Settings.h</a></div></div>
+<div class="ttc" id="a_shader_effect_manager_8h_html"><div class="ttname"><a href="_shader_effect_manager_8h.html">ShaderEffectManager.h</a></div></div>
+<div class="ttc" id="a_shader_module_manager_8h_html"><div class="ttname"><a href="_shader_module_manager_8h.html">ShaderModuleManager.h</a></div></div>
+<div class="ttc" id="a_swapchain_camera_manager_8h_html"><div class="ttname"><a href="_swapchain_camera_manager_8h.html">SwapchainCameraManager.h</a></div></div>
+<div class="ttc" id="a_vulkan_init_8h_html"><div class="ttname"><a href="_vulkan_init_8h.html">VulkanInit.h</a></div></div>
 <div class="ttc" id="aclassrailguard_1_1core_1_1_window_manager_html"><div class="ttname"><a href="classrailguard_1_1core_1_1_window_manager.html">railguard::core::WindowManager</a></div><div class="ttdef"><b>Definition:</b> WindowManager.h:13</div></div>
 <div class="ttc" id="aclassrailguard_1_1rendering_1_1_frame_manager_html"><div class="ttname"><a href="classrailguard_1_1rendering_1_1_frame_manager.html">railguard::rendering::FrameManager</a></div><div class="ttdef"><b>Definition:</b> FrameManager.h:17</div></div>
-<div class="ttc" id="aclassrailguard_1_1rendering_1_1_renderer_html"><div class="ttname"><a href="classrailguard_1_1rendering_1_1_renderer.html">railguard::rendering::Renderer</a></div><div class="ttdef"><b>Definition:</b> Renderer.h:15</div></div>
-<div class="ttc" id="aclassrailguard_1_1rendering_1_1_renderer_html_a565ba2cb4acb52c6b3b08732e641b27f"><div class="ttname"><a href="classrailguard_1_1rendering_1_1_renderer.html#a565ba2cb4acb52c6b3b08732e641b27f">railguard::rendering::Renderer::Draw</a></div><div class="ttdeci">void Draw()</div><div class="ttdoc">Renders an image for every camera.</div><div class="ttdef"><b>Definition:</b> Renderer.cpp:108</div></div>
+<div class="ttc" id="aclassrailguard_1_1rendering_1_1_renderer_html"><div class="ttname"><a href="classrailguard_1_1rendering_1_1_renderer.html">railguard::rendering::Renderer</a></div><div class="ttdoc">Main class of the rendering system.</div><div class="ttdef"><b>Definition:</b> Renderer.h:23</div></div>
+<div class="ttc" id="aclassrailguard_1_1rendering_1_1_renderer_html_a3665090272137632603ceaae1d5b4ff0"><div class="ttname"><a href="classrailguard_1_1rendering_1_1_renderer.html#a3665090272137632603ceaae1d5b4ff0">railguard::rendering::Renderer::Renderer</a></div><div class="ttdeci">Renderer(const core::WindowManager &amp;windowManager)</div><div class="ttdef"><b>Definition:</b> Renderer.cpp:11</div></div>
+<div class="ttc" id="aclassrailguard_1_1rendering_1_1_renderer_html_a3fcf8d651f3d4192fcf36c6fa5758afc"><div class="ttname"><a href="classrailguard_1_1rendering_1_1_renderer.html#a3fcf8d651f3d4192fcf36c6fa5758afc">railguard::rendering::Renderer::GetSwapchainCameraManager</a></div><div class="ttdeci">SwapchainCameraManager * GetSwapchainCameraManager()</div><div class="ttdef"><b>Definition:</b> Renderer.cpp:138</div></div>
+<div class="ttc" id="aclassrailguard_1_1rendering_1_1_renderer_html_a565ba2cb4acb52c6b3b08732e641b27f"><div class="ttname"><a href="classrailguard_1_1rendering_1_1_renderer.html#a565ba2cb4acb52c6b3b08732e641b27f">railguard::rendering::Renderer::Draw</a></div><div class="ttdeci">void Draw()</div><div class="ttdoc">Renders an image for every camera.</div><div class="ttdef"><b>Definition:</b> Renderer.cpp:102</div></div>
+<div class="ttc" id="aclassrailguard_1_1rendering_1_1_renderer_html_a75260f957e0481968691898ee31c989c"><div class="ttname"><a href="classrailguard_1_1rendering_1_1_renderer.html#a75260f957e0481968691898ee31c989c">railguard::rendering::Renderer::~Renderer</a></div><div class="ttdeci">~Renderer()</div><div class="ttdef"><b>Definition:</b> Renderer.cpp:74</div></div>
 <div class="ttc" id="aclassrailguard_1_1rendering_1_1_shader_effect_manager_html"><div class="ttname"><a href="classrailguard_1_1rendering_1_1_shader_effect_manager.html">railguard::rendering::ShaderEffectManager</a></div><div class="ttdoc">A &quot;shader effect&quot; is a configuration of pipeline layouts, shaders and descriptor set....</div><div class="ttdef"><b>Definition:</b> ShaderEffectManager.h:33</div></div>
 <div class="ttc" id="aclassrailguard_1_1rendering_1_1_shader_module_manager_html"><div class="ttname"><a href="classrailguard_1_1rendering_1_1_shader_module_manager.html">railguard::rendering::ShaderModuleManager</a></div><div class="ttdef"><b>Definition:</b> ShaderModuleManager.h:14</div></div>
-<div class="ttc" id="aclassrailguard_1_1rendering_1_1_swapchain_camera_manager_html"><div class="ttname"><a href="classrailguard_1_1rendering_1_1_swapchain_camera_manager.html">railguard::rendering::SwapchainCameraManager</a></div><div class="ttdef"><b>Definition:</b> SwapchainCameraManager.h:11</div></div>
-<div class="ttc" id="aclassrailguard_1_1rendering_1_1_swapchain_manager_html"><div class="ttname"><a href="classrailguard_1_1rendering_1_1_swapchain_manager.html">railguard::rendering::SwapchainManager</a></div><div class="ttdef"><b>Definition:</b> SwapchainManager.h:15</div></div>
-<div class="ttc" id="astructrailguard_1_1rendering_1_1_frame_data_html"><div class="ttname"><a href="structrailguard_1_1rendering_1_1_frame_data.html">railguard::rendering::FrameData</a></div><div class="ttdef"><b>Definition:</b> FrameManager.h:8</div></div>
+<div class="ttc" id="aclassrailguard_1_1rendering_1_1_swapchain_camera_manager_html"><div class="ttname"><a href="classrailguard_1_1rendering_1_1_swapchain_camera_manager.html">railguard::rendering::SwapchainCameraManager</a></div><div class="ttdoc">A swapchain camera is a camera that renders to a swapchain.</div><div class="ttdef"><b>Definition:</b> SwapchainCameraManager.h:27</div></div>
+<div class="ttc" id="aclassrailguard_1_1rendering_1_1_swapchain_manager_html"><div class="ttname"><a href="classrailguard_1_1rendering_1_1_swapchain_manager.html">railguard::rendering::SwapchainManager</a></div><div class="ttdef"><b>Definition:</b> SwapchainManager.h:24</div></div>
+<div class="ttc" id="anamespacerailguard_1_1rendering_html"><div class="ttname"><a href="namespacerailguard_1_1rendering.html">railguard::rendering</a></div><div class="ttdef"><b>Definition:</b> CameraMode.h:8</div></div>
+<div class="ttc" id="anamespacerailguard_1_1rendering_html_a01c788a6c07f456661b63ed00e284a69"><div class="ttname"><a href="namespacerailguard_1_1rendering.html#a01c788a6c07f456661b63ed00e284a69">railguard::rendering::swapchain_id_t</a></div><div class="ttdeci">uint32_t swapchain_id_t</div><div class="ttdef"><b>Definition:</b> SwapchainManager.h:13</div></div>
+<div class="ttc" id="anamespacerailguard_1_1rendering_html_ad8ec5b314f0afac2be19c6d3a8129984"><div class="ttname"><a href="namespacerailguard_1_1rendering.html#ad8ec5b314f0afac2be19c6d3a8129984">railguard::rendering::shader_effect_id_t</a></div><div class="ttdeci">uint32_t shader_effect_id_t</div><div class="ttdef"><b>Definition:</b> ShaderEffectManager.h:14</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_27636f4d4b2113f82b513d65146ca471.html">rendering</a></li><li class="navelem"><b>Renderer.h</b></li>
+    <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_27636f4d4b2113f82b513d65146ca471.html">rendering</a></li><li class="navelem"><a class="el" href="_renderer_8h.html">Renderer.h</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>

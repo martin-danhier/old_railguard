@@ -87,23 +87,30 @@ $(document).ready(function(){initNavTree('_colors_8h_source.html',''); initResiz
 <div class="title">Colors.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div>
+<a href="_colors_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &lt;array&gt;</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;cinttypes&gt;</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="keyword">namespace </span>railguard::utils</div>
+<div class="line"><a name="l00006"></a><span class="lineno"><a class="line" href="namespacerailguard_1_1utils.html">    6</a></span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacerailguard_1_1utils.html">railguard::utils</a></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;{</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    std::array&lt;float, 4&gt; GetColor(<span class="keywordtype">float</span> r, <span class="keywordtype">float</span> g, <span class="keywordtype">float</span> b, <span class="keywordtype">float</span> a = 1.0f);</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    std::array&lt;float, 4&gt; GetColorInt(uint8_t r, uint8_t g, uint8_t b, uint8_t a = 255);</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    std::array&lt;float, 4&gt; GetColorHex(uint32_t rgba);</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;} <span class="comment">// namespace railguard::utils</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="namespacerailguard_1_1utils.html#abf60a99615605efa766eb9e4db765de6">   11</a></span>&#160;    <span class="keyword">typedef</span> std::array&lt;float, 4&gt; <a class="code" href="namespacerailguard_1_1utils.html#abf60a99615605efa766eb9e4db765de6">Color</a>;</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    std::array&lt;float, 4&gt; <a class="code" href="namespacerailguard_1_1utils.html#ade4493fdd3b04eb4e53dcdc0c84f4702">GetColor</a>(<span class="keywordtype">float</span> r, <span class="keywordtype">float</span> g, <span class="keywordtype">float</span> b, <span class="keywordtype">float</span> a = 1.0f);</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    std::array&lt;float, 4&gt; <a class="code" href="namespacerailguard_1_1utils.html#ab490d9b53b6883f43a216e0efb7c3255">GetColorInt</a>(uint8_t r, uint8_t g, uint8_t b, uint8_t a = 255);</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    std::array&lt;float, 4&gt; <a class="code" href="namespacerailguard_1_1utils.html#a145f8b800821c35e3952a501c571e9c2">GetColorHex</a>(uint32_t rgba);</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;} <span class="comment">// namespace railguard::utils</span></div>
+<div class="ttc" id="anamespacerailguard_1_1utils_html"><div class="ttname"><a href="namespacerailguard_1_1utils.html">railguard::utils</a></div><div class="ttdef"><b>Definition:</b> Colors.h:7</div></div>
+<div class="ttc" id="anamespacerailguard_1_1utils_html_a145f8b800821c35e3952a501c571e9c2"><div class="ttname"><a href="namespacerailguard_1_1utils.html#a145f8b800821c35e3952a501c571e9c2">railguard::utils::GetColorHex</a></div><div class="ttdeci">std::array&lt; float, 4 &gt; GetColorHex(uint32_t rgba)</div><div class="ttdoc">Returns the array representation of the given color.</div><div class="ttdef"><b>Definition:</b> Colors.cpp:21</div></div>
+<div class="ttc" id="anamespacerailguard_1_1utils_html_ab490d9b53b6883f43a216e0efb7c3255"><div class="ttname"><a href="namespacerailguard_1_1utils.html#ab490d9b53b6883f43a216e0efb7c3255">railguard::utils::GetColorInt</a></div><div class="ttdeci">std::array&lt; float, 4 &gt; GetColorInt(uint8_t r, uint8_t g, uint8_t b, uint8_t a=255)</div><div class="ttdoc">Returns the array representation of the given color.</div><div class="ttdef"><b>Definition:</b> Colors.cpp:11</div></div>
+<div class="ttc" id="anamespacerailguard_1_1utils_html_abf60a99615605efa766eb9e4db765de6"><div class="ttname"><a href="namespacerailguard_1_1utils.html#abf60a99615605efa766eb9e4db765de6">railguard::utils::Color</a></div><div class="ttdeci">std::array&lt; float, 4 &gt; Color</div><div class="ttdoc">R, G, B, A color format. Each value is a float between 0 and 1.</div><div class="ttdef"><b>Definition:</b> Colors.h:11</div></div>
+<div class="ttc" id="anamespacerailguard_1_1utils_html_ade4493fdd3b04eb4e53dcdc0c84f4702"><div class="ttname"><a href="namespacerailguard_1_1utils.html#ade4493fdd3b04eb4e53dcdc0c84f4702">railguard::utils::GetColor</a></div><div class="ttdeci">std::array&lt; float, 4 &gt; GetColor(float r, float g, float b, float a=1.0f)</div><div class="ttdoc">Returns the array representation of the given color.</div><div class="ttdef"><b>Definition:</b> Colors.cpp:6</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_821002d4f10779a80d4fb17bc32f21f1.html">utils</a></li><li class="navelem"><b>Colors.h</b></li>
+    <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_821002d4f10779a80d4fb17bc32f21f1.html">utils</a></li><li class="navelem"><a class="el" href="_colors_8h.html">Colors.h</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>

@@ -90,47 +90,484 @@ $(document).ready(function(){initNavTree('classrailguard_1_1rendering_1_1_frame_
 <div class="title">railguard::rendering::FrameManager Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p><code>#include &lt;<a class="el" href="_frame_manager_8h_source.html">FrameManager.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a60de3683077ee1451687a460df118a85"><td class="memItemLeft" align="right" valign="top"><a id="a60de3683077ee1451687a460df118a85"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>Init</b> (const <a class="elRef" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkDevice.html">vk::Device</a> &amp;device, uint32_t graphicsQueueFamily)</td></tr>
+<tr class="memitem:a60de3683077ee1451687a460df118a85"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrailguard_1_1rendering_1_1_frame_manager.html#a60de3683077ee1451687a460df118a85">Init</a> (const <a class="elRef" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkDevice.html">vk::Device</a> &amp;device, uint32_t graphicsQueueFamily)</td></tr>
 <tr class="separator:a60de3683077ee1451687a460df118a85"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a83c952f29ff8aec657462d6563759776"><td class="memItemLeft" align="right" valign="top"><a id="a83c952f29ff8aec657462d6563759776"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>Cleanup</b> ()</td></tr>
+<tr class="memitem:a83c952f29ff8aec657462d6563759776"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrailguard_1_1rendering_1_1_frame_manager.html#a83c952f29ff8aec657462d6563759776">Cleanup</a> ()</td></tr>
 <tr class="separator:a83c952f29ff8aec657462d6563759776"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2dfe210b1fdec895c77f21fede8599fa"><td class="memItemLeft" align="right" valign="top"><a id="a2dfe210b1fdec895c77f21fede8599fa"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>WaitForAllFences</b> () const</td></tr>
+<tr class="memitem:ad922ab4c538c1ba8ef10978d5328ff06"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrailguard_1_1rendering_1_1_frame_manager.html#ad922ab4c538c1ba8ef10978d5328ff06">~FrameManager</a> ()</td></tr>
+<tr class="separator:ad922ab4c538c1ba8ef10978d5328ff06"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aff5dc6c2dc4ae728b10ad13c7783c4a6"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrailguard_1_1rendering_1_1_frame_manager.html#aff5dc6c2dc4ae728b10ad13c7783c4a6">FinishFrame</a> ()</td></tr>
+<tr class="memdesc:aff5dc6c2dc4ae728b10ad13c7783c4a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ends the current frame and increments the frame number.  <a href="classrailguard_1_1rendering_1_1_frame_manager.html#aff5dc6c2dc4ae728b10ad13c7783c4a6">More...</a><br /></td></tr>
+<tr class="separator:aff5dc6c2dc4ae728b10ad13c7783c4a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5e2ed7231a3a6fde4ba4b74f3bf511bf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrailguard_1_1rendering_1_1_frame_manager.html#a5e2ed7231a3a6fde4ba4b74f3bf511bf">WaitForFence</a> (const <a class="elRef" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkFence.html">vk::Fence</a> &amp;fence) const</td></tr>
+<tr class="separator:a5e2ed7231a3a6fde4ba4b74f3bf511bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a50d722e1ca28ca5f4ae88e8ccee13469"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrailguard_1_1rendering_1_1_frame_manager.html#a50d722e1ca28ca5f4ae88e8ccee13469">WaitForCurrentFence</a> () const</td></tr>
+<tr class="separator:a50d722e1ca28ca5f4ae88e8ccee13469"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2dfe210b1fdec895c77f21fede8599fa"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrailguard_1_1rendering_1_1_frame_manager.html#a2dfe210b1fdec895c77f21fede8599fa">WaitForAllFences</a> () const</td></tr>
 <tr class="separator:a2dfe210b1fdec895c77f21fede8599fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad460577c171ecc0b7e1a604366ef5d9b"><td class="memItemLeft" align="right" valign="top"><a id="ad460577c171ecc0b7e1a604366ef5d9b"></a>
-const <a class="el" href="structrailguard_1_1rendering_1_1_frame_data.html">FrameData</a>&#160;</td><td class="memItemRight" valign="bottom"><b>GetFrame</b> (uint32_t index) const</td></tr>
+<tr class="memitem:a55c5ec819d8c5448e3638ccc7b1a8498"><td class="memItemLeft" align="right" valign="top"><a class="elRef" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkCommandBuffer.html">vk::CommandBuffer</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrailguard_1_1rendering_1_1_frame_manager.html#a55c5ec819d8c5448e3638ccc7b1a8498">BeginRecording</a> ()</td></tr>
+<tr class="separator:a55c5ec819d8c5448e3638ccc7b1a8498"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a16dd67b9ec82c04d894c0594b95b52c6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrailguard_1_1rendering_1_1_frame_manager.html#a16dd67b9ec82c04d894c0594b95b52c6">EndRecordingAndSubmit</a> (const vk::Queue &amp;graphicsQueue)</td></tr>
+<tr class="separator:a16dd67b9ec82c04d894c0594b95b52c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a40b928f0ed2228f49b5e18c4dbe3971f"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrailguard_1_1rendering_1_1_frame_manager.html#a40b928f0ed2228f49b5e18c4dbe3971f">GetFrameNumber</a> () const</td></tr>
+<tr class="separator:a40b928f0ed2228f49b5e18c4dbe3971f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4a4aa3331050463707b0666b9c76c94c"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrailguard_1_1rendering_1_1_frame_manager.html#a4a4aa3331050463707b0666b9c76c94c">GetCurrentFrameIndex</a> () const</td></tr>
+<tr class="separator:a4a4aa3331050463707b0666b9c76c94c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1ac4e83d8e07a5ebf44d85315d31e02b"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="structrailguard_1_1rendering_1_1_frame_data.html">FrameData</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrailguard_1_1rendering_1_1_frame_manager.html#a1ac4e83d8e07a5ebf44d85315d31e02b">GetCurrentFrame</a> () const</td></tr>
+<tr class="separator:a1ac4e83d8e07a5ebf44d85315d31e02b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3ea73e07dd282b756246f9a3c03f041e"><td class="memItemLeft" align="right" valign="top">const <a class="elRef" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkCommandPool.html">vk::CommandPool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrailguard_1_1rendering_1_1_frame_manager.html#a3ea73e07dd282b756246f9a3c03f041e">GetCurrentCommandPool</a> () const</td></tr>
+<tr class="separator:a3ea73e07dd282b756246f9a3c03f041e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac91ddaae01432030df2d362dec8482a4"><td class="memItemLeft" align="right" valign="top">const <a class="elRef" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkCommandBuffer.html">vk::CommandBuffer</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrailguard_1_1rendering_1_1_frame_manager.html#ac91ddaae01432030df2d362dec8482a4">GetCurrentCommandBuffer</a> () const</td></tr>
+<tr class="separator:ac91ddaae01432030df2d362dec8482a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abfd862a08294490ee8b51a7567b3dc4c"><td class="memItemLeft" align="right" valign="top">const <a class="elRef" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkFence.html">vk::Fence</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrailguard_1_1rendering_1_1_frame_manager.html#abfd862a08294490ee8b51a7567b3dc4c">GetCurrentRenderFence</a> () const</td></tr>
+<tr class="separator:abfd862a08294490ee8b51a7567b3dc4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aba33f311a499ba3eee0c3f68d1f48aa2"><td class="memItemLeft" align="right" valign="top">const <a class="elRef" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkSemaphore.html">vk::Semaphore</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrailguard_1_1rendering_1_1_frame_manager.html#aba33f311a499ba3eee0c3f68d1f48aa2">GetCurrentRenderSemaphore</a> () const</td></tr>
+<tr class="separator:aba33f311a499ba3eee0c3f68d1f48aa2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a577bb0c83b4b589ee43d040ad788134a"><td class="memItemLeft" align="right" valign="top">const <a class="elRef" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkSemaphore.html">vk::Semaphore</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrailguard_1_1rendering_1_1_frame_manager.html#a577bb0c83b4b589ee43d040ad788134a">GetCurrentPresentSemaphore</a> () const</td></tr>
+<tr class="separator:a577bb0c83b4b589ee43d040ad788134a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad460577c171ecc0b7e1a604366ef5d9b"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="structrailguard_1_1rendering_1_1_frame_data.html">FrameData</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrailguard_1_1rendering_1_1_frame_manager.html#ad460577c171ecc0b7e1a604366ef5d9b">GetFrame</a> (uint32_t index) const</td></tr>
 <tr class="separator:ad460577c171ecc0b7e1a604366ef5d9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af92ea920211fcd6cffde18fdc97aa2dd"><td class="memItemLeft" align="right" valign="top"><a id="af92ea920211fcd6cffde18fdc97aa2dd"></a>
-const <a class="elRef" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkCommandPool.html">vk::CommandPool</a>&#160;</td><td class="memItemRight" valign="bottom"><b>GetCommandPool</b> (uint32_t index) const</td></tr>
+<tr class="memitem:af92ea920211fcd6cffde18fdc97aa2dd"><td class="memItemLeft" align="right" valign="top">const <a class="elRef" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkCommandPool.html">vk::CommandPool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrailguard_1_1rendering_1_1_frame_manager.html#af92ea920211fcd6cffde18fdc97aa2dd">GetCommandPool</a> (uint32_t index) const</td></tr>
 <tr class="separator:af92ea920211fcd6cffde18fdc97aa2dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a25dd99ccbe3cf523f95c4214c3aa1f14"><td class="memItemLeft" align="right" valign="top"><a id="a25dd99ccbe3cf523f95c4214c3aa1f14"></a>
-const <a class="elRef" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkCommandBuffer.html">vk::CommandBuffer</a>&#160;</td><td class="memItemRight" valign="bottom"><b>GetCommandBuffer</b> (uint32_t index) const</td></tr>
+<tr class="memitem:a25dd99ccbe3cf523f95c4214c3aa1f14"><td class="memItemLeft" align="right" valign="top">const <a class="elRef" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkCommandBuffer.html">vk::CommandBuffer</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrailguard_1_1rendering_1_1_frame_manager.html#a25dd99ccbe3cf523f95c4214c3aa1f14">GetCommandBuffer</a> (uint32_t index) const</td></tr>
 <tr class="separator:a25dd99ccbe3cf523f95c4214c3aa1f14"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a246ca8905d459881679dbb69966a3e69"><td class="memItemLeft" align="right" valign="top"><a id="a246ca8905d459881679dbb69966a3e69"></a>
-const <a class="elRef" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkFence.html">vk::Fence</a>&#160;</td><td class="memItemRight" valign="bottom"><b>GetRenderFence</b> (uint32_t index) const</td></tr>
+<tr class="memitem:a246ca8905d459881679dbb69966a3e69"><td class="memItemLeft" align="right" valign="top">const <a class="elRef" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkFence.html">vk::Fence</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrailguard_1_1rendering_1_1_frame_manager.html#a246ca8905d459881679dbb69966a3e69">GetRenderFence</a> (uint32_t index) const</td></tr>
 <tr class="separator:a246ca8905d459881679dbb69966a3e69"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad2d6ec61018d7323128e38fd3e793b49"><td class="memItemLeft" align="right" valign="top"><a id="ad2d6ec61018d7323128e38fd3e793b49"></a>
-const <a class="elRef" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkSemaphore.html">vk::Semaphore</a>&#160;</td><td class="memItemRight" valign="bottom"><b>GetRenderSemaphore</b> (uint32_t index) const</td></tr>
-<tr class="separator:ad2d6ec61018d7323128e38fd3e793b49"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4571e18911d925fbcc1b4b2e34d135e8"><td class="memItemLeft" align="right" valign="top"><a id="a4571e18911d925fbcc1b4b2e34d135e8"></a>
-const <a class="elRef" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkSemaphore.html">vk::Semaphore</a>&#160;</td><td class="memItemRight" valign="bottom"><b>GetPresentSemaphore</b> (uint32_t index) const</td></tr>
-<tr class="separator:a4571e18911d925fbcc1b4b2e34d135e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8c164ddf697adfe95ffd6567d492d24a"><td class="memItemLeft" align="right" valign="top">const <a class="elRef" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkSemaphore.html">vk::Semaphore</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrailguard_1_1rendering_1_1_frame_manager.html#a8c164ddf697adfe95ffd6567d492d24a">GetRenderSemaphore</a> (uint32_t index) const</td></tr>
+<tr class="separator:a8c164ddf697adfe95ffd6567d492d24a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae0c35691d14f7e1a2f6465b2b3d9a30b"><td class="memItemLeft" align="right" valign="top">const <a class="elRef" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkSemaphore.html">vk::Semaphore</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrailguard_1_1rendering_1_1_frame_manager.html#ae0c35691d14f7e1a2f6465b2b3d9a30b">GetPresentSemaphore</a> (uint32_t index) const</td></tr>
+<tr class="separator:ae0c35691d14f7e1a2f6465b2b3d9a30b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="ad922ab4c538c1ba8ef10978d5328ff06"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad922ab4c538c1ba8ef10978d5328ff06">&#9670;&nbsp;</a></span>~FrameManager()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">railguard::rendering::FrameManager::~FrameManager </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a55c5ec819d8c5448e3638ccc7b1a8498"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a55c5ec819d8c5448e3638ccc7b1a8498">&#9670;&nbsp;</a></span>BeginRecording()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="elRef" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkCommandBuffer.html">vk::CommandBuffer</a> railguard::rendering::FrameManager::BeginRecording </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a83c952f29ff8aec657462d6563759776"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a83c952f29ff8aec657462d6563759776">&#9670;&nbsp;</a></span>Cleanup()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void railguard::rendering::FrameManager::Cleanup </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a16dd67b9ec82c04d894c0594b95b52c6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a16dd67b9ec82c04d894c0594b95b52c6">&#9670;&nbsp;</a></span>EndRecordingAndSubmit()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void railguard::rendering::FrameManager::EndRecordingAndSubmit </td>
+          <td>(</td>
+          <td class="paramtype">const vk::Queue &amp;&#160;</td>
+          <td class="paramname"><em>graphicsQueue</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aff5dc6c2dc4ae728b10ad13c7783c4a6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aff5dc6c2dc4ae728b10ad13c7783c4a6">&#9670;&nbsp;</a></span>FinishFrame()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint64_t railguard::rendering::FrameManager::FinishFrame </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Ends the current frame and increments the frame number. </p>
+<dl class="section return"><dt>Returns</dt><dd>uint64_t The frame number of the next frame. </dd></dl>
+
+</div>
+</div>
+<a id="a25dd99ccbe3cf523f95c4214c3aa1f14"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a25dd99ccbe3cf523f95c4214c3aa1f14">&#9670;&nbsp;</a></span>GetCommandBuffer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="elRef" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkCommandBuffer.html">vk::CommandBuffer</a> railguard::rendering::FrameManager::GetCommandBuffer </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>index</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af92ea920211fcd6cffde18fdc97aa2dd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af92ea920211fcd6cffde18fdc97aa2dd">&#9670;&nbsp;</a></span>GetCommandPool()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="elRef" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkCommandPool.html">vk::CommandPool</a> railguard::rendering::FrameManager::GetCommandPool </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>index</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac91ddaae01432030df2d362dec8482a4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac91ddaae01432030df2d362dec8482a4">&#9670;&nbsp;</a></span>GetCurrentCommandBuffer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="elRef" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkCommandBuffer.html">vk::CommandBuffer</a> railguard::rendering::FrameManager::GetCurrentCommandBuffer </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3ea73e07dd282b756246f9a3c03f041e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3ea73e07dd282b756246f9a3c03f041e">&#9670;&nbsp;</a></span>GetCurrentCommandPool()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="elRef" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkCommandPool.html">vk::CommandPool</a> railguard::rendering::FrameManager::GetCurrentCommandPool </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1ac4e83d8e07a5ebf44d85315d31e02b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1ac4e83d8e07a5ebf44d85315d31e02b">&#9670;&nbsp;</a></span>GetCurrentFrame()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="structrailguard_1_1rendering_1_1_frame_data.html">FrameData</a> railguard::rendering::FrameManager::GetCurrentFrame </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4a4aa3331050463707b0666b9c76c94c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4a4aa3331050463707b0666b9c76c94c">&#9670;&nbsp;</a></span>GetCurrentFrameIndex()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t railguard::rendering::FrameManager::GetCurrentFrameIndex </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a577bb0c83b4b589ee43d040ad788134a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a577bb0c83b4b589ee43d040ad788134a">&#9670;&nbsp;</a></span>GetCurrentPresentSemaphore()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="elRef" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkSemaphore.html">vk::Semaphore</a> * railguard::rendering::FrameManager::GetCurrentPresentSemaphore </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="abfd862a08294490ee8b51a7567b3dc4c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abfd862a08294490ee8b51a7567b3dc4c">&#9670;&nbsp;</a></span>GetCurrentRenderFence()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="elRef" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkFence.html">vk::Fence</a> railguard::rendering::FrameManager::GetCurrentRenderFence </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aba33f311a499ba3eee0c3f68d1f48aa2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aba33f311a499ba3eee0c3f68d1f48aa2">&#9670;&nbsp;</a></span>GetCurrentRenderSemaphore()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="elRef" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkSemaphore.html">vk::Semaphore</a> * railguard::rendering::FrameManager::GetCurrentRenderSemaphore </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad460577c171ecc0b7e1a604366ef5d9b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad460577c171ecc0b7e1a604366ef5d9b">&#9670;&nbsp;</a></span>GetFrame()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="structrailguard_1_1rendering_1_1_frame_data.html">FrameData</a> railguard::rendering::FrameManager::GetFrame </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>index</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a40b928f0ed2228f49b5e18c4dbe3971f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a40b928f0ed2228f49b5e18c4dbe3971f">&#9670;&nbsp;</a></span>GetFrameNumber()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint64_t railguard::rendering::FrameManager::GetFrameNumber </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae0c35691d14f7e1a2f6465b2b3d9a30b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae0c35691d14f7e1a2f6465b2b3d9a30b">&#9670;&nbsp;</a></span>GetPresentSemaphore()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="elRef" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkSemaphore.html">vk::Semaphore</a> * railguard::rendering::FrameManager::GetPresentSemaphore </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>index</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a246ca8905d459881679dbb69966a3e69"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a246ca8905d459881679dbb69966a3e69">&#9670;&nbsp;</a></span>GetRenderFence()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="elRef" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkFence.html">vk::Fence</a> railguard::rendering::FrameManager::GetRenderFence </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>index</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8c164ddf697adfe95ffd6567d492d24a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8c164ddf697adfe95ffd6567d492d24a">&#9670;&nbsp;</a></span>GetRenderSemaphore()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="elRef" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkSemaphore.html">vk::Semaphore</a> * railguard::rendering::FrameManager::GetRenderSemaphore </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>index</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a60de3683077ee1451687a460df118a85"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a60de3683077ee1451687a460df118a85">&#9670;&nbsp;</a></span>Init()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void railguard::rendering::FrameManager::Init </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="elRef" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkDevice.html">vk::Device</a> &amp;&#160;</td>
+          <td class="paramname"><em>device</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>graphicsQueueFamily</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2dfe210b1fdec895c77f21fede8599fa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2dfe210b1fdec895c77f21fede8599fa">&#9670;&nbsp;</a></span>WaitForAllFences()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void railguard::rendering::FrameManager::WaitForAllFences </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a50d722e1ca28ca5f4ae88e8ccee13469"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a50d722e1ca28ca5f4ae88e8ccee13469">&#9670;&nbsp;</a></span>WaitForCurrentFence()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void railguard::rendering::FrameManager::WaitForCurrentFence </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5e2ed7231a3a6fde4ba4b74f3bf511bf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5e2ed7231a3a6fde4ba4b74f3bf511bf">&#9670;&nbsp;</a></span>WaitForFence()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void railguard::rendering::FrameManager::WaitForFence </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="elRef" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkFence.html">vk::Fence</a> &amp;&#160;</td>
+          <td class="paramname"><em>fence</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>include/rendering/<a class="el" href="_frame_manager_8h_source.html">FrameManager.h</a></li>
-<li>src/rendering/FrameManager.cpp</li>
+<li>src/rendering/<a class="el" href="_frame_manager_8cpp.html">FrameManager.cpp</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><b>railguard</b></li><li class="navelem"><b>rendering</b></li><li class="navelem"><a class="el" href="classrailguard_1_1rendering_1_1_frame_manager.html">FrameManager</a></li>
+    <li class="navelem"><a class="el" href="namespacerailguard.html">railguard</a></li><li class="navelem"><a class="el" href="namespacerailguard_1_1rendering.html">rendering</a></li><li class="navelem"><a class="el" href="classrailguard_1_1rendering_1_1_frame_manager.html">FrameManager</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>

@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['physicaldevice_185',['physicalDevice',['../structrailguard_1_1rendering_1_1init_1_1_swapchain_init_info.html#a3a163e574a3a667e92f7ec88d062b448',1,'railguard::rendering::init::SwapchainInitInfo::physicalDevice()'],['../structrailguard_1_1rendering_1_1init_1_1_vulkan_init_info.html#a2f363490a701900b86c4762138a6eeb7',1,'railguard::rendering::init::VulkanInitInfo::physicalDevice()']]],
-  ['physicaldeviceproperties_186',['physicalDeviceProperties',['../structrailguard_1_1rendering_1_1init_1_1_vulkan_init_info.html#a261d88f39b36a785084d8af712934c09',1,'railguard::rendering::init::VulkanInitInfo']]]
+  ['eid_589',['eid',['../structrailguard_1_1core_1_1_entity.html#a7f27dab07fb80e0a41ea0c7c92ab7b47',1,'railguard::core::Entity']]],
+  ['enabled_590',['enabled',['../structrailguard_1_1rendering_1_1init_1_1_swapchain_camera_init_info.html#a53cfce906ed86f7e4075d8701ccd2bc9',1,'railguard::rendering::init::SwapchainCameraInitInfo']]]
 ];

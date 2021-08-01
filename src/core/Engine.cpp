@@ -11,6 +11,13 @@ namespace railguard::core
                        _renderer(_windowManager),
                        _deltaTime{0}
     {
+        // Create camera
+        auto mainCamera = _entityManager.CreateEntity();
+        auto camManager = _renderer.GetSwapchainCameraManager();
+        camManager->CreateComponent(mainCamera, rendering::init::SwapchainCameraInitInfo {
+            .swapchainId = 1,
+            .clearColor = utils::GetColorHex(0xff0000ff)
+        });
         std::cout << "Engine initialized successfully.\n";
     }
 

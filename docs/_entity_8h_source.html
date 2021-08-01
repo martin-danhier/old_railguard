@@ -87,12 +87,12 @@ $(document).ready(function(){initNavTree('_entity_8h_source.html',''); initResiz
 <div class="title">Entity.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div>
+<a href="_entity_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &lt;cinttypes&gt;</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;ostream&gt;</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="keyword">namespace </span>railguard::core</div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacerailguard_1_1core.html">railguard::core</a></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;{</div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;    <span class="comment">// === Config values for the ids ===</span></div>
@@ -102,11 +102,11 @@ $(document).ready(function(){initNavTree('_entity_8h_source.html',''); initResiz
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    <span class="comment">// A typedef is used to allow better maintability:</span></div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    <span class="comment">// If the size of the integer type needs to be increased in the future,</span></div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <span class="comment">// all the function handling entities will instantly be updated with the new size.</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <span class="keyword">typedef</span> uint64_t eid_t;</div>
+<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="namespacerailguard_1_1core.html#a1e9d711a63a58b7a9fb56678db0f1a85">   16</a></span>&#160;    <span class="keyword">typedef</span> uint64_t <a class="code" href="namespacerailguard_1_1core.html#a1e9d711a63a58b7a9fb56678db0f1a85">eid_t</a>;</div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <span class="comment">// Type used to represent the unique part of an Entity id.</span></div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="comment">// It needs to be large enough to fit in every possible unique id,</span></div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <span class="comment">// but as small as possible to avoid taking not needed space</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="keyword">typedef</span> uint8_t unique_eid_t;</div>
+<div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="namespacerailguard_1_1core.html#a333994c458289eebb0483664d7fc9806">   20</a></span>&#160;    <span class="keyword">typedef</span> uint8_t <a class="code" href="namespacerailguard_1_1core.html#a333994c458289eebb0483664d7fc9806">unique_eid_t</a>;</div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="comment">// Number of bits used for the &quot;unique&quot; part of an entity id</span></div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="comment">//</span></div>
@@ -117,25 +117,25 @@ $(document).ready(function(){initNavTree('_entity_8h_source.html',''); initResiz
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="comment">// the less space the entity table will take, and the more ids will fit in the cache.</span></div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="comment">//</span></div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="comment">// Formula: 2^UNIQUE_BITS</span></div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    constexpr uint8_t UNIQUE_BITS = 8;</div>
+<div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="namespacerailguard_1_1core.html#aac32acfcf353457af05c283bc7402d74">   31</a></span>&#160;    constexpr uint8_t <a class="code" href="namespacerailguard_1_1core.html#aac32acfcf353457af05c283bc7402d74">UNIQUE_BITS</a> = 8;</div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="comment">// Number of bits used for the &quot;index&quot; part of an entity id</span></div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="comment">//</span></div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="comment">// The &quot;index part&quot; is used to index an id in the lookup table.</span></div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="comment">// The number of possible indexes defines the maximum number of simultaneous alive entities.</span></div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="comment">//</span></div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="comment">// Formula: 2^INDEX_BITS</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    constexpr uint8_t INDEX_BITS = 56;</div>
+<div class="line"><a name="l00038"></a><span class="lineno"><a class="line" href="namespacerailguard_1_1core.html#ac8bee2793408d3ab362994be320704e6">   38</a></span>&#160;    constexpr uint8_t <a class="code" href="namespacerailguard_1_1core.html#ac8bee2793408d3ab362994be320704e6">INDEX_BITS</a> = 56;</div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="comment">// Static assert to prevent mis configuration of the above parameters</span></div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="comment">// They must always sum up to the the size of the entity id</span></div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="comment">// If in the future, the id must be divided in more than 2 parts, this assertion will need to be</span></div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="comment">// updated.</span></div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    static_assert(</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        <span class="keyword">static_cast&lt;</span><span class="keywordtype">size_t</span><span class="keyword">&gt;</span>(UNIQUE_BITS + INDEX_BITS) == <span class="keyword">sizeof</span>(eid_t) * 8,</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        <span class="keyword">static_cast&lt;</span><span class="keywordtype">size_t</span><span class="keyword">&gt;</span>(<a class="code" href="namespacerailguard_1_1core.html#aac32acfcf353457af05c283bc7402d74">UNIQUE_BITS</a> + <a class="code" href="namespacerailguard_1_1core.html#ac8bee2793408d3ab362994be320704e6">INDEX_BITS</a>) == <span class="keyword">sizeof</span>(<a class="code" href="namespacerailguard_1_1core.html#a1e9d711a63a58b7a9fb56678db0f1a85">eid_t</a>) * 8,</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        <span class="stringliteral">&quot;The unique and index bits must sum up to the length of the type used to represent Entity ids.&quot;</span>);</div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="comment">// Check if the unique_eid_t type can hold every possible unique id</span></div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    static_assert(</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        UNIQUE_BITS &lt;= <span class="keyword">sizeof</span>(unique_eid_t) * 8,</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        <a class="code" href="namespacerailguard_1_1core.html#aac32acfcf353457af05c283bc7402d74">UNIQUE_BITS</a> &lt;= <span class="keyword">sizeof</span>(<a class="code" href="namespacerailguard_1_1core.html#a333994c458289eebb0483664d7fc9806">unique_eid_t</a>) * 8,</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        <span class="stringliteral">&quot;The unique_eid_t type must be large enough to fit in every possible unique part of an Entity id.&quot;</span>);</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="comment">// An entity is an ID that can be used to represent a &quot;thing&quot; in the Engine, like a player, a bullet,</span></div>
@@ -144,30 +144,42 @@ $(document).ready(function(){initNavTree('_entity_8h_source.html',''); initResiz
 <div class="line"><a name="l00055"></a><span class="lineno"><a class="line" href="structrailguard_1_1core_1_1_entity.html">   55</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="structrailguard_1_1core_1_1_entity.html">Entity</a></div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    {</div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        <span class="comment">// Id of the entity itself</span></div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        eid_t eid;</div>
+<div class="line"><a name="l00058"></a><span class="lineno"><a class="line" href="structrailguard_1_1core_1_1_entity.html#a7f27dab07fb80e0a41ea0c7c92ab7b47">   58</a></span>&#160;        <a class="code" href="namespacerailguard_1_1core.html#a1e9d711a63a58b7a9fb56678db0f1a85">eid_t</a> <a class="code" href="structrailguard_1_1core_1_1_entity.html#a7f27dab07fb80e0a41ea0c7c92ab7b47">eid</a>;</div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        <span class="keyword">explicit</span> <a class="code" href="structrailguard_1_1core_1_1_entity.html">Entity</a>(eid_t <span class="keywordtype">id</span>);</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        <span class="keyword">explicit</span> <a class="code" href="structrailguard_1_1core_1_1_entity.html">Entity</a>(eid_t index, unique_eid_t unique);</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        <span class="keyword">explicit</span> <a class="code" href="structrailguard_1_1core_1_1_entity.html#aabbcaff55d2990a2c1b919ea3e263dc8">Entity</a>(<a class="code" href="namespacerailguard_1_1core.html#a1e9d711a63a58b7a9fb56678db0f1a85">eid_t</a> <span class="keywordtype">id</span>);</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        <span class="keyword">explicit</span> <a class="code" href="structrailguard_1_1core_1_1_entity.html#aabbcaff55d2990a2c1b919ea3e263dc8">Entity</a>(<a class="code" href="namespacerailguard_1_1core.html#a1e9d711a63a58b7a9fb56678db0f1a85">eid_t</a> index, <a class="code" href="namespacerailguard_1_1core.html#a333994c458289eebb0483664d7fc9806">unique_eid_t</a> unique);</div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        <span class="comment">// Returns the index part of this entity</span></div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        [[nodiscard]] eid_t GetIndex() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        [[nodiscard]] <a class="code" href="namespacerailguard_1_1core.html#a1e9d711a63a58b7a9fb56678db0f1a85">eid_t</a> <a class="code" href="structrailguard_1_1core_1_1_entity.html#a2b4afccf7e48a8238e4b8c641adad85b">GetIndex</a>() <span class="keyword">const</span>;</div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        <span class="comment">// Returns the unique part of this entity</span></div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        [[nodiscard]] unique_eid_t GetUnique() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        [[nodiscard]] <a class="code" href="namespacerailguard_1_1core.html#a333994c458289eebb0483664d7fc9806">unique_eid_t</a> <a class="code" href="structrailguard_1_1core_1_1_entity.html#a9446c90ac21ed931dc7678fa1b66d003">GetUnique</a>() <span class="keyword">const</span>;</div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        <span class="comment">// Comparison operators between two entities</span></div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        <span class="keywordtype">bool</span> operator==(<span class="keyword">const</span> <a class="code" href="structrailguard_1_1core_1_1_entity.html">Entity</a> &amp;other) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        <span class="keywordtype">bool</span> operator!=(<span class="keyword">const</span> <a class="code" href="structrailguard_1_1core_1_1_entity.html">Entity</a> &amp;other) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        <span class="keywordtype">bool</span> <a class="code" href="structrailguard_1_1core_1_1_entity.html#a2f8e043026235c485a744c5f7545ff00">operator==</a>(<span class="keyword">const</span> <a class="code" href="structrailguard_1_1core_1_1_entity.html">Entity</a> &amp;other) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        <span class="keywordtype">bool</span> <a class="code" href="structrailguard_1_1core_1_1_entity.html#a8d98cf3baf80ac5aa5c883bb2cda9655">operator!=</a>(<span class="keyword">const</span> <a class="code" href="structrailguard_1_1core_1_1_entity.html">Entity</a> &amp;other) <span class="keyword">const</span>;</div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        <span class="comment">// Pretty prints an entity when placed in a cout</span></div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        <span class="keyword">friend</span> std::ostream &amp;operator&lt;&lt;(std::ostream &amp;os, <span class="keyword">const</span> <a class="code" href="structrailguard_1_1core_1_1_entity.html">Entity</a> &amp;rhs);</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        <span class="keyword">friend</span> std::ostream &amp;<a class="code" href="structrailguard_1_1core_1_1_entity.html#a30697d32eca14a2a9cf1271d9bbc177f">operator&lt;&lt;</a>(std::ostream &amp;os, <span class="keyword">const</span> <a class="code" href="structrailguard_1_1core_1_1_entity.html">Entity</a> &amp;rhs);</div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    };</div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;}</div>
+<div class="ttc" id="anamespacerailguard_1_1core_html"><div class="ttname"><a href="namespacerailguard_1_1core.html">railguard::core</a></div><div class="ttdef"><b>Definition:</b> ComponentManager.h:13</div></div>
+<div class="ttc" id="anamespacerailguard_1_1core_html_a1e9d711a63a58b7a9fb56678db0f1a85"><div class="ttname"><a href="namespacerailguard_1_1core.html#a1e9d711a63a58b7a9fb56678db0f1a85">railguard::core::eid_t</a></div><div class="ttdeci">uint64_t eid_t</div><div class="ttdef"><b>Definition:</b> Entity.h:16</div></div>
+<div class="ttc" id="anamespacerailguard_1_1core_html_a333994c458289eebb0483664d7fc9806"><div class="ttname"><a href="namespacerailguard_1_1core.html#a333994c458289eebb0483664d7fc9806">railguard::core::unique_eid_t</a></div><div class="ttdeci">uint8_t unique_eid_t</div><div class="ttdef"><b>Definition:</b> Entity.h:20</div></div>
+<div class="ttc" id="anamespacerailguard_1_1core_html_aac32acfcf353457af05c283bc7402d74"><div class="ttname"><a href="namespacerailguard_1_1core.html#aac32acfcf353457af05c283bc7402d74">railguard::core::UNIQUE_BITS</a></div><div class="ttdeci">constexpr uint8_t UNIQUE_BITS</div><div class="ttdef"><b>Definition:</b> Entity.h:31</div></div>
+<div class="ttc" id="anamespacerailguard_1_1core_html_ac8bee2793408d3ab362994be320704e6"><div class="ttname"><a href="namespacerailguard_1_1core.html#ac8bee2793408d3ab362994be320704e6">railguard::core::INDEX_BITS</a></div><div class="ttdeci">constexpr uint8_t INDEX_BITS</div><div class="ttdef"><b>Definition:</b> Entity.h:38</div></div>
 <div class="ttc" id="astructrailguard_1_1core_1_1_entity_html"><div class="ttname"><a href="structrailguard_1_1core_1_1_entity.html">railguard::core::Entity</a></div><div class="ttdef"><b>Definition:</b> Entity.h:56</div></div>
+<div class="ttc" id="astructrailguard_1_1core_1_1_entity_html_a2b4afccf7e48a8238e4b8c641adad85b"><div class="ttname"><a href="structrailguard_1_1core_1_1_entity.html#a2b4afccf7e48a8238e4b8c641adad85b">railguard::core::Entity::GetIndex</a></div><div class="ttdeci">eid_t GetIndex() const</div><div class="ttdef"><b>Definition:</b> Entity.cpp:34</div></div>
+<div class="ttc" id="astructrailguard_1_1core_1_1_entity_html_a2f8e043026235c485a744c5f7545ff00"><div class="ttname"><a href="structrailguard_1_1core_1_1_entity.html#a2f8e043026235c485a744c5f7545ff00">railguard::core::Entity::operator==</a></div><div class="ttdeci">bool operator==(const Entity &amp;other) const</div><div class="ttdef"><b>Definition:</b> Entity.cpp:17</div></div>
+<div class="ttc" id="astructrailguard_1_1core_1_1_entity_html_a30697d32eca14a2a9cf1271d9bbc177f"><div class="ttname"><a href="structrailguard_1_1core_1_1_entity.html#a30697d32eca14a2a9cf1271d9bbc177f">railguard::core::Entity::operator&lt;&lt;</a></div><div class="ttdeci">friend std::ostream &amp; operator&lt;&lt;(std::ostream &amp;os, const Entity &amp;rhs)</div><div class="ttdef"><b>Definition:</b> Entity.cpp:27</div></div>
+<div class="ttc" id="astructrailguard_1_1core_1_1_entity_html_a7f27dab07fb80e0a41ea0c7c92ab7b47"><div class="ttname"><a href="structrailguard_1_1core_1_1_entity.html#a7f27dab07fb80e0a41ea0c7c92ab7b47">railguard::core::Entity::eid</a></div><div class="ttdeci">eid_t eid</div><div class="ttdef"><b>Definition:</b> Entity.h:58</div></div>
+<div class="ttc" id="astructrailguard_1_1core_1_1_entity_html_a8d98cf3baf80ac5aa5c883bb2cda9655"><div class="ttname"><a href="structrailguard_1_1core_1_1_entity.html#a8d98cf3baf80ac5aa5c883bb2cda9655">railguard::core::Entity::operator!=</a></div><div class="ttdeci">bool operator!=(const Entity &amp;other) const</div><div class="ttdef"><b>Definition:</b> Entity.cpp:22</div></div>
+<div class="ttc" id="astructrailguard_1_1core_1_1_entity_html_a9446c90ac21ed931dc7678fa1b66d003"><div class="ttname"><a href="structrailguard_1_1core_1_1_entity.html#a9446c90ac21ed931dc7678fa1b66d003">railguard::core::Entity::GetUnique</a></div><div class="ttdeci">unique_eid_t GetUnique() const</div><div class="ttdef"><b>Definition:</b> Entity.cpp:43</div></div>
+<div class="ttc" id="astructrailguard_1_1core_1_1_entity_html_aabbcaff55d2990a2c1b919ea3e263dc8"><div class="ttname"><a href="structrailguard_1_1core_1_1_entity.html#aabbcaff55d2990a2c1b919ea3e263dc8">railguard::core::Entity::Entity</a></div><div class="ttdeci">Entity(eid_t id)</div><div class="ttdef"><b>Definition:</b> Entity.cpp:6</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_3d69f64eaf81436fe2b22361382717e5.html">core</a></li><li class="navelem"><b>Entity.h</b></li>
+    <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_3d69f64eaf81436fe2b22361382717e5.html">core</a></li><li class="navelem"><a class="el" href="_entity_8h.html">Entity.h</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>

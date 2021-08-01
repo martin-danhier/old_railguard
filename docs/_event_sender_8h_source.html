@@ -87,15 +87,15 @@ $(document).ready(function(){initNavTree('_event_sender_8h_source.html',''); ini
 <div class="title">EventSender.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
+<a href="_event_sender_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &lt;map&gt;</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;functional&gt;</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="keyword">namespace </span>railguard::core</div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacerailguard_1_1core.html">railguard::core</a></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;{</div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;    <span class="keyword">using</span> EventHandler = std::function&lt;void(<span class="keyword">const</span> T &amp;)&gt;;</div>
+<div class="line"><a name="l00009"></a><span class="lineno"><a class="line" href="namespacerailguard_1_1core.html#a4110db806e1d71aee94ed9de162c18bf">    9</a></span>&#160;    <span class="keyword">using</span> <a class="code" href="namespacerailguard_1_1core.html#a4110db806e1d71aee94ed9de162c18bf">EventHandler</a> = std::function&lt;void(<span class="keyword">const</span> T &amp;)&gt;;</div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;</div>
 <div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="classrailguard_1_1core_1_1_event_sender.html">   26</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classrailguard_1_1core_1_1_event_sender.html">EventSender</a></div>
@@ -115,7 +115,7 @@ $(document).ready(function(){initNavTree('_event_sender_8h_source.html',''); ini
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;            }</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        }</div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
-<div class="line"><a name="l00054"></a><span class="lineno"><a class="line" href="classrailguard_1_1core_1_1_event_sender.html#a4236b9357853cc167220bbcc5fe431b9">   54</a></span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classrailguard_1_1core_1_1_event_sender.html#a4236b9357853cc167220bbcc5fe431b9">RegisterListener</a>(std::string name, EventHandler&lt;T&gt; handler)</div>
+<div class="line"><a name="l00054"></a><span class="lineno"><a class="line" href="classrailguard_1_1core_1_1_event_sender.html#a4236b9357853cc167220bbcc5fe431b9">   54</a></span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classrailguard_1_1core_1_1_event_sender.html#a4236b9357853cc167220bbcc5fe431b9">RegisterListener</a>(std::string name, <a class="code" href="namespacerailguard_1_1core.html#a4110db806e1d71aee94ed9de162c18bf">EventHandler&lt;T&gt;</a> handler)</div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        {</div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;            _handlers[name] = handler;</div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        }</div>
@@ -130,12 +130,14 @@ $(document).ready(function(){initNavTree('_event_sender_8h_source.html',''); ini
 <div class="ttc" id="aclassrailguard_1_1core_1_1_event_sender_html_a385ea5af42282f3cb04904694abd1c02"><div class="ttname"><a href="classrailguard_1_1core_1_1_event_sender.html#a385ea5af42282f3cb04904694abd1c02">railguard::core::EventSender::SendEvent</a></div><div class="ttdeci">void SendEvent(const T &amp;data)</div><div class="ttdoc">Send an event to every listener/.</div><div class="ttdef"><b>Definition:</b> EventSender.h:39</div></div>
 <div class="ttc" id="aclassrailguard_1_1core_1_1_event_sender_html_a4236b9357853cc167220bbcc5fe431b9"><div class="ttname"><a href="classrailguard_1_1core_1_1_event_sender.html#a4236b9357853cc167220bbcc5fe431b9">railguard::core::EventSender::RegisterListener</a></div><div class="ttdeci">void RegisterListener(std::string name, EventHandler&lt; T &gt; handler)</div><div class="ttdoc">Registers an event handler that will then be called if the event is sent.</div><div class="ttdef"><b>Definition:</b> EventSender.h:54</div></div>
 <div class="ttc" id="aclassrailguard_1_1core_1_1_event_sender_html_a50f5bfad2cf98597acaaa83fca589286"><div class="ttname"><a href="classrailguard_1_1core_1_1_event_sender.html#a50f5bfad2cf98597acaaa83fca589286">railguard::core::EventSender::RemoveListener</a></div><div class="ttdeci">void RemoveListener(std::string name)</div><div class="ttdoc">Removes a handler that was previously registered. It will stop receiving events.</div><div class="ttdef"><b>Definition:</b> EventSender.h:64</div></div>
+<div class="ttc" id="anamespacerailguard_1_1core_html"><div class="ttname"><a href="namespacerailguard_1_1core.html">railguard::core</a></div><div class="ttdef"><b>Definition:</b> ComponentManager.h:13</div></div>
+<div class="ttc" id="anamespacerailguard_1_1core_html_a4110db806e1d71aee94ed9de162c18bf"><div class="ttname"><a href="namespacerailguard_1_1core.html#a4110db806e1d71aee94ed9de162c18bf">railguard::core::EventHandler</a></div><div class="ttdeci">std::function&lt; void(const T &amp;)&gt; EventHandler</div><div class="ttdef"><b>Definition:</b> EventSender.h:9</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_3d69f64eaf81436fe2b22361382717e5.html">core</a></li><li class="navelem"><b>EventSender.h</b></li>
+    <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_3d69f64eaf81436fe2b22361382717e5.html">core</a></li><li class="navelem"><a class="el" href="_event_sender_8h.html">EventSender.h</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>

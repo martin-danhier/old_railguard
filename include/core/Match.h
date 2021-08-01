@@ -17,10 +17,10 @@ namespace railguard::core
     protected:
         // Index of the corresponding component in the manager + 1
         // Is 0 when the entity does not have any component
-        size_t _index;
+        size_t _index = 0;
 
     public:
-        explicit Match(size_t index);
+        explicit Match(size_t index = 0);
 
         // Returns true if a component was found, false otherwise
         [[nodiscard]] bool HasResult() const;

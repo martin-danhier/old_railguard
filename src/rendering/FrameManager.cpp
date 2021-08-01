@@ -130,12 +130,73 @@ namespace railguard::rendering
         };
     }
 
+    void FrameManager::WaitForFence(const vk::Fence &fence) const 
+	{
+		// Wait for fences
+		auto waitResult = _device.waitForFences(fence, true, WAIT_FOR_FENCES_TIMEOUT);
+        // Reset it
+        _device.resetFences(fence);
+
+		if (waitResult != vk::Result::eSuccess)
+		{
+			throw std::runtime_error("Error while waiting for fences");
+		}
+	}
+
+    void FrameManager::WaitForCurrentFence() const {
+        WaitForFence(GetCurrentRenderFence());
+    }
+
     void FrameManager::WaitForAllFences() const {
         auto waitResult = _device.waitForFences(NB_OVERLAPPING_FRAMES, _renderFences, true, WAIT_FOR_FENCES_TIMEOUT);
         if (waitResult != vk::Result::eSuccess)
 		{
 			throw std::runtime_error("Error while waiting for fences");
 		}
+    }
+
+    vk::CommandBuffer FrameManager::BeginRecording() {
+        auto cmd = GetCurrentCommandBuffer();
+
+        // Reset command buffer
+        cmd.reset();
+
+        // Begin recording
+        vk::CommandBufferBeginInfo cmdBeginInfo{
+			.flags = vk::CommandBufferUsageFlagBits::eOneTimeSubmit,
+		};
+        cmd.begin(cmdBeginInfo);
+
+        return cmd;
+    }
+
+    void FrameManager::EndRecordingAndSubmit(const vk::Queue &graphicsQueue) {
+        // Get handles we will need
+        auto frameIndex = GetCurrentFrameIndex();
+        auto cmd = GetCommandBuffer(frameIndex);
+        auto presentSemaphore = GetPresentSemaphore(frameIndex);
+        auto renderSemaphore = GetRenderSemaphore(frameIndex);
+        auto renderFence = GetRenderFence(frameIndex);
+
+        // End recording
+        cmd.end();
+
+        // Submit to the graphics queue
+		vk::PipelineStageFlags waitStage = vk::PipelineStageFlagBits::eColorAttachmentOutput;
+		vk::SubmitInfo submitInfo{
+			// Wait until the image to render to is ready
+			.waitSemaphoreCount = 1,
+			.pWaitSemaphores = presentSemaphore,
+			// Pipeline stage
+			.pWaitDstStageMask = &waitStage,
+			// Link the command buffer
+			.commandBufferCount = 1,
+			.pCommandBuffers = &cmd,
+			// Signal the render semaphore
+			.signalSemaphoreCount = 1,
+			.pSignalSemaphores = renderSemaphore,
+		};
+		graphicsQueue.submit(submitInfo, renderFence);
     }
 
     // Getters
@@ -161,19 +222,55 @@ namespace railguard::rendering
 
         return _renderFences[index];
     }
-    const vk::Semaphore FrameManager::GetRenderSemaphore(uint32_t index) const
+    const vk::Semaphore* FrameManager::GetRenderSemaphore(uint32_t index) const
     {
         ADVANCED_CHECK(_initialized, NOT_INITIALIZED_ERROR);
         ADVANCED_CHECK(index < NB_OVERLAPPING_FRAMES, INDEX_OUT_OF_RANGE_ERROR);
 
-        return _renderSemaphores[index];
+        return &_renderSemaphores[index];
     }
-    const vk::Semaphore FrameManager::GetPresentSemaphore(uint32_t index) const
+    const vk::Semaphore* FrameManager::GetPresentSemaphore(uint32_t index) const
     {
         ADVANCED_CHECK(_initialized, NOT_INITIALIZED_ERROR);
         ADVANCED_CHECK(index < NB_OVERLAPPING_FRAMES, INDEX_OUT_OF_RANGE_ERROR);
 
-        return _presentSemaphores[index];
+        return &_presentSemaphores[index];
     }
 
+    uint64_t FrameManager::FinishFrame() {
+        return _currentFrameNumber++;
+    }
+
+    uint64_t FrameManager::GetFrameNumber() const {
+        return _currentFrameNumber;
+    }
+
+    uint32_t FrameManager::GetCurrentFrameIndex() const {
+        return _currentFrameNumber % NB_OVERLAPPING_FRAMES;
+    }
+
+    const FrameData FrameManager::GetCurrentFrame() const {
+        return GetFrame(GetCurrentFrameIndex());
+    }
+
+    const vk::CommandPool FrameManager::GetCurrentCommandPool() const {
+        return GetCommandPool(GetCurrentFrameIndex());
+    }
+
+    const vk::CommandBuffer FrameManager::GetCurrentCommandBuffer() const {
+        return GetCommandBuffer(GetCurrentFrameIndex());
+    }
+
+    const vk::Fence FrameManager::GetCurrentRenderFence() const {
+        return GetRenderFence(GetCurrentFrameIndex());
+    }
+
+    const vk::Semaphore* FrameManager::GetCurrentRenderSemaphore() const {
+        return GetRenderSemaphore(GetCurrentFrameIndex());
+    }
+
+    const vk::Semaphore* FrameManager::GetCurrentPresentSemaphore() const {
+        return GetPresentSemaphore(GetCurrentFrameIndex());
+    }
+    
 }

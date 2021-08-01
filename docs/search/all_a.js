@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['onwindowresized_48',['OnWindowResized',['../classrailguard_1_1core_1_1_engine.html#a8c91756e67a3df9fdb32714cf73d1578',1,'railguard::core::Engine']]]
+  ['killentity_160',['KillEntity',['../classrailguard_1_1core_1_1_entity_manager.html#aa535c17973edef1de961ab0e5b2fdae8',1,'railguard::core::EntityManager']]]
 ];

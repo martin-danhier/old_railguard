@@ -90,27 +90,119 @@ $(document).ready(function(){initNavTree('classrailguard_1_1rendering_1_1_render
 <div class="title">railguard::rendering::Renderer Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Main class of the rendering system.  
+ <a href="classrailguard_1_1rendering_1_1_renderer.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_renderer_8h_source.html">Renderer.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a3665090272137632603ceaae1d5b4ff0"><td class="memItemLeft" align="right" valign="top"><a id="a3665090272137632603ceaae1d5b4ff0"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>Renderer</b> (const <a class="el" href="classrailguard_1_1core_1_1_window_manager.html">core::WindowManager</a> &amp;windowManager)</td></tr>
+<tr class="memitem:a3665090272137632603ceaae1d5b4ff0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrailguard_1_1rendering_1_1_renderer.html#a3665090272137632603ceaae1d5b4ff0">Renderer</a> (const <a class="el" href="classrailguard_1_1core_1_1_window_manager.html">core::WindowManager</a> &amp;windowManager)</td></tr>
 <tr class="separator:a3665090272137632603ceaae1d5b4ff0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a565ba2cb4acb52c6b3b08732e641b27f"><td class="memItemLeft" align="right" valign="top"><a id="a565ba2cb4acb52c6b3b08732e641b27f"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrailguard_1_1rendering_1_1_renderer.html#a565ba2cb4acb52c6b3b08732e641b27f">Draw</a> ()</td></tr>
-<tr class="memdesc:a565ba2cb4acb52c6b3b08732e641b27f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Renders an image for every camera. <br /></td></tr>
+<tr class="memitem:a565ba2cb4acb52c6b3b08732e641b27f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrailguard_1_1rendering_1_1_renderer.html#a565ba2cb4acb52c6b3b08732e641b27f">Draw</a> ()</td></tr>
+<tr class="memdesc:a565ba2cb4acb52c6b3b08732e641b27f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Renders an image for every camera.  <a href="classrailguard_1_1rendering_1_1_renderer.html#a565ba2cb4acb52c6b3b08732e641b27f">More...</a><br /></td></tr>
 <tr class="separator:a565ba2cb4acb52c6b3b08732e641b27f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3fcf8d651f3d4192fcf36c6fa5758afc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classrailguard_1_1rendering_1_1_swapchain_camera_manager.html">SwapchainCameraManager</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrailguard_1_1rendering_1_1_renderer.html#a3fcf8d651f3d4192fcf36c6fa5758afc">GetSwapchainCameraManager</a> ()</td></tr>
+<tr class="separator:a3fcf8d651f3d4192fcf36c6fa5758afc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a75260f957e0481968691898ee31c989c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrailguard_1_1rendering_1_1_renderer.html#a75260f957e0481968691898ee31c989c">~Renderer</a> ()</td></tr>
+<tr class="separator:a75260f957e0481968691898ee31c989c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Main class of the rendering system. </p>
+<p>The renderer handles the entirety of the rendering process. It manages Vulkan object handles, internal managers and components used for the rendering.</p>
+<p>However, it doesn't manage the window itself, and only connects to one that is provided at initialization. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a3665090272137632603ceaae1d5b4ff0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3665090272137632603ceaae1d5b4ff0">&#9670;&nbsp;</a></span>Renderer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">railguard::rendering::Renderer::Renderer </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classrailguard_1_1core_1_1_window_manager.html">core::WindowManager</a> &amp;&#160;</td>
+          <td class="paramname"><em>windowManager</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">explicit</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a75260f957e0481968691898ee31c989c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a75260f957e0481968691898ee31c989c">&#9670;&nbsp;</a></span>~Renderer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">railguard::rendering::Renderer::~Renderer </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a565ba2cb4acb52c6b3b08732e641b27f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a565ba2cb4acb52c6b3b08732e641b27f">&#9670;&nbsp;</a></span>Draw()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void railguard::rendering::Renderer::Draw </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Renders an image for every camera. </p>
+
+</div>
+</div>
+<a id="a3fcf8d651f3d4192fcf36c6fa5758afc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3fcf8d651f3d4192fcf36c6fa5758afc">&#9670;&nbsp;</a></span>GetSwapchainCameraManager()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classrailguard_1_1rendering_1_1_swapchain_camera_manager.html">SwapchainCameraManager</a> * railguard::rendering::Renderer::GetSwapchainCameraManager </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>include/rendering/<a class="el" href="_renderer_8h_source.html">Renderer.h</a></li>
-<li>src/rendering/Renderer.cpp</li>
+<li>src/rendering/<a class="el" href="_renderer_8cpp.html">Renderer.cpp</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><b>railguard</b></li><li class="navelem"><b>rendering</b></li><li class="navelem"><a class="el" href="classrailguard_1_1rendering_1_1_renderer.html">Renderer</a></li>
+    <li class="navelem"><a class="el" href="namespacerailguard.html">railguard</a></li><li class="navelem"><a class="el" href="namespacerailguard_1_1rendering.html">rendering</a></li><li class="navelem"><a class="el" href="classrailguard_1_1rendering_1_1_renderer.html">Renderer</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>

@@ -90,16 +90,191 @@ $(document).ready(function(){initNavTree('structrailguard_1_1rendering_1_1init_1
 <div class="title">railguard::rendering::init::SwapchainCameraInitInfo Struct Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p><code>#include &lt;<a class="el" href="_camera_init_info_8h_source.html">CameraInitInfo.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:a53cfce906ed86f7e4075d8701ccd2bc9"><td class="memItemLeft" align="right" valign="top"><a id="a53cfce906ed86f7e4075d8701ccd2bc9"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>enabled</b></td></tr>
+<tr class="memitem:a53cfce906ed86f7e4075d8701ccd2bc9"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrailguard_1_1rendering_1_1init_1_1_swapchain_camera_init_info.html#a53cfce906ed86f7e4075d8701ccd2bc9">enabled</a> = true</td></tr>
+<tr class="memdesc:a53cfce906ed86f7e4075d8701ccd2bc9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Is the camera enabled or not ? Disabled cameras do not render anything.  <a href="structrailguard_1_1rendering_1_1init_1_1_swapchain_camera_init_info.html#a53cfce906ed86f7e4075d8701ccd2bc9">More...</a><br /></td></tr>
 <tr class="separator:a53cfce906ed86f7e4075d8701ccd2bc9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afa4aefa7bd3f09747193c229c0159eea"><td class="memItemLeft" align="right" valign="top"><a id="afa4aefa7bd3f09747193c229c0159eea"></a>
-railguard::rendering::swapchain_id_t&#160;</td><td class="memItemRight" valign="bottom"><b>swapchainId</b></td></tr>
+<tr class="memitem:afa4aefa7bd3f09747193c229c0159eea"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacerailguard_1_1rendering.html#a01c788a6c07f456661b63ed00e284a69">railguard::rendering::swapchain_id_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrailguard_1_1rendering_1_1init_1_1_swapchain_camera_init_info.html#afa4aefa7bd3f09747193c229c0159eea">swapchainId</a></td></tr>
+<tr class="memdesc:afa4aefa7bd3f09747193c229c0159eea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Id of the swapchain used for the camera in the swapchain manager.  <a href="structrailguard_1_1rendering_1_1init_1_1_swapchain_camera_init_info.html#afa4aefa7bd3f09747193c229c0159eea">More...</a><br /></td></tr>
 <tr class="separator:afa4aefa7bd3f09747193c229c0159eea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa5b2f21514bb824b1d4ba29e2458549a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacerailguard_1_1rendering_1_1enums.html#aec7446ff5e9c436f99ba91656f403c82">enums::CameraMode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrailguard_1_1rendering_1_1init_1_1_swapchain_camera_init_info.html#aa5b2f21514bb824b1d4ba29e2458549a">mode</a> = <a class="el" href="namespacerailguard_1_1rendering_1_1enums.html#aec7446ff5e9c436f99ba91656f403c82aa80420eef88d11f77532f1b9cb467fa3">enums::CameraMode::Perspective</a></td></tr>
+<tr class="memdesc:aa5b2f21514bb824b1d4ba29e2458549a"><td class="mdescLeft">&#160;</td><td class="mdescRight">CameraMode of the camera. Defines whether it will use a orthographic or perspective projection matrix.  <a href="structrailguard_1_1rendering_1_1init_1_1_swapchain_camera_init_info.html#aa5b2f21514bb824b1d4ba29e2458549a">More...</a><br /></td></tr>
+<tr class="separator:aa5b2f21514bb824b1d4ba29e2458549a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac1152a67112ffc6c888bfdd79fdf28ae"><td class="memItemLeft" align="right" valign="top">glm::vec3&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrailguard_1_1rendering_1_1init_1_1_swapchain_camera_init_info.html#ac1152a67112ffc6c888bfdd79fdf28ae">position</a> = glm::vec3(0.f, 0.f, 0.f)</td></tr>
+<tr class="memdesc:ac1152a67112ffc6c888bfdd79fdf28ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Position of the camera in the world. Defined in X, Y and Z coordinates.  <a href="structrailguard_1_1rendering_1_1init_1_1_swapchain_camera_init_info.html#ac1152a67112ffc6c888bfdd79fdf28ae">More...</a><br /></td></tr>
+<tr class="separator:ac1152a67112ffc6c888bfdd79fdf28ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac81b872e2b0f267893a3c47d11affdef"><td class="memItemLeft" align="right" valign="top">glm::quat&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrailguard_1_1rendering_1_1init_1_1_swapchain_camera_init_info.html#ac81b872e2b0f267893a3c47d11affdef">rotation</a> = glm::quat(0.f, 0.f, 0.f, 1.f)</td></tr>
+<tr class="memdesc:ac81b872e2b0f267893a3c47d11affdef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rotation of the camera in the world. Defined using a quarternion.  <a href="structrailguard_1_1rendering_1_1init_1_1_swapchain_camera_init_info.html#ac81b872e2b0f267893a3c47d11affdef">More...</a><br /></td></tr>
+<tr class="separator:ac81b872e2b0f267893a3c47d11affdef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adab8b1a26a454d745a6832080b98d3a0"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrailguard_1_1rendering_1_1init_1_1_swapchain_camera_init_info.html#adab8b1a26a454d745a6832080b98d3a0">fieldOfView</a> = 70.f</td></tr>
+<tr class="memdesc:adab8b1a26a454d745a6832080b98d3a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Field of view of the camera, in degrees. Ignored in orthographic mode.  <a href="structrailguard_1_1rendering_1_1init_1_1_swapchain_camera_init_info.html#adab8b1a26a454d745a6832080b98d3a0">More...</a><br /></td></tr>
+<tr class="separator:adab8b1a26a454d745a6832080b98d3a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a40b134e49ba987f37092aa42c690f386"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrailguard_1_1rendering_1_1init_1_1_swapchain_camera_init_info.html#a40b134e49ba987f37092aa42c690f386">modeParam1</a> = 0.1f</td></tr>
+<tr class="memdesc:a40b134e49ba987f37092aa42c690f386"><td class="mdescLeft">&#160;</td><td class="mdescRight">First param of the camera mode.  <a href="structrailguard_1_1rendering_1_1init_1_1_swapchain_camera_init_info.html#a40b134e49ba987f37092aa42c690f386">More...</a><br /></td></tr>
+<tr class="separator:a40b134e49ba987f37092aa42c690f386"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3d687960bdd211bcf4596ca5a27fe6dd"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrailguard_1_1rendering_1_1init_1_1_swapchain_camera_init_info.html#a3d687960bdd211bcf4596ca5a27fe6dd">modeParam2</a> = 100.f</td></tr>
+<tr class="memdesc:a3d687960bdd211bcf4596ca5a27fe6dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Second param of the camera mode.  <a href="structrailguard_1_1rendering_1_1init_1_1_swapchain_camera_init_info.html#a3d687960bdd211bcf4596ca5a27fe6dd">More...</a><br /></td></tr>
+<tr class="separator:a3d687960bdd211bcf4596ca5a27fe6dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0108078ba677261573511036266bd6f2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacerailguard_1_1utils.html#abf60a99615605efa766eb9e4db765de6">utils::Color</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrailguard_1_1rendering_1_1init_1_1_swapchain_camera_init_info.html#a0108078ba677261573511036266bd6f2">clearColor</a> = <a class="el" href="namespacerailguard_1_1utils.html#ade4493fdd3b04eb4e53dcdc0c84f4702">utils::GetColor</a>(1.0f, 1.0f, 1.0f, 1.0f)</td></tr>
+<tr class="memdesc:a0108078ba677261573511036266bd6f2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Color used to clear the image.  <a href="structrailguard_1_1rendering_1_1init_1_1_swapchain_camera_init_info.html#a0108078ba677261573511036266bd6f2">More...</a><br /></td></tr>
+<tr class="separator:a0108078ba677261573511036266bd6f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a0108078ba677261573511036266bd6f2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0108078ba677261573511036266bd6f2">&#9670;&nbsp;</a></span>clearColor</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacerailguard_1_1utils.html#abf60a99615605efa766eb9e4db765de6">utils::Color</a> railguard::rendering::init::SwapchainCameraInitInfo::clearColor = <a class="el" href="namespacerailguard_1_1utils.html#ade4493fdd3b04eb4e53dcdc0c84f4702">utils::GetColor</a>(1.0f, 1.0f, 1.0f, 1.0f)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Color used to clear the image. </p>
+
+</div>
+</div>
+<a id="a53cfce906ed86f7e4075d8701ccd2bc9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a53cfce906ed86f7e4075d8701ccd2bc9">&#9670;&nbsp;</a></span>enabled</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool railguard::rendering::init::SwapchainCameraInitInfo::enabled = true</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Is the camera enabled or not ? Disabled cameras do not render anything. </p>
+
+</div>
+</div>
+<a id="adab8b1a26a454d745a6832080b98d3a0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adab8b1a26a454d745a6832080b98d3a0">&#9670;&nbsp;</a></span>fieldOfView</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float railguard::rendering::init::SwapchainCameraInitInfo::fieldOfView = 70.f</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Field of view of the camera, in degrees. Ignored in orthographic mode. </p>
+
+</div>
+</div>
+<a id="aa5b2f21514bb824b1d4ba29e2458549a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa5b2f21514bb824b1d4ba29e2458549a">&#9670;&nbsp;</a></span>mode</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacerailguard_1_1rendering_1_1enums.html#aec7446ff5e9c436f99ba91656f403c82">enums::CameraMode</a> railguard::rendering::init::SwapchainCameraInitInfo::mode = <a class="el" href="namespacerailguard_1_1rendering_1_1enums.html#aec7446ff5e9c436f99ba91656f403c82aa80420eef88d11f77532f1b9cb467fa3">enums::CameraMode::Perspective</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>CameraMode of the camera. Defines whether it will use a orthographic or perspective projection matrix. </p>
+<p>By default, the camera mode will be CameraMode::Perspective. </p>
+
+</div>
+</div>
+<a id="a40b134e49ba987f37092aa42c690f386"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a40b134e49ba987f37092aa42c690f386">&#9670;&nbsp;</a></span>modeParam1</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float railguard::rendering::init::SwapchainCameraInitInfo::modeParam1 = 0.1f</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>First param of the camera mode. </p>
+<p>In CameraMode::Orthographic mode, it represents the horizontal distance between the center and the border.</p>
+<p>In CameraMode::Perspective mode, it represents the distance of the near plane. </p>
+
+</div>
+</div>
+<a id="a3d687960bdd211bcf4596ca5a27fe6dd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3d687960bdd211bcf4596ca5a27fe6dd">&#9670;&nbsp;</a></span>modeParam2</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float railguard::rendering::init::SwapchainCameraInitInfo::modeParam2 = 100.f</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Second param of the camera mode. </p>
+<p>In CameraMode::Orthographic mode, it represents the vertical distance between the center and the border.</p>
+<p>In CameraMode::Perspective mode, it represents the distance of the far plane. </p>
+
+</div>
+</div>
+<a id="ac1152a67112ffc6c888bfdd79fdf28ae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac1152a67112ffc6c888bfdd79fdf28ae">&#9670;&nbsp;</a></span>position</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">glm::vec3 railguard::rendering::init::SwapchainCameraInitInfo::position = glm::vec3(0.f, 0.f, 0.f)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Position of the camera in the world. Defined in X, Y and Z coordinates. </p>
+<dl class="section see"><dt>See also</dt><dd>Coordinates documentation (TODO) </dd></dl>
+
+</div>
+</div>
+<a id="ac81b872e2b0f267893a3c47d11affdef"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac81b872e2b0f267893a3c47d11affdef">&#9670;&nbsp;</a></span>rotation</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">glm::quat railguard::rendering::init::SwapchainCameraInitInfo::rotation = glm::quat(0.f, 0.f, 0.f, 1.f)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Rotation of the camera in the world. Defined using a quarternion. </p>
+<dl class="section see"><dt>See also</dt><dd>Rotations documentation (TODO) </dd></dl>
+
+</div>
+</div>
+<a id="afa4aefa7bd3f09747193c229c0159eea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afa4aefa7bd3f09747193c229c0159eea">&#9670;&nbsp;</a></span>swapchainId</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacerailguard_1_1rendering.html#a01c788a6c07f456661b63ed00e284a69">railguard::rendering::swapchain_id_t</a> railguard::rendering::init::SwapchainCameraInitInfo::swapchainId</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Id of the swapchain used for the camera in the swapchain manager. </p>
+
+</div>
+</div>
 <hr/>The documentation for this struct was generated from the following file:<ul>
 <li>include/rendering/init/<a class="el" href="_camera_init_info_8h_source.html">CameraInitInfo.h</a></li>
 </ul>
@@ -108,7 +283,7 @@ railguard::rendering::swapchain_id_t&#160;</td><td class="memItemRight" valign="
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><b>railguard</b></li><li class="navelem"><b>rendering</b></li><li class="navelem"><b>init</b></li><li class="navelem"><a class="el" href="structrailguard_1_1rendering_1_1init_1_1_swapchain_camera_init_info.html">SwapchainCameraInitInfo</a></li>
+    <li class="navelem"><a class="el" href="namespacerailguard.html">railguard</a></li><li class="navelem"><a class="el" href="namespacerailguard_1_1rendering.html">rendering</a></li><li class="navelem"><a class="el" href="namespacerailguard_1_1rendering_1_1init.html">init</a></li><li class="navelem"><a class="el" href="structrailguard_1_1rendering_1_1init_1_1_swapchain_camera_init_info.html">SwapchainCameraInitInfo</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>

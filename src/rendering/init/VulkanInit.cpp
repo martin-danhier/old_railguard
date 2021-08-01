@@ -114,15 +114,12 @@ namespace railguard::rendering::init
 
 	void VulkanInit::InitWindowSwapchain(const SwapchainInitInfo &initInfo)
 	{
-		// Get window extent
-		auto windowExtent = initInfo.windowManager.GetWindowExtent();
-
 		// Init swapchain with vk bootstrap
 		vkb::SwapchainBuilder swapchainBuilder{initInfo.physicalDevice, initInfo.device, initInfo.surface};
 		auto vkbSwapchain = swapchainBuilder
 								.set_desired_format({SWAPCHAIN_FORMAT, SWAPCHAIN_COLOR_SPACE})
 								.set_desired_present_mode(VK_PRESENT_MODE_FIFO_KHR)
-								.set_desired_extent(windowExtent.width, windowExtent.height)
+								.set_desired_extent(initInfo.windowExtent.width, initInfo.windowExtent.height)
 								.build()
 								.value();
 
@@ -172,8 +169,8 @@ namespace railguard::rendering::init
 			.renderPass = initInfo.renderPass,
 			.attachmentCount = ATTACHMENTS_COUNT,
 			.pAttachments = attachments,
-			.width = windowExtent.width,
-			.height = windowExtent.height,
+			.width = initInfo.windowExtent.width,
+			.height = initInfo.windowExtent.height,
 			.layers = 1,
 		};
 
