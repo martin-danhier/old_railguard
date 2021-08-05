@@ -18,8 +18,16 @@ namespace railguard::core
     {
         return eid == other.eid;
     }
+    bool Entity::operator==(const Entity &&other) const
+    {
+        return eid == other.eid;
+    }
 
     bool Entity::operator!=(const Entity &other) const
+    {
+        return eid != other.eid;
+    }
+    bool Entity::operator!=(const Entity &&other) const
     {
         return eid != other.eid;
     }

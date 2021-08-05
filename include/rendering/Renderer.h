@@ -7,6 +7,10 @@
 #include "Settings.h"
 #include "ShaderModuleManager.h"
 #include "ShaderEffectManager.h"
+#include "MaterialTemplateManager.h"
+#include "MaterialManager.h"
+#include "ModelManager.h"
+#include "RenderStageManager.h"
 
 namespace railguard::rendering
 {
@@ -44,11 +48,14 @@ namespace railguard::rendering
         FrameManager _frameManager;
         ShaderModuleManager _shaderModuleManager;
         ShaderEffectManager _shaderEffectManager;
+        MaterialTemplateManager _materialTemplateManager;
+        MaterialManager _materialManager;
+        ModelManager _modelManager;
+        RenderStageManager _renderStageManager;
 
         // Test
         shader_effect_id_t _triangleEffect;
 
-        // Internal methods
     public:
         explicit Renderer(const core::WindowManager &windowManager);
 

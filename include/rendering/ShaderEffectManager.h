@@ -6,13 +6,11 @@
 #include "./ShaderModuleManager.h"
 #include "./init/ShaderEffectInitInfo.h"
 #include "../core/WindowManager.h"
+#include "enums/ShaderEffectKind.h"
+#include "Ids.h"
 
 namespace railguard::rendering
 {
-    // Use a typedef to specify which type will be used for shader effect ids
-    // That way, if we need to change that type, we only need to do it here
-    typedef uint32_t shader_effect_id_t;
-
     /**
      * @brief Storage that is used to store the device as well as a pointer to the shader module manager.
      */
@@ -38,6 +36,7 @@ namespace railguard::rendering
         std::vector<vk::PipelineLayout> _pipelineLayouts;
         std::vector<std::vector<shader_module_id_t>> _shaderStages;
         std::vector<vk::Pipeline> _pipelines;
+        std::vector<enums::ShaderEffectKind> _effectKinds;
 
     public:
         void Init(ShaderEffectManagerStorage storage, size_t defaultCapacity = 5);
@@ -67,9 +66,11 @@ namespace railguard::rendering
         void DestroyShaderEffect(const core::Match &match);
 
         void Bind(const core::Match &match, const vk::CommandBuffer &cmd) const;
+        [[nodiscard]] const std::vector<shader_effect_id_t> GetEffectsOfKind(enums::ShaderEffectKind kind) const;
 
         [[nodiscard]] const vk::PipelineLayout GetPipelineLayout(const core::Match &match) const;
         [[nodiscard]] const vk::Pipeline GetPipeline(const core::Match &match) const;
         [[nodiscard]] const std::vector<shader_module_id_t> GetShaderStages(const core::Match &match) const;
+        [[nodiscard]] enums::ShaderEffectKind GetEffectKind(const core::Match &match) const;
     };
 } // namespace railguard::rendering

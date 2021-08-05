@@ -4,7 +4,7 @@
 namespace railguard::rendering
 {
 
-    void SwapchainCameraManager::Init(SwapchainCameraManagerStorage storage, const core::component_id_t defaultComponentCapacity)
+    void SwapchainCameraManager::Init(SwapchainCameraManagerStorage storage, const core::component_idx_t defaultComponentCapacity)
     {
         // Init with boilerplate code
         super::Init(storage, defaultComponentCapacity);
@@ -53,16 +53,18 @@ namespace railguard::rendering
         }
 
         // Run boilerplate for entity management
-        return this->RegisterComponent(entity);
+        return super::RegisterComponent(entity);
     }
 
-    void SwapchainCameraManager::DestroyComponent(core::component_id_t index)
+    void SwapchainCameraManager::DestroyComponent(const core::Match &match)
     {
-        // Run boilerplate deletion
-        super::DestroyComponent(index);
+        // Get index
+        auto index = match.GetIndex();
+        const size_t lastIndex = _entities.size() - 1;
 
-        // Move the last item of vectors to the destroyed index if it is not the last
-        core::component_id_t lastIndex = _enabledCameras.size() - 1;
+        // Run boilerplate deletion
+        super::DestroyComponent(match);
+
         if (index < lastIndex)
         {
             _enabledCameras[index] = _enabledCameras[lastIndex];
@@ -91,6 +93,8 @@ namespace railguard::rendering
 
     void SwapchainCameraManager::Clear()
     {
+        super::Clear();
+
         // Clear every vector
         _enabledCameras.clear();
         _swapchainIds.clear();

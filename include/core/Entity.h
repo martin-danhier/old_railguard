@@ -57,6 +57,8 @@ namespace railguard::core
         // Id of the entity itself
         eid_t eid;
 
+        Entity(const Entity &other) = default;
+        Entity(Entity &&other) = default;
         explicit Entity(eid_t id);
         explicit Entity(eid_t index, unique_eid_t unique);
 
@@ -66,7 +68,13 @@ namespace railguard::core
         [[nodiscard]] unique_eid_t GetUnique() const;
         // Comparison operators between two entities
         bool operator==(const Entity &other) const;
+        bool operator==(const Entity &&other) const;
         bool operator!=(const Entity &other) const;
+        bool operator!=(const Entity &&other) const;
+
+        Entity &operator=(Entity &&other) = default;
+        Entity &operator=(Entity &other) = default;
+
         // Pretty prints an entity when placed in a cout
         friend std::ostream &operator<<(std::ostream &os, const Entity &rhs);
     };

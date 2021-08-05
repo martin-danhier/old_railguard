@@ -78,11 +78,12 @@ namespace railguard::rendering
 //! [Example of derivation of StandaloneManager::DestroyItem]
     void ShaderModuleManager::DestroyShaderModule(const core::Match &match)
     {
-        super::DestroyItem(match);
-
         // Get index
         auto index = match.GetIndex();
-        size_t lastIndex = _ids.size() - 1;
+        const size_t lastIndex = _ids.size() - 1;
+
+        // Run boilerplate deletion
+        super::DestroyItem(match);
 
         // Destroy the module
         _storage.vulkanDevice.destroyShaderModule(_modules[index]);

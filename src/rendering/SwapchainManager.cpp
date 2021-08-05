@@ -109,11 +109,12 @@ namespace railguard::rendering
 
     void SwapchainManager::DestroySwapchain(const core::Match &match)
     {
-        super::DestroyItem(match);
-
         // Get index
         auto index = match.GetIndex();
-        size_t lastIndex = _ids.size() - 1;
+        const size_t lastIndex = _ids.size() - 1;
+
+        // Run boilerplate deletion
+        super::DestroyItem(match);
 
         // Destroy the framebuffers
         for (auto framebuffer : _frameBuffers[index])

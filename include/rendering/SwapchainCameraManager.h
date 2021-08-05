@@ -23,7 +23,7 @@ namespace railguard::rendering
      *
      * These cameras can be used to render images to the window, for example. To render to a texture, see RenderTextureCameraManager (TODO).
      */
-    class SwapchainCameraManager : core::ComponentManager<SwapchainCameraManagerStorage>
+    class SwapchainCameraManager : public core::ComponentManager<SwapchainCameraManagerStorage>
     {
     private:
         // Typedef the parent type to make it easier to call from the methods
@@ -87,7 +87,7 @@ namespace railguard::rendering
 
 
     public:
-        void Init(SwapchainCameraManagerStorage storage, const core::component_id_t defaultComponentCapacity = 1);
+        void Init(SwapchainCameraManagerStorage storage, const size_t defaultComponentCapacity = 1);
 
         void Clear();
 
@@ -99,7 +99,7 @@ namespace railguard::rendering
          * @return core::Match linking the entity to its component slot
          */
         core::Match CreateComponent(const core::Entity &entity, const init::SwapchainCameraInitInfo &initInfo);
-        void DestroyComponent(core::component_id_t index) override;
+        void DestroyComponent(const core::Match &match);
 
         // Getters
 

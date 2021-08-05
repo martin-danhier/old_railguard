@@ -12,6 +12,7 @@ namespace railguard::rendering
         _pipelineLayouts.reserve(defaultCapacity);
         _pipelines.reserve(defaultCapacity);
         _shaderStages.reserve(defaultCapacity);
+        _effectKinds.reserve(defaultCapacity);
     }
 
     void ShaderEffectManager::Clear()
@@ -37,6 +38,7 @@ namespace railguard::rendering
         _pipelineLayouts.clear();
         _pipelines.clear();
         _shaderStages.clear();
+        _effectKinds.clear();
     }
 
     core::CompleteMatch<shader_effect_id_t> ShaderEffectManager::CreateShaderEffect(init::ShaderEffectInitInfo initInfo, bool buildEffectAfterCreation)
@@ -46,6 +48,7 @@ namespace railguard::rendering
         _pipelineLayouts.push_back(initInfo.pipelineLayout);
         _shaderStages.push_back(initInfo.shaderStages);
         _pipelines.push_back(nullptr);
+        _effectKinds.push_back(initInfo.effectKind);
 
         // Build if we should
         if (buildEffectAfterCreation)
@@ -84,11 +87,12 @@ namespace railguard::rendering
 
     void ShaderEffectManager::DestroyShaderEffect(const core::Match &match)
     {
-        super::DestroyItem(match);
-
         // Get index
         auto index = match.GetIndex();
-        size_t lastIndex = _ids.size() - 1;
+        const size_t lastIndex = _ids.size() - 1;
+
+        // Run boilerplate deletion
+        super::DestroyItem(match);
 
         // Destroy the pipeline if needed
         if (_pipelines[index] != static_cast<vk::Pipeline>(nullptr))
@@ -105,12 +109,14 @@ namespace railguard::rendering
             _pipelineLayouts[index] = _pipelineLayouts[lastIndex];
             _pipelines[index] = _pipelines[lastIndex];
             _shaderStages[index] = _shaderStages[lastIndex];
+            _effectKinds[index] = _effectKinds[lastIndex];
         }
 
         // Destroy the last item
         _pipelineLayouts.pop_back();
         _pipelines.pop_back();
         _shaderStages.pop_back();
+        _effectKinds.pop_back();
     }
 
     void ShaderEffectManager::Bind(const core::Match &match, const vk::CommandBuffer &cmd) const
@@ -129,6 +135,27 @@ namespace railguard::rendering
     const std::vector<shader_module_id_t> ShaderEffectManager::GetShaderStages(const core::Match &match) const
     {
         return _shaderStages[match.GetIndex()];
+    }
+
+    enums::ShaderEffectKind ShaderEffectManager::GetEffectKind(const core::Match &match) const
+    {
+        return _effectKinds[match.GetIndex()];
+    }
+
+    const std::vector<shader_effect_id_t> ShaderEffectManager::GetEffectsOfKind(enums::ShaderEffectKind kind) const
+    {
+        std::vector<shader_effect_id_t> results;
+
+        for (uint32_t i = 0; i < _effectKinds.size(); i++)
+        {
+            if (_effectKinds[i] == kind)
+            {
+                // Add ids of effects with that kind
+                results.push_back(_ids[i]);
+            }
+        }
+
+        return results;
     }
 
 }

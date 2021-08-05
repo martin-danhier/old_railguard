@@ -116,7 +116,6 @@ namespace railguard::core
             _ids.pop_back();
         }
 
-    public:
         /**
          * @brief Inits the vectors to the default capacity.
          *
@@ -138,6 +137,8 @@ namespace railguard::core
             _initialized = true;
 #endif
         }
+        
+    public:
 
         /**
          * @brief Destroys every remaining item.

@@ -3,13 +3,10 @@
 #include "../includes/Vulkan.h"
 #include "../core/StandaloneManager.h"
 #include "./structs/Storages.h"
+#include "Ids.h"
 
 namespace railguard::rendering
 {
-    // Use a typedef to specify which type will be used for shader module ids
-    // That way, if we need to change that type, we only need to do it here
-    typedef uint32_t shader_module_id_t;
-
     class ShaderModuleManager : public core::StandaloneManager<shader_module_id_t, structs::DeviceStorage>
     {
     private:
@@ -50,6 +47,6 @@ namespace railguard::rendering
         [[nodiscard]] vk::ShaderStageFlagBits GetStage(const core::Match &match) const;
         [[nodiscard]] const vk::ShaderModule GetModule(const core::Match &match) const;
 
-        
+
     };
 }

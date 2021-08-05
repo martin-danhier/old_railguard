@@ -14,17 +14,17 @@ namespace railguard::core
     /**
      * @brief Type representing an index of a component.
      */
-    typedef size_t component_id_t;
+    typedef size_t component_idx_t;
 
     template <typename T = nullptr_t>
     class ComponentManager
     {
-    private:
+    protected:
         // === Manager data ===
 
         // Map that can be used for fast search of a component given an entity
         // Entity -> Component
-        std::unordered_map<eid_t, component_id_t> _entityLookUpMap;
+        std::unordered_map<eid_t, component_idx_t> _entityLookUpMap;
 
         // === Component data ===
 
@@ -39,7 +39,6 @@ namespace railguard::core
         bool _initialized = false;
 #endif
 
-    protected:
         /**
          * @brief Optional storage for data that is passed in the Init method.
          */
@@ -66,42 +65,9 @@ namespace railguard::core
             return Match(_entities.size());
         }
 
-    public:
-        /**
-         * @brief Inits the vectors to the default capacity.
-         *
-         * @param storage Optional storage required by the derived class
-         * @param defaultComponentCapacity Number of items that will have pre allocated space in the vectors
-         */
-        void Init(T storage = nullptr, const component_id_t defaultComponentCapacity = 10)
-        {
-            ADVANCED_CHECK(!_initialized, "ComponentManager should not be initialized twice.");
-
-            // Pre allocate the given size
-            _entities.reserve(defaultComponentCapacity);
-            _entityLookUpMap.reserve(defaultComponentCapacity);
-
-            // Save the storage
-            _storage = storage;
-
-#ifdef USE_ADVANCED_CHECKS
-            _initialized = true;
-#endif
-        }
-
-        /**
-         * @brief Destroy a component but keep everything tightly packed in the vectors.
-         *
-         * Meant to be used from derivated classes. Call this method to execute the boilerplate,
-         * then move the last item of the custom vectors at the location of the destroyed item, then pop_back
-         * every custom vectors.
-         *
-         * @param match Match pointing to the component.
-         */
-        void DestroyComponent(const Match &match)
-        {
-            component_id_t index = match.GetIndex();
-            DestroyComponent(index);
+        void Clear() {
+            _entities.clear();
+            _entityLookUpMap.clear();
         }
 
         /**
@@ -113,8 +79,9 @@ namespace railguard::core
          *
          * @param index index of the component.
          */
-        virtual void DestroyComponent(component_id_t index)
+        void DestroyComponent(const Match &match)
         {
+            auto index = match.GetIndex();
             ADVANCED_CHECK(_initialized, "ComponentManager should be initialized with Init before calling this method.");
             ADVANCED_CHECK(index < _entities.size(), "The index should exist in the vectors.");
 
@@ -134,6 +101,30 @@ namespace railguard::core
             _entities.pop_back();
         }
 
+    public:
+        /**
+         * @brief Inits the vectors to the default capacity.
+         *
+         * @param storage Optional storage required by the derived class
+         * @param defaultComponentCapacity Number of items that will have pre allocated space in the vectors
+         */
+        void Init(T storage = nullptr, const component_idx_t defaultComponentCapacity = 10)
+        {
+            ADVANCED_CHECK(!_initialized, "ComponentManager should not be initialized twice.");
+
+            // Pre allocate the given size
+            _entities.reserve(defaultComponentCapacity);
+            _entityLookUpMap.reserve(defaultComponentCapacity);
+
+            // Save the storage
+            _storage = storage;
+
+#ifdef USE_ADVANCED_CHECKS
+            _initialized = true;
+#endif
+        }
+
+
         /**
          * @brief Searches for an component attached to the given entity.
          *
@@ -144,7 +135,7 @@ namespace railguard::core
         {
             ADVANCED_CHECK(_initialized, "ComponentManager should be initialized with Init before calling this method.");
 
-            component_id_t index = _entityLookUpMap[entity.eid];
+            component_idx_t index = _entityLookUpMap[entity.eid];
             return Match(index);
         }
 
@@ -166,7 +157,7 @@ namespace railguard::core
         void RunGarbageCollection(const EntityManager &em)
         {
             ADVANCED_CHECK(_initialized, "ComponentManager should be initialized with Init before calling this method.");
-            
+
             uint8_t foundAliveInARow = 0;
 
             while (foundAliveInARow < REQUIRED_FOUND_ALIVE_TO_END_GC && _entities.size() > 0)

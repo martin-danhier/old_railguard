@@ -5,12 +5,11 @@
 #include "../core/StandaloneManager.h"
 #include "structs/Storages.h"
 #include "FrameManager.h"
+#include "Ids.h"
 
 namespace railguard::rendering
 {
-    // Use a typedef to specify which type will be used for swapchain ids
-    // That way, if we need to change that type, we only need to do it here
-    typedef uint32_t swapchain_id_t;
+
 
     struct SwapchainManagerStorage
     {

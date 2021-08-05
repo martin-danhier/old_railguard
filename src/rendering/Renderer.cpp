@@ -45,14 +45,25 @@ namespace railguard::rendering
 							  .Build(_device);
 
 		// Init swapchain for window
-		_swapchainManager.Init(SwapchainManagerStorage{_device, _physicalDevice, &_frameManager}, 1);
+		_swapchainManager.Init({_device, _physicalDevice, &_frameManager}, 1);
 		_mainWindowSwapchain = _swapchainManager.CreateWindowSwapchain(_surface, windowManager, _mainRenderPass).GetId();
 
 		// Init shader module manager
-		_shaderModuleManager.Init(structs::DeviceStorage{_device}, 5);
+		_shaderModuleManager.Init({_device}, 5);
 
 		// Init shader effect manager
-		_shaderEffectManager.Init(ShaderEffectManagerStorage{_device, _mainRenderPass, &_shaderModuleManager, &windowManager}, 5);
+		_shaderEffectManager.Init({_device, _mainRenderPass, &_shaderModuleManager, &windowManager}, 5);
+
+		// Init material system
+		_materialTemplateManager.Init({&_shaderEffectManager}, 3);
+		_materialManager.Init({&_materialTemplateManager, &_shaderEffectManager}, 10);
+		_modelManager.Init({&_materialManager}, 30);
+
+		// Init passes
+		// A pass defines a shader configuration
+		_renderStageManager.Init({
+			enums::ShaderEffectKind::Forward
+		}, &_materialManager, &_modelManager);
 
 		// === Init components ===
 
@@ -65,10 +76,12 @@ namespace railguard::rendering
 		auto fragmentModule = _shaderModuleManager.LoadShaderModule(vk::ShaderStageFlagBits::eFragment, "./bin/shaders/triangle.frag.spv").GetId();
 		_triangleEffect = _shaderEffectManager.CreateShaderEffect(init::ShaderEffectInitInfo{
 																	  .pipelineLayout = init::PipelineLayoutBuilder().Build(_device),
-																	  .shaderStages = {vertexModule, fragmentModule}},
+																	  .shaderStages = {vertexModule, fragmentModule},
+																	  .effectKind = enums::ShaderEffectKind::Forward,
+																  },
 																  true)
 							  .GetId(); // Build the effect after creation
-		// Add a camera
+										// Add a camera
 	}
 
 	Renderer::~Renderer()
@@ -76,6 +89,10 @@ namespace railguard::rendering
 		// Wait for all fences
 		_frameManager.WaitForAllFences();
 
+		// Destroy material system
+		_modelManager.Clear();
+		_materialManager.Clear();
+		_materialTemplateManager.Clear();
 		// Destroy shader effect manager
 		_shaderEffectManager.Clear();
 		// Destroy shader module manager
@@ -122,6 +139,11 @@ namespace railguard::rendering
 			_shaderEffectManager.Bind(_shaderEffectManager.LookupId(_triangleEffect), cmd);
 			cmd.draw(3, 1, 0, 0);
 
+			// Execute passes
+			// for (uint32_t i = 0; i < _passes.size(); i++) {
+			// 	ExecutePass(i);
+			// }
+
 			cmd.endRenderPass();
 		}
 
@@ -135,7 +157,8 @@ namespace railguard::rendering
 		_frameManager.FinishFrame();
 	}
 
-	SwapchainCameraManager *Renderer::GetSwapchainCameraManager() {
+	SwapchainCameraManager *Renderer::GetSwapchainCameraManager()
+	{
 		return &_swapchainCameraManager;
 	}
 
