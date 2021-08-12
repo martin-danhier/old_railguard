@@ -35,7 +35,6 @@ namespace railguard::rendering
         vk::Device _device = nullptr;
         vk::Queue _graphicsQueue = nullptr;
         uint32_t _graphicsQueueFamily = 0;
-        VmaAllocator _allocator = nullptr;
         vk::RenderPass _mainRenderPass = nullptr;
 
         // Other internal variables

@@ -75,41 +75,6 @@ namespace railguard::rendering::init
 
 		// Get physical device properties
 		*initInfo.physicalDeviceProperties = (*initInfo.physicalDevice).getProperties();
-
-		// Init allocator
-		// Give VMA the functions pointers of vulkan functions
-		// We need to do that since we load them dynamically
-		VmaVulkanFunctions vulkanFunctions{
-			VULKAN_HPP_DEFAULT_DISPATCHER.vkGetPhysicalDeviceProperties,
-			VULKAN_HPP_DEFAULT_DISPATCHER.vkGetPhysicalDeviceMemoryProperties,
-			VULKAN_HPP_DEFAULT_DISPATCHER.vkAllocateMemory,
-			VULKAN_HPP_DEFAULT_DISPATCHER.vkFreeMemory,
-			VULKAN_HPP_DEFAULT_DISPATCHER.vkMapMemory,
-			VULKAN_HPP_DEFAULT_DISPATCHER.vkUnmapMemory,
-			VULKAN_HPP_DEFAULT_DISPATCHER.vkFlushMappedMemoryRanges,
-			VULKAN_HPP_DEFAULT_DISPATCHER.vkInvalidateMappedMemoryRanges,
-			VULKAN_HPP_DEFAULT_DISPATCHER.vkBindBufferMemory,
-			VULKAN_HPP_DEFAULT_DISPATCHER.vkBindImageMemory,
-			VULKAN_HPP_DEFAULT_DISPATCHER.vkGetBufferMemoryRequirements,
-			VULKAN_HPP_DEFAULT_DISPATCHER.vkGetImageMemoryRequirements,
-			VULKAN_HPP_DEFAULT_DISPATCHER.vkCreateBuffer,
-			VULKAN_HPP_DEFAULT_DISPATCHER.vkDestroyBuffer,
-			VULKAN_HPP_DEFAULT_DISPATCHER.vkCreateImage,
-			VULKAN_HPP_DEFAULT_DISPATCHER.vkDestroyImage,
-			VULKAN_HPP_DEFAULT_DISPATCHER.vkCmdCopyBuffer,
-			VULKAN_HPP_DEFAULT_DISPATCHER.vkGetBufferMemoryRequirements2KHR,
-			VULKAN_HPP_DEFAULT_DISPATCHER.vkGetImageMemoryRequirements2KHR,
-			VULKAN_HPP_DEFAULT_DISPATCHER.vkBindBufferMemory2KHR,
-			VULKAN_HPP_DEFAULT_DISPATCHER.vkBindImageMemory2KHR,
-			VULKAN_HPP_DEFAULT_DISPATCHER.vkGetPhysicalDeviceMemoryProperties2KHR,
-		};
-		VmaAllocatorCreateInfo allocatorInfo{
-			.physicalDevice = *initInfo.physicalDevice,
-			.device = *initInfo.device,
-			.pVulkanFunctions = &vulkanFunctions,
-			.instance = *initInfo.instance,
-		};
-		vmaCreateAllocator(&allocatorInfo, initInfo.allocator);
 	}
 
 	void VulkanInit::InitWindowSwapchain(const SwapchainInitInfo &initInfo)

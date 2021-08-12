@@ -46,10 +46,5 @@ namespace railguard::rendering::init
          * @brief Pointer to a variable that will hold the vulkan device
          */
         uint32_t *graphicsQueueFamily;
-        /**
-         * @brief Pointer to a variable that will hold the VMA allocator
-         */
-        VmaAllocator *allocator;
-
     };
 }

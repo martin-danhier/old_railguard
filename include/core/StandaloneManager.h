@@ -109,7 +109,7 @@ namespace railguard::core
                 T movedId = _ids[lastIndex];
                 _ids[index] = movedId;
                 // Update id in map
-                _idLookupMap[movedId] = index;
+                _idLookupMap[movedId] = index + 1;
             }
 
             // Remove last item

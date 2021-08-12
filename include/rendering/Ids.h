@@ -15,5 +15,7 @@ namespace railguard::rendering
     typedef uint32_t shader_effect_id_t;
     typedef uint32_t shader_module_id_t;
     typedef uint32_t swapchain_id_t;
+    typedef uint32_t buffer_id_t;
+    typedef uint32_t image_id_t;
 
 } // namespace railguard::rendering

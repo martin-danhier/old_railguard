@@ -25,8 +25,7 @@ namespace railguard::rendering
 			.physicalDeviceProperties = &_physicalDeviceProperties,
 			.device = &_device,
 			.graphicsQueue = &_graphicsQueue,
-			.graphicsQueueFamily = &_graphicsQueueFamily,
-			.allocator = &_allocator,
+			.graphicsQueueFamily = &_graphicsQueueFamily
 		};
 		init::VulkanInit::InitVulkan(vulkanInitInfo);
 
@@ -103,8 +102,6 @@ namespace railguard::rendering
 		_device.destroyRenderPass(_mainRenderPass);
 		// Destroy frame manager
 		_frameManager.Cleanup();
-		// Destroy allocator
-		vmaDestroyAllocator(_allocator);
 		// Destroy device
 		_device.destroy();
 		// Destroy surface
@@ -146,6 +143,8 @@ namespace railguard::rendering
 
 			cmd.endRenderPass();
 		}
+
+
 
 		// End recording of commands
 		_frameManager.EndRecordingAndSubmit(_graphicsQueue);

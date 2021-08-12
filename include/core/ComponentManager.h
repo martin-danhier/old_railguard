@@ -96,7 +96,7 @@ namespace railguard::core
                 auto movedEntity = _entities[lastIndex];
                 _entities[index] = movedEntity;
                 // Update the map for the updated index
-                _entityLookUpMap[movedEntity.eid] = index;
+                _entityLookUpMap[movedEntity.eid] = index + 1;
             }
             _entities.pop_back();
         }

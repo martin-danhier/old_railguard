@@ -1,7 +1,9 @@
 #pragma once
 
 #include "../includes/Vulkan.h"
+#include "Ids.h"
 #include "./Settings.h"
+#include "AllocationManager.h"
 
 namespace railguard::rendering
 {
