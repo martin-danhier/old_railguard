@@ -33,7 +33,7 @@ namespace railguard::rendering::init
 
     public:
         PipelineBuilder AddShaderStage(vk::ShaderStageFlagBits stage, vk::ShaderModule shaderModule);
-        PipelineBuilder WithVertexInput(const structs::VertexInputDescription<1, 3> &vertexInputDescription);
+        PipelineBuilder WithVertexInput(const structs::VertexInputDescription &vertexInputDescription);
         PipelineBuilder WithAssemblyTopology(vk::PrimitiveTopology topology);
         PipelineBuilder WithPolygonMode(vk::PolygonMode polygonMode);
         PipelineBuilder WithPipelineLayout(vk::PipelineLayout pipelineLayout);

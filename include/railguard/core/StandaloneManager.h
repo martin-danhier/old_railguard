@@ -3,8 +3,8 @@
 #include <concepts>
 #include <unordered_map>
 #include <vector>
-#include "Match.h"
-#include "../utils/AdvancedCheck.h"
+#include "railguard/core/Match.h"
+#include "railguard/utils/AdvancedCheck.h"
 
 namespace railguard::core
 {

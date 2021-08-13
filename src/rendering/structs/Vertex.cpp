@@ -2,44 +2,45 @@
 
 namespace railguard::rendering::structs
 {
-    const VertexInputDescription<1, 3> Vertex::GetVertexDescription()
+    VertexInputDescription Vertex::GetVertexDescription()
     {
-        constexpr VertexInputDescription<1, 3> description {
+        return VertexInputDescription {
             // Bindings
-            .bindings = {
-                vk::VertexInputBindingDescription{
-                    .binding = 0,
-                    .stride = sizeof(Vertex),
-                    .inputRate = vk::VertexInputRate::eVertex,
-                }
-            },
+            .bindings =
+                {
+                    vk::VertexInputBindingDescription {
+                        .binding   = 0,
+                        .stride    = sizeof(Vertex),
+                        .inputRate = vk::VertexInputRate::eVertex,
+                    },
+                },
             // Attributes
-            .attributes = {
-                // location 0 : position
-                vk::VertexInputAttributeDescription {
-                    .location = 0,
-                    .binding = 0,
-                    .format = vk::Format::eR32G32B32Sfloat,
-                    .offset = static_cast<uint32_t>(offsetof(Vertex, position)),
+            .attributes =
+                {
+                    // location 0 : position
+                    vk::VertexInputAttributeDescription {
+                        .location = 0,
+                        .binding  = 0,
+                        .format   = vk::Format::eR32G32B32Sfloat,
+                        .offset   = static_cast<uint32_t>(offsetof(Vertex, position)),
+                    },
+                    // location 1 : normal
+                    vk::VertexInputAttributeDescription {
+                        .location = 1,
+                        .binding  = 0,
+                        .format   = vk::Format::eR32G32B32Sfloat,
+                        .offset   = static_cast<uint32_t>(offsetof(Vertex, normal)),
+                    },
+                    // location 2 : uv
+                    vk::VertexInputAttributeDescription {
+                        .location = 2,
+                        .binding  = 0,
+                        .format   = vk::Format::eR32G32Sfloat,
+                        .offset   = static_cast<uint32_t>(offsetof(Vertex, uv)),
+                    },
                 },
-                // location 1 : normal
-                vk::VertexInputAttributeDescription {
-                    .location = 1,
-                    .binding = 0,
-                    .format = vk::Format::eR32G32B32Sfloat,
-                    .offset = static_cast<uint32_t>(offsetof(Vertex, normal)),
-                },
-                // location 2 : uv
-                vk::VertexInputAttributeDescription {
-                    .location = 2,
-                    .binding = 0,
-                    .format = vk::Format::eR32G32Sfloat,
-                    .offset = static_cast<uint32_t>(offsetof(Vertex, uv)),
-                },
-            },
             // Flags
-            .flags = {}
+            .flags = {},
         };
-        return description;
     }
 } // namespace railguard::rendering::structs

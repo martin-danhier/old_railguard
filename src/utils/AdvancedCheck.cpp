@@ -9,7 +9,7 @@ namespace railguard::utils
     void AdvancedCheck(bool condition, const std::string &message)
     {
         // The condition must be true
-        if (condition == false)
+        if (!condition)
         {
             std::cerr << "\n[Error]\n"
                       << message << std::endl;

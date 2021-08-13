@@ -26,7 +26,10 @@ namespace railguard::rendering
         auto match = super::CreateItem();
 
         _materials.push_back(material);
-        _instances.push_back(std::vector<core::Entity>(5));
+
+        std::vector<core::Entity> instances;
+        instances.reserve(5);
+        _instances.push_back(instances);
 
         // Signal the creation to the material
         auto matMatch = _storage.materialManager->LookupId(material);

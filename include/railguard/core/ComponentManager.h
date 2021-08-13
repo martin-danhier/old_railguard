@@ -1,36 +1,37 @@
 #pragma once
 
-#include <vector>
-#include <unordered_map>
-#include "Entity.h"
-#include "Match.h"
-#include "EntityManager.h"
-#include "../utils/AdvancedCheck.h"
+#include "railguard/utils/AdvancedCheck.h"
 
 #define REQUIRED_FOUND_ALIVE_TO_END_GC 5
 
 namespace railguard::core
 {
+
+    // Forward declarations for performances
+    class Match;
+    class Entity;
+    class EntityManager;
+
     /**
      * @brief Type representing an index of a component.
      */
     typedef size_t component_idx_t;
 
-    template <typename T = nullptr_t>
+    template<typename T = nullptr_t>
     class ComponentManager
     {
-    protected:
+      protected:
         // === Manager data ===
 
         // Map that can be used for fast search of a component given an entity
         // Entity -> Component
-        std::unordered_map<eid_t, component_idx_t> _entityLookUpMap;
+        class std::unordered_map<eid_t, component_idx_t> _entityLookUpMap;
 
         // === Component data ===
 
         // For a given component, the entity linked to it
         // Component -> Entity
-        std::vector<Entity> _entities;
+        class std::vector<Entity> _entities;
 
 #ifdef USE_ADVANCED_CHECKS
         /**
@@ -65,7 +66,8 @@ namespace railguard::core
             return Match(_entities.size());
         }
 
-        void Clear() {
+        void Clear()
+        {
             _entities.clear();
             _entityLookUpMap.clear();
         }
@@ -101,7 +103,7 @@ namespace railguard::core
             _entities.pop_back();
         }
 
-    public:
+      public:
         /**
          * @brief Inits the vectors to the default capacity.
          *
@@ -123,7 +125,6 @@ namespace railguard::core
             _initialized = true;
 #endif
         }
-
 
         /**
          * @brief Searches for an component attached to the given entity.
@@ -163,7 +164,7 @@ namespace railguard::core
             while (foundAliveInARow < REQUIRED_FOUND_ALIVE_TO_END_GC && _entities.size() > 0)
             {
                 // Select an entity
-                auto i = std::rand() % _entities.size();
+                auto i   = std::rand() % _entities.size();
                 Entity e = _entities[i];
 
                 // Check if it is still alive
@@ -182,4 +183,4 @@ namespace railguard::core
         }
     };
 
-}
+} // namespace railguard::core

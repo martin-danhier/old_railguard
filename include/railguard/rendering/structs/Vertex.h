@@ -1,7 +1,7 @@
 #pragma once
 
 #include <glm/glm.hpp>
-#include "../../includes/Vulkan.h"
+#include "includes/Vulkan.h"
 #include <concepts>
 #include "VertexInputDescription.h"
 
@@ -25,7 +25,7 @@ namespace railguard::rendering::structs
          */
         glm::vec2 uv;
 
-        static const VertexInputDescription<1, 3> GetVertexDescription();
+        static VertexInputDescription GetVertexDescription();
     };
 
 } // namespace railguard::rendering

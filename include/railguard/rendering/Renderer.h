@@ -51,6 +51,7 @@ namespace railguard::rendering
         MaterialManager _materialManager;
         ModelManager _modelManager;
         RenderStageManager _renderStageManager;
+        AllocationManager _allocationManager;
 
         // Test
         shader_effect_id_t _triangleEffect;

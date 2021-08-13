@@ -13,7 +13,7 @@ namespace railguard::core
 
     Entity EntityManager::CreateEntity()
     {
-        eid_t indexPart = 0;
+        eid_t indexPart;
 
         // If enough indices have been freed, reuse the first slot of the queue
         if (_freedIndices.size() >= MIN_FREED_INDICES_BEFORE_REUSE)

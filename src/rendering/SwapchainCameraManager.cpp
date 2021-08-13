@@ -231,7 +231,7 @@ namespace railguard::rendering
         // Update estimation for next frame
         if (_lastNbOfActiveCameras != renderInfos.size())
         {
-            _lastNbOfActiveCameras = renderInfos.size();
+            _lastNbOfActiveCameras = static_cast<uint32_t>(renderInfos.size());
         }
 
         ADVANCED_CHECK(_lastNbOfActiveCameras > 0, "There must be at least one active camera !");

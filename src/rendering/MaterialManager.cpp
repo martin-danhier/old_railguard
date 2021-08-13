@@ -4,7 +4,7 @@
 namespace railguard::rendering
 {
 
-    void MaterialManager::Init(MaterialManagerStorage storage, size_t defaultCapacity = 10)
+    void MaterialManager::Init(MaterialManagerStorage storage, size_t defaultCapacity)
     {
         super::Init(storage, defaultCapacity);
 

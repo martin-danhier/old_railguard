@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Entity.h"
+#include "railguard/core/Entity.h"
 #include <vector>
 #include <deque>
 

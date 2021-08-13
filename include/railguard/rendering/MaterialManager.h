@@ -1,8 +1,8 @@
 #pragma once
 
 #include "../core/StandaloneManager.h"
-#include "MaterialTemplateManager.h"
 #include "Ids.h"
+#include "MaterialTemplateManager.h"
 
 namespace railguard::rendering
 {
@@ -14,7 +14,7 @@ namespace railguard::rendering
 
     class MaterialManager : public core::StandaloneManager<material_id_t, MaterialManagerStorage>
     {
-    private:
+      private:
         // Typedef the parent type to make it easier to call from the methods
         typedef core::StandaloneManager<material_id_t, MaterialManagerStorage> super;
 
@@ -25,7 +25,7 @@ namespace railguard::rendering
         std::vector<std::vector<model_id_t>> _modelsUsingMaterial;
 
         // Will contain textures later TODO
-    public:
+      public:
         void Init(MaterialManagerStorage storage, size_t defaultCapacity = 10);
         void Clear();
         core::CompleteMatch<material_id_t> CreateMaterial(material_template_id_t baseTemplate);

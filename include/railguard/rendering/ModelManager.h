@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../core/StandaloneManager.h"
 #include "../core/EntityManager.h"
+#include "../core/StandaloneManager.h"
 #include "MaterialManager.h"
 
 namespace railguard::rendering
@@ -13,13 +13,13 @@ namespace railguard::rendering
 
     class ModelManager : public core::StandaloneManager<model_id_t, ModelManagerStorage>
     {
-    private:
+      private:
         typedef core::StandaloneManager<model_id_t, ModelManagerStorage> super;
 
         std::vector<material_id_t> _materials;
         std::vector<std::vector<core::Entity>> _instances;
 
-    public:
+      public:
         void Init(ModelManagerStorage storage, size_t defaultCapacity = 30);
         void Clear();
         core::CompleteMatch<model_id_t> CreateModel(material_id_t material);

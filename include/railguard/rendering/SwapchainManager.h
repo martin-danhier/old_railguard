@@ -78,7 +78,7 @@ namespace railguard::rendering
         [[nodiscard]] uint32_t RequestNextImageIndex(const core::Match &match);
 
         void PresentImage(const core::Match &match, const vk::Queue &graphicsQueue);
-        void PresentImage(swapchain_id_t index, const vk::Queue &graphicsQueue);
+        void PresentImage(size_t index, const vk::Queue &graphicsQueue);
         void PresentUsedImages(const vk::Queue &graphicsQueue);
 
         // Getters

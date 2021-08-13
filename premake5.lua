@@ -22,6 +22,37 @@ workspace "railguard"
       system "linux"
    filter {}
 
+----------------------------------
+   -- We use os.getenv below because the cmake export does not support the premake env variables
+   -- Thus we get them as we would normally do in Lua
+
+   -- Find SDL2
+   sdl_include_dir = os.findheader(
+     "SDL.h", {
+        "$(SDL2_PATH)/include/SDL2",
+        "/usr/include",
+        "$(sdl2_image_DIR)/include"
+     })
+   sdl_lib_dir = os.findlib(
+        "SDL2", {
+           "$(SDL2_PATH)/lib",
+           "/usr/lib/x86_64-linux-gnu/",
+           "$(sdl2_image_DIR)/lib",
+           "/usr/lib64"
+   })
+   if (sdl_include_dir == nil) then
+      print("Using default value for SDL")
+      sdl_include_dir = os.getenv('SDL2_PATH') .. "/include"
+   end
+   if (sdl_include_dir == nil or sdl_lib_dir == nil) then
+      error("\n--> SDL2 must be installed.\n")
+   end
+
+   -- Find Vulkan
+   vulkan_include_dir = os.getenv("VULKAN_SDK") .. "/include"
+   vulkan_lib_dir = os.getenv("VULKAN_SDK") .. "/lib"
+   vulkan_glslang_validator = os.getenv("VULKAN_SDK") .. "/Bin/glslangValidator.exe"
+
 ---------------------------------
    project "vkbootstrap"
       kind "StaticLib"
@@ -29,15 +60,15 @@ workspace "railguard"
       architecture "x64"
       location "build/vkbootstrap"
       files {"./external/vk-bootstrap/src/**.cpp", "./external/vk-bootstrap/src/**.h"}
-      includedirs {"$(VULKAN_SDK)/include"}
-      libdirs {"$(VULKAN_SDK)/Lib"}
+      includedirs {vulkan_include_dir}
+      libdirs {vulkan_lib_dir}
 
    project "shaders"
       kind "Utility"
       location "build/shaders"
       -- Build shaders with glslangValidator
       filter {"files:**"}
-      buildcommands { '"$(VULKAN_SDK)/Bin/glslangValidator.exe" -V "%{file.relpath}" -o "../../bin/shaders/%{file.name}.spv"' }
+      buildcommands { '"' .. vulkan_glslang_validator .. '"' ..  ' -V "%{file.relpath}" -o "../../bin/shaders/%{file.name}.spv"' }
       buildoutputs {"bin/shaders/%{file.name}.spv"}
       filter {}
       -- Take all shader files
@@ -51,43 +82,21 @@ workspace "railguard"
       architecture "x64"
       targetdir "bin/%{cfg.buildcfg}"
       location "build/railguard"
-      
-      -- Find SDL2
-      sdl_include_dir = os.findheader(
-         "SDL.h", {
-            "$(SDL2_PATH)/include/SDL2",
-            "/usr/include",
-            "$(sdl2_image_DIR)/include"
-         })
-         sdl_lib_dir = os.findlib(
-            "SDL2", {
-               "$(SDL2_PATH)/lib",
-               "/usr/lib/x86_64-linux-gnu/",
-               "$(sdl2_image_DIR)/lib",
-               "/usr/lib64"
-            }
-         )
-         if (sdl_include_dir == nil) then
-            print("Using default value for SDL")
-            sdl_include_dir = "$(SDL2_PATH)/include"
-         end
-         if (sdl_include_dir == nil or sdl_lib_dir == nil) then
-            error("\n--> SDL2 must be installed.\n")
-         end
-         
+
          -- Add header dependencies
          includedirs {
-            "$(VULKAN_SDK)/include",
+            vulkan_include_dir,
             sdl_include_dir,
             "external/glm",
             "external/vk-bootstrap/src",
-            "external/vma"
+            "external/vma",
+            "include"
          }
          
          
       -- Add lib dependencies
       libdirs {
-         "$(VULKAN_SDK)/Lib",
+         vulkan_lib_dir,
          sdl_lib_dir
       }
 
@@ -107,6 +116,6 @@ workspace "railguard"
       os.mkdir "build/railguard/obj"
 
       -- Source files
-      files { "include/**.h" }
+      -- files { "include/**.h" }
 	   files { "src/**.cpp" }
 

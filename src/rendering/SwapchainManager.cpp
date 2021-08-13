@@ -263,7 +263,7 @@ namespace railguard::rendering
         PresentImage(index, graphicsQueue);
     }
 
-    void SwapchainManager::PresentImage(swapchain_id_t index, const vk::Queue &graphicsQueue)
+    void SwapchainManager::PresentImage(size_t index, const vk::Queue &graphicsQueue)
     {
 
 #ifdef USE_ADVANCED_CHECKS

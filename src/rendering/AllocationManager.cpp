@@ -1,9 +1,17 @@
 #include "../../include/rendering/AllocationManager.h"
+#include "../../include/utils/AdvancedCheck.h"
+
+#ifdef USE_ADVANCED_CHECKS
+#define INITIALIZED_TWICE_ERROR "AllocationManager should not be initialized twice."
+#define NOT_INITIALIZED_ERROR "AllocationManager should be initialized with Init before calling this method."
+#endif
 
 namespace railguard::rendering
 {
-    AllocationManager::AllocationManager(const vk::PhysicalDevice &physicalDevice, const vk::Device &device, const vk::Instance &instance, size_t bufferCapacity, size_t imageCapacity)
+    void AllocationManager::Init(const vk::PhysicalDevice &physicalDevice, const vk::Device &device, const vk::Instance &instance)
     {
+        ADVANCED_CHECK(!_initialized, INITIALIZED_TWICE_ERROR);
+
         // Init allocator
         // Give VMA the functions pointers of vulkan functions
         // We need to do that since we load them dynamically
@@ -38,17 +46,6 @@ namespace railguard::rendering
             .instance = instance,
         };
         vmaCreateAllocator(&allocatorInfo, &_allocator);
-
-        // Reserve space in vectors
-        _bufferIds.reserve(bufferCapacity);
-        _buffers.reserve(bufferCapacity);
-        _bufferLookupMap.reserve(bufferCapacity);
-        _bufferAllocations.reserve(bufferCapacity);
-
-        _imageLookupMap.reserve(imageCapacity);
-        _imageIds.reserve(imageCapacity);
-        _images.reserve(imageCapacity);
-        _imageAllocations.reserve(imageCapacity);
     }
 
     void AllocationManager::CleanUp()
@@ -57,22 +54,17 @@ namespace railguard::rendering
         vmaDestroyAllocator(_allocator);
     }
 
-    core::Match AllocationManager::LookupBuffer(buffer_id_t id)
-    {
-        size_t index = _bufferLookupMap.at(id);
-        return core::Match(index);
-    }
 
-    [[nodiscard]] core::CompleteMatch<buffer_id_t> AllocationManager::CreateBuffer(size_t allocationSize, vk::BufferUsageFlags bufferUsage, VmaMemoryUsage memoryUsage)
+    [[nodiscard]] structs::AllocatedBuffer AllocationManager::CreateBuffer(size_t allocationSize, vk::BufferUsageFlags bufferUsage, VmaMemoryUsage memoryUsage)
     {
+        ADVANCED_CHECK(_initialized, NOT_INITIALIZED_ERROR);
 
-        // Add new buffer
-        auto index = _bufferIds.size();
-        auto newId = _lastBufferId++;
-        _bufferLookupMap[newId] = index;
-        _bufferIds.push_back(newId);
-        _buffers.push_back(nullptr);
-        _bufferAllocations.push_back(nullptr);
+        // Create a new allocated buffer
+        structs::AllocatedBuffer newBuffer {
+            .buffer = nullptr,
+            .allocation = nullptr,
+            .size = allocationSize,
+        };
 
         // Buffer info
         vk::BufferCreateInfo bufferCreateInfo{
@@ -86,59 +78,34 @@ namespace railguard::rendering
 
         // Create the buffer
         vmaCreateBuffer(_allocator, reinterpret_cast<VkBufferCreateInfo *>(&bufferCreateInfo),
-                        &allocationCreateInfo, reinterpret_cast<VkBuffer *>(&_buffers[index]),
-                        &_bufferAllocations[index], nullptr);
+                        &allocationCreateInfo, reinterpret_cast<VkBuffer *>(&newBuffer.buffer),
+                        &newBuffer.allocation, nullptr);
 
-        return core::CompleteMatch<buffer_id_t>(index + 1, newId);
+        return newBuffer;
     }
 
-    void AllocationManager::DestroyBuffer(const core::Match &match)
+    void AllocationManager::DestroyBuffer(structs::AllocatedBuffer &buffer)
     {
-        auto index = match.GetIndex();
-        auto lastIndex = _bufferIds.size() - 1;
-        auto destroyedId = _bufferIds[index];
-
         // Destroy buffer
-        vmaDestroyBuffer(_allocator, _buffers[index], _bufferAllocations[index]);
+        vmaDestroyBuffer(_allocator, buffer.buffer, buffer.allocation);
 
-        // Move last element if needed
-        if (index < lastIndex)
-        {
-            auto movedId = _bufferIds[lastIndex];
-            _bufferLookupMap[movedId] = index;
-            _bufferIds[index] = _bufferIds[lastIndex];
-            _buffers[index] = _buffers[lastIndex];
-            _bufferAllocations[index] = _bufferAllocations[lastIndex];
-        }
-
-        _bufferLookupMap.erase(destroyedId);
-        _buffers.pop_back();
-        _bufferAllocations.pop_back();
-        _bufferIds.pop_back();
+        // Set values to 0 to make clear that this isn't valid anymore
+        buffer.buffer = nullptr;
+        buffer.allocation = nullptr;
+        buffer.size = 0;
     }
 
-    [[nodiscard]] const vk::Buffer &AllocationManager::GetBuffer(const core::Match &match)
+
+    [[nodiscard]] void *AllocationManager::MapBuffer(const structs::AllocatedBuffer &buffer)
     {
-        return _buffers[match.GetIndex()];
+        void *data = nullptr;
+        vmaMapMemory(_allocator, buffer.allocation, &data);
+        return data;
     }
 
-    [[nodiscard]] const VmaAllocation &AllocationManager::GetBufferAllocation(const core::Match &match)
+    void AllocationManager::UnmapBuffer(const structs::AllocatedBuffer &buffer)
     {
-        return _bufferAllocations[match.GetIndex()];
-    }
-
-    [[nodiscard]] void *AllocationManager::MapBuffer(const core::Match &match)
-    {
-        void *buffer = nullptr;
-        const auto index = match.GetIndex();
-        vmaMapMemory(_allocator, _bufferAllocations[index], &buffer);
-        return buffer;
-    }
-
-    void AllocationManager::UnmapBuffer(const core::Match &match)
-    {
-        const auto index = match.GetIndex();
-        vmaUnmapMemory(_allocator, _bufferAllocations[index]);
+        vmaUnmapMemory(_allocator, buffer.allocation);
     }
 
 } // namespace railguard::rendering
