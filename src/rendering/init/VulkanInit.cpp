@@ -15,8 +15,8 @@ namespace railguard::rendering::init
         // Init dynamic loader
         vk::DynamicLoader loader;
 		
-        auto vkGetInstanceProcAddress = loader.getProcAddress<PFN_vkGetInstanceProcAddr>("vkGetInstanceProcAddress");
-        VULKAN_HPP_DEFAULT_DISPATCHER.init(vkGetInstanceProcAddress);
+        auto vkGetInstanceProcAddr = loader.getProcAddress<PFN_vkGetInstanceProcAddr>("vkGetInstanceProcAddr");
+        VULKAN_HPP_DEFAULT_DISPATCHER.init(vkGetInstanceProcAddr);
 
         // Create instance
         vkb::InstanceBuilder vkbInstanceBuilder;
