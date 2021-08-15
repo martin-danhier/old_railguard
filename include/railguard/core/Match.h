@@ -4,7 +4,7 @@
 
 namespace railguard::core
 {
-    // Forward declaration of the CompletMatch so it can be used in Match
+    // Forward declaration of the CompleteMatch so it can be used in Match
     template <std::integral T>
     class CompleteMatch;
 
@@ -26,12 +26,6 @@ namespace railguard::core
         [[nodiscard]] bool HasResult() const;
         // Returns the index. Fails if it does not have any result
         [[nodiscard]] size_t GetIndex() const;
-
-        template <std::integral T>
-        [[nodiscard]] CompleteMatch<T> AttachId(T id) const
-        {
-            return CompleteMatch(_index, id);
-        }
     };
 
     // Take the type of the original ID as a template parameter.

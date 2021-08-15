@@ -1,4 +1,6 @@
-#include "../../include/core/Entity.h"
+#include "railguard/core/Entity.h"
+#include <ostream>
+#include <cinttypes>
 
 namespace railguard::core
 {
@@ -32,13 +34,6 @@ namespace railguard::core
         return eid != other.eid;
     }
 
-    std::ostream &operator<<(std::ostream &os, const Entity &e)
-    {
-        // Pretty print the entity
-        os << "Entity " << e.eid << " (index: " << e.GetIndex() << ", unique: " << +e.GetUnique() << ")";
-        return os;
-    }
-
     eid_t Entity::GetIndex() const
     {
         // We want the first INDEX_BITS bits from the left
@@ -55,5 +50,11 @@ namespace railguard::core
         constexpr unique_eid_t mask = (1 << UNIQUE_BITS) - 1;
         return eid & mask;
     }
+//    std::ostream &operator<<(std::ostream &os, const Entity &rhs)
+//    {
+//        // Pretty print the entity
+//        os << "Entity " << rhs.eid << " (index: " << rhs.GetIndex() << ", unique: " << + rhs.GetUnique() << ")";
+//        return os;
+//    }
 
 } // namespace core

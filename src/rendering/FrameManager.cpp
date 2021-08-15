@@ -1,21 +1,21 @@
-#include "../../include/rendering/FrameManager.h"
-#include "../../include/utils/AdvancedCheck.h"
+#include "railguard/rendering/FrameManager.h"
+
+#include "railguard/utils/AdvancedCheck.h"
 
 #ifdef USE_ADVANCED_CHECKS
-#include <iostream>
+    #include <iostream>
 
-// Define local error messages
-#define INITIALIZED_TWICE_ERROR "FrameManager should not be initialized twice."
-#define NOT_INITIALIZED_ERROR "FrameManager should be initialized with Init before calling this method."
-#define NOT_CLEANED_ERROR "FrameManager should be cleaned up with Cleanup before it is destroyed."
-#define INDEX_OUT_OF_RANGE_ERROR "The provided index references an nonexisting frame. The index must be lower than NB_OVERLAPPING_FRAMES."
+    // Define local error messages
+    #define INITIALIZED_TWICE_ERROR "FrameManager should not be initialized twice."
+    #define NOT_INITIALIZED_ERROR   "FrameManager should be initialized with Init before calling this method."
+    #define INDEX_OUT_OF_RANGE_ERROR \
+        "The provided index references an nonexisting frame. The index must be lower than NB_OVERLAPPING_FRAMES."
 #endif
 
 namespace railguard::rendering
 {
-    void FrameManager::Init(const vk::Device &device, uint32_t graphicsQueueFamily)
+    FrameManager::FrameManager(const vk::Device &device, uint32_t graphicsQueueFamily)
     {
-        ADVANCED_CHECK(!_initialized, INITIALIZED_TWICE_ERROR);
 
         _device = vk::Device(device);
 
@@ -66,15 +66,10 @@ namespace railguard::rendering
         {
             renderSemaphore = device.createSemaphore(semaphoreCreateInfo);
         }
-
-#ifdef USE_ADVANCED_CHECKS
-        _initialized = true;
-#endif
     }
 
-    void FrameManager::Cleanup()
+    FrameManager::~FrameManager()
     {
-        ADVANCED_CHECK(_initialized, NOT_INITIALIZED_ERROR);
 
         // Destroy semaphores
 
@@ -105,28 +100,19 @@ namespace railguard::rendering
             pool = nullptr;
         }
 
-#ifdef USE_ADVANCED_CHECKS
-        // Back to the beginning
-        _initialized = false;
-#endif
     }
 
-    FrameManager::~FrameManager()
-    {
-        ADVANCED_CHECK(!_initialized, NOT_CLEANED_ERROR);
-    }
 
-    const FrameData FrameManager::GetFrame(uint32_t index) const
+    FrameData FrameManager::GetFrame(uint32_t index) const
     {
-        ADVANCED_CHECK(_initialized, NOT_INITIALIZED_ERROR);
         ADVANCED_CHECK(index < NB_OVERLAPPING_FRAMES, INDEX_OUT_OF_RANGE_ERROR);
 
-        return FrameData{
-            .commandPool = _commandPools[index],
-            .commandBuffer = _commandBuffers[index],
-            .renderFence = _renderFences[index],
+        return FrameData {
+            .commandPool      = _commandPools[index],
+            .commandBuffer    = _commandBuffers[index],
+            .renderFence      = _renderFences[index],
             .presentSemaphore = _presentSemaphores[index],
-            .renderSemaphore = _renderSemaphores[index],
+            .renderSemaphore  = _renderSemaphores[index],
         };
     }
 
@@ -155,28 +141,30 @@ namespace railguard::rendering
 		}
     }
 
-    vk::CommandBuffer FrameManager::BeginRecording() {
+    vk::CommandBuffer FrameManager::BeginRecording() const
+    {
         auto cmd = GetCurrentCommandBuffer();
 
         // Reset command buffer
         cmd.reset();
 
         // Begin recording
-        vk::CommandBufferBeginInfo cmdBeginInfo{
-			.flags = vk::CommandBufferUsageFlagBits::eOneTimeSubmit,
-		};
+        vk::CommandBufferBeginInfo cmdBeginInfo {
+            .flags = vk::CommandBufferUsageFlagBits::eOneTimeSubmit,
+        };
         cmd.begin(cmdBeginInfo);
 
         return cmd;
     }
 
-    void FrameManager::EndRecordingAndSubmit(const vk::Queue &graphicsQueue) {
+    void FrameManager::EndRecordingAndSubmit(const vk::Queue &graphicsQueue) const
+    {
         // Get handles we will need
-        auto frameIndex = GetCurrentFrameIndex();
-        auto cmd = GetCommandBuffer(frameIndex);
+        auto frameIndex       = GetCurrentFrameIndex();
+        auto cmd              = GetCommandBuffer(frameIndex);
         auto presentSemaphore = GetPresentSemaphore(frameIndex);
-        auto renderSemaphore = GetRenderSemaphore(frameIndex);
-        auto renderFence = GetRenderFence(frameIndex);
+        auto renderSemaphore  = GetRenderSemaphore(frameIndex);
+        auto renderFence      = GetRenderFence(frameIndex);
 
         // End recording
         cmd.end();
@@ -201,37 +189,32 @@ namespace railguard::rendering
 
     // Getters
 
-    const vk::CommandPool FrameManager::GetCommandPool(uint32_t index) const
+    vk::CommandPool FrameManager::GetCommandPool(uint32_t index) const
     {
-        ADVANCED_CHECK(_initialized, NOT_INITIALIZED_ERROR);
         ADVANCED_CHECK(index < NB_OVERLAPPING_FRAMES, INDEX_OUT_OF_RANGE_ERROR);
 
         return _commandPools[index];
     }
-    const vk::CommandBuffer FrameManager::GetCommandBuffer(uint32_t index) const
+    vk::CommandBuffer FrameManager::GetCommandBuffer(uint32_t index) const
     {
-        ADVANCED_CHECK(_initialized, NOT_INITIALIZED_ERROR);
         ADVANCED_CHECK(index < NB_OVERLAPPING_FRAMES, INDEX_OUT_OF_RANGE_ERROR);
 
         return _commandBuffers[index];
     }
-    const vk::Fence FrameManager::GetRenderFence(uint32_t index) const
+    vk::Fence FrameManager::GetRenderFence(uint32_t index) const
     {
-        ADVANCED_CHECK(_initialized, NOT_INITIALIZED_ERROR);
         ADVANCED_CHECK(index < NB_OVERLAPPING_FRAMES, INDEX_OUT_OF_RANGE_ERROR);
 
         return _renderFences[index];
     }
-    const vk::Semaphore* FrameManager::GetRenderSemaphore(uint32_t index) const
+    const vk::Semaphore *FrameManager::GetRenderSemaphore(uint32_t index) const
     {
-        ADVANCED_CHECK(_initialized, NOT_INITIALIZED_ERROR);
         ADVANCED_CHECK(index < NB_OVERLAPPING_FRAMES, INDEX_OUT_OF_RANGE_ERROR);
 
         return &_renderSemaphores[index];
     }
     const vk::Semaphore* FrameManager::GetPresentSemaphore(uint32_t index) const
     {
-        ADVANCED_CHECK(_initialized, NOT_INITIALIZED_ERROR);
         ADVANCED_CHECK(index < NB_OVERLAPPING_FRAMES, INDEX_OUT_OF_RANGE_ERROR);
 
         return &_presentSemaphores[index];
@@ -249,19 +232,23 @@ namespace railguard::rendering
         return _currentFrameNumber % NB_OVERLAPPING_FRAMES;
     }
 
-    const FrameData FrameManager::GetCurrentFrame() const {
+    FrameData FrameManager::GetCurrentFrame() const
+    {
         return GetFrame(GetCurrentFrameIndex());
     }
 
-    const vk::CommandPool FrameManager::GetCurrentCommandPool() const {
+    vk::CommandPool FrameManager::GetCurrentCommandPool() const
+    {
         return GetCommandPool(GetCurrentFrameIndex());
     }
 
-    const vk::CommandBuffer FrameManager::GetCurrentCommandBuffer() const {
+    vk::CommandBuffer FrameManager::GetCurrentCommandBuffer() const
+    {
         return GetCommandBuffer(GetCurrentFrameIndex());
     }
 
-    const vk::Fence FrameManager::GetCurrentRenderFence() const {
+    vk::Fence FrameManager::GetCurrentRenderFence() const
+    {
         return GetRenderFence(GetCurrentFrameIndex());
     }
 

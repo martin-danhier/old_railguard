@@ -1,11 +1,17 @@
-#include "../../include/rendering/RenderStageManager.h"
+#include <railguard/includes/Vulkan.h>
+#include <railguard/rendering/AllocationManager.h>
+#include <railguard/rendering/MaterialManager.h>
+#include <railguard/rendering/ModelManager.h>
+#include <railguard/rendering/RenderStageManager.h>
+#include <railguard/rendering/enums/ShaderEffectKind.h>
+#include <railguard/rendering/structs/AllocatedStructs.h>
 
 namespace railguard::rendering
 {
-    void RenderStageManager::Init(const std::vector<enums::ShaderEffectKind> &stages,
-                                  const MaterialManager *materialManager,
-                                  const ModelManager *modelManager,
-                                  AllocationManager *allocationManager)
+    RenderStageManager::RenderStageManager(const std::vector<enums::ShaderEffectKind> &stages,
+                                           const MaterialManager *materialManager,
+                                           const ModelManager *modelManager,
+                                           AllocationManager *allocationManager)
     {
         _stages            = stages;
         _materialManager   = materialManager;
@@ -26,7 +32,7 @@ namespace railguard::rendering
         // For each stage
         for (uint32_t stageIndex = 0; stageIndex < _stages.size(); stageIndex++)
         {
-            const auto &stageKind = _stages[stageIndex];
+            const enums::ShaderEffectKind &stageKind = _stages[stageIndex];
 
             // Get the materials that support the shader kind of that stage.
             // These materials are returned sorted by material template, which are sorted by shader effect
@@ -96,7 +102,7 @@ namespace railguard::rendering
         }
     }
 
-    void RenderStageManager::CleanUp()
+    RenderStageManager::~RenderStageManager()
     {
         // Destroy indirect buffers
         for (auto &buffer : _indirectBuffers)

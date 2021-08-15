@@ -1,16 +1,17 @@
-#include "../../../include/rendering/init/PipelineBuilder.h"
-#include "../../../include/utils/AdvancedCheck.h"
+#include "railguard/rendering/init/PipelineBuilder.h"
+
+#include "railguard/rendering/structs/VertexInputDescription.h"
+#include "railguard/utils/AdvancedCheck.h"
 
 #ifdef USE_ADVANCED_CHECKS
-// Define errors
-#define NO_PIPELINE_LAYOUT_ERROR "Pipeline layout must be given to the pipeline builder."
-#define NO_VIEWPORT_ERROR "Viewport must be given to the pipeline builder."
-#define NO_SCISSORS_ERROR "Scissors must be given to the pipeline builder."
+    // Define errors
+    #define NO_PIPELINE_LAYOUT_ERROR "Pipeline layout must be given to the pipeline builder."
+    #define NO_VIEWPORT_ERROR        "Viewport must be given to the pipeline builder."
+    #define NO_SCISSORS_ERROR        "Scissors must be given to the pipeline builder."
 #endif
 
 namespace railguard::rendering::init
 {
-
     // ===== PIPELINE BUILDER =====
 
     PipelineBuilder PipelineBuilder::AddShaderStage(vk::ShaderStageFlagBits stage,

@@ -1,7 +1,5 @@
 #pragma once
 
-#include "VkInitIncludes.h"
-
 namespace railguard::rendering::init
 {
     /**

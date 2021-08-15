@@ -1,14 +1,14 @@
 #pragma once
 
-#include "../core/StandaloneManager.h"
-#include "ShaderEffectManager.h"
-#include "Ids.h"
+#include <railguard/core/StandaloneManager.h>
+#include <railguard/rendering/Ids.h>
+#include <railguard/rendering/enums/ShaderEffectKind.h>
 
 namespace railguard::rendering
 {
     struct MaterialTemplateManagerStorage
     {
-        const ShaderEffectManager *shaderEffectManager;
+        const class ShaderEffectManager *shaderEffectManager;
     };
 
     class MaterialTemplateManager : public core::StandaloneManager<material_template_id_t, MaterialTemplateManagerStorage>
@@ -27,16 +27,16 @@ namespace railguard::rendering
         std::vector<enums::ShaderEffectKind> _kinds;
 
     public:
-        void Init(MaterialTemplateManagerStorage storage, size_t defaultCapacity = 3);
-        void Clear();
-        core::CompleteMatch<material_template_id_t> CreateMaterialTemplate(std::vector<shader_effect_id_t> shaderEffects);
+        MaterialTemplateManager(MaterialTemplateManagerStorage storage, size_t defaultCapacity);
+        void Clear() override;
+        core::CompleteMatch<material_template_id_t> CreateMaterialTemplate(const std::vector<shader_effect_id_t>& shaderEffects);
         void DestroyMaterialTemplate(const core::Match &match);
-        bool HasEffect(const core::Match &match, shader_effect_id_t effectId) const;
-        bool HasEffectForKind(const core::Match &match, enums::ShaderEffectKind kind) const;
-        const std::vector<material_template_id_t> GetMaterialTemplatesWithEffectForKind(enums::ShaderEffectKind kind) const;
-        const std::vector<material_template_id_t> GetMaterialTemplatesWithEffects(const std::vector<shader_effect_id_t> &shaderEffectsIds) const;
+        [[nodiscard]] bool HasEffect(const core::Match &match, shader_effect_id_t effectId) const;
+        [[nodiscard]] bool HasEffectForKind(const core::Match &match, enums::ShaderEffectKind kind) const;
+        [[nodiscard]] std::vector<material_template_id_t> GetMaterialTemplatesWithEffectForKind(enums::ShaderEffectKind kind) const;
+        [[nodiscard]] std::vector<material_template_id_t> GetMaterialTemplatesWithEffects(const std::vector<shader_effect_id_t> &shaderEffectsIds) const;
 
         // Getters
-        const std::vector<shader_effect_id_t> GetShaderEffects(const core::Match &match) const;
+        [[nodiscard]] std::vector<shader_effect_id_t> GetShaderEffects(const core::Match &match) const;
     };
 } // namespace railguard::rendering

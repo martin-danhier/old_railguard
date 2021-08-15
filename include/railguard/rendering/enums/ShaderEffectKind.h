@@ -11,15 +11,9 @@ namespace railguard::rendering::enums
         PBR = 8
     };
 
-    inline ShaderEffectKind operator|(ShaderEffectKind a, ShaderEffectKind b)
-    {
-        return static_cast<ShaderEffectKind>(static_cast<int>(a) | static_cast<int>(b));
-    }
+    ShaderEffectKind operator|(ShaderEffectKind a, ShaderEffectKind b);
 
-    inline ShaderEffectKind operator&(ShaderEffectKind a, ShaderEffectKind b)
-    {
-        return static_cast<ShaderEffectKind>(static_cast<int>(a) & static_cast<int>(b));
-    }
-};
+    ShaderEffectKind operator&(ShaderEffectKind a, ShaderEffectKind b);
+}
 
 // namespace railguard::rendering::enums

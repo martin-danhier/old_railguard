@@ -1,4 +1,4 @@
-#include "../../include/utils/GetError.h"
+#include "railguard/utils/GetError.h"
 
 namespace railguard::utils
 {

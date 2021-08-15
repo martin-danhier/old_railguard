@@ -1,4 +1,4 @@
-#include "../../include/core/EntityManager.h"
+#include "railguard/core/EntityManager.h"
 #include <cassert>
 
 #define MIN_FREED_INDICES_BEFORE_REUSE 1024
@@ -29,7 +29,7 @@ namespace railguard::core
             indexPart = _lookupList.size() - 1;
             // Make sure it does not go beyond the limit of available indices
             assert(
-                indexPart < (static_cast<eid_t>(1) << INDEX_BITS) && "Entity ID index out of range. Too many instanciated entities.");
+                indexPart < (static_cast<eid_t>(1) << INDEX_BITS) && "Entity ID index out of range. Too many instantiated entities.");
         }
 
         // Return the new entity

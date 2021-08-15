@@ -1,8 +1,7 @@
 #pragma once
 
-#include "../../includes/Vulkan.h"
-#include <glm/glm.hpp>
-#include <glm/gtc/quaternion.hpp>
+#include "railguard/includes/Vulkan.h"
+#include <glm/detail/type_quat.hpp>
 
 namespace railguard::rendering::structs
 {

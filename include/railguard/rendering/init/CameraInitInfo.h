@@ -1,16 +1,16 @@
 #pragma once
 
-#include "../SwapchainManager.h"
-#include "../enums/CameraMode.h"
-#include <glm/glm.hpp>
-#include <glm/gtc/quaternion.hpp>
-#include "../../utils/Colors.h"
+#include "railguard/rendering/SwapchainManager.h"
+#include "railguard/rendering/enums/CameraMode.h"
+#include "railguard/utils/Colors.h"
+
+#include <glm/detail/type_quat.hpp>
 
 namespace railguard::rendering::init
 {
     struct SwapchainCameraInitInfo
     {
-    public:
+      public:
         /**
          * @brief Is the camera enabled or not ? Disabled cameras do not render anything.
          */
@@ -31,7 +31,7 @@ namespace railguard::rendering::init
          */
         glm::vec3 position = glm::vec3(0.f, 0.f, 0.f);
         /**
-         * @brief Rotation of the camera in the world. Defined using a quarternion.
+         * @brief Rotation of the camera in the world. Defined using a quaternion.
          * @see Rotations documentation (TODO)
          */
         glm::quat rotation = glm::quat(0.f, 0.f, 0.f, 1.f);

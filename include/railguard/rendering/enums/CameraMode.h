@@ -10,7 +10,7 @@ namespace railguard::rendering::enums
      * @brief The camera mode defines the projection matrix that will be used by a camera.
      * @see The description of the variants for details about them.
      */
-    enum class CameraMode
+    enum class CameraMode : uint32_t
     {
         /**
          * @brief Far objects will appear the same size as close ones.

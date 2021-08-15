@@ -1,18 +1,24 @@
 #pragma once
 
-#include "ModelManager.h"
-#include "AllocationManager.h"
+#include <railguard/rendering/Ids.h>
+#include <railguard/rendering/enums/ShaderEffectKind.h>
+#include <vector>
 
 namespace railguard::rendering
 {
 
+    namespace structs
+    {
+        struct AllocatedBuffer;
+    }
+
     class RenderStageManager
     {
-    private:
+      private:
         // Pointer to other managers
-        const MaterialManager *_materialManager;
-        const ModelManager *_modelManager;
-        AllocationManager *_allocationManager;
+        const class MaterialManager *_materialManager;
+        const class ModelManager *_modelManager;
+        class AllocationManager *_allocationManager;
 
         // Stages to render
         std::vector<enums::ShaderEffectKind> _stages;
@@ -22,11 +28,11 @@ namespace railguard::rendering
         std::vector<std::vector<material_id_t>> _materialsCache;
         std::vector<std::vector<std::vector<model_id_t>>> _modelsCache;
 
-    public:
-        void Init(const std::vector<enums::ShaderEffectKind>& stages, const MaterialManager *materialManager, const ModelManager *modelManager, AllocationManager *allocationManager);
+      public:
+        RenderStageManager(const std::vector<enums::ShaderEffectKind>& stages, const MaterialManager *materialManager, const ModelManager *modelManager, AllocationManager *allocationManager);
+        ~RenderStageManager();
         void UpdateCache();
         void DrawFromCache();
-        void CleanUp();
     };
 
 } // namespace railguard::rendering

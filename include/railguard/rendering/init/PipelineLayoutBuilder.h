@@ -1,6 +1,9 @@
 #pragma once
 
-#include "../../includes/Vulkan.h"
+namespace vk {
+    class Device;
+    class PipelineLayout;
+}
 
 namespace railguard::rendering::init
 {
@@ -13,6 +16,6 @@ namespace railguard::rendering::init
 
 
     public:
-        [[nodiscard]] vk::PipelineLayout Build(const vk::Device &vulkanDevice);
+        [[nodiscard]] static vk::PipelineLayout Build(const vk::Device &vulkanDevice);
     };
 } // namespace railguard::rendering::init

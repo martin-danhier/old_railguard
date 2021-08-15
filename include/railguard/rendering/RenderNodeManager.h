@@ -1,16 +1,14 @@
 #pragma once
 
-#include "../core/ComponentManager.h"
-#include "Ids.h"
-#include "ModelManager.h"
 #include <glm/glm.hpp>
+#include <railguard/core/ComponentManager.h>
+#include <railguard/rendering/Ids.h>
 
 namespace railguard::rendering
 {
-
     struct RenderNodeManagerStorage
     {
-        ModelManager *modelManager;
+        class ModelManager *modelManager;
     };
 
     class RenderNodeManager : public core::ComponentManager<RenderNodeManagerStorage>
@@ -24,10 +22,10 @@ namespace railguard::rendering
         std::vector<glm::mat4> _transforms;
 
     public:
-        void Init(RenderNodeManagerStorage storage, const size_t defaultComponentCapacity = 50);
-        void Clear();
+        explicit RenderNodeManager(RenderNodeManagerStorage storage, size_t defaultComponentCapacity = 50);
+        void Clear() override;
         core::Match CreateComponent(const core::Entity &entity, model_id_t model);
-        void DestroyComponent(const core::Match &match);
+        void DestroyComponent(const core::Match &match) override;
 
         // Getters
         [[nodiscard]] model_id_t GetModel(const core::Match &match) const;

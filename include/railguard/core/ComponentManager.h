@@ -1,17 +1,15 @@
 #pragma once
 
-#include "railguard/utils/AdvancedCheck.h"
-
 #define REQUIRED_FOUND_ALIVE_TO_END_GC 5
+
+#include <railguard/core/Entity.h>
+#include <railguard/core/EntityManager.h>
+#include <railguard/core/Match.h>
+#include <unordered_map>
+#include <vector>
 
 namespace railguard::core
 {
-
-    // Forward declarations for performances
-    class Match;
-    class Entity;
-    class EntityManager;
-
     /**
      * @brief Type representing an index of a component.
      */
@@ -25,20 +23,13 @@ namespace railguard::core
 
         // Map that can be used for fast search of a component given an entity
         // Entity -> Component
-        class std::unordered_map<eid_t, component_idx_t> _entityLookUpMap;
+        std::unordered_map<eid_t, component_idx_t> _entityLookUpMap;
 
         // === Component data ===
 
         // For a given component, the entity linked to it
         // Component -> Entity
-        class std::vector<Entity> _entities;
-
-#ifdef USE_ADVANCED_CHECKS
-        /**
-         * @brief In debug mode, keep track of the init status to ensure that Init is called first
-         */
-        bool _initialized = false;
-#endif
+        std::vector<Entity> _entities;
 
         /**
          * @brief Optional storage for data that is passed in the Init method.
@@ -53,7 +44,6 @@ namespace railguard::core
          */
         Match RegisterComponent(const Entity &entity)
         {
-            ADVANCED_CHECK(_initialized, "ComponentManager should be initialized with Init before calling this method.");
 
             // Add the entity in the list
             _entities.push_back(entity);
@@ -66,26 +56,25 @@ namespace railguard::core
             return Match(_entities.size());
         }
 
-        void Clear()
+        virtual void Clear()
         {
             _entities.clear();
             _entityLookUpMap.clear();
         }
 
-        /**
-         * @brief Destroy a component but keep everything tightly packed in the vectors.
-         *
-         * Meant to be used from derivated classes. Call this method to execute the boilerplate,
-         * then move the last item of the custom vectors at the location of the destroyed item, then pop_back
-         * every custom vectors.
-         *
-         * @param index index of the component.
-         */
-        void DestroyComponent(const Match &match)
+        virtual /**
+                 * @brief Destroy a component but keep everything tightly packed in the vectors.
+                 *
+                 * Meant to be used from derived classes. Call this method to execute the boilerplate,
+                 * then move the last item of the custom vectors at the location of the destroyed item, then pop_back
+                 * every custom vectors.
+                 *
+                 * @param index index of the component.
+                 */
+            void
+            DestroyComponent(const Match &match)
         {
             auto index = match.GetIndex();
-            ADVANCED_CHECK(_initialized, "ComponentManager should be initialized with Init before calling this method.");
-            ADVANCED_CHECK(index < _entities.size(), "The index should exist in the vectors.");
 
             // Remove the match from the lookup map
             _entityLookUpMap.erase(_entities[index].eid);
@@ -110,20 +99,14 @@ namespace railguard::core
          * @param storage Optional storage required by the derived class
          * @param defaultComponentCapacity Number of items that will have pre allocated space in the vectors
          */
-        void Init(T storage = nullptr, const component_idx_t defaultComponentCapacity = 10)
+        ComponentManager(T storage, component_idx_t defaultComponentCapacity)
         {
-            ADVANCED_CHECK(!_initialized, "ComponentManager should not be initialized twice.");
-
             // Pre allocate the given size
             _entities.reserve(defaultComponentCapacity);
             _entityLookUpMap.reserve(defaultComponentCapacity);
 
             // Save the storage
             _storage = storage;
-
-#ifdef USE_ADVANCED_CHECKS
-            _initialized = true;
-#endif
         }
 
         /**
@@ -132,10 +115,8 @@ namespace railguard::core
          * @param entity Entity for the search.
          * @return Match a match representing the position of the component in the arrays.
          */
-        [[nodiscard]] const Match FindComponentOfEntity(const Entity &entity)
+        [[nodiscard]] Match FindComponentOfEntity(const Entity &entity)
         {
-            ADVANCED_CHECK(_initialized, "ComponentManager should be initialized with Init before calling this method.");
-
             component_idx_t index = _entityLookUpMap[entity.eid];
             return Match(index);
         }
@@ -146,10 +127,8 @@ namespace railguard::core
          * @param match Match pointing to the component of which the entity is queried.
          * @return The Entity attached to the given component.
          */
-        const Entity GetCorrespondingEntity(const Match &match)
+        Entity GetCorrespondingEntity(const Match &match)
         {
-            ADVANCED_CHECK(_initialized, "ComponentManager should be initialized with Init before calling this method.");
-
             return _entities[match.GetIndex()];
         }
 
@@ -157,11 +136,9 @@ namespace railguard::core
         // Can be useful when there are a lot of entities
         void RunGarbageCollection(const EntityManager &em)
         {
-            ADVANCED_CHECK(_initialized, "ComponentManager should be initialized with Init before calling this method.");
-
             uint8_t foundAliveInARow = 0;
 
-            while (foundAliveInARow < REQUIRED_FOUND_ALIVE_TO_END_GC && _entities.size() > 0)
+            while (foundAliveInARow < REQUIRED_FOUND_ALIVE_TO_END_GC && !_entities.empty())
             {
                 // Select an entity
                 auto i   = std::rand() % _entities.size();

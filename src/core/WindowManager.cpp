@@ -1,14 +1,18 @@
-#include "../../include/core/WindowManager.h"
-#include <iostream>
+#include "railguard/core/WindowManager.h"
+
+#include "railguard/includes/Vulkan.h"
+
+#include <SDL2/SDL.h>
 #include <SDL2/SDL_vulkan.h>
+#include <iostream>
+#include <utility>
 
 namespace railguard::core
 {
-
-    WindowManager::WindowManager(int defaultWidth, int defaultHeight, const std::string &defaultTitle)
+    WindowManager::WindowManager(int defaultWidth, int defaultHeight, std::string defaultTitle)
         : _width(defaultWidth),
           _height(defaultHeight),
-          _title(defaultTitle)
+          _title(std::move(defaultTitle))
     {
         CreateWindow();
     }
@@ -21,10 +25,19 @@ namespace railguard::core
     {
         // Create a window
         SDL_WindowFlags windowFlags = SDL_WINDOW_VULKAN;
-        _window = SDL_CreateWindow(_title.c_str(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, _width, _height, windowFlags);
+
+        _window = SDL_CreateWindow(_title.c_str(),
+                                   SDL_WINDOWPOS_UNDEFINED,
+                                   SDL_WINDOWPOS_UNDEFINED,
+                                   static_cast<int32_t>(_width),
+                                   static_cast<int32_t>(_height),
+                                   windowFlags);
         SDL_SetWindowResizable(_window, SDL_TRUE);
 
-        if (_window == nullptr) HandleError();
+        if (_window == nullptr)
+        {
+            HandleError();
+        }
     }
 
     void WindowManager::DestroyWindow()

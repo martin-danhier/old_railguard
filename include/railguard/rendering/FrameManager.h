@@ -1,9 +1,8 @@
 #pragma once
 
-#include "../includes/Vulkan.h"
-#include "Ids.h"
-#include "./Settings.h"
-#include "AllocationManager.h"
+#include "railguard/rendering/Settings.h"
+#include "railguard/includes/Vulkan.h"
+
 
 namespace railguard::rendering
 {
@@ -33,14 +32,9 @@ namespace railguard::rendering
         vk::Semaphore _renderSemaphores[NB_OVERLAPPING_FRAMES];
         vk::Fence _renderFences[NB_OVERLAPPING_FRAMES];
 
-#ifdef USE_ADVANCED_CHECKS
-        // In debug mode, keep track of the init status to ensure that Init is called first
-        bool _initialized = false;
-#endif
 
     public:
-        void Init(const vk::Device &device, uint32_t graphicsQueueFamily);
-        void Cleanup();
+        FrameManager(const vk::Device &device, uint32_t graphicsQueueFamily);
         ~FrameManager();
         /**
          * @brief Ends the current frame and increments the frame number.
@@ -53,23 +47,23 @@ namespace railguard::rendering
         void WaitForCurrentFence() const;
         void WaitForAllFences() const;
 
-        vk::CommandBuffer BeginRecording();
-        void EndRecordingAndSubmit(const vk::Queue &graphicsQueue);
+        [[nodiscard]] vk::CommandBuffer BeginRecording() const;
+        void EndRecordingAndSubmit(const vk::Queue &graphicsQueue) const;
 
         [[nodiscard]] uint64_t GetFrameNumber() const;
         [[nodiscard]] uint32_t GetCurrentFrameIndex() const;
 
-        [[nodiscard]] const FrameData GetCurrentFrame() const;
-        [[nodiscard]] const vk::CommandPool GetCurrentCommandPool() const;
-        [[nodiscard]] const vk::CommandBuffer GetCurrentCommandBuffer() const;
-        [[nodiscard]] const vk::Fence GetCurrentRenderFence() const;
+        [[nodiscard]] FrameData GetCurrentFrame() const;
+        [[nodiscard]] vk::CommandPool GetCurrentCommandPool() const;
+        [[nodiscard]] vk::CommandBuffer GetCurrentCommandBuffer() const;
+        [[nodiscard]] vk::Fence GetCurrentRenderFence() const;
         [[nodiscard]] const vk::Semaphore* GetCurrentRenderSemaphore() const;
         [[nodiscard]] const vk::Semaphore* GetCurrentPresentSemaphore() const;
 
-        [[nodiscard]] const FrameData GetFrame(uint32_t index) const;
-        [[nodiscard]] const vk::CommandPool GetCommandPool(uint32_t index) const;
-        [[nodiscard]] const vk::CommandBuffer GetCommandBuffer(uint32_t index) const;
-        [[nodiscard]] const vk::Fence GetRenderFence(uint32_t index) const;
+        [[nodiscard]] FrameData GetFrame(uint32_t index) const;
+        [[nodiscard]] vk::CommandPool GetCommandPool(uint32_t index) const;
+        [[nodiscard]] vk::CommandBuffer GetCommandBuffer(uint32_t index) const;
+        [[nodiscard]] vk::Fence GetRenderFence(uint32_t index) const;
         [[nodiscard]] const vk::Semaphore* GetRenderSemaphore(uint32_t index) const;
         [[nodiscard]] const vk::Semaphore* GetPresentSemaphore(uint32_t index) const;
     };

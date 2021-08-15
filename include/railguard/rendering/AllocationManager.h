@@ -1,31 +1,44 @@
 #pragma once
 
-#include "../includes/Vma.h"
-#include "../includes/Vulkan.h"
-#include "structs/AllocatedStructs.h"
+#include "railguard/includes/Vma.h"
 
+// Forward declarations
+// Avoids a vulkan import in the header
+namespace vk
+{
+    class PhysicalDevice;
+    class Device;
+    class Instance;
+    enum class BufferUsageFlagBits : uint32_t ;
+    template<typename T>
+    class Flags;
+    typedef Flags<BufferUsageFlagBits> BufferUsageFlags;
+} // namespace vk
 
 namespace railguard::rendering
 {
+    namespace structs
+    {
+        struct AllocatedBuffer;
+    }
+
     class AllocationManager
     {
-    private:
+      private:
         VmaAllocator _allocator = nullptr;
 
-#ifdef USE_ADVANCED_CHECKS
-        bool _initialized = false;
-#endif
 
-    public:
-        void Init(const vk::PhysicalDevice &physicalDevice, const vk::Device &device, const vk::Instance &instance);
-        void CleanUp();
+      public:
+        AllocationManager(const vk::PhysicalDevice &physicalDevice, const vk::Device &device, const vk::Instance &instance);
+        ~AllocationManager();
 
-        [[nodiscard]] structs::AllocatedBuffer CreateBuffer(size_t allocationSize, vk::BufferUsageFlags bufferUsage, VmaMemoryUsage memoryUsage);
+        [[nodiscard]] structs::AllocatedBuffer
+            CreateBuffer(size_t allocationSize, vk::BufferUsageFlags bufferUsage, VmaMemoryUsage memoryUsage);
         void DestroyBuffer(structs::AllocatedBuffer &buffer);
         [[nodiscard]] void *MapBuffer(const structs::AllocatedBuffer &buffer);
         void UnmapBuffer(const structs::AllocatedBuffer &buffer);
 
-        template <class T>
+        template<class T>
         void CopyBufferToAllocation(const structs::AllocatedBuffer &buffer, const T *src, size_t size)
         {
 

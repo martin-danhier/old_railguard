@@ -4,7 +4,6 @@
 #include <unordered_map>
 #include <vector>
 #include "railguard/core/Match.h"
-#include "railguard/utils/AdvancedCheck.h"
 
 namespace railguard::core
 {
@@ -46,16 +45,10 @@ namespace railguard::core
         T _lastUsedId = 1;
 
         /**
-         * @brief Allows to quickly retreive the id of an item from its index.
+         * @brief Allows to quickly retrieve the id of an item from its index.
          */
         std::vector<T> _ids;
 
-#ifdef USE_ADVANCED_CHECKS
-        /**
-         * @brief In debug mode, keep track of the init status to ensure that Init is called first
-         */
-        bool _initialized = false;
-#endif
 
         /**
         * @brief Create a new Item. Derived function should append values to the vectors.
@@ -64,7 +57,6 @@ namespace railguard::core
         */
         CompleteMatch<T> CreateItem()
         {
-            ADVANCED_CHECK(_initialized, "StandaloneManager should be initialized with Init before calling this method.");
 
             // Get new id for the item
             T newId = _lastUsedId++;
@@ -77,21 +69,20 @@ namespace railguard::core
         }
 
         /**
-        * @brief Destroy an item but keep everything tightly packed in the vectors.
-        *
-        * Meant to be used from derivated classes. Call this method to execute the boilerplate,
-        * then move the last item of the custom vectors at the location of the destroyed item, then pop_back
-        * every custom vectors.
-        *
-        * Here is an example of code for a derived function:
-        *
-        * @snippet ShaderModuleManager.cpp Example of derivation of StandaloneManager::DestroyItem
-        *
-        * @param match Match pointing to the item
-        */
+         * @brief Destroy an item but keep everything tightly packed in the vectors.
+         *
+         * Meant to be used from derived classes. Call this method to execute the boilerplate,
+         * then move the last item of the custom vectors at the location of the destroyed item, then pop_back
+         * every custom vectors.
+         *
+         * Here is an example of code for a derived function:
+         *
+         * @snippet ShaderModuleManager.cpp Example of derivation of StandaloneManager::DestroyItem
+         *
+         * @param match Match pointing to the item
+         */
         void DestroyItem(const Match &match)
         {
-            ADVANCED_CHECK(_initialized, "StandaloneManager should be initialized with Init before calling this method.");
 
             // Get index
             auto index = match.GetIndex();
@@ -106,7 +97,7 @@ namespace railguard::core
             // the destroyed item was
             if (index < lastIndex)
             {
-                T movedId = _ids[lastIndex];
+                T movedId   = _ids[lastIndex];
                 _ids[index] = movedId;
                 // Update id in map
                 _idLookupMap[movedId] = index + 1;
@@ -122,31 +113,23 @@ namespace railguard::core
          * @param storage Optional storage required by the derived class
          * @param defaultCapacity Number of items that will have pre allocated space in the vectors
          */
-        void Init(U storage = nullptr, size_t defaultCapacity = 1)
+        StandaloneManager(U storage, size_t defaultCapacity)
         {
-            ADVANCED_CHECK(!_initialized, "StandaloneManager should not be initialized twice.");
-
             // Reserve space in the vector
             _ids.reserve(defaultCapacity);
             _idLookupMap.reserve(defaultCapacity);
 
             // Save the storage
             _storage = storage;
-
-#ifdef USE_ADVANCED_CHECKS
-            _initialized = true;
-#endif
         }
-        
-    public:
 
-        /**
-         * @brief Destroys every remaining item.
-         */
-        void Clear()
+      public:
+        virtual /**
+                 * @brief Destroys every remaining item.
+                 */
+            void
+            Clear()
         {
-            ADVANCED_CHECK(_initialized, "StandaloneManager should be initialized with Init before calling this method.");
-
             _ids.clear();
             _idLookupMap.clear();
         }
@@ -159,8 +142,6 @@ namespace railguard::core
          */
         [[nodiscard]] Match LookupId(T id) const
         {
-            ADVANCED_CHECK(_initialized, "StandaloneManager should be initialized with Init before calling this method.");
-
             size_t index = _idLookupMap.at(id);
             return core::Match(index);
         }

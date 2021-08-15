@@ -1,7 +1,7 @@
 #pragma once
 
-#include "includes/Vma.h"
-#include "includes/Vulkan.h"
+#include "railguard/includes/Vma.h"
+#include "railguard/includes/Vulkan.h"
 
 namespace railguard::rendering::structs
 {

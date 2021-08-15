@@ -1,12 +1,14 @@
-#include "../../include/rendering/ModelManager.h"
+#include "railguard/rendering/ModelManager.h"
+
+#include "railguard/core/Entity.h"
+#include "railguard/rendering/MaterialManager.h"
+
 #include <algorithm>
 
 namespace railguard::rendering
 {
-    void ModelManager::Init(ModelManagerStorage storage, size_t defaultCapacity)
+    ModelManager::ModelManager(ModelManagerStorage storage, size_t defaultCapacity): super(storage, defaultCapacity)
     {
-        super::Init(storage, defaultCapacity);
-
         // Init vectors
         _materials.reserve(defaultCapacity);
         _instances.reserve(defaultCapacity);
@@ -83,7 +85,7 @@ namespace railguard::rendering
         _instances[match.GetIndex()].clear();
     }
 
-    const std::vector<core::Entity> ModelManager::GetInstances(const core::Match &match) const {
+    std::vector<core::Entity> ModelManager::GetInstances(const core::Match &match) const {
         return _instances[match.GetIndex()];
     }
 

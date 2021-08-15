@@ -1,5 +1,6 @@
 #pragma once
-#include "../../includes/Vulkan.h"
+
+#include <railguard/includes/Vulkan.h>
 
 namespace railguard::rendering::structs
 {

@@ -1,4 +1,6 @@
-#include "../../../include/rendering/structs/Vertex.h"
+#include <railguard/rendering/structs/Vertex.h>
+#include <railguard/rendering/structs/VertexInputDescription.h>
+#include <railguard/includes/Vulkan.h>
 
 namespace railguard::rendering::structs
 {

@@ -1,4 +1,4 @@
-#include "../../include/utils/Colors.h"
+#include "railguard/utils/Colors.h"
 
 namespace railguard::utils
 {

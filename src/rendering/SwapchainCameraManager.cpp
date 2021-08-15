@@ -1,14 +1,16 @@
-#include "../../include/rendering/SwapchainCameraManager.h"
-#include <glm/gtx/transform.hpp>
+#include "railguard/rendering/SwapchainCameraManager.h"
+
+#include "railguard/includes/Vulkan.h"
+#include "railguard/rendering/init/CameraInitInfo.h"
+#include "railguard/rendering/structs/CameraRenderInfo.h"
+#include "railguard/utils/AdvancedCheck.h"
 
 namespace railguard::rendering
 {
-
-    void SwapchainCameraManager::Init(SwapchainCameraManagerStorage storage, const core::component_idx_t defaultComponentCapacity)
+    SwapchainCameraManager::SwapchainCameraManager(SwapchainCameraManagerStorage storage,
+                                                   const core::component_idx_t defaultComponentCapacity)
+        : super(storage, defaultComponentCapacity)
     {
-        // Init with boilerplate code
-        super::Init(storage, defaultComponentCapacity);
-
         // Init vectors that were added by this component
         _enabledCameras.reserve(defaultComponentCapacity);
         _swapchainIds.reserve(defaultComponentCapacity);
@@ -33,7 +35,7 @@ namespace railguard::rendering
         _fieldsOfView.push_back(initInfo.fieldOfView);
         _modeParams1.push_back(initInfo.modeParam1);
         _modeParams2.push_back(initInfo.modeParam2);
-        _clearColors.push_back(vk::ClearValue(initInfo.clearColor));
+        _clearColors.emplace_back(initInfo.clearColor);
 
         // Get aspect ratio if it is in perspective mode
         if (initInfo.mode == enums::CameraMode::Perspective)
@@ -196,16 +198,16 @@ namespace railguard::rendering
         // For each enabled camera
         for (size_t i = 0; i < _enabledCameras.size(); i++)
         {
-            if (_enabledCameras[i] == true)
+            if (_enabledCameras[i])
             {
                 // The swapchain of this camera is not the same as the previous one
                 if (lastSwapchainId != _swapchainIds[i])
                 {
                     // Get the swapchain
-                    swapchainMatch = _storage.swapchainManager->LookupId(_swapchainIds[i]);
-                    lastSwapchainExtent = _storage.swapchainManager->GetViewportExtent(swapchainMatch);
+                    swapchainMatch          = _storage.swapchainManager->LookupId(_swapchainIds[i]);
+                    lastSwapchainExtent     = _storage.swapchainManager->GetViewportExtent(swapchainMatch);
                     lastSwapchainImageIndex = _storage.swapchainManager->RequestNextImageIndex(swapchainMatch);
-                    lastSwapchainId = _swapchainIds[i];
+                    lastSwapchainId         = _swapchainIds[i];
                 }
 
                 // Generate a render info struct

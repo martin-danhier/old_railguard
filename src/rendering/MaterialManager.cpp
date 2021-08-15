@@ -1,13 +1,13 @@
-#include "../../include/rendering/MaterialManager.h"
 #include <algorithm>
+#include <railguard/rendering/MaterialManager.h>
+#include <railguard/rendering/MaterialTemplateManager.h>
+#include <railguard/rendering/ShaderEffectManager.h>
+#include <railguard/rendering/enums/ShaderEffectKind.h>
 
 namespace railguard::rendering
 {
-
-    void MaterialManager::Init(MaterialManagerStorage storage, size_t defaultCapacity)
+    MaterialManager::MaterialManager(MaterialManagerStorage storage, size_t defaultCapacity) : super(storage, defaultCapacity)
     {
-        super::Init(storage, defaultCapacity);
-
         // Init vectors
         _baseTemplates.reserve(defaultCapacity);
         _modelsUsingMaterial.reserve(defaultCapacity);
@@ -24,7 +24,7 @@ namespace railguard::rendering
     core::CompleteMatch<material_id_t> MaterialManager::CreateMaterial(material_template_id_t baseTemplate)
     {
         _baseTemplates.push_back(baseTemplate);
-        _modelsUsingMaterial.push_back(std::vector<model_id_t>(1));
+        _modelsUsingMaterial.emplace_back(1);
 
         return super::CreateItem();
     }
@@ -57,17 +57,17 @@ namespace railguard::rendering
         return _baseTemplates[match.GetIndex()];
     }
 
-    const std::vector<model_id_t> MaterialManager::GetModelsThatUseMaterial(const core::Match &match) const
+    std::vector<model_id_t> MaterialManager::GetModelsThatUseMaterial(const core::Match &match) const
     {
         return _modelsUsingMaterial[match.GetIndex()];
     }
 
-    const std::vector<model_id_t> MaterialManager::GetModelsThatUseMaterial(uint32_t index) const
+    std::vector<model_id_t> MaterialManager::GetModelsThatUseMaterial(uint32_t index) const
     {
         return _modelsUsingMaterial[index];
     }
 
-    const std::vector<uint32_t> MaterialManager::GetMaterialsWhichSupportKind(enums::ShaderEffectKind kind) const
+    std::vector<uint32_t> MaterialManager::GetMaterialsWhichSupportKind(enums::ShaderEffectKind kind) const
     {
         // Get the shader effects for that kind
         const auto effectsWithDesiredKind = _storage.shaderEffectManager->GetEffectsOfKind(kind);

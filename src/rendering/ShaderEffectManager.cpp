@@ -1,13 +1,15 @@
-#include "../../../include/rendering/ShaderEffectManager.h"
-#include "../../../include/rendering/init/PipelineBuilder.h"
+#include "railguard/rendering/ShaderEffectManager.h"
+
+#include "railguard/core/WindowManager.h"
+#include "railguard/rendering/ShaderModuleManager.h"
+#include "railguard/rendering/init/PipelineBuilder.h"
+#include "railguard/rendering/init/ShaderEffectInitInfo.h"
 
 namespace railguard::rendering
 {
-    void ShaderEffectManager::Init(ShaderEffectManagerStorage storage, size_t defaultCapacity)
+    ShaderEffectManager::ShaderEffectManager(ShaderEffectManagerStorage storage, size_t defaultCapacity)
+        : super(storage, defaultCapacity)
     {
-        // Call parent function
-        super::Init(storage, defaultCapacity);
-
         // Resize vectors that weren't initialized by parent
         _pipelineLayouts.reserve(defaultCapacity);
         _pipelines.reserve(defaultCapacity);
@@ -19,20 +21,7 @@ namespace railguard::rendering
     {
         super::Clear();
 
-        // Destroy pipelines that are built
-        for (vk::Pipeline pipeline : _pipelines)
-        {
-            if (pipeline != static_cast<vk::Pipeline>(nullptr))
-            {
-                _storage.vulkanDevice.destroyPipeline(pipeline);
-            }
-        }
-
-        // Destroy pipeline layouts
-        for (vk::PipelineLayout layout : _pipelineLayouts)
-        {
-            _storage.vulkanDevice.destroyPipelineLayout(layout);
-        }
+        CleanUp();
 
         // Clear vectors
         _pipelineLayouts.clear();
@@ -41,13 +30,14 @@ namespace railguard::rendering
         _effectKinds.clear();
     }
 
-    core::CompleteMatch<shader_effect_id_t> ShaderEffectManager::CreateShaderEffect(init::ShaderEffectInitInfo initInfo, bool buildEffectAfterCreation)
+    core::CompleteMatch<shader_effect_id_t> ShaderEffectManager::CreateShaderEffect(const init::ShaderEffectInitInfo &initInfo,
+                                                                                    bool buildEffectAfterCreation)
     {
         auto match = super::CreateItem();
 
         _pipelineLayouts.push_back(initInfo.pipelineLayout);
         _shaderStages.push_back(initInfo.shaderStages);
-        _pipelines.push_back(nullptr);
+        _pipelines.emplace_back(nullptr);
         _effectKinds.push_back(initInfo.effectKind);
 
         // Build if we should
@@ -71,9 +61,10 @@ namespace railguard::rendering
         for (shader_module_id_t shaderModuleId : _shaderStages[index])
         {
             // Find that module
-            auto match = _storage.shaderModuleManager->LookupId(shaderModuleId);
+            auto moduleMatch = _storage.shaderModuleManager->LookupId(shaderModuleId);
             // Register the stage
-            builder.AddShaderStage(_storage.shaderModuleManager->GetStage(match), _storage.shaderModuleManager->GetModule(match));
+            builder.AddShaderStage(_storage.shaderModuleManager->GetStage(moduleMatch),
+                                   _storage.shaderModuleManager->GetModule(moduleMatch));
         }
 
         // Build the pipeline
@@ -124,15 +115,15 @@ namespace railguard::rendering
         cmd.bindPipeline(vk::PipelineBindPoint::eGraphics, _pipelines[match.GetIndex()]);
     }
 
-    const vk::PipelineLayout ShaderEffectManager::GetPipelineLayout(const core::Match &match) const
+    vk::PipelineLayout ShaderEffectManager::GetPipelineLayout(const core::Match &match) const
     {
         return _pipelineLayouts[match.GetIndex()];
     }
-    const vk::Pipeline ShaderEffectManager::GetPipeline(const core::Match &match) const
+    vk::Pipeline ShaderEffectManager::GetPipeline(const core::Match &match) const
     {
         return _pipelines[match.GetIndex()];
     }
-    const std::vector<shader_module_id_t> ShaderEffectManager::GetShaderStages(const core::Match &match) const
+    std::vector<shader_module_id_t> ShaderEffectManager::GetShaderStages(const core::Match &match) const
     {
         return _shaderStages[match.GetIndex()];
     }
@@ -142,7 +133,7 @@ namespace railguard::rendering
         return _effectKinds[match.GetIndex()];
     }
 
-    const std::vector<shader_effect_id_t> ShaderEffectManager::GetEffectsOfKind(enums::ShaderEffectKind kind) const
+    std::vector<shader_effect_id_t> ShaderEffectManager::GetEffectsOfKind(enums::ShaderEffectKind kind) const
     {
         std::vector<shader_effect_id_t> results;
 
@@ -157,5 +148,26 @@ namespace railguard::rendering
 
         return results;
     }
+    void ShaderEffectManager::CleanUp()
+    {
+        // Destroy pipelines that are built
+        for (vk::Pipeline pipeline : _pipelines)
+        {
+            if (pipeline != static_cast<vk::Pipeline>(nullptr))
+            {
+                _storage.vulkanDevice.destroyPipeline(pipeline);
+            }
+        }
 
-}
+        // Destroy pipeline layouts
+        for (vk::PipelineLayout layout : _pipelineLayouts)
+        {
+            _storage.vulkanDevice.destroyPipelineLayout(layout);
+        }
+    }
+    ShaderEffectManager::~ShaderEffectManager()
+    {
+        CleanUp();
+    }
+
+} // namespace railguard::rendering

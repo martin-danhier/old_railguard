@@ -1,9 +1,5 @@
 #pragma once
 
-#include "VkInitIncludes.h"
-#include "VulkanInitInfo.h"
-#include "SwapchainInitInfo.h"
-
 namespace railguard::rendering::init
 {
     class VulkanInit
@@ -14,8 +10,8 @@ namespace railguard::rendering::init
          *
          * @param initInfo A struct containing destination pointers for the various handles.
          */
-        static void InitVulkan(const VulkanInitInfo &initInfo);
-        static void InitWindowSwapchain(const SwapchainInitInfo &initInfo);
+        static void InitVulkan(const struct VulkanInitInfo &initInfo);
+        static void InitWindowSwapchain(const struct SwapchainInitInfo &initInfo);
         
     };
 }

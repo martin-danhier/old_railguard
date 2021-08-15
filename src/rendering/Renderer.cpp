@@ -1,14 +1,34 @@
-#include "../../include/rendering/Renderer.h"
-
-#include "../../include/rendering/init/PipelineLayoutBuilder.h"
-#include "../../include/rendering/init/RenderPassBuilder.h"
-#include "../../include/rendering/Settings.h"
-#include "../../include/rendering/structs/Storages.h"
-#include "../../include/utils/Colors.h"
+#include <railguard/core/WindowManager.h>
+#include <railguard/rendering/AllocationManager.h>
+#include <railguard/rendering/FrameManager.h>
+#include <railguard/rendering/MaterialManager.h>
+#include <railguard/rendering/MaterialTemplateManager.h>
+#include <railguard/rendering/ModelManager.h>
+#include <railguard/rendering/RenderStageManager.h>
+#include <railguard/rendering/Renderer.h>
+#include <railguard/rendering/ShaderEffectManager.h>
+#include <railguard/rendering/ShaderModuleManager.h>
+#include <railguard/rendering/SwapchainCameraManager.h>
+#include <railguard/rendering/SwapchainManager.h>
+#include <railguard/rendering/enums/ShaderEffectKind.h>
+#include <railguard/rendering/init/PipelineLayoutBuilder.h>
+#include <railguard/rendering/init/RenderPassBuilder.h>
+#include <railguard/rendering/init/ShaderEffectInitInfo.h>
+#include <railguard/rendering/init/VulkanInit.h>
+#include <railguard/rendering/init/VulkanInitInfo.h>
+#include <railguard/rendering/structs/CameraRenderInfo.h>
+#include <railguard/utils/Colors.h>
 
 namespace railguard::rendering
 {
     Renderer::Renderer(const core::WindowManager &windowManager)
+        : _instance(nullptr),
+          _device(nullptr),
+          _graphicsQueue(nullptr),
+          _surface(nullptr),
+          _physicalDevice(nullptr),
+          _graphicsQueueFamily(0),
+          _debugMessenger(nullptr)
     {
         // Save current extent
         _windowExtent = windowManager.GetWindowExtent();
@@ -30,7 +50,7 @@ namespace railguard::rendering
         init::VulkanInit::InitVulkan(vulkanInitInfo);
 
         // Init frame manager
-        _frameManager.Init(_device, _graphicsQueueFamily);
+        _frameManager = new FrameManager(_device, _graphicsQueueFamily);
 
         // Init the render pass for the main swapchain
         _mainRenderPass = init::RenderPassBuilder()
@@ -44,76 +64,90 @@ namespace railguard::rendering
                               .Build(_device);
 
         // Init swapchain for window
-        _swapchainManager.Init({_device, _physicalDevice, &_frameManager}, 1);
-        _mainWindowSwapchain = _swapchainManager.CreateWindowSwapchain(_surface, windowManager, _mainRenderPass).GetId();
+        _swapchainManager    = new SwapchainManager({_device, _physicalDevice, _frameManager}, 1);
+        _mainWindowSwapchain = _swapchainManager->CreateWindowSwapchain(_surface, windowManager, _mainRenderPass).GetId();
 
         // Init shader module manager
-        _shaderModuleManager.Init({_device}, 5);
+        _shaderModuleManager = new ShaderModuleManager({_device}, 5);
 
         // Init shader effect manager
-        _shaderEffectManager.Init({_device, _mainRenderPass, &_shaderModuleManager, &windowManager}, 5);
+        _shaderEffectManager = new ShaderEffectManager({_device, _mainRenderPass, _shaderModuleManager, &windowManager}, 5);
 
         // Init material system
-        _materialTemplateManager.Init({&_shaderEffectManager}, 3);
-        _materialManager.Init({&_materialTemplateManager, &_shaderEffectManager}, 10);
-        _modelManager.Init({&_materialManager}, 30);
+        _materialTemplateManager = new MaterialTemplateManager({_shaderEffectManager}, 3);
+        _materialManager         = new MaterialManager({_materialTemplateManager, _shaderEffectManager}, 10);
+        _modelManager            = new ModelManager({_materialManager}, 30);
 
         // Init allocation manager
-        _allocationManager.Init(_physicalDevice, _device, _instance);
+        _allocationManager = new AllocationManager(_physicalDevice, _device, _instance);
 
         // Init passes
         // A pass defines a shader configuration
-        _renderStageManager.Init({enums::ShaderEffectKind::Forward}, &_materialManager, &_modelManager, &_allocationManager);
+        _renderStageManager =
+            new RenderStageManager({enums::ShaderEffectKind::Forward}, _materialManager, _modelManager, _allocationManager);
 
         // === Init components ===
 
         // Init cameras
-        _swapchainCameraManager.Init(SwapchainCameraManagerStorage {&_swapchainManager}, 1);
+        _swapchainCameraManager = new SwapchainCameraManager(SwapchainCameraManagerStorage {_swapchainManager}, 1);
 
         // === Test ===
 
         auto vertexModule =
-            _shaderModuleManager.LoadShaderModule(vk::ShaderStageFlagBits::eVertex, "./bin/shaders/triangle.vert.spv").GetId();
+            _shaderModuleManager->LoadShaderModule(vk::ShaderStageFlagBits::eVertex, "./bin/shaders/triangle.vert.spv").GetId();
         auto fragmentModule =
-            _shaderModuleManager.LoadShaderModule(vk::ShaderStageFlagBits::eFragment, "./bin/shaders/triangle.frag.spv").GetId();
+            _shaderModuleManager->LoadShaderModule(vk::ShaderStageFlagBits::eFragment, "./bin/shaders/triangle.frag.spv").GetId();
         _triangleEffect = _shaderEffectManager
-                              .CreateShaderEffect(
+                              ->CreateShaderEffect(
                                   init::ShaderEffectInitInfo {
-                                      .pipelineLayout = init::PipelineLayoutBuilder().Build(_device),
+                                      .pipelineLayout = init::PipelineLayoutBuilder::Build(_device),
                                       .shaderStages   = {vertexModule, fragmentModule},
                                       .effectKind     = enums::ShaderEffectKind::Forward,
                                   },
                                   true)
                               .GetId(); // Build the effect after creation
                                         // Add a camera
-        auto baseMaterialTemplate = _materialTemplateManager.CreateMaterialTemplate({_triangleEffect}).GetId();
-        auto baseMaterial         = _materialManager.CreateMaterial(baseMaterialTemplate).GetId();
-        auto triangleModel        = _modelManager.CreateModel(baseMaterial);
+        auto baseMaterialTemplate = _materialTemplateManager->CreateMaterialTemplate({_triangleEffect}).GetId();
+        auto baseMaterial         = _materialManager->CreateMaterial(baseMaterialTemplate).GetId();
+        auto triangleModel        = _modelManager->CreateModel(baseMaterial);
     }
 
     Renderer::~Renderer()
     {
         // Wait for all fences
-        _frameManager.WaitForAllFences();
+        _frameManager->WaitForAllFences();
+
+        // Destroy camera manager
+        delete _swapchainCameraManager;
+        _swapchainCameraManager = nullptr;
 
         // Destroy stage manager
-        _renderStageManager.CleanUp();
+        delete _renderStageManager;
+        _renderStageManager = nullptr;
         // Destroy allocation manager
-        _allocationManager.CleanUp();
+        delete _allocationManager;
+        _allocationManager = nullptr;
         // Destroy material system
-        _modelManager.Clear();
-        _materialManager.Clear();
-        _materialTemplateManager.Clear();
+        delete _modelManager;
+        _modelManager = nullptr;
+        delete _materialManager;
+        _materialManager = nullptr;
+        delete _materialTemplateManager;
+        _materialTemplateManager = nullptr;
         // Destroy shader effect manager
-        _shaderEffectManager.Clear();
+        delete _shaderEffectManager;
+        _shaderEffectManager = nullptr;
         // Destroy shader module manager
-        _shaderModuleManager.Clear();
+        delete _shaderModuleManager;
+        _shaderModuleManager = nullptr;
         // Destroy swapchains
-        _swapchainManager.Clear();
+        delete _swapchainManager;
+        _swapchainManager = nullptr;
         // Destroy main render pass
         _device.destroyRenderPass(_mainRenderPass);
         // Destroy frame manager
-        _frameManager.Cleanup();
+        delete _frameManager;
+        _frameManager = nullptr;
         // Destroy device
         _device.destroy();
         // Destroy surface
@@ -128,13 +162,13 @@ namespace railguard::rendering
     void Renderer::Draw()
     {
         // Wait for fences
-        _frameManager.WaitForCurrentFence();
+        _frameManager->WaitForCurrentFence();
 
         // Get render infos from cameras
-        std::vector<structs::CameraRenderInfo> cameraRenderInfos = _swapchainCameraManager.GetRenderInfos(_mainRenderPass);
+        std::vector<structs::CameraRenderInfo> cameraRenderInfos = _swapchainCameraManager->GetRenderInfos(_mainRenderPass);
 
         // Begin recording of commands
-        auto cmd = _frameManager.BeginRecording();
+        auto cmd = _frameManager->BeginRecording();
 
         // Each active camera returned a render info containing all the data we need.
         // We need to render to all of them.
@@ -144,7 +178,7 @@ namespace railguard::rendering
             cmd.beginRenderPass(renderInfo.renderPassBeginInfo, vk::SubpassContents::eInline);
 
             // Draw each object
-            _shaderEffectManager.Bind(_shaderEffectManager.LookupId(_triangleEffect), cmd);
+            _shaderEffectManager->Bind(_shaderEffectManager->LookupId(_triangleEffect), cmd);
             cmd.draw(3, 1, 0, 0);
 
             // Execute passes
@@ -156,18 +190,18 @@ namespace railguard::rendering
         }
 
         // End recording of commands
-        _frameManager.EndRecordingAndSubmit(_graphicsQueue);
+        _frameManager->EndRecordingAndSubmit(_graphicsQueue);
 
         // Present used swapchain images
-        _swapchainManager.PresentUsedImages(_graphicsQueue);
+        _swapchainManager->PresentUsedImages(_graphicsQueue);
 
         // Increase the number of frames drawn
-        _frameManager.FinishFrame();
+        _frameManager->FinishFrame();
     }
 
     SwapchainCameraManager *Renderer::GetSwapchainCameraManager()
     {
-        return &_swapchainCameraManager;
+        return _swapchainCameraManager;
     }
 
 } // namespace railguard::rendering

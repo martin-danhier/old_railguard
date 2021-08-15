@@ -1,55 +1,58 @@
+#include "railguard/rendering/init/VulkanInit.h"
 
-#include "../../include/rendering/init/VulkanInit.h"
-#include "../../include/rendering/Settings.h"
+#include "railguard/core/WindowManager.h"
+#include "railguard/includes/Vulkan.h"
+#include "railguard/rendering/Settings.h"
+#include "railguard/rendering/init/SwapchainInitInfo.h"
+#include "railguard/rendering/init/VulkanInitInfo.h"
+
 #include <VkBootstrap.h>
 
 namespace railguard::rendering::init
 {
-	void VulkanInit::InitVulkan(const VulkanInitInfo &initInfo)
-	{
-		// Init dynamic loader
-		vk::DynamicLoader loader;
-		auto vkGetInstanceProcAddr = loader.getProcAddress<PFN_vkGetInstanceProcAddr>("vkGetInstanceProcAddr");
-		VULKAN_HPP_DEFAULT_DISPATCHER.init(vkGetInstanceProcAddr);
+    void VulkanInit::InitVulkan(const VulkanInitInfo &initInfo)
+    {
+        // Init dynamic loader
+        vk::DynamicLoader loader;
+		
+        auto vkGetInstanceProcAddress = loader.getProcAddress<PFN_vkGetInstanceProcAddr>("vkGetInstanceProcAddress");
+        VULKAN_HPP_DEFAULT_DISPATCHER.init(vkGetInstanceProcAddress);
 
-		// Create instance
-		vkb::InstanceBuilder vkbInstanceBuilder;
+        // Create instance
+        vkb::InstanceBuilder vkbInstanceBuilder;
 #ifdef USE_VK_VALIDATION_LAYERS
-		// Enable validation layers and debug messenger in debug mode
-		vkbInstanceBuilder
-			.request_validation_layers(true)
-			.enable_validation_layers()
-			.use_default_debug_messenger();
+        // Enable validation layers and debug messenger in debug mode
+        vkbInstanceBuilder.request_validation_layers(true).enable_validation_layers().use_default_debug_messenger();
 #endif
 
-		// Get required SDL extensions
-		auto requiredSDLExtensions = initInfo.windowManager.GetRequiredVulkanExtensions();
+        // Get required SDL extensions
+        auto requiredSDLExtensions = initInfo.windowManager.GetRequiredVulkanExtensions();
 
-		vkbInstanceBuilder.set_app_name("My wonderful game")
-			.set_app_version(0, 1, 0)
-			.set_engine_version(0, 1, 0)
-			.require_api_version(1, 1, 0)
-			.set_engine_name("Railguard");
+        vkbInstanceBuilder.set_app_name("My wonderful game")
+            .set_app_version(0, 1, 0)
+            .set_engine_version(0, 1, 0)
+            .require_api_version(1, 1, 0)
+            .set_engine_name("Railguard");
 
-		// Add sdl extensions
-		for (const char *ext : requiredSDLExtensions)
-		{
-			vkbInstanceBuilder.enable_extension(ext);
-		}
+        // Add sdl extensions
+        for (const char *ext : requiredSDLExtensions)
+        {
+            vkbInstanceBuilder.enable_extension(ext);
+        }
 
-		// Build instance
-		auto vkbInstance = vkbInstanceBuilder.build().value();
+        // Build instance
+        auto vkbInstance = vkbInstanceBuilder.build().value();
 
-		// Wrap the instance and debug messenger in vk-hpp handle classes and store
-		// them
-		*initInfo.instance = vkbInstance.instance;
-		*initInfo.debugMessenger = vkbInstance.debug_messenger;
+        // Wrap the instance and debug messenger in vk-hpp handle classes and store
+        // them
+        *initInfo.instance       = vkbInstance.instance;
+        *initInfo.debugMessenger = vkbInstance.debug_messenger;
 
-		// Initialize function pointers for instance
-		VULKAN_HPP_DEFAULT_DISPATCHER.init(*initInfo.instance);
+        // Initialize function pointers for instance
+        VULKAN_HPP_DEFAULT_DISPATCHER.init(*initInfo.instance);
 
-		// Get the surface of the SDL window
-		*initInfo.surface = initInfo.windowManager.GetVulkanSurface(*initInfo.instance);
+        // Get the surface of the SDL window
+        *initInfo.surface = initInfo.windowManager.GetVulkanSurface(*initInfo.instance);
 
 		// Select a physical device
 		vkb::PhysicalDeviceSelector gpuSelector{vkbInstance};
@@ -84,28 +87,28 @@ namespace railguard::rendering::init
 		auto vkbSwapchain = swapchainBuilder
 								.set_desired_format({SWAPCHAIN_FORMAT, SWAPCHAIN_COLOR_SPACE})
 								.set_desired_present_mode(VK_PRESENT_MODE_FIFO_KHR)
-								.set_desired_extent(initInfo.windowExtent.width, initInfo.windowExtent.height)
-								.build()
-								.value();
+                                .set_desired_extent(initInfo.windowExtent.width, initInfo.windowExtent.height)
+                                .build()
+                                .value();
 
-		// Store swapchain and images
-		*initInfo.swapchain = vkbSwapchain.swapchain;
-		*initInfo.swapchainImages = initInfo.device.getSwapchainImagesKHR(*initInfo.swapchain);
-		*initInfo.swapchainImageFormat = vk::Format(vkbSwapchain.image_format);
+        // Store swapchain and images
+        *initInfo.swapchain            = vkbSwapchain.swapchain;
+        *initInfo.swapchainImages      = initInfo.device.getSwapchainImagesKHR(*initInfo.swapchain);
+        *initInfo.swapchainImageFormat = vk::Format(vkbSwapchain.image_format);
 
-		// Get image views
-		const uint32_t swapchainImageCount = static_cast<uint32_t>(initInfo.swapchainImages->size());
-		initInfo.swapchainImageViews->resize(swapchainImageCount);
+        // Get image views
+        const auto swapchainImageCount = static_cast<uint32_t>(initInfo.swapchainImages->size());
+        initInfo.swapchainImageViews->resize(swapchainImageCount);
 
-		for (uint32_t i = 0; i < static_cast<uint32_t>(swapchainImageCount); i++)
-		{
-			vk::ImageViewCreateInfo createInfo{
-				.image = (*initInfo.swapchainImages)[i],
-				.viewType = vk::ImageViewType::e2D,
-				.format = *initInfo.swapchainImageFormat,
-				.components{
-					.r = vk::ComponentSwizzle::eIdentity,
-					.g = vk::ComponentSwizzle::eIdentity,
+        for (uint32_t i = 0; i < static_cast<uint32_t>(swapchainImageCount); i++)
+        {
+            vk::ImageViewCreateInfo createInfo {
+                .image    = (*initInfo.swapchainImages)[i],
+                .viewType = vk::ImageViewType::e2D,
+                .format   = *initInfo.swapchainImageFormat,
+                .components {
+                    .r = vk::ComponentSwizzle::eIdentity,
+                    .g = vk::ComponentSwizzle::eIdentity,
 					.b = vk::ComponentSwizzle::eIdentity,
 					.a = vk::ComponentSwizzle::eIdentity,
 				},

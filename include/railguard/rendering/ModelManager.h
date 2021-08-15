@@ -1,38 +1,45 @@
 #pragma once
 
-#include "../core/EntityManager.h"
-#include "../core/StandaloneManager.h"
-#include "MaterialManager.h"
+#include "railguard/core/StandaloneManager.h"
+#include "railguard/rendering/Ids.h"
 
-namespace railguard::rendering
+namespace railguard
 {
-    struct ModelManagerStorage
+    namespace core
     {
-        MaterialManager *materialManager;
-    };
+        struct Entity;
+    }
 
-    class ModelManager : public core::StandaloneManager<model_id_t, ModelManagerStorage>
+    namespace rendering
     {
-      private:
-        typedef core::StandaloneManager<model_id_t, ModelManagerStorage> super;
+        struct ModelManagerStorage
+        {
+            class MaterialManager *materialManager;
+        };
 
-        std::vector<material_id_t> _materials;
-        std::vector<std::vector<core::Entity>> _instances;
+        class ModelManager : public core::StandaloneManager<model_id_t, ModelManagerStorage>
+        {
+          private:
+            typedef core::StandaloneManager<model_id_t, ModelManagerStorage> super;
 
-      public:
-        void Init(ModelManagerStorage storage, size_t defaultCapacity = 30);
-        void Clear();
-        core::CompleteMatch<model_id_t> CreateModel(material_id_t material);
-        void DestroyModel(const core::Match &match);
+            std::vector<material_id_t> _materials;
+            std::vector<std::vector<core::Entity>> _instances;
 
-        void RegisterInstance(const core::Match &match, const core::Entity &instanceEntity);
-        void UnregisterInstance(const core::Match &match, const core::Entity &instanceEntity);
-        void ClearInstances(const core::Match &match);
-        void ClearAllInstances();
+          public:
+            ModelManager(ModelManagerStorage storage, size_t defaultCapacity);
+            void Clear() override;
+            core::CompleteMatch<model_id_t> CreateModel(material_id_t material);
+            void DestroyModel(const core::Match &match);
 
-        // Getters
-        material_id_t GetMaterial(const core::Match &match) const;
-        const std::vector<core::Entity> GetInstances(const core::Match &match) const;
-    };
+            void RegisterInstance(const core::Match &match, const core::Entity &instanceEntity);
+            void UnregisterInstance(const core::Match &match, const core::Entity &instanceEntity);
+            void ClearInstances(const core::Match &match);
+            void ClearAllInstances();
 
-} // namespace railguard::rendering
+            // Getters
+            [[nodiscard]] material_id_t GetMaterial(const core::Match &match) const;
+            [[nodiscard]] std::vector<core::Entity> GetInstances(const core::Match &match) const;
+        };
+
+    } // namespace rendering
+} // namespace railguard

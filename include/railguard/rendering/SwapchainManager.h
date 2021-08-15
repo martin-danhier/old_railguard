@@ -1,47 +1,51 @@
 #pragma once
 
-#include "../core/WindowManager.h"
-#include "../core/Match.h"
-#include "../core/StandaloneManager.h"
-#include "structs/Storages.h"
-#include "FrameManager.h"
-#include "Ids.h"
+#include "railguard/core/StandaloneManager.h"
+#include "railguard/rendering/Ids.h"
+#include "railguard/includes/Vulkan.h"
 
-namespace railguard::rendering
+namespace railguard
 {
-
-
-    struct SwapchainManagerStorage
+    namespace core
     {
-    public:
-        vk::Device vulkanDevice = nullptr;
-        vk::PhysicalDevice vulkanPhysicalDevice = nullptr;
-        const FrameManager *frameManager = nullptr;
-    };
+        class Match;
+        class WindowManager;
+    }
 
-    class SwapchainManager : public core::StandaloneManager<swapchain_id_t, SwapchainManagerStorage>
+    namespace rendering
     {
-    private:
-        // Typedef the parent type to make it easier to call from the methods
-        typedef core::StandaloneManager<swapchain_id_t, SwapchainManagerStorage> super;
+        struct SwapchainManagerStorage
+        {
+          public:
+            vk::Device vulkanDevice                 = nullptr;
+            vk::PhysicalDevice vulkanPhysicalDevice = nullptr;
+            const class FrameManager *frameManager  = nullptr;
+        };
 
-        std::vector<vk::SwapchainKHR> _swapchains;
-        std::vector<vk::Format> _swapchainImageFormats;
-        std::vector<vk::Extent2D> _viewportExtents;
-        // std::vector<vk::Format> _depthImageFormat;
-        std::vector<std::vector<vk::Image>> _swapchainsImages;
-        std::vector<std::vector<vk::ImageView>> _swapchainsImageViews;
-        std::vector<std::vector<vk::Framebuffer>> _frameBuffers;
+        class SwapchainManager : public core::StandaloneManager<swapchain_id_t, SwapchainManagerStorage>
+        {
+          private:
+            // Typedef the parent type to make it easier to call from the methods
+            typedef core::StandaloneManager<swapchain_id_t, SwapchainManagerStorage> super;
+
+            std::vector<vk::SwapchainKHR> _swapchains;
+            std::vector<vk::Format> _swapchainImageFormats;
+            std::vector<vk::Extent2D> _viewportExtents;
+            // std::vector<vk::Format> _depthImageFormat;
+            std::vector<std::vector<vk::Image>> _swapchainsImages;
+            std::vector<std::vector<vk::ImageView>> _swapchainsImageViews;
+            std::vector<std::vector<vk::Framebuffer>> _frameBuffers;
         std::vector<uint64_t> _lastTimeSubmitted;
         std::vector<uint32_t> _imageIndex;
 
+        void CleanUp();
     public:
-        void Init(SwapchainManagerStorage storage, size_t defaultCapacity = 1);
-
+        SwapchainManager(SwapchainManagerStorage storage, size_t defaultCapacity);
+        ~SwapchainManager();
         /**
          * @brief Destroys every remaining swapchain.
          */
-        void Clear();
+        void Clear() override;
 
         /**
          * @brief Create a swapchain that will be used to render on a window.
@@ -88,6 +92,8 @@ namespace railguard::rendering
         [[nodiscard]] std::vector<vk::Image> GetSwapchainImages(const core::Match &match) const;
         [[nodiscard]] std::vector<vk::ImageView> GetSwapchainImageViews(const core::Match &match) const;
         [[nodiscard]] std::vector<vk::Framebuffer> GetFramebuffers(const core::Match &match) const;
-        [[nodiscard]] const vk::Extent2D GetViewportExtent(const core::Match &match) const;
-    };
-}
+        [[nodiscard]] vk::Extent2D GetViewportExtent(const core::Match &match) const;
+
+        };
+    } // namespace rendering
+} // namespace railguard

@@ -1,15 +1,14 @@
-#include "../../include/rendering/ShaderModuleManager.h"
-#include "../../include/utils/GetError.h"
+#include "railguard/rendering/ShaderModuleManager.h"
+
+#include "railguard/utils/GetError.h"
+
 #include <fstream>
 #include <iostream>
 
 namespace railguard::rendering
 {
-    void ShaderModuleManager::Init(structs::DeviceStorage storage, size_t defaultCapacity)
+    ShaderModuleManager::ShaderModuleManager(structs::DeviceStorage storage, size_t defaultCapacity) : super(storage, defaultCapacity)
     {
-        // Call parent function
-        super::Init(storage, defaultCapacity);
-
         // Init vectors that weren't initialized by parent
         _stages.reserve(defaultCapacity);
         _modules.reserve(defaultCapacity);
@@ -20,10 +19,7 @@ namespace railguard::rendering
         super::Clear();
 
         // Destroy every module with the device
-        for (auto module : _modules)
-        {
-            _storage.vulkanDevice.destroyShaderModule(module);
-        }
+        CleanUp();
 
         // Once everything is properly destroyed, we can safely clear the vectors and the map
         _stages.clear();
@@ -68,7 +64,7 @@ namespace railguard::rendering
         // Cursor at the beginning
         file.seekg(0);
         // Load the file into the buffer
-        file.read((char *)buffer.data(), fileSize);
+        file.read((char *) buffer.data(), static_cast<int64_t>(fileSize));
         // Close the file
         file.close();
 
@@ -107,9 +103,21 @@ namespace railguard::rendering
         return _stages[match.GetIndex()];
     }
 
-    const vk::ShaderModule ShaderModuleManager::GetModule(const core::Match &match) const
+    vk::ShaderModule ShaderModuleManager::GetModule(const core::Match &match) const
     {
         return _modules[match.GetIndex()];
     }
+    void ShaderModuleManager::CleanUp()
+    {
+        // Destroy every module with the device
+        for (auto module : _modules)
+        {
+            _storage.vulkanDevice.destroyShaderModule(module);
+        }
+    }
+    ShaderModuleManager::~ShaderModuleManager()
+    {
+        CleanUp();
+    }
 
-}
+} // namespace railguard::rendering

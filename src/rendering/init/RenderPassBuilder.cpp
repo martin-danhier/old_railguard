@@ -1,4 +1,4 @@
-#include "../../../include/rendering/init/RenderPassBuilder.h"
+#include "railguard/rendering/init/RenderPassBuilder.h"
 
 namespace railguard::rendering::init
 {

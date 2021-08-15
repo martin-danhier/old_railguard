@@ -1,7 +1,5 @@
 #pragma once
 
-#include "../includes/Vulkan.h"
-
 // Various hardcoded constants used in the renderer. They are regrouped here for easy editing.
 
 // Some files also define constants, most of the time they are constants that only relate to that file in particular and shouldn't be accessible elsewhere.

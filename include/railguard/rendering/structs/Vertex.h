@@ -1,12 +1,10 @@
 #pragma once
 
 #include <glm/glm.hpp>
-#include "includes/Vulkan.h"
-#include <concepts>
-#include "VertexInputDescription.h"
 
 namespace railguard::rendering::structs
 {
+
     /**
      * @brief A single vertex in a mesh.
      */
@@ -25,7 +23,7 @@ namespace railguard::rendering::structs
          */
         glm::vec2 uv;
 
-        static VertexInputDescription GetVertexDescription();
+        static struct VertexInputDescription GetVertexDescription();
     };
 
 } // namespace railguard::rendering

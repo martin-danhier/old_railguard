@@ -1,15 +1,15 @@
 #pragma once
 
-#include "../core/StandaloneManager.h"
-#include "Ids.h"
-#include "MaterialTemplateManager.h"
+#include <railguard/core/StandaloneManager.h>
+#include <railguard/rendering/Ids.h>
+#include <railguard/rendering/enums/ShaderEffectKind.h>
 
 namespace railguard::rendering
 {
     struct MaterialManagerStorage
     {
-        const MaterialTemplateManager *materialTemplateManager;
-        const ShaderEffectManager *shaderEffectManager;
+        const class MaterialTemplateManager *materialTemplateManager;
+        const class ShaderEffectManager *shaderEffectManager;
     };
 
     class MaterialManager : public core::StandaloneManager<material_id_t, MaterialManagerStorage>
@@ -26,20 +26,20 @@ namespace railguard::rendering
 
         // Will contain textures later TODO
       public:
-        void Init(MaterialManagerStorage storage, size_t defaultCapacity = 10);
-        void Clear();
+        MaterialManager(MaterialManagerStorage storage, size_t defaultCapacity);
+        void Clear() override;
         core::CompleteMatch<material_id_t> CreateMaterial(material_template_id_t baseTemplate);
         void DestroyMaterial(const core::Match &match);
 
-        material_template_id_t GetMaterialTemplate(const core::Match &match) const;
-        const std::vector<model_id_t> GetModelsThatUseMaterial(uint32_t index) const;
-        const std::vector<model_id_t> GetModelsThatUseMaterial(const core::Match &match) const;
+        [[nodiscard]] material_template_id_t GetMaterialTemplate(const core::Match &match) const;
+        [[nodiscard]] std::vector<model_id_t> GetModelsThatUseMaterial(uint32_t index) const;
+        [[nodiscard]] std::vector<model_id_t> GetModelsThatUseMaterial(const core::Match &match) const;
 
         void RegisterModel(const core::Match &match, model_id_t modelId);
         void UnregisterModel(const core::Match &match, model_id_t modelId);
         void ClearModels(const core::Match &match);
         void ClearAllModels();
 
-        const std::vector<uint32_t> GetMaterialsWhichSupportKind(enums::ShaderEffectKind kind) const;
+        [[nodiscard]] std::vector<uint32_t> GetMaterialsWhichSupportKind(enums::ShaderEffectKind kind) const;
     };
 } // namespace railguard::rendering

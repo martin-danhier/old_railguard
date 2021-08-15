@@ -1,16 +1,15 @@
-#pragma once
+#ifndef ENTITY_H
+#define ENTITY_H
 
-#include <cinttypes>
-#include <ostream>
+#include <cstdint>
 
 namespace railguard::core
 {
-
     // === Config values for the ids ===
 
     // Type used to represent a full Entity id.
     //
-    // A typedef is used to allow better maintability:
+    // A typedef is used to allow better maintainability:
     // If the size of the integer type needs to be increased in the future,
     // all the function handling entities will instantly be updated with the new size.
     typedef uint64_t eid_t;
@@ -57,8 +56,6 @@ namespace railguard::core
         // Id of the entity itself
         eid_t eid;
 
-        Entity(const Entity &other) = default;
-        Entity(Entity &&other) = default;
         explicit Entity(eid_t id);
         explicit Entity(eid_t index, unique_eid_t unique);
 
@@ -72,11 +69,10 @@ namespace railguard::core
         bool operator!=(const Entity &other) const;
         bool operator!=(const Entity &&other) const;
 
-        Entity &operator=(Entity &&other) = default;
-        Entity &operator=(Entity &other) = default;
-
         // Pretty prints an entity when placed in a cout
-        friend std::ostream &operator<<(std::ostream &os, const Entity &rhs);
+        //        friend std::ostream &operator<<(std::ostream &os, const Entity &rhs);
     };
 
-}
+} // namespace railguard::core
+
+#endif // ENTITY_H

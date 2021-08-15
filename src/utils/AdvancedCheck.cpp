@@ -1,4 +1,4 @@
-#include "../../include/utils/AdvancedCheck.h"
+#include "railguard/utils/AdvancedCheck.h"
 
 #ifdef USE_ADVANCED_CHECKS
 

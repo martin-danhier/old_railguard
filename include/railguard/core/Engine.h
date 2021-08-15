@@ -1,10 +1,11 @@
-#pragma once
+#ifndef ENGINE_H
+#define ENGINE_H
 
 // Forward declaration of what we need
-namespace vk
-{
-    class Extent2D;
-} // namespace vk
+//namespace vk
+//{
+//    struct Extent2D;
+//} // namespace vk
 
 namespace railguard
 {
@@ -42,8 +43,10 @@ namespace railguard
              *
              * @param newSize New size of the window.
              */
-            void OnWindowResized(const vk::Extent2D &newSize);
+//            void OnWindowResized(const vk::Extent2D &newSize);
         };
 
     } // namespace core
 } // namespace railguard
+
+#endif // ENGINE_H

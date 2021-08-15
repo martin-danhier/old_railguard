@@ -1,12 +1,12 @@
-#include "../../include/rendering/RenderNodeManager.h"
+#include <railguard/rendering/ModelManager.h>
+#include <railguard/rendering/RenderNodeManager.h>
+#include <vulkan/vulkan.h>
 
 namespace railguard::rendering
 {
-
-    void RenderNodeManager::Init(RenderNodeManagerStorage storage, const size_t defaultComponentCapacity)
+    RenderNodeManager::RenderNodeManager(RenderNodeManagerStorage storage, const size_t defaultComponentCapacity)
+        : super(storage, defaultComponentCapacity)
     {
-        super::Init(storage, defaultComponentCapacity);
-
         _models.reserve(defaultComponentCapacity);
         _transforms.reserve(defaultComponentCapacity);
     }

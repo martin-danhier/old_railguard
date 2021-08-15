@@ -1,21 +1,17 @@
-#include "../../include/rendering/AllocationManager.h"
-#include "../../include/utils/AdvancedCheck.h"
+#include "railguard/rendering/AllocationManager.h"
 
-#ifdef USE_ADVANCED_CHECKS
-#define INITIALIZED_TWICE_ERROR "AllocationManager should not be initialized twice."
-#define NOT_INITIALIZED_ERROR "AllocationManager should be initialized with Init before calling this method."
-#endif
+#include "railguard/rendering/structs/AllocatedStructs.h"
 
 namespace railguard::rendering
 {
-    void AllocationManager::Init(const vk::PhysicalDevice &physicalDevice, const vk::Device &device, const vk::Instance &instance)
+    AllocationManager::AllocationManager(const vk::PhysicalDevice &physicalDevice,
+                                         const vk::Device &device,
+                                         const vk::Instance &instance)
     {
-        ADVANCED_CHECK(!_initialized, INITIALIZED_TWICE_ERROR);
-
         // Init allocator
         // Give VMA the functions pointers of vulkan functions
         // We need to do that since we load them dynamically
-        VmaVulkanFunctions vulkanFunctions{
+        VmaVulkanFunctions vulkanFunctions {
             VULKAN_HPP_DEFAULT_DISPATCHER.vkGetPhysicalDeviceProperties,
             VULKAN_HPP_DEFAULT_DISPATCHER.vkGetPhysicalDeviceMemoryProperties,
             VULKAN_HPP_DEFAULT_DISPATCHER.vkAllocateMemory,
@@ -48,22 +44,20 @@ namespace railguard::rendering
         vmaCreateAllocator(&allocatorInfo, &_allocator);
     }
 
-    void AllocationManager::CleanUp()
+    AllocationManager::~AllocationManager()
     {
         // Destroy allocator
         vmaDestroyAllocator(_allocator);
     }
 
-
-    [[nodiscard]] structs::AllocatedBuffer AllocationManager::CreateBuffer(size_t allocationSize, vk::BufferUsageFlags bufferUsage, VmaMemoryUsage memoryUsage)
+    structs::AllocatedBuffer
+        AllocationManager::CreateBuffer(size_t allocationSize, vk::BufferUsageFlags bufferUsage, VmaMemoryUsage memoryUsage)
     {
-        ADVANCED_CHECK(_initialized, NOT_INITIALIZED_ERROR);
-
         // Create a new allocated buffer
         structs::AllocatedBuffer newBuffer {
-            .buffer = nullptr,
+            .buffer     = nullptr,
             .allocation = nullptr,
-            .size = allocationSize,
+            .size       = allocationSize,
         };
 
         // Buffer info

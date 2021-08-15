@@ -1,11 +1,13 @@
-#include <vector>
-#include <string>
-#include <map>
+#ifndef EVENT_SENDER_H
+#define EVENT_SENDER_H
+
 #include <functional>
+#include <map>
+
 
 namespace railguard::core
 {
-    template <class T>
+    template<class T>
     using EventHandler = std::function<void(const T &)>;
 
     /**
@@ -67,3 +69,5 @@ namespace railguard::core
         }
     };
 } // namespace railguard::core
+
+#endif // EVENT_SENDER_H

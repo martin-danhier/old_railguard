@@ -1,19 +1,36 @@
 #pragma once
 
-#include <vector>
-#include <glm/glm.hpp>
-#include "./init/CameraInitInfo.h"
-#include "../core/ComponentManager.h"
-#include "./SwapchainManager.h"
-#include "enums/CameraMode.h"
-#include "structs/CameraRenderInfo.h"
+#include "railguard/core/ComponentManager.h"
+#include "railguard/rendering/Ids.h"
 
+#include <glm/glm.hpp>
+#include <vector>
+
+namespace vk
+{
+    union ClearValue;
+    class RenderPass;
+} // namespace vk
 
 namespace railguard::rendering
 {
+    // Forward declarations
+    namespace init
+    {
+        struct SwapchainCameraInitInfo;
+    }
+    namespace structs
+    {
+        struct CameraRenderInfo;
+    }
+    namespace enums {
+        enum class CameraMode : uint32_t ;
+    }
 
-    struct SwapchainCameraManagerStorage {
-        SwapchainManager *swapchainManager;
+    // Define storage type
+    struct SwapchainCameraManagerStorage
+    {
+        class SwapchainManager *swapchainManager;
     };
 
     /**
@@ -21,7 +38,8 @@ namespace railguard::rendering
      *
      * This component can be attached to entities in order to give them a camera.
      *
-     * These cameras can be used to render images to the window, for example. To render to a texture, see RenderTextureCameraManager (TODO).
+     * These cameras can be used to render images to the window, for example. To render to a texture, see RenderTextureCameraManager
+     * (TODO).
      */
     class SwapchainCameraManager : public core::ComponentManager<SwapchainCameraManagerStorage>
     {
@@ -84,12 +102,10 @@ namespace railguard::rendering
 
         uint32_t _lastNbOfActiveCameras = 1;
 
+      public:
+        SwapchainCameraManager(SwapchainCameraManagerStorage storage, size_t defaultComponentCapacity);
 
-
-    public:
-        void Init(SwapchainCameraManagerStorage storage, const size_t defaultComponentCapacity = 1);
-
-        void Clear();
+        void Clear() override;
 
         /**
          * @brief Create a new Camera component for the given entity
@@ -99,7 +115,7 @@ namespace railguard::rendering
          * @return core::Match linking the entity to its component slot
          */
         core::Match CreateComponent(const core::Entity &entity, const init::SwapchainCameraInitInfo &initInfo);
-        void DestroyComponent(const core::Match &match);
+        void DestroyComponent(const core::Match &match) override;
 
         // Getters
 

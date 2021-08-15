@@ -1,11 +1,12 @@
-#include "../../include/rendering/MaterialTemplateManager.h"
+#include "railguard/rendering/MaterialTemplateManager.h"
+
+#include "railguard/rendering/ShaderEffectManager.h"
+#include "railguard/rendering/enums/ShaderEffectKind.h"
 
 namespace railguard::rendering
 {
-    void MaterialTemplateManager::Init(MaterialTemplateManagerStorage storage, size_t defaultCapacity)
+    MaterialTemplateManager::MaterialTemplateManager(MaterialTemplateManagerStorage storage, size_t defaultCapacity): super(storage, defaultCapacity)
     {
-        super::Init(storage, defaultCapacity);
-
         _shaderEffects.reserve(defaultCapacity);
         _kinds.reserve(defaultCapacity);
     }
@@ -18,13 +19,15 @@ namespace railguard::rendering
         _kinds.clear();
     }
 
-    core::CompleteMatch<material_template_id_t> MaterialTemplateManager::CreateMaterialTemplate(std::vector<shader_effect_id_t> shaderEffects)
+    core::CompleteMatch<material_template_id_t>
+        MaterialTemplateManager::CreateMaterialTemplate(const std::vector<shader_effect_id_t> &shaderEffects)
     {
         _shaderEffects.push_back(shaderEffects);
 
         enums::ShaderEffectKind kinds = enums::ShaderEffectKind::None;
-        for (auto effectId : shaderEffects) {
-            auto effect = _storage.shaderEffectManager->LookupId(effectId);
+        for (auto effectId : shaderEffects)
+        {
+            auto effect     = _storage.shaderEffectManager->LookupId(effectId);
             auto effectKind = _storage.shaderEffectManager->GetEffectKind(effect);
 
             // Amalgamate the kinds of all available shaders in one value so we can easily know if we have a certain kind or not
@@ -49,7 +52,7 @@ namespace railguard::rendering
         if (index < lastIndex)
         {
             _shaderEffects[index] = _shaderEffects[lastIndex];
-            _kinds[index] = _kinds[lastIndex];
+            _kinds[index]         = _kinds[lastIndex];
         }
 
         // Destroy the last item
@@ -57,15 +60,10 @@ namespace railguard::rendering
         _kinds.pop_back();
     }
 
-    bool MaterialTemplateManager::HasEffect(const core::Match &match, shader_effect_id_t effectId) const {
-        for (auto id : _shaderEffects[match.GetIndex()]) {
-            if (id == effectId) {
-                return true;
-            }
-        }
-
-        // None found
-        return false;
+    bool MaterialTemplateManager::HasEffect(const core::Match &match, shader_effect_id_t effectId) const
+    {
+        // Look if at least one of the effects is equal to the given one
+        return std::ranges::any_of(_shaderEffects[match.GetIndex()], [effectId](int a) { return effectId == a; });
     }
 
     bool MaterialTemplateManager::HasEffectForKind(const core::Match &match, enums::ShaderEffectKind kind) const
@@ -73,12 +71,12 @@ namespace railguard::rendering
         return static_cast<bool>(_kinds[match.GetIndex()] & kind);
     }
 
-    const std::vector<shader_effect_id_t> MaterialTemplateManager::GetShaderEffects(const core::Match &match) const
+    std::vector<shader_effect_id_t> MaterialTemplateManager::GetShaderEffects(const core::Match &match) const
     {
         return _shaderEffects[match.GetIndex()];
     }
 
-    const std::vector<material_template_id_t> MaterialTemplateManager::GetMaterialTemplatesWithEffectForKind(enums::ShaderEffectKind kind) const {
+    std::vector<material_template_id_t> MaterialTemplateManager::GetMaterialTemplatesWithEffectForKind(enums::ShaderEffectKind kind) const {
         std::vector<material_template_id_t> result;
 
         for (uint32_t i = 0; i < _kinds.size(); i++) {
@@ -90,7 +88,7 @@ namespace railguard::rendering
         return result;
     }
 
-    const std::vector<material_template_id_t> MaterialTemplateManager::GetMaterialTemplatesWithEffects(const std::vector<shader_effect_id_t> &shaderEffectsIds) const {
+    std::vector<material_template_id_t> MaterialTemplateManager::GetMaterialTemplatesWithEffects(const std::vector<shader_effect_id_t> &shaderEffectsIds) const {
         std::vector<material_template_id_t> result;
         // TODO smart thing for reserve
         result.reserve(_shaderEffects.size());
@@ -119,5 +117,6 @@ namespace railguard::rendering
 
         return result;
     }
+
 
 } // namespace railguard::rendering

@@ -1,21 +1,19 @@
-#include "../../include/rendering/SwapchainManager.h"
-#include "../../include/rendering/init/VulkanInit.h"
-#include "../../include/utils/AdvancedCheck.h"
-#include "../../include/rendering/Settings.h"
+#include <railguard/core/WindowManager.h>
+#include <railguard/rendering/FrameManager.h>
+#include <railguard/rendering/SwapchainManager.h>
+#include <railguard/rendering/init/SwapchainInitInfo.h>
+#include <railguard/rendering/init/VulkanInit.h>
+#include <railguard/utils/AdvancedCheck.h>
 
 #ifdef USE_ADVANCED_CHECKS
-// Define local error messages
-#define NOT_INITIALIZED_ERROR "SwapchainManager should be initialized with Init before calling this method."
+    // Define local error messages
+    #define NOT_INITIALIZED_ERROR "SwapchainManager should be initialized with Init before calling this method."
 #endif
 
 namespace railguard::rendering
 {
-
-    void SwapchainManager::Init(SwapchainManagerStorage storage, size_t defaultCapacity)
+    SwapchainManager::SwapchainManager(SwapchainManagerStorage storage, size_t defaultCapacity) : super(storage, defaultCapacity)
     {
-        // Call parent function
-        super::Init(storage, defaultCapacity);
-
         // Init vectors that weren't initialized by parent
         _swapchains.reserve(defaultCapacity);
         _swapchainImageFormats.reserve(defaultCapacity);
@@ -27,12 +25,11 @@ namespace railguard::rendering
         _imageIndex.reserve(defaultCapacity);
     }
 
-    void SwapchainManager::Clear()
+    void SwapchainManager::CleanUp()
     {
-        super::Clear();
-
+        // Clean up without clearing vectors
         // Destroy the framebuffers
-        for (auto framebufferVector : _frameBuffers)
+        for (const auto &framebufferVector : _frameBuffers)
         {
             for (auto framebuffer : framebufferVector)
             {
@@ -41,7 +38,7 @@ namespace railguard::rendering
         }
 
         // Destroy image views
-        for (auto imageViewVector : _swapchainsImageViews)
+        for (const auto &imageViewVector : _swapchainsImageViews)
         {
             for (auto imageView : imageViewVector)
             {
@@ -55,6 +52,14 @@ namespace railguard::rendering
         {
             _storage.vulkanDevice.destroySwapchainKHR(swapchain);
         }
+    }
+
+    void SwapchainManager::Clear()
+    {
+        super::Clear();
+
+        // Clean up everything
+        CleanUp();
 
         // Clear everything
         _swapchains.clear();
@@ -157,8 +162,6 @@ namespace railguard::rendering
 
     void SwapchainManager::RecreateWindowSwapchain(const core::Match &match, const vk::SurfaceKHR &surface, const vk::Extent2D &newExtent, const vk::RenderPass &renderPass)
     {
-        ADVANCED_CHECK(_initialized, NOT_INITIALIZED_ERROR);
-
         // Get index
         auto index = match.GetIndex();
 
@@ -323,8 +326,13 @@ namespace railguard::rendering
         return _frameBuffers[match.GetIndex()];
     }
 
-    const vk::Extent2D SwapchainManager::GetViewportExtent(const core::Match &match) const
+    vk::Extent2D SwapchainManager::GetViewportExtent(const core::Match &match) const
     {
         return _viewportExtents[match.GetIndex()];
     }
-}
+
+    SwapchainManager::~SwapchainManager()
+    {
+        CleanUp();
+    }
+} // namespace railguard::rendering
