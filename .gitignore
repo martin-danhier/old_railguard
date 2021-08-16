@@ -2,6 +2,7 @@
 Makefile
 *.make
 build
+cmakebuild
 bin
 *.log
 *.spv

@@ -3,6 +3,7 @@
 
 #include <functional>
 #include <map>
+#include <string>
 
 
 namespace railguard::core

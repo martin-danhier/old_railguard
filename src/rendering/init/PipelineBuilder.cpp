@@ -160,7 +160,7 @@ namespace railguard::rendering::init
     PipelineBuilder PipelineBuilder::GetDefaultsForExtent(vk::Extent2D windowExtent)
     {
         // Setup a viewport that takes the whole screen
-        WithViewport(0.0f, 0.0f, static_cast<float_t>(windowExtent.width), static_cast<float_t>(windowExtent.height), 0.0f, 1.0f);
+        WithViewport(0.0f, 0.0f, static_cast<float>(windowExtent.width), static_cast<float>(windowExtent.height), 0.0f, 1.0f);
         WithScissors(0, 0, windowExtent);
 
         return *this;

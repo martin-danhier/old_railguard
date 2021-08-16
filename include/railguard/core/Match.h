@@ -1,13 +1,9 @@
 #pragma once
-#include <concepts>
+#include <railguard/utils/IntegralConcept.h>
 #include <cstddef>
 
 namespace railguard::core
 {
-    // Forward declaration of the CompleteMatch so it can be used in Match
-    template <std::integral T>
-    class CompleteMatch;
-
     // Represents an index in a component manager.
     // Created for example by calling ComponentManager.FindComponentOfEntity or by creating a component
     // Contains either the index of the corresponding component or nothing (in case no component was found)
@@ -30,7 +26,7 @@ namespace railguard::core
 
     // Take the type of the original ID as a template parameter.
     // We use concepts to force it to be an integral type
-    template <std::integral T>
+    template <utils::integral T>
     class CompleteMatch : public Match
     {
     private:

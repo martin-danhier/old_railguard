@@ -1,5 +1,6 @@
 #include "railguard/core/EntityManager.h"
 #include <cassert>
+#include <cstddef>
 
 #define MIN_FREED_INDICES_BEFORE_REUSE 1024
 
