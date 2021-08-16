@@ -23,8 +23,9 @@ namespace railguard::rendering
     {
         struct CameraRenderInfo;
     }
-    namespace enums {
-        enum class CameraMode : uint32_t ;
+    namespace enums
+    {
+        enum class CameraMode : uint32_t;
     }
 
     // Define storage type
@@ -43,7 +44,7 @@ namespace railguard::rendering
      */
     class SwapchainCameraManager : public core::ComponentManager<SwapchainCameraManagerStorage>
     {
-    private:
+      private:
         // Typedef the parent type to make it easier to call from the methods
         typedef core::ComponentManager<SwapchainCameraManagerStorage> super;
 
@@ -144,4 +145,4 @@ namespace railguard::rendering
          */
         [[nodiscard]] std::vector<structs::CameraRenderInfo> GetRenderInfos(const vk::RenderPass &renderPass);
     };
-}
+} // namespace railguard::rendering

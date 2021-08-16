@@ -2,7 +2,6 @@
 
 namespace railguard::rendering::init
 {
-
     AttachmentBuilder AttachmentBuilder::SetFormat(vk::Format format)
     {
         _format = format;
@@ -49,17 +48,17 @@ namespace railguard::rendering::init
 
     vk::AttachmentDescription AttachmentBuilder::Build()
     {
-        return vk::AttachmentDescription{
+        return vk::AttachmentDescription {
             .format = _format,
             // No multisampling, so 1 sample
             // TODO maybe later
-            .samples = vk::SampleCountFlagBits::e1,
-            .loadOp = _loadOp,
-            .storeOp = _storeOp,
-            .stencilLoadOp = _stencilLoadOp,
+            .samples        = vk::SampleCountFlagBits::e1,
+            .loadOp         = _loadOp,
+            .storeOp        = _storeOp,
+            .stencilLoadOp  = _stencilLoadOp,
             .stencilStoreOp = _stencilStoreOp,
-            .initialLayout = vk::ImageLayout::eUndefined,
-            .finalLayout = _finalLayout,
+            .initialLayout  = vk::ImageLayout::eUndefined,
+            .finalLayout    = _finalLayout,
         };
     }
 
@@ -68,14 +67,14 @@ namespace railguard::rendering::init
         _attachments.push_back(attachment);
 
         // Save reference to the attachment
-        _attachmentReferences.push_back(vk::AttachmentReference{
+        _attachmentReferences.push_back(vk::AttachmentReference {
             .attachment = static_cast<uint32_t>(_attachments.size()) - 1,
-            .layout = vk::ImageLayout::eColorAttachmentOptimal,
+            .layout     = vk::ImageLayout::eColorAttachmentOptimal,
         });
 
         // Only allow 1 color attachment for now max.
         _subpass.colorAttachmentCount = 1;
-        _subpass.pColorAttachments = &_attachmentReferences[_attachmentReferences.size() - 1];
+        _subpass.pColorAttachments    = &_attachmentReferences[_attachmentReferences.size() - 1];
 
         return *this;
     }
@@ -85,9 +84,9 @@ namespace railguard::rendering::init
         _attachments.push_back(attachment);
 
         // Save reference to the attachment
-        _attachmentReferences.push_back(vk::AttachmentReference{
+        _attachmentReferences.push_back(vk::AttachmentReference {
             .attachment = static_cast<uint32_t>(_attachments.size()) - 1,
-            .layout = vk::ImageLayout::eDepthStencilAttachmentOptimal,
+            .layout     = vk::ImageLayout::eDepthStencilAttachmentOptimal,
         });
 
         // Only allow 1 color attachment for now max.
@@ -105,11 +104,11 @@ namespace railguard::rendering::init
 
     vk::RenderPass RenderPassBuilder::Build(const vk::Device &device)
     {
-        vk::RenderPassCreateInfo renderPassCreateInfo{
+        vk::RenderPassCreateInfo renderPassCreateInfo {
             .attachmentCount = static_cast<uint32_t>(_attachments.size()),
-            .pAttachments = _attachments.data(),
-            .subpassCount = 1,
-            .pSubpasses = &_subpass,
+            .pAttachments    = _attachments.data(),
+            .subpassCount    = 1,
+            .pSubpasses      = &_subpass,
         };
         return device.createRenderPass(renderPassCreateInfo);
     }

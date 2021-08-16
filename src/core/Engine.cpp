@@ -4,8 +4,8 @@
 #include <railguard/core/WindowManager.h>
 #include <railguard/rendering/Renderer.h>
 #include <railguard/rendering/SwapchainCameraManager.h>
-#include <railguard/utils/Colors.h>
 #include <railguard/rendering/init/CameraInitInfo.h>
+#include <railguard/utils/Colors.h>
 
 #define DEFAULT_ENTITY_MANAGER_CAPACITY 1000
 

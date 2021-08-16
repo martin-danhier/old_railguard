@@ -44,7 +44,6 @@ namespace railguard::core
          */
         Match RegisterComponent(const Entity &entity)
         {
-
             // Add the entity in the list
             _entities.push_back(entity);
             // Store the index of the new variable + 1

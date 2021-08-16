@@ -79,7 +79,7 @@ namespace railguard::rendering
     void ShaderEffectManager::DestroyShaderEffect(const core::Match &match)
     {
         // Get index
-        auto index = match.GetIndex();
+        auto index             = match.GetIndex();
         const size_t lastIndex = _ids.size() - 1;
 
         // Run boilerplate deletion
@@ -98,9 +98,9 @@ namespace railguard::rendering
         if (index < lastIndex)
         {
             _pipelineLayouts[index] = _pipelineLayouts[lastIndex];
-            _pipelines[index] = _pipelines[lastIndex];
-            _shaderStages[index] = _shaderStages[lastIndex];
-            _effectKinds[index] = _effectKinds[lastIndex];
+            _pipelines[index]       = _pipelines[lastIndex];
+            _shaderStages[index]    = _shaderStages[lastIndex];
+            _effectKinds[index]     = _effectKinds[lastIndex];
         }
 
         // Destroy the last item

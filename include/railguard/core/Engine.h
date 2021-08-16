@@ -2,7 +2,7 @@
 #define ENGINE_H
 
 // Forward declaration of what we need
-//namespace vk
+// namespace vk
 //{
 //    struct Extent2D;
 //} // namespace vk
@@ -13,7 +13,7 @@ namespace railguard
     {
         class Renderer;
     } // namespace rendering
-    
+
     namespace core
     {
         /**
@@ -24,8 +24,8 @@ namespace railguard
           private:
             class EntityManager *_entityManager = nullptr;
             class WindowManager *_windowManager = nullptr;
-            rendering::Renderer *_renderer = nullptr;
-            double _deltaTime = 0;
+            rendering::Renderer *_renderer      = nullptr;
+            double _deltaTime                   = 0;
 
           public:
             explicit Engine();
@@ -43,7 +43,7 @@ namespace railguard
              *
              * @param newSize New size of the window.
              */
-//            void OnWindowResized(const vk::Extent2D &newSize);
+            //            void OnWindowResized(const vk::Extent2D &newSize);
         };
 
     } // namespace core

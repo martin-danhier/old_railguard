@@ -37,7 +37,7 @@ namespace railguard::rendering
 
     void RenderNodeManager::DestroyComponent(const core::Match &match)
     {
-        auto index = match.GetIndex();
+        auto index     = match.GetIndex();
         auto lastIndex = _models.size() - 1;
 
         // Notify deletion to model
@@ -49,7 +49,7 @@ namespace railguard::rendering
         // Move last to deleted one if it is not the last
         if (index < lastIndex)
         {
-            _models[index] = _models[lastIndex];
+            _models[index]     = _models[lastIndex];
             _transforms[index] = _transforms[lastIndex];
         }
 
@@ -62,7 +62,8 @@ namespace railguard::rendering
         return _models[match.GetIndex()];
     }
 
-    [[nodiscard]] glm::mat4 RenderNodeManager::GetTransform(const core::Match &match) const {
+    [[nodiscard]] glm::mat4 RenderNodeManager::GetTransform(const core::Match &match) const
+    {
         return _transforms[match.GetIndex()];
     }
 

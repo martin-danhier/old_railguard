@@ -7,7 +7,7 @@
 
 namespace railguard::rendering
 {
-    ModelManager::ModelManager(ModelManagerStorage storage, size_t defaultCapacity): super(storage, defaultCapacity)
+    ModelManager::ModelManager(ModelManagerStorage storage, size_t defaultCapacity) : super(storage, defaultCapacity)
     {
         // Init vectors
         _materials.reserve(defaultCapacity);
@@ -42,9 +42,8 @@ namespace railguard::rendering
 
     void ModelManager::DestroyModel(const core::Match &match)
     {
-
         // Get index
-        const auto index = match.GetIndex();
+        const auto index       = match.GetIndex();
         const size_t lastIndex = _ids.size() - 1;
 
         // Signal the destruction to the material
@@ -85,7 +84,8 @@ namespace railguard::rendering
         _instances[match.GetIndex()].clear();
     }
 
-    std::vector<core::Entity> ModelManager::GetInstances(const core::Match &match) const {
+    std::vector<core::Entity> ModelManager::GetInstances(const core::Match &match) const
+    {
         return _instances[match.GetIndex()];
     }
 

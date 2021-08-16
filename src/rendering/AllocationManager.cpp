@@ -35,11 +35,11 @@ namespace railguard::rendering
             VULKAN_HPP_DEFAULT_DISPATCHER.vkBindImageMemory2KHR,
             VULKAN_HPP_DEFAULT_DISPATCHER.vkGetPhysicalDeviceMemoryProperties2KHR,
         };
-        VmaAllocatorCreateInfo allocatorInfo{
-            .physicalDevice = physicalDevice,
-            .device = device,
+        VmaAllocatorCreateInfo allocatorInfo {
+            .physicalDevice   = physicalDevice,
+            .device           = device,
             .pVulkanFunctions = &vulkanFunctions,
-            .instance = instance,
+            .instance         = instance,
         };
         vmaCreateAllocator(&allocatorInfo, &_allocator);
     }
@@ -61,19 +61,22 @@ namespace railguard::rendering
         };
 
         // Buffer info
-        vk::BufferCreateInfo bufferCreateInfo{
-            .size = allocationSize,
+        vk::BufferCreateInfo bufferCreateInfo {
+            .size  = allocationSize,
             .usage = bufferUsage,
         };
 
         // Allocation info
-        VmaAllocationCreateInfo allocationCreateInfo{};
+        VmaAllocationCreateInfo allocationCreateInfo {};
         allocationCreateInfo.usage = memoryUsage;
 
         // Create the buffer
-        vmaCreateBuffer(_allocator, reinterpret_cast<VkBufferCreateInfo *>(&bufferCreateInfo),
-                        &allocationCreateInfo, reinterpret_cast<VkBuffer *>(&newBuffer.buffer),
-                        &newBuffer.allocation, nullptr);
+        vmaCreateBuffer(_allocator,
+                        reinterpret_cast<VkBufferCreateInfo *>(&bufferCreateInfo),
+                        &allocationCreateInfo,
+                        reinterpret_cast<VkBuffer *>(&newBuffer.buffer),
+                        &newBuffer.allocation,
+                        nullptr);
 
         return newBuffer;
     }
@@ -84,11 +87,10 @@ namespace railguard::rendering
         vmaDestroyBuffer(_allocator, buffer.buffer, buffer.allocation);
 
         // Set values to 0 to make clear that this isn't valid anymore
-        buffer.buffer = nullptr;
+        buffer.buffer     = nullptr;
         buffer.allocation = nullptr;
-        buffer.size = 0;
+        buffer.size       = 0;
     }
-
 
     [[nodiscard]] void *AllocationManager::MapBuffer(const structs::AllocatedBuffer &buffer)
     {

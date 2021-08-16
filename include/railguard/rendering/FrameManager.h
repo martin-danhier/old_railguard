@@ -1,12 +1,12 @@
 #pragma once
 
-#include "railguard/rendering/Settings.h"
 #include "railguard/includes/Vulkan.h"
-
+#include "railguard/rendering/Settings.h"
 
 namespace railguard::rendering
 {
-    struct FrameData {
+    struct FrameData
+    {
         vk::CommandPool commandPool;
         vk::CommandBuffer commandBuffer;
         vk::Fence renderFence;
@@ -16,7 +16,7 @@ namespace railguard::rendering
 
     class FrameManager
     {
-    private:
+      private:
         // Ref to device
         vk::Device _device = nullptr;
 
@@ -32,8 +32,7 @@ namespace railguard::rendering
         vk::Semaphore _renderSemaphores[NB_OVERLAPPING_FRAMES];
         vk::Fence _renderFences[NB_OVERLAPPING_FRAMES];
 
-
-    public:
+      public:
         FrameManager(const vk::Device &device, uint32_t graphicsQueueFamily);
         ~FrameManager();
         /**
@@ -57,14 +56,14 @@ namespace railguard::rendering
         [[nodiscard]] vk::CommandPool GetCurrentCommandPool() const;
         [[nodiscard]] vk::CommandBuffer GetCurrentCommandBuffer() const;
         [[nodiscard]] vk::Fence GetCurrentRenderFence() const;
-        [[nodiscard]] const vk::Semaphore* GetCurrentRenderSemaphore() const;
-        [[nodiscard]] const vk::Semaphore* GetCurrentPresentSemaphore() const;
+        [[nodiscard]] const vk::Semaphore *GetCurrentRenderSemaphore() const;
+        [[nodiscard]] const vk::Semaphore *GetCurrentPresentSemaphore() const;
 
         [[nodiscard]] FrameData GetFrame(uint32_t index) const;
         [[nodiscard]] vk::CommandPool GetCommandPool(uint32_t index) const;
         [[nodiscard]] vk::CommandBuffer GetCommandBuffer(uint32_t index) const;
         [[nodiscard]] vk::Fence GetRenderFence(uint32_t index) const;
-        [[nodiscard]] const vk::Semaphore* GetRenderSemaphore(uint32_t index) const;
-        [[nodiscard]] const vk::Semaphore* GetPresentSemaphore(uint32_t index) const;
+        [[nodiscard]] const vk::Semaphore *GetRenderSemaphore(uint32_t index) const;
+        [[nodiscard]] const vk::Semaphore *GetPresentSemaphore(uint32_t index) const;
     };
-}
+} // namespace railguard::rendering

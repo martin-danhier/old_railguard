@@ -17,8 +17,9 @@ namespace railguard::core
         CreateWindow();
     }
 
-    void WindowManager::HandleError() {
-        std::cerr << "[SDL Error]\n" << SDL_GetError() << '\n'; 
+    void WindowManager::HandleError()
+    {
+        std::cerr << "[SDL Error]\n" << SDL_GetError() << '\n';
     }
 
     void WindowManager::CreateWindow()
@@ -56,7 +57,8 @@ namespace railguard::core
         return SDL_GetPerformanceFrequency();
     }
 
-    std::vector<const char*> WindowManager::GetRequiredVulkanExtensions() const {
+    std::vector<const char *> WindowManager::GetRequiredVulkanExtensions() const
+    {
         // Get the number of required extensions
         uint32_t sdlRequiredExtensionsCount = 0;
         if (!SDL_Vulkan_GetInstanceExtensions(_window, &sdlRequiredExtensionsCount, nullptr))
@@ -71,10 +73,12 @@ namespace railguard::core
         return sdlRequiredExtensions;
     }
 
-    vk::SurfaceKHR WindowManager::GetVulkanSurface(vk::Instance instance) const {
+    vk::SurfaceKHR WindowManager::GetVulkanSurface(vk::Instance instance) const
+    {
         VkSurfaceKHR surface;
         // Generate surface
-        if (!SDL_Vulkan_CreateSurface(_window, instance, &surface)) HandleError();
+        if (!SDL_Vulkan_CreateSurface(_window, instance, &surface))
+            HandleError();
         return vk::SurfaceKHR(surface);
     }
 
@@ -95,10 +99,7 @@ namespace railguard::core
             {
                 if (event.window.event == SDL_WINDOWEVENT_RESIZED)
                 {
-                    _resizeEvent.SendEvent({
-                        static_cast<uint32_t>(event.window.data1),
-                        static_cast<uint32_t>(event.window.data2)
-                    });
+                    _resizeEvent.SendEvent({static_cast<uint32_t>(event.window.data1), static_cast<uint32_t>(event.window.data2)});
                 }
             }
             // ...
@@ -108,15 +109,17 @@ namespace railguard::core
         return shouldQuit;
     }
 
-    EventSender<vk::Extent2D> & WindowManager::ResizeEvent() {
+    EventSender<vk::Extent2D> &WindowManager::ResizeEvent()
+    {
         return _resizeEvent;
     }
 
-    vk::Extent2D WindowManager::GetWindowExtent() const {
+    vk::Extent2D WindowManager::GetWindowExtent() const
+    {
         return vk::Extent2D {
-            .width = _width,
+            .width  = _width,
             .height = _height,
         };
     }
 
-} // namespace core
+} // namespace railguard::core

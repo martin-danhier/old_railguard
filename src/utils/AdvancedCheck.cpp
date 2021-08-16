@@ -2,7 +2,7 @@
 
 #ifdef USE_ADVANCED_CHECKS
 
-#include <iostream>
+    #include <iostream>
 
 namespace railguard::utils
 {
@@ -11,11 +11,10 @@ namespace railguard::utils
         // The condition must be true
         if (!condition)
         {
-            std::cerr << "\n[Error]\n"
-                      << message << std::endl;
+            std::cerr << "\n[Error]\n" << message << std::endl;
             throw std::runtime_error(message);
         }
     }
-}
+} // namespace railguard::utils
 
 #endif

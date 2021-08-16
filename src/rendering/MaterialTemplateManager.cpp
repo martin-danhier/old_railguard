@@ -5,7 +5,8 @@
 
 namespace railguard::rendering
 {
-    MaterialTemplateManager::MaterialTemplateManager(MaterialTemplateManagerStorage storage, size_t defaultCapacity): super(storage, defaultCapacity)
+    MaterialTemplateManager::MaterialTemplateManager(MaterialTemplateManagerStorage storage, size_t defaultCapacity)
+        : super(storage, defaultCapacity)
     {
         _shaderEffects.reserve(defaultCapacity);
         _kinds.reserve(defaultCapacity);
@@ -41,7 +42,7 @@ namespace railguard::rendering
     void MaterialTemplateManager::DestroyMaterialTemplate(const core::Match &match)
     {
         // Get index
-        auto index = match.GetIndex();
+        auto index             = match.GetIndex();
         const size_t lastIndex = _ids.size() - 1;
 
         // Run boilerplate deletion
@@ -76,11 +77,15 @@ namespace railguard::rendering
         return _shaderEffects[match.GetIndex()];
     }
 
-    std::vector<material_template_id_t> MaterialTemplateManager::GetMaterialTemplatesWithEffectForKind(enums::ShaderEffectKind kind) const {
+    std::vector<material_template_id_t>
+        MaterialTemplateManager::GetMaterialTemplatesWithEffectForKind(enums::ShaderEffectKind kind) const
+    {
         std::vector<material_template_id_t> result;
 
-        for (uint32_t i = 0; i < _kinds.size(); i++) {
-            if (static_cast<bool>(_kinds[i] & kind)) {
+        for (uint32_t i = 0; i < _kinds.size(); i++)
+        {
+            if (static_cast<bool>(_kinds[i] & kind))
+            {
                 result.push_back(_ids[i]);
             }
         }
@@ -88,19 +93,25 @@ namespace railguard::rendering
         return result;
     }
 
-    std::vector<material_template_id_t> MaterialTemplateManager::GetMaterialTemplatesWithEffects(const std::vector<shader_effect_id_t> &shaderEffectsIds) const {
+    std::vector<material_template_id_t>
+        MaterialTemplateManager::GetMaterialTemplatesWithEffects(const std::vector<shader_effect_id_t> &shaderEffectsIds) const
+    {
         std::vector<material_template_id_t> result;
         // TODO smart thing for reserve
         result.reserve(_shaderEffects.size());
 
         // For each shader effect id
-        for (auto shaderEffectId : shaderEffectsIds) {
+        for (auto shaderEffectId : shaderEffectsIds)
+        {
             // For each template
-            for (uint32_t i = 0; i < _shaderEffects.size(); i++) {
+            for (uint32_t i = 0; i < _shaderEffects.size(); i++)
+            {
                 // For each shader effect of that template
-                for (auto availableEffect : _shaderEffects[i]) {
+                for (auto availableEffect : _shaderEffects[i])
+                {
                     // If it has the requested effect
-                    if (shaderEffectId == availableEffect) {
+                    if (shaderEffectId == availableEffect)
+                    {
                         // Add the id of the template and stop looping in that template
                         result.push_back(_ids[i]);
                         break;
@@ -117,6 +128,5 @@ namespace railguard::rendering
 
         return result;
     }
-
 
 } // namespace railguard::rendering

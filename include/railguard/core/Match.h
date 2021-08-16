@@ -1,6 +1,6 @@
 #pragma once
-#include <railguard/utils/IntegralConcept.h>
 #include <cstddef>
+#include <railguard/utils/IntegralConcept.h>
 
 namespace railguard::core
 {
@@ -10,12 +10,12 @@ namespace railguard::core
     // Thus, the HasResult function should be called before the GetIndex value is used
     class Match
     {
-    protected:
+      protected:
         // Index of the corresponding component in the manager + 1
         // Is 0 when the entity does not have any component
         size_t _index = 0;
 
-    public:
+      public:
         explicit Match(size_t index = 0);
 
         // Returns true if a component was found, false otherwise
@@ -26,14 +26,16 @@ namespace railguard::core
 
     // Take the type of the original ID as a template parameter.
     // We use concepts to force it to be an integral type
-    template <utils::integral T>
+    template<utils::integral T>
     class CompleteMatch : public Match
     {
-    private:
+      private:
         T _id;
 
-    public:
-        CompleteMatch(size_t index, T id) : Match(index), _id(id) {}
+      public:
+        CompleteMatch(size_t index, T id) : Match(index), _id(id)
+        {
+        }
 
         [[nodiscard]] T GetId() const
         {
@@ -48,4 +50,4 @@ namespace railguard::core
             return Match(_index);
         }
     };
-}
+} // namespace railguard::core

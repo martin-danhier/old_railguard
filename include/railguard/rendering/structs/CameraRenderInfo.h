@@ -1,11 +1,13 @@
 #pragma once
 
 #include "railguard/includes/Vulkan.h"
+
 #include <glm/detail/type_quat.hpp>
 
 namespace railguard::rendering::structs
 {
-    struct CameraRenderInfo {
+    struct CameraRenderInfo
+    {
         vk::RenderPassBeginInfo renderPassBeginInfo;
         glm::vec3 position;
         glm::quat rotation;

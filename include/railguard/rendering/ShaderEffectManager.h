@@ -7,15 +7,18 @@
 
 namespace railguard
 {
-    namespace core {
+    namespace core
+    {
         class WindowManager;
     }
     namespace rendering
     {
-        namespace enums {
+        namespace enums
+        {
             enum class ShaderEffectKind;
         }
-        namespace init {
+        namespace init
+        {
             struct ShaderEffectInitInfo;
         }
 
@@ -47,6 +50,7 @@ namespace railguard
             std::vector<enums::ShaderEffectKind> _effectKinds;
 
             void CleanUp();
+
           public:
             ShaderEffectManager(ShaderEffectManagerStorage storage, size_t defaultCapacity);
             ~ShaderEffectManager();
@@ -64,7 +68,7 @@ namespace railguard
              *
              * @return CompleteMatch A match allowing either to retrieve the ID of the effect or to use it with another function
              */
-            [[nodiscard]] core::CompleteMatch<shader_effect_id_t> CreateShaderEffect(const init::ShaderEffectInitInfo& initInfo,
+            [[nodiscard]] core::CompleteMatch<shader_effect_id_t> CreateShaderEffect(const init::ShaderEffectInitInfo &initInfo,
                                                                                      bool buildEffectAfterCreation = false);
 
             vk::Pipeline BuildEffect(const core::Match &match);

@@ -1,7 +1,7 @@
 #include "railguard/utils/GetError.h"
 
 #ifdef __GNUC__
-#include <cstring>
+    #include <cstring>
 #endif
 
 namespace railguard::utils

@@ -1,9 +1,10 @@
 #pragma once
 
-namespace vk {
+namespace vk
+{
     class Device;
     class PipelineLayout;
-}
+} // namespace vk
 
 namespace railguard::rendering::init
 {
@@ -12,10 +13,8 @@ namespace railguard::rendering::init
      */
     class PipelineLayoutBuilder
     {
-    private:
-
-
-    public:
+      private:
+      public:
         [[nodiscard]] static vk::PipelineLayout Build(const vk::Device &vulkanDevice);
     };
 } // namespace railguard::rendering::init

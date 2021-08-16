@@ -1,4 +1,5 @@
 #include "railguard/core/EntityManager.h"
+
 #include <cassert>
 #include <cstddef>
 
@@ -6,7 +7,6 @@
 
 namespace railguard::core
 {
-
     EntityManager::EntityManager(size_t defaultCapacity)
     {
         _lookupList.reserve(defaultCapacity);
@@ -29,8 +29,8 @@ namespace railguard::core
             // The new index part will be the index of the new slot
             indexPart = _lookupList.size() - 1;
             // Make sure it does not go beyond the limit of available indices
-            assert(
-                indexPart < (static_cast<eid_t>(1) << INDEX_BITS) && "Entity ID index out of range. Too many instantiated entities.");
+            assert(indexPart < (static_cast<eid_t>(1) << INDEX_BITS)
+                   && "Entity ID index out of range. Too many instantiated entities.");
         }
 
         // Return the new entity
@@ -59,4 +59,4 @@ namespace railguard::core
         return _lookupList[entity.GetIndex()] == entity.GetUnique();
     }
 
-} // namespace core
+} // namespace railguard::core

@@ -14,7 +14,7 @@ namespace railguard::rendering::init
     {
         // Init dynamic loader
         vk::DynamicLoader loader;
-		
+
         auto vkGetInstanceProcAddr = loader.getProcAddress<PFN_vkGetInstanceProcAddr>("vkGetInstanceProcAddr");
         VULKAN_HPP_DEFAULT_DISPATCHER.init(vkGetInstanceProcAddr);
 
@@ -54,39 +54,38 @@ namespace railguard::rendering::init
         // Get the surface of the SDL window
         *initInfo.surface = initInfo.windowManager.GetVulkanSurface(*initInfo.instance);
 
-		// Select a physical device
-		vkb::PhysicalDeviceSelector gpuSelector{vkbInstance};
-		auto vkbPhysicalDevice = gpuSelector.set_minimum_version(1, 1)
-									 .set_surface(*initInfo.surface)
-									 .add_required_extension(VK_KHR_SWAPCHAIN_EXTENSION_NAME)
-									 .select()
-									 .value();
-		// Get logical device
-		vkb::DeviceBuilder deviceBuilder{vkbPhysicalDevice};
-		auto vkbDevice = deviceBuilder.build().value();
+        // Select a physical device
+        vkb::PhysicalDeviceSelector gpuSelector {vkbInstance};
+        auto vkbPhysicalDevice = gpuSelector.set_minimum_version(1, 1)
+                                     .set_surface(*initInfo.surface)
+                                     .add_required_extension(VK_KHR_SWAPCHAIN_EXTENSION_NAME)
+                                     .select()
+                                     .value();
+        // Get logical device
+        vkb::DeviceBuilder deviceBuilder {vkbPhysicalDevice};
+        auto vkbDevice = deviceBuilder.build().value();
 
-		// Save devices
-		*initInfo.device = vkbDevice.device;
-		*initInfo.physicalDevice = vkbPhysicalDevice.physical_device;
+        // Save devices
+        *initInfo.device         = vkbDevice.device;
+        *initInfo.physicalDevice = vkbPhysicalDevice.physical_device;
 
-		// Initialize function pointers for device
-		VULKAN_HPP_DEFAULT_DISPATCHER.init(*initInfo.device);
+        // Initialize function pointers for device
+        VULKAN_HPP_DEFAULT_DISPATCHER.init(*initInfo.device);
 
-		// Get queue
-		*initInfo.graphicsQueue = vkbDevice.get_queue(vkb::QueueType::graphics).value();
-		*initInfo.graphicsQueueFamily = vkbDevice.get_queue_index(vkb::QueueType::graphics).value();
+        // Get queue
+        *initInfo.graphicsQueue       = vkbDevice.get_queue(vkb::QueueType::graphics).value();
+        *initInfo.graphicsQueueFamily = vkbDevice.get_queue_index(vkb::QueueType::graphics).value();
 
-		// Get physical device properties
-		*initInfo.physicalDeviceProperties = (*initInfo.physicalDevice).getProperties();
-	}
+        // Get physical device properties
+        *initInfo.physicalDeviceProperties = (*initInfo.physicalDevice).getProperties();
+    }
 
-	void VulkanInit::InitWindowSwapchain(const SwapchainInitInfo &initInfo)
-	{
-		// Init swapchain with vk bootstrap
-		vkb::SwapchainBuilder swapchainBuilder{initInfo.physicalDevice, initInfo.device, initInfo.surface};
-		auto vkbSwapchain = swapchainBuilder
-								.set_desired_format({SWAPCHAIN_FORMAT, SWAPCHAIN_COLOR_SPACE})
-								.set_desired_present_mode(VK_PRESENT_MODE_FIFO_KHR)
+    void VulkanInit::InitWindowSwapchain(const SwapchainInitInfo &initInfo)
+    {
+        // Init swapchain with vk bootstrap
+        vkb::SwapchainBuilder swapchainBuilder {initInfo.physicalDevice, initInfo.device, initInfo.surface};
+        auto vkbSwapchain = swapchainBuilder.set_desired_format({SWAPCHAIN_FORMAT, SWAPCHAIN_COLOR_SPACE})
+                                .set_desired_present_mode(VK_PRESENT_MODE_FIFO_KHR)
                                 .set_desired_extent(initInfo.windowExtent.width, initInfo.windowExtent.height)
                                 .build()
                                 .value();
@@ -109,46 +108,46 @@ namespace railguard::rendering::init
                 .components {
                     .r = vk::ComponentSwizzle::eIdentity,
                     .g = vk::ComponentSwizzle::eIdentity,
-					.b = vk::ComponentSwizzle::eIdentity,
-					.a = vk::ComponentSwizzle::eIdentity,
-				},
-				.subresourceRange{
-					.aspectMask = vk::ImageAspectFlagBits::eColor,
-					.baseMipLevel = 0,
-					.levelCount = 1,
-					.baseArrayLayer = 0,
-					.layerCount = 1,
-				},
-			};
+                    .b = vk::ComponentSwizzle::eIdentity,
+                    .a = vk::ComponentSwizzle::eIdentity,
+                },
+                .subresourceRange {
+                    .aspectMask     = vk::ImageAspectFlagBits::eColor,
+                    .baseMipLevel   = 0,
+                    .levelCount     = 1,
+                    .baseArrayLayer = 0,
+                    .layerCount     = 1,
+                },
+            };
 
-			(*initInfo.swapchainImageViews)[i] = initInfo.device.createImageView(createInfo);
-		}
+            (*initInfo.swapchainImageViews)[i] = initInfo.device.createImageView(createInfo);
+        }
 
-		// TODO depth image
+        // TODO depth image
 
-		// Create framebuffers
+        // Create framebuffers
 
 #define ATTACHMENTS_COUNT 1
-		vk::ImageView attachments[ATTACHMENTS_COUNT];
-		// TODO insert depth image view when done
+        vk::ImageView attachments[ATTACHMENTS_COUNT];
+        // TODO insert depth image view when done
 
-		// Define the init info
-		vk::FramebufferCreateInfo framebufferCreateInfo{
-			.renderPass = initInfo.renderPass,
-			.attachmentCount = ATTACHMENTS_COUNT,
-			.pAttachments = attachments,
-			.width = initInfo.windowExtent.width,
-			.height = initInfo.windowExtent.height,
-			.layers = 1,
-		};
+        // Define the init info
+        vk::FramebufferCreateInfo framebufferCreateInfo {
+            .renderPass      = initInfo.renderPass,
+            .attachmentCount = ATTACHMENTS_COUNT,
+            .pAttachments    = attachments,
+            .width           = initInfo.windowExtent.width,
+            .height          = initInfo.windowExtent.height,
+            .layers          = 1,
+        };
 
-		initInfo.swapchainFramebuffers->resize(swapchainImageCount);
+        initInfo.swapchainFramebuffers->resize(swapchainImageCount);
 
-		// Create a framebuffer for each image
-		for (uint32_t i = 0; i < swapchainImageCount; i++)
-		{
-			attachments[0] = (*initInfo.swapchainImageViews)[i];
-			(*initInfo.swapchainFramebuffers)[i] = initInfo.device.createFramebuffer(framebufferCreateInfo);
-		}
-	}
-}
+        // Create a framebuffer for each image
+        for (uint32_t i = 0; i < swapchainImageCount; i++)
+        {
+            attachments[0]                       = (*initInfo.swapchainImageViews)[i];
+            (*initInfo.swapchainFramebuffers)[i] = initInfo.device.createFramebuffer(framebufferCreateInfo);
+        }
+    }
+} // namespace railguard::rendering::init

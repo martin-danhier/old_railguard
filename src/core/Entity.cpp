@@ -1,10 +1,10 @@
 #include "railguard/core/Entity.h"
-#include <ostream>
+
 #include <cinttypes>
+#include <ostream>
 
 namespace railguard::core
 {
-
     Entity::Entity(eid_t id)
     {
         eid = id;
@@ -50,11 +50,11 @@ namespace railguard::core
         constexpr unique_eid_t mask = (1 << UNIQUE_BITS) - 1;
         return eid & mask;
     }
-//    std::ostream &operator<<(std::ostream &os, const Entity &rhs)
-//    {
-//        // Pretty print the entity
-//        os << "Entity " << rhs.eid << " (index: " << rhs.GetIndex() << ", unique: " << + rhs.GetUnique() << ")";
-//        return os;
-//    }
+    //    std::ostream &operator<<(std::ostream &os, const Entity &rhs)
+    //    {
+    //        // Pretty print the entity
+    //        os << "Entity " << rhs.eid << " (index: " << rhs.GetIndex() << ", unique: " << + rhs.GetUnique() << ")";
+    //        return os;
+    //    }
 
-} // namespace core
+} // namespace railguard::core

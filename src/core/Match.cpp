@@ -1,4 +1,5 @@
 #include "railguard/core/Match.h"
+
 #include "railguard/utils/AdvancedCheck.h"
 
 #ifdef USE_ADVANCED_CHECKS
@@ -8,7 +9,9 @@
 
 namespace railguard::core
 {
-    Match::Match(size_t index) : _index(index) {}
+    Match::Match(size_t index) : _index(index)
+    {
+    }
 
     size_t Match::GetIndex() const
     {
@@ -23,4 +26,4 @@ namespace railguard::core
         return _index > 0;
     }
 
-} // namespace core
+} // namespace railguard::core

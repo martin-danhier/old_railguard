@@ -61,7 +61,7 @@ namespace railguard::rendering
     void SwapchainCameraManager::DestroyComponent(const core::Match &match)
     {
         // Get index
-        auto index = match.GetIndex();
+        auto index             = match.GetIndex();
         const size_t lastIndex = _entities.size() - 1;
 
         // Run boilerplate deletion
@@ -69,16 +69,16 @@ namespace railguard::rendering
 
         if (index < lastIndex)
         {
-            _enabledCameras[index] = _enabledCameras[lastIndex];
-            _swapchainIds[index] = _swapchainIds[lastIndex];
-            _cameraModes[index] = _cameraModes[lastIndex];
+            _enabledCameras[index]  = _enabledCameras[lastIndex];
+            _swapchainIds[index]    = _swapchainIds[lastIndex];
+            _cameraModes[index]     = _cameraModes[lastIndex];
             _cameraPositions[index] = _cameraPositions[lastIndex];
             _cameraRotations[index] = _cameraRotations[lastIndex];
-            _fieldsOfView[index] = _fieldsOfView[lastIndex];
-            _modeParams1[index] = _modeParams1[lastIndex];
-            _modeParams2[index] = _modeParams2[lastIndex];
-            _aspectRatios[index] = _aspectRatios[lastIndex];
-            _clearColors[index] = _clearColors[lastIndex];
+            _fieldsOfView[index]    = _fieldsOfView[lastIndex];
+            _modeParams1[index]     = _modeParams1[lastIndex];
+            _modeParams2[index]     = _modeParams2[lastIndex];
+            _aspectRatios[index]    = _aspectRatios[lastIndex];
+            _clearColors[index]     = _clearColors[lastIndex];
         }
         // Remove the last element
         _enabledCameras.pop_back();
@@ -168,7 +168,8 @@ namespace railguard::rendering
         // Perspective
         if (_cameraModes[index] == enums::CameraMode::Perspective)
         {
-            return glm::perspective(glm::radians(_fieldsOfView[index]), _aspectRatios[index], _modeParams1[index], _modeParams2[index]);
+            return glm::perspective(
+                glm::radians(_fieldsOfView[index]), _aspectRatios[index], _modeParams1[index], _modeParams2[index]);
         }
         // Orthographic
         else
@@ -191,7 +192,7 @@ namespace railguard::rendering
         // Multiple cameras could reference the same swapchain
         // If they follow each other, these values will not be fetched again
         core::Match swapchainMatch;
-        swapchain_id_t lastSwapchainId = 0;
+        swapchain_id_t lastSwapchainId   = 0;
         uint32_t lastSwapchainImageIndex = 0;
         vk::Extent2D lastSwapchainExtent;
 
@@ -211,19 +212,21 @@ namespace railguard::rendering
                 }
 
                 // Generate a render info struct
-                structs::CameraRenderInfo info{
-                    .renderPassBeginInfo = {
-                        .renderPass = renderPass,
-                        .framebuffer = _storage.swapchainManager->GetFramebuffers(swapchainMatch)[lastSwapchainImageIndex],
-                        .renderArea = {
-                            .offset = {0, 0},
-                            .extent = lastSwapchainExtent,
+                structs::CameraRenderInfo info {
+                    .renderPassBeginInfo =
+                        {
+                            .renderPass  = renderPass,
+                            .framebuffer = _storage.swapchainManager->GetFramebuffers(swapchainMatch)[lastSwapchainImageIndex],
+                            .renderArea =
+                                {
+                                    .offset = {0, 0},
+                                    .extent = lastSwapchainExtent,
+                                },
+                            .clearValueCount = 1,
+                            .pClearValues    = &_clearColors[i],
                         },
-                        .clearValueCount = 1,
-                        .pClearValues = &_clearColors[i],
-                    },
-                    .position = _cameraPositions[i],
-                    .rotation = _cameraRotations[i],
+                    .position         = _cameraPositions[i],
+                    .rotation         = _cameraRotations[i],
                     .projectionMatrix = GetProjectionMatrix(i),
                 };
                 renderInfos.push_back(info);
@@ -240,4 +243,4 @@ namespace railguard::rendering
 
         return renderInfos;
     }
-}
+} // namespace railguard::rendering

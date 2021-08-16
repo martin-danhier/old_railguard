@@ -2,7 +2,8 @@
 
 namespace railguard
 {
-    namespace core {
+    namespace core
+    {
         class WindowManager;
     }
 

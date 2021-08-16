@@ -1,8 +1,8 @@
 #ifndef ENTITY_H
 #define ENTITY_H
 
-#include <cstdint>
 #include <cstddef>
+#include <cstdint>
 
 namespace railguard::core
 {
@@ -41,13 +41,11 @@ namespace railguard::core
     // They must always sum up to the the size of the entity id
     // If in the future, the id must be divided in more than 2 parts, this assertion will need to be
     // updated.
-    static_assert(
-        static_cast<size_t>(UNIQUE_BITS + INDEX_BITS) == sizeof(eid_t) * 8,
-        "The unique and index bits must sum up to the length of the type used to represent Entity ids.");
+    static_assert(static_cast<size_t>(UNIQUE_BITS + INDEX_BITS) == sizeof(eid_t) * 8,
+                  "The unique and index bits must sum up to the length of the type used to represent Entity ids.");
     // Check if the unique_eid_t type can hold every possible unique id
-    static_assert(
-        UNIQUE_BITS <= sizeof(unique_eid_t) * 8,
-        "The unique_eid_t type must be large enough to fit in every possible unique part of an Entity id.");
+    static_assert(UNIQUE_BITS <= sizeof(unique_eid_t) * 8,
+                  "The unique_eid_t type must be large enough to fit in every possible unique part of an Entity id.");
 
     // An entity is an ID that can be used to represent a "thing" in the Engine, like a player, a bullet,
     // a tree, a sound effect, etc.

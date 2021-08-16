@@ -12,7 +12,7 @@ namespace railguard::rendering::init
             .setLayoutCount         = 0,
             .pSetLayouts            = nullptr,
             .pushConstantRangeCount = 0,
-            .pPushConstantRanges = nullptr,
+            .pPushConstantRanges    = nullptr,
         };
 
         // Changes can be added here

@@ -164,6 +164,9 @@ namespace railguard::rendering
         // Wait for fences
         _frameManager->WaitForCurrentFence();
 
+        // Update render stages cache
+        _renderStageManager->UpdateCache();
+
         // Get render infos from cameras
         std::vector<structs::CameraRenderInfo> cameraRenderInfos = _swapchainCameraManager->GetRenderInfos(_mainRenderPass);
 
@@ -179,7 +182,8 @@ namespace railguard::rendering
 
             // Draw each object
             _shaderEffectManager->Bind(_shaderEffectManager->LookupId(_triangleEffect), cmd);
-            cmd.draw(3, 1, 0, 0);
+            // cmd.draw(3, 1, 0, 0);
+            _renderStageManager->DrawFromCache(cmd);
 
             // Execute passes
             // for (uint32_t i = 0; i < _passes.size(); i++) {

@@ -32,18 +32,17 @@ namespace railguard::rendering
     void MaterialManager::DestroyMaterial(const core::Match &match)
     {
         // Get index
-        auto index = match.GetIndex();
+        auto index             = match.GetIndex();
         const size_t lastIndex = _ids.size() - 1;
 
         // Run boilerplate deletion
         super::DestroyItem(match);
 
-
         // If the index is smaller then, the destroyed item is not the last and the last one should be moved where
         // the destroyed item was
         if (index < lastIndex)
         {
-            _baseTemplates[index] = _baseTemplates[lastIndex];
+            _baseTemplates[index]       = _baseTemplates[lastIndex];
             _modelsUsingMaterial[index] = _modelsUsingMaterial[lastIndex];
         }
 
@@ -78,7 +77,8 @@ namespace railguard::rendering
         std::vector<material_id_t> result;
         // Reserve it with the size of the full vector
         // It will be faster, but we might overshoot it
-        // Maybe later a more intelligent formula can be used to estimate the size of the result vector, for example using the count of the last time.
+        // Maybe later a more intelligent formula can be used to estimate the size of the result vector, for example using the count of
+        // the last time.
         result.reserve(_baseTemplates.size());
 
         // For each template

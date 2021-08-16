@@ -13,7 +13,7 @@ namespace railguard::rendering
 
     class RenderNodeManager : public core::ComponentManager<RenderNodeManagerStorage>
     {
-    private:
+      private:
         typedef core::ComponentManager<RenderNodeManagerStorage> super;
 
         std::vector<model_id_t> _models;
@@ -21,7 +21,7 @@ namespace railguard::rendering
         // Transform
         std::vector<glm::mat4> _transforms;
 
-    public:
+      public:
         explicit RenderNodeManager(RenderNodeManagerStorage storage, size_t defaultComponentCapacity = 50);
         void Clear() override;
         core::Match CreateComponent(const core::Entity &entity, model_id_t model);
@@ -30,7 +30,6 @@ namespace railguard::rendering
         // Getters
         [[nodiscard]] model_id_t GetModel(const core::Match &match) const;
         [[nodiscard]] glm::mat4 GetTransform(const core::Match &match) const;
-
     };
 
 } // namespace railguard::rendering

@@ -4,7 +4,6 @@
 
 namespace railguard::rendering
 {
-
     // Use a typedef to specify which type will be used for ids
     // That way, if we need to change that type, we only need to do it here
 

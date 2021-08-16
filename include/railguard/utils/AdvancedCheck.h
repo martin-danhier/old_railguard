@@ -2,14 +2,15 @@
 
 #ifdef USE_ADVANCED_CHECKS
 
-#include <string>
+    #include <string>
 
-// Call the advanced check method if the USE_ADVANCED_CHECKS variable is set
+    // Call the advanced check method if the USE_ADVANCED_CHECKS variable is set
 
-/**
- * @brief In debug mode, throws an error with MSG as message if COND is false. Doesn't do anything in release mode. (Currently in debug mode)
- */
-#define ADVANCED_CHECK(COND, MSG) railguard::utils::AdvancedCheck(COND, MSG)
+    /**
+     * @brief In debug mode, throws an error with MSG as message if COND is false. Doesn't do anything in release mode. (Currently in
+     * debug mode)
+     */
+    #define ADVANCED_CHECK(COND, MSG) railguard::utils::AdvancedCheck(COND, MSG)
 
 namespace railguard::utils
 {
@@ -20,16 +21,17 @@ namespace railguard::utils
      * @param message The message of the error thrown if the condition is false.
      */
     void AdvancedCheck(bool condition, const std::string &message);
-}
+} // namespace railguard::utils
 
 #else
 
-// The macro does nothing in release mode
-// It exists to avoid needing to wrap every call in ifndef checks
+    // The macro does nothing in release mode
+    // It exists to avoid needing to wrap every call in ifndef checks
 
-/**
- * @brief In debug mode, throws an error with MSG as message if COND is false. Doesn't do anything in release mode. (Currently in release mode)
- */
-#define ADVANCED_CHECK(COND, MSG)
+    /**
+     * @brief In debug mode, throws an error with MSG as message if COND is false. Doesn't do anything in release mode. (Currently in
+     * release mode)
+     */
+    #define ADVANCED_CHECK(COND, MSG)
 
 #endif

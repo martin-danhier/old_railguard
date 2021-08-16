@@ -4,9 +4,12 @@
 #include <railguard/rendering/enums/ShaderEffectKind.h>
 #include <vector>
 
+namespace vk {
+  class vk::CommandBuffer;
+}
+
 namespace railguard::rendering
 {
-
     namespace structs
     {
         struct AllocatedBuffer;
@@ -29,10 +32,13 @@ namespace railguard::rendering
         std::vector<std::vector<std::vector<model_id_t>>> _modelsCache;
 
       public:
-        RenderStageManager(const std::vector<enums::ShaderEffectKind>& stages, const MaterialManager *materialManager, const ModelManager *modelManager, AllocationManager *allocationManager);
+        RenderStageManager(const std::vector<enums::ShaderEffectKind> &stages,
+                           const MaterialManager *materialManager,
+                           const ModelManager *modelManager,
+                           AllocationManager *allocationManager);
         ~RenderStageManager();
         void UpdateCache();
-        void DrawFromCache();
+        void DrawFromCache(vk::CommandBuffer &cmd);
     };
 
 } // namespace railguard::rendering

@@ -26,13 +26,14 @@ namespace railguard::rendering
         _modules.clear();
     }
 
-    core::CompleteMatch<shader_module_id_t> ShaderModuleManager::LoadShaderModule(vk::ShaderStageFlagBits stage, const std::vector<uint32_t> &codeBuffer)
+    core::CompleteMatch<shader_module_id_t> ShaderModuleManager::LoadShaderModule(vk::ShaderStageFlagBits stage,
+                                                                                  const std::vector<uint32_t> &codeBuffer)
     {
         auto match = super::CreateItem();
 
-        vk::ShaderModuleCreateInfo shaderCreateInfo{
+        vk::ShaderModuleCreateInfo shaderCreateInfo {
             .codeSize = codeBuffer.size() * sizeof(uint32_t),
-            .pCode = codeBuffer.data(),
+            .pCode    = codeBuffer.data(),
         };
         auto shaderModule = _storage.vulkanDevice.createShaderModule(shaderCreateInfo);
 
@@ -43,7 +44,8 @@ namespace railguard::rendering
         return match;
     }
 
-    core::CompleteMatch<shader_module_id_t> ShaderModuleManager::LoadShaderModule(vk::ShaderStageFlagBits stage, const std::string &filePath)
+    core::CompleteMatch<shader_module_id_t> ShaderModuleManager::LoadShaderModule(vk::ShaderStageFlagBits stage,
+                                                                                  const std::string &filePath)
     {
         // Load the SPIR-V code from the given file.
 
@@ -71,11 +73,11 @@ namespace railguard::rendering
         return LoadShaderModule(stage, buffer);
     }
 
-//! [Example of derivation of StandaloneManager::DestroyItem]
+    //! [Example of derivation of StandaloneManager::DestroyItem]
     void ShaderModuleManager::DestroyShaderModule(const core::Match &match)
     {
         // Get index
-        auto index = match.GetIndex();
+        auto index             = match.GetIndex();
         const size_t lastIndex = _ids.size() - 1;
 
         // Run boilerplate deletion
@@ -88,7 +90,7 @@ namespace railguard::rendering
         // the destroyed item was
         if (index < lastIndex)
         {
-            _stages[index] = _stages[lastIndex];
+            _stages[index]  = _stages[lastIndex];
             _modules[index] = _modules[lastIndex];
         }
 
@@ -96,7 +98,7 @@ namespace railguard::rendering
         _stages.pop_back();
         _modules.pop_back();
     }
-//! [Example of derivation of StandaloneManager::DestroyItem]
+    //! [Example of derivation of StandaloneManager::DestroyItem]
 
     vk::ShaderStageFlagBits ShaderModuleManager::GetStage(const core::Match &match) const
     {

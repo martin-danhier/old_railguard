@@ -68,6 +68,7 @@ namespace railguard::rendering
             constexpr vk::BufferUsageFlags indirectBufferUsageFlags = vk::BufferUsageFlagBits::eTransferDst
                                                                       | vk::BufferUsageFlagBits::eStorageBuffer
                                                                       | vk::BufferUsageFlagBits::eIndirectBuffer;
+            constexpr VmaMemoryUsage indirectBufferMemoryUsage = VMA_MEMORY_USAGE_CPU_TO_GPU;
 
             const auto requiredIndirectBufferSize = _modelsCache[stageIndex].size();
             auto &currentIndirectBuffer           = _indirectBuffers[stageIndex];
@@ -76,7 +77,7 @@ namespace railguard::rendering
             if (currentIndirectBuffer.IsNull())
             {
                 currentIndirectBuffer =
-                    _allocationManager->CreateBuffer(requiredIndirectBufferSize, indirectBufferUsageFlags, VMA_MEMORY_USAGE_GPU_ONLY);
+                    _allocationManager->CreateBuffer(requiredIndirectBufferSize, indirectBufferUsageFlags, indirectBufferMemoryUsage);
             }
             // If it exists but is not big enough, recreate it
             else if (currentIndirectBuffer.size < requiredIndirectBufferSize)
@@ -84,21 +85,42 @@ namespace railguard::rendering
                 // Maybe register it for deletion at the end of the frame later instead on doing it directly
                 _allocationManager->DestroyBuffer(currentIndirectBuffer);
                 currentIndirectBuffer =
-                    _allocationManager->CreateBuffer(requiredIndirectBufferSize, indirectBufferUsageFlags, VMA_MEMORY_USAGE_GPU_ONLY);
+                    _allocationManager->CreateBuffer(requiredIndirectBufferSize, indirectBufferUsageFlags, indirectBufferMemoryUsage);
             }
 
             // At this point, we have an indirect buffer big enough to hold the commands we want to register
+
+            // Register commands
+            auto drawCommands = static_cast<vk::DrawIndirectCommand *>(_allocationManager->MapBuffer(currentIndirectBuffer));
+            for (size_t i = 0; i < _modelsCache[stageIndex].size(); i++)
+            {
+                drawCommands[i].vertexCount   = 3;
+                drawCommands[i].instanceCount = 1;
+                drawCommands[i].firstVertex   = 0;
+                drawCommands[i].firstInstance = 0;
+            }
+            _allocationManager->UnmapBuffer(currentIndirectBuffer);
         }
     }
 
-    void RenderStageManager::DrawFromCache()
+    void RenderStageManager::DrawFromCache(vk::CommandBuffer &cmd)
     {
         // For each stage
         for (uint32_t stageIndex = 0; stageIndex < _stages.size(); stageIndex++)
         {
             // const auto &stageKind = _stages[stageIndex];
             // const auto &stageMaterials = _materialsCache[stageIndex];
-            // const auto &stageModels = _modelsCache[stageIndex];
+            const auto &stageModels = _modelsCache[stageIndex];
+
+            // Get indirect buffer
+            auto &currentIndirectBuffer = _indirectBuffers[stageIndex];
+
+            for (size_t i = 0; i < stageModels.size(); i++)
+            {
+                vk::DeviceSize indirectOffset = i * sizeof(vk::DrawIndirectCommand);
+                uint32_t drawStride           = sizeof(vk::DrawIndirectCommand);
+                cmd.drawIndirect(currentIndirectBuffer.buffer, indirectOffset, 1, drawStride);
+            }
         }
     }
 

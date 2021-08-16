@@ -16,12 +16,11 @@ namespace railguard::rendering
 {
     FrameManager::FrameManager(const vk::Device &device, uint32_t graphicsQueueFamily)
     {
-
         _device = vk::Device(device);
 
         // Prepare create info structs
-        vk::CommandPoolCreateInfo commandPoolCreateInfo{
-            .flags = vk::CommandPoolCreateFlagBits::eResetCommandBuffer,
+        vk::CommandPoolCreateInfo commandPoolCreateInfo {
+            .flags            = vk::CommandPoolCreateFlagBits::eResetCommandBuffer,
             .queueFamilyIndex = graphicsQueueFamily,
         };
 
@@ -34,9 +33,9 @@ namespace railguard::rendering
             _commandPools[i] = device.createCommandPool(commandPoolCreateInfo);
 
             // Create command buffer
-            vk::CommandBufferAllocateInfo commandBufferAllocateInfo{
-                .commandPool = _commandPools[i],
-                .level = vk::CommandBufferLevel::ePrimary,
+            vk::CommandBufferAllocateInfo commandBufferAllocateInfo {
+                .commandPool        = _commandPools[i],
+                .level              = vk::CommandBufferLevel::ePrimary,
                 .commandBufferCount = 1,
             };
             _commandBuffers[i] = device.allocateCommandBuffers(commandBufferAllocateInfo)[0];
@@ -45,7 +44,7 @@ namespace railguard::rendering
         // Create fences
         // We separate the for loops so that we can really focus on one vector at a time
 
-        vk::FenceCreateInfo fenceCreateInfo{
+        vk::FenceCreateInfo fenceCreateInfo {
             .flags = vk::FenceCreateFlagBits::eSignaled,
         };
 
@@ -56,7 +55,7 @@ namespace railguard::rendering
 
         // Create semaphores
 
-        vk::SemaphoreCreateInfo semaphoreCreateInfo{};
+        vk::SemaphoreCreateInfo semaphoreCreateInfo {};
 
         for (auto &presentSemaphore : _presentSemaphores)
         {
@@ -70,7 +69,6 @@ namespace railguard::rendering
 
     FrameManager::~FrameManager()
     {
-
         // Destroy semaphores
 
         for (auto &renderSemaphore : _renderSemaphores)
@@ -99,9 +97,7 @@ namespace railguard::rendering
             _device.destroyCommandPool(pool);
             pool = nullptr;
         }
-
     }
-
 
     FrameData FrameManager::GetFrame(uint32_t index) const
     {
@@ -116,29 +112,31 @@ namespace railguard::rendering
         };
     }
 
-    void FrameManager::WaitForFence(const vk::Fence &fence) const 
-	{
-		// Wait for fences
-		auto waitResult = _device.waitForFences(fence, true, WAIT_FOR_FENCES_TIMEOUT);
+    void FrameManager::WaitForFence(const vk::Fence &fence) const
+    {
+        // Wait for fences
+        auto waitResult = _device.waitForFences(fence, true, WAIT_FOR_FENCES_TIMEOUT);
         // Reset it
         _device.resetFences(fence);
 
-		if (waitResult != vk::Result::eSuccess)
-		{
-			throw std::runtime_error("Error while waiting for fences");
-		}
-	}
+        if (waitResult != vk::Result::eSuccess)
+        {
+            throw std::runtime_error("Error while waiting for fences");
+        }
+    }
 
-    void FrameManager::WaitForCurrentFence() const {
+    void FrameManager::WaitForCurrentFence() const
+    {
         WaitForFence(GetCurrentRenderFence());
     }
 
-    void FrameManager::WaitForAllFences() const {
+    void FrameManager::WaitForAllFences() const
+    {
         auto waitResult = _device.waitForFences(NB_OVERLAPPING_FRAMES, _renderFences, true, WAIT_FOR_FENCES_TIMEOUT);
         if (waitResult != vk::Result::eSuccess)
-		{
-			throw std::runtime_error("Error while waiting for fences");
-		}
+        {
+            throw std::runtime_error("Error while waiting for fences");
+        }
     }
 
     vk::CommandBuffer FrameManager::BeginRecording() const
@@ -170,21 +168,21 @@ namespace railguard::rendering
         cmd.end();
 
         // Submit to the graphics queue
-		vk::PipelineStageFlags waitStage = vk::PipelineStageFlagBits::eColorAttachmentOutput;
-		vk::SubmitInfo submitInfo{
-			// Wait until the image to render to is ready
-			.waitSemaphoreCount = 1,
-			.pWaitSemaphores = presentSemaphore,
-			// Pipeline stage
-			.pWaitDstStageMask = &waitStage,
-			// Link the command buffer
-			.commandBufferCount = 1,
-			.pCommandBuffers = &cmd,
-			// Signal the render semaphore
-			.signalSemaphoreCount = 1,
-			.pSignalSemaphores = renderSemaphore,
-		};
-		graphicsQueue.submit(submitInfo, renderFence);
+        vk::PipelineStageFlags waitStage = vk::PipelineStageFlagBits::eColorAttachmentOutput;
+        vk::SubmitInfo submitInfo {
+            // Wait until the image to render to is ready
+            .waitSemaphoreCount = 1,
+            .pWaitSemaphores    = presentSemaphore,
+            // Pipeline stage
+            .pWaitDstStageMask = &waitStage,
+            // Link the command buffer
+            .commandBufferCount = 1,
+            .pCommandBuffers    = &cmd,
+            // Signal the render semaphore
+            .signalSemaphoreCount = 1,
+            .pSignalSemaphores    = renderSemaphore,
+        };
+        graphicsQueue.submit(submitInfo, renderFence);
     }
 
     // Getters
@@ -213,22 +211,25 @@ namespace railguard::rendering
 
         return &_renderSemaphores[index];
     }
-    const vk::Semaphore* FrameManager::GetPresentSemaphore(uint32_t index) const
+    const vk::Semaphore *FrameManager::GetPresentSemaphore(uint32_t index) const
     {
         ADVANCED_CHECK(index < NB_OVERLAPPING_FRAMES, INDEX_OUT_OF_RANGE_ERROR);
 
         return &_presentSemaphores[index];
     }
 
-    uint64_t FrameManager::FinishFrame() {
+    uint64_t FrameManager::FinishFrame()
+    {
         return _currentFrameNumber++;
     }
 
-    uint64_t FrameManager::GetFrameNumber() const {
+    uint64_t FrameManager::GetFrameNumber() const
+    {
         return _currentFrameNumber;
     }
 
-    uint32_t FrameManager::GetCurrentFrameIndex() const {
+    uint32_t FrameManager::GetCurrentFrameIndex() const
+    {
         return _currentFrameNumber % NB_OVERLAPPING_FRAMES;
     }
 
@@ -252,12 +253,14 @@ namespace railguard::rendering
         return GetRenderFence(GetCurrentFrameIndex());
     }
 
-    const vk::Semaphore* FrameManager::GetCurrentRenderSemaphore() const {
+    const vk::Semaphore *FrameManager::GetCurrentRenderSemaphore() const
+    {
         return GetRenderSemaphore(GetCurrentFrameIndex());
     }
 
-    const vk::Semaphore* FrameManager::GetCurrentPresentSemaphore() const {
+    const vk::Semaphore *FrameManager::GetCurrentPresentSemaphore() const
+    {
         return GetPresentSemaphore(GetCurrentFrameIndex());
     }
-    
-}
+
+} // namespace railguard::rendering

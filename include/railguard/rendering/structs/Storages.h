@@ -8,7 +8,7 @@ namespace railguard::rendering::structs
      */
     struct DeviceStorage
     {
-    public:
+      public:
         vk::Device vulkanDevice = nullptr;
     };
 
@@ -17,8 +17,8 @@ namespace railguard::rendering::structs
      */
     struct FullDeviceStorage
     {
-    public:
-        vk::Device vulkanDevice = nullptr;
+      public:
+        vk::Device vulkanDevice                 = nullptr;
         vk::PhysicalDevice vulkanPhysicalDevice = nullptr;
     };
 

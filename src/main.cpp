@@ -3,11 +3,12 @@
 #define SDL_MAIN_HANDLED
 
 #include <SDL2/SDL.h>
-#include "railguard/core/Engine.h"
+#include <railguard/core/Engine.h>
 
 using namespace railguard::core;
 
-int main() {
+int main()
+{
     // Init SDL2
     SDL_SetMainReady();
     SDL_Init(SDL_INIT_VIDEO);
