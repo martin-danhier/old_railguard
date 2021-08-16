@@ -70,7 +70,7 @@ namespace railguard::rendering
                                                                       | vk::BufferUsageFlagBits::eIndirectBuffer;
             constexpr VmaMemoryUsage indirectBufferMemoryUsage = VMA_MEMORY_USAGE_CPU_TO_GPU;
 
-            const auto requiredIndirectBufferSize = _modelsCache[stageIndex].size();
+            const auto requiredIndirectBufferSize = _modelsCache[stageIndex].size() * sizeof(vk::DrawIndirectCommand);
             auto &currentIndirectBuffer           = _indirectBuffers[stageIndex];
 
             // If it does not exist, create it
@@ -119,6 +119,8 @@ namespace railguard::rendering
             {
                 vk::DeviceSize indirectOffset = i * sizeof(vk::DrawIndirectCommand);
                 uint32_t drawStride           = sizeof(vk::DrawIndirectCommand);
+
+                // Draw indirect
                 cmd.drawIndirect(currentIndirectBuffer.buffer, indirectOffset, 1, drawStride);
             }
         }

@@ -182,7 +182,7 @@ namespace railguard::rendering
 
             // Draw each object
             _shaderEffectManager->Bind(_shaderEffectManager->LookupId(_triangleEffect), cmd);
-            // cmd.draw(3, 1, 0, 0);
+            
             _renderStageManager->DrawFromCache(cmd);
 
             // Execute passes
