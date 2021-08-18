@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
+    <generated>
+      <config projectName="railguard" targetName="shaders" />
+      <config projectName="railguard" targetName="vkbootstrap" />
+      <config projectName="railguard" targetName="railguard" />
+    </generated>
+  </component>
+  <component name="CMakeSettings">
+    <configurations>
+      <configuration PROFILE_NAME="Win64_Debug" ENABLED="true" CONFIG_NAME="Win64_Debug" />
+    </configurations>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="68aa04f6-66bd-4dbf-9c29-f69781df6134" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/railguard/core/Match.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/railguard/core/Match.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/railguard/rendering/MaterialManager.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/railguard/rendering/MaterialManager.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/railguard/rendering/MaterialTemplateManager.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/railguard/rendering/MaterialTemplateManager.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/railguard/rendering/RenderStageManager.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/railguard/rendering/RenderStageManager.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/railguard/utils/IntegralConcept.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/rendering/MaterialManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/rendering/MaterialManager.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/rendering/MaterialTemplateManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/rendering/MaterialTemplateManager.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/rendering/RenderStageManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/rendering/RenderStageManager.cpp" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Win64_Debug" />
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MacroExpansionManager">
+    <option name="directoryName" value="kj68kwj5" />
+  </component>
+  <component name="NamedScopeManager">
+    <scope name="Source" pattern="file[new_engine]:src//*||file[new_engine]:include//*||file[new_engine]:shaders//*" />
+  </component>
+  <component name="ProjectId" id="1wtlPyW0H33bRUHaf9aCD128jlY" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="NEW_TOOLWINDOW_STRIPE_DEFAULTS" value="true" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="RunOnceActivity.cidr.known.project.marker" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="true" />
+    <property name="cf.advertisement.text.overridden" value="true" />
+    <property name="cf.first.check.clang-format" value="false" />
+    <property name="cidr.known.project.marker" value="true" />
+    <property name="cmake.loaded.for.project" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/cmakebuild/CMakeLists.txt" />
+    <property name="settings.editor.selected.configurable" value="project.scopes" />
+  </component>
+  <component name="RunManager" selected="CMake Application.railguard">
+    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="railguard" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="railguard" TARGET_NAME="railguard" CONFIG_NAME="Win64_Debug" RUN_TARGET_PROJECT_NAME="railguard" RUN_TARGET_NAME="railguard">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="shaders" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="railguard" TARGET_NAME="shaders" CONFIG_NAME="Win64_Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="vkbootstrap" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="railguard" TARGET_NAME="vkbootstrap" CONFIG_NAME="Win64_Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="GradleAppRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="com.jetbrains.cidr.cpp.gradle.execution.GradleNativeBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="CMake Application.railguard" />
+      <item itemvalue="CMake Application.shaders" />
+      <item itemvalue="CMake Application.vkbootstrap" />
+    </list>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="68aa04f6-66bd-4dbf-9c29-f69781df6134" name="Changes" comment="" />
+      <created>1629285746384</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1629285746384</updated>
+      <workItem from="1629285749285" duration="1664000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

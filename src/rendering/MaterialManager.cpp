@@ -3,6 +3,8 @@
 #include <railguard/rendering/MaterialTemplateManager.h>
 #include <railguard/rendering/ShaderEffectManager.h>
 #include <railguard/rendering/enums/ShaderEffectKind.h>
+#include <railguard/rendering/structs/BuiltTemplate.h>
+#include <railguard/rendering/structs/RenderBatch.h>
 
 namespace railguard::rendering
 {
@@ -51,6 +53,46 @@ namespace railguard::rendering
         _modelsUsingMaterial.pop_back();
     }
 
+    size_t MaterialManager::CountModelsThatUseMaterial(const core::Match &match) const
+    {
+        return _modelsUsingMaterial[match.GetIndex()].size();
+    }
+
+    std::vector<structs::RenderBatch> MaterialManager::GenerateBatchesForKind(enums::ShaderEffectKind kind) const
+    {
+        std::vector<structs::RenderBatch> batches;
+
+        // Get effects which support the given kind, sorted by effect so that the number of required binds is minimal
+        const auto effectsWithDesiredKind = _storage.shaderEffectManager->GetEffectsOfKind(kind);
+        const auto supportedTemplates     = _storage.materialTemplateManager->BuildTemplatesForEffects(effectsWithDesiredKind);
+
+        size_t modelCounter = 0;
+
+        // For each template
+        for (auto matTemplate : supportedTemplates)
+        {
+            // Add the materials that use that template.
+            for (uint32_t i = 0; i < _baseTemplates.size(); i++)
+            {
+                if (_baseTemplates[i] == matTemplate.templateId)
+                {
+                    size_t count = _modelsUsingMaterial[i].size();
+
+                    // Add a batch
+                    batches.push_back(structs::RenderBatch{
+                        .offset = modelCounter,
+                        .count = count,
+                        .pipeline = matTemplate.pipeline,
+                    });
+
+                    modelCounter += count;
+                }
+            }
+        }
+
+        return batches;
+    }
+
     material_template_id_t MaterialManager::GetMaterialTemplate(const core::Match &match) const
     {
         return _baseTemplates[match.GetIndex()];
@@ -66,38 +108,6 @@ namespace railguard::rendering
         return _modelsUsingMaterial[index];
     }
 
-    std::vector<uint32_t> MaterialManager::GetMaterialsWhichSupportKind(enums::ShaderEffectKind kind) const
-    {
-        // Get the shader effects for that kind
-        const auto effectsWithDesiredKind = _storage.shaderEffectManager->GetEffectsOfKind(kind);
-
-        // Get the templates that support one of those effects, sorted by effect
-        const auto supportedTemplates = _storage.materialTemplateManager->GetMaterialTemplatesWithEffects(effectsWithDesiredKind);
-
-        std::vector<material_id_t> result;
-        // Reserve it with the size of the full vector
-        // It will be faster, but we might overshoot it
-        // Maybe later a more intelligent formula can be used to estimate the size of the result vector, for example using the count of
-        // the last time.
-        result.reserve(_baseTemplates.size());
-
-        // For each template
-        for (auto matTemplate : supportedTemplates)
-        {
-            // Add the materials that use that template.
-            for (uint32_t i = 0; i < _baseTemplates.size(); i++)
-            {
-                if (_baseTemplates[i] == matTemplate)
-                {
-                    result.push_back(i);
-                }
-            }
-        }
-
-        // The result will be a vector of pipelines indexes, sorted by template, themselves sorted by effect.
-        // This order minimises the number of binds needed to draw them.
-        return result;
-    }
 
     void MaterialManager::RegisterModel(const core::Match &match, model_id_t modelId)
     {

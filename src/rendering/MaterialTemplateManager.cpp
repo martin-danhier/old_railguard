@@ -1,7 +1,6 @@
-#include "railguard/rendering/MaterialTemplateManager.h"
-
-#include "railguard/rendering/ShaderEffectManager.h"
-#include "railguard/rendering/enums/ShaderEffectKind.h"
+#include <railguard/rendering/MaterialTemplateManager.h>
+#include <railguard/rendering/ShaderEffectManager.h>
+#include <railguard/rendering/structs/BuiltTemplate.h>
 
 namespace railguard::rendering
 {
@@ -93,16 +92,18 @@ namespace railguard::rendering
         return result;
     }
 
-    std::vector<material_template_id_t>
-        MaterialTemplateManager::GetMaterialTemplatesWithEffects(const std::vector<shader_effect_id_t> &shaderEffectsIds) const
+    std::vector<structs::BuiltTemplate>
+        MaterialTemplateManager::BuildTemplatesForEffects(const std::vector<shader_effect_id_t> &shaderEffectsIds) const
     {
-        std::vector<material_template_id_t> result;
-        // TODO smart thing for reserve
-        result.reserve(_shaderEffects.size());
+        std::vector<structs::BuiltTemplate> result;
 
         // For each shader effect id
         for (auto shaderEffectId : shaderEffectsIds)
         {
+            // Find the pipeline
+            auto effectMatch      = _storage.shaderEffectManager->LookupId(shaderEffectId);
+            vk::Pipeline effectPipeline = _storage.shaderEffectManager->GetPipeline(effectMatch);
+
             // For each template
             for (uint32_t i = 0; i < _shaderEffects.size(); i++)
             {
@@ -113,11 +114,16 @@ namespace railguard::rendering
                     if (shaderEffectId == availableEffect)
                     {
                         // Add the id of the template and stop looping in that template
-                        result.push_back(_ids[i]);
+                        result.push_back(structs::BuiltTemplate {
+                            .templateId = _ids[i],
+                            .pipeline   = effectPipeline,
+                        });
                         break;
                     }
                 }
             }
+
+            return result;
         }
 
         // This will do 2 things at once:

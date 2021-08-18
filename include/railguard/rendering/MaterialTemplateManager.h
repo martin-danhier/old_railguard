@@ -6,6 +6,12 @@
 
 namespace railguard::rendering
 {
+    namespace structs
+    {
+      struct BuiltTemplate;
+    } // namespace structs
+    
+
     struct MaterialTemplateManagerStorage
     {
         const class ShaderEffectManager *shaderEffectManager;
@@ -35,8 +41,8 @@ namespace railguard::rendering
         [[nodiscard]] bool HasEffect(const core::Match &match, shader_effect_id_t effectId) const;
         [[nodiscard]] bool HasEffectForKind(const core::Match &match, enums::ShaderEffectKind kind) const;
         [[nodiscard]] std::vector<material_template_id_t> GetMaterialTemplatesWithEffectForKind(enums::ShaderEffectKind kind) const;
-        [[nodiscard]] std::vector<material_template_id_t>
-            GetMaterialTemplatesWithEffects(const std::vector<shader_effect_id_t> &shaderEffectsIds) const;
+        [[nodiscard]] std::vector<structs::BuiltTemplate>
+            BuildTemplatesForEffects(const std::vector<shader_effect_id_t> &shaderEffectsIds) const;
 
         // Getters
         [[nodiscard]] std::vector<shader_effect_id_t> GetShaderEffects(const core::Match &match) const;

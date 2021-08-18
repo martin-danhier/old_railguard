@@ -6,6 +6,10 @@
 
 namespace railguard::rendering
 {
+    namespace structs
+    {
+        struct RenderBatch;
+    }
     struct MaterialManagerStorage
     {
         const class MaterialTemplateManager *materialTemplateManager;
@@ -34,12 +38,12 @@ namespace railguard::rendering
         [[nodiscard]] material_template_id_t GetMaterialTemplate(const core::Match &match) const;
         [[nodiscard]] std::vector<model_id_t> GetModelsThatUseMaterial(uint32_t index) const;
         [[nodiscard]] std::vector<model_id_t> GetModelsThatUseMaterial(const core::Match &match) const;
+        [[nodiscard]] size_t CountModelsThatUseMaterial(const core::Match &match) const;
+        [[nodiscard]] std::vector<structs::RenderBatch> GenerateBatchesForKind(enums::ShaderEffectKind kind) const;
 
         void RegisterModel(const core::Match &match, model_id_t modelId);
         void UnregisterModel(const core::Match &match, model_id_t modelId);
         void ClearModels(const core::Match &match);
         void ClearAllModels();
-
-        [[nodiscard]] std::vector<uint32_t> GetMaterialsWhichSupportKind(enums::ShaderEffectKind kind) const;
     };
 } // namespace railguard::rendering

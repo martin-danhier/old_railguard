@@ -1,6 +1,6 @@
 #pragma once
 #include <cstddef>
-#include <railguard/utils/IntegralConcept.h>
+#include <concepts>
 
 namespace railguard::core
 {
@@ -26,7 +26,7 @@ namespace railguard::core
 
     // Take the type of the original ID as a template parameter.
     // We use concepts to force it to be an integral type
-    template<utils::integral T>
+    template<std::integral T>
     class CompleteMatch : public Match
     {
       private:

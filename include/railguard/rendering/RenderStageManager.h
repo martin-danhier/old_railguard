@@ -2,6 +2,7 @@
 
 #include <railguard/rendering/Ids.h>
 #include <railguard/rendering/enums/ShaderEffectKind.h>
+#include <railguard/rendering/structs/RenderBatch.h>
 #include <vector>
 
 namespace vk {
@@ -30,6 +31,8 @@ namespace railguard::rendering
         // Cache
         std::vector<std::vector<material_id_t>> _materialsCache;
         std::vector<std::vector<std::vector<model_id_t>>> _modelsCache;
+        std::vector<std::vector<structs::RenderBatch>> _batchesCache;
+        
 
       public:
         RenderStageManager(const std::vector<enums::ShaderEffectKind> &stages,
