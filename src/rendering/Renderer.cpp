@@ -180,15 +180,7 @@ namespace railguard::rendering
             // We do a render pass for each camera
             cmd.beginRenderPass(renderInfo.renderPassBeginInfo, vk::SubpassContents::eInline);
 
-            // Draw each object
-            _shaderEffectManager->Bind(_shaderEffectManager->LookupId(_triangleEffect), cmd);
-            
             _renderStageManager->DrawFromCache(cmd);
-
-            // Execute passes
-            // for (uint32_t i = 0; i < _passes.size(); i++) {
-            // 	ExecutePass(i);
-            // }
 
             cmd.endRenderPass();
         }

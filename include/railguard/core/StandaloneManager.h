@@ -22,7 +22,7 @@ namespace railguard::core
      * @tparam U optional type that can be used to store a struct of values with the init function.
      * For example, the vulkan device is often required in methods, storing it here removes the need to require it everywhere.
      */
-    template <std::integral T, typename U = nullptr_t>
+    template <std::integral T, typename U = std::nullptr_t>
     class StandaloneManager
     {
     protected:

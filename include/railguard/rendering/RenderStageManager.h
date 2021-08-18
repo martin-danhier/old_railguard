@@ -29,8 +29,6 @@ namespace railguard::rendering
         std::vector<structs::AllocatedBuffer> _indirectBuffers;
 
         // Cache
-        std::vector<std::vector<material_id_t>> _materialsCache;
-        std::vector<std::vector<std::vector<model_id_t>>> _modelsCache;
         std::vector<std::vector<structs::RenderBatch>> _batchesCache;
         
 

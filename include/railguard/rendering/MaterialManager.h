@@ -8,7 +8,7 @@ namespace railguard::rendering
 {
     namespace structs
     {
-        struct RenderBatch;
+        struct BatchGenerationResult;
     }
     struct MaterialManagerStorage
     {
@@ -39,7 +39,7 @@ namespace railguard::rendering
         [[nodiscard]] std::vector<model_id_t> GetModelsThatUseMaterial(uint32_t index) const;
         [[nodiscard]] std::vector<model_id_t> GetModelsThatUseMaterial(const core::Match &match) const;
         [[nodiscard]] size_t CountModelsThatUseMaterial(const core::Match &match) const;
-        [[nodiscard]] std::vector<structs::RenderBatch> GenerateBatchesForKind(enums::ShaderEffectKind kind) const;
+        [[nodiscard]] structs::BatchGenerationResult GenerateBatchesForKind(enums::ShaderEffectKind kind) const;
 
         void RegisterModel(const core::Match &match, model_id_t modelId);
         void UnregisterModel(const core::Match &match, model_id_t modelId);

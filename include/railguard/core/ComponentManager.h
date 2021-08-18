@@ -15,7 +15,7 @@ namespace railguard::core
      */
     typedef size_t component_idx_t;
 
-    template<typename T = nullptr_t>
+    template<typename T = std::nullptr_t>
     class ComponentManager
     {
       protected:

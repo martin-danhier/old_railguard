@@ -5,6 +5,7 @@
 #include <railguard/rendering/enums/ShaderEffectKind.h>
 #include <railguard/rendering/structs/BuiltTemplate.h>
 #include <railguard/rendering/structs/RenderBatch.h>
+#include <railguard/rendering/structs/BatchGenerationResult.h>
 
 namespace railguard::rendering
 {
@@ -26,7 +27,9 @@ namespace railguard::rendering
     core::CompleteMatch<material_id_t> MaterialManager::CreateMaterial(material_template_id_t baseTemplate)
     {
         _baseTemplates.push_back(baseTemplate);
-        _modelsUsingMaterial.emplace_back(1);
+        std::vector<model_id_t> models;
+        models.reserve(1);
+        _modelsUsingMaterial.push_back(models);
 
         return super::CreateItem();
     }
@@ -58,15 +61,14 @@ namespace railguard::rendering
         return _modelsUsingMaterial[match.GetIndex()].size();
     }
 
-    std::vector<structs::RenderBatch> MaterialManager::GenerateBatchesForKind(enums::ShaderEffectKind kind) const
+    structs::BatchGenerationResult MaterialManager::GenerateBatchesForKind(enums::ShaderEffectKind kind) const
     {
         std::vector<structs::RenderBatch> batches;
+        std::vector<model_id_t> models;
 
         // Get effects which support the given kind, sorted by effect so that the number of required binds is minimal
         const auto effectsWithDesiredKind = _storage.shaderEffectManager->GetEffectsOfKind(kind);
         const auto supportedTemplates     = _storage.materialTemplateManager->BuildTemplatesForEffects(effectsWithDesiredKind);
-
-        size_t modelCounter = 0;
 
         // For each template
         for (auto matTemplate : supportedTemplates)
@@ -76,21 +78,26 @@ namespace railguard::rendering
             {
                 if (_baseTemplates[i] == matTemplate.templateId)
                 {
-                    size_t count = _modelsUsingMaterial[i].size();
-
                     // Add a batch
                     batches.push_back(structs::RenderBatch{
-                        .offset = modelCounter,
-                        .count = count,
+                        .offset = models.size(),
+                        .count = _modelsUsingMaterial[i].size(),
                         .pipeline = matTemplate.pipeline,
                     });
 
-                    modelCounter += count;
+                    // Add the models
+                    for (auto modelId : _modelsUsingMaterial[i]) {
+                        models.push_back(modelId);
+                    }
+
                 }
             }
         }
 
-        return batches;
+        return structs::BatchGenerationResult {
+            .batches = batches,
+            .models = models,
+        };
     }
 
     material_template_id_t MaterialManager::GetMaterialTemplate(const core::Match &match) const
