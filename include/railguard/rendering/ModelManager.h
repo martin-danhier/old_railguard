@@ -1,7 +1,7 @@
 #pragma once
 
-#include "railguard/core/StandaloneManager.h"
-#include "railguard/rendering/Ids.h"
+#include <railguard/core/StandaloneManager.h>
+#include <railguard/rendering/Ids.h>
 
 namespace railguard
 {

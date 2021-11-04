@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cinttypes>
+using std::uint32_t;
 
 namespace railguard::rendering
 {

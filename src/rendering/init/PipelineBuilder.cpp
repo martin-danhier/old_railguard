@@ -14,10 +14,10 @@ namespace railguard::rendering::init
 {
     // ===== PIPELINE BUILDER =====
 
-    PipelineBuilder PipelineBuilder::AddShaderStage(vk::ShaderStageFlagBits stage, vk::ShaderModule shaderModule)
+    PipelineBuilder PipelineBuilder::AddShaderStage(VkShaderStageFlagBits stage, VkShaderModule shaderModule)
     {
         // Add a new shader stage to the vector
-        _shaderStages.push_back(vk::PipelineShaderStageCreateInfo {
+        _shaderStages.push_back(VkPipelineShaderStageCreateInfo {
             .stage  = stage,
             .module = shaderModule,
             // Entry function of the shader, we use main conventionally
@@ -30,7 +30,7 @@ namespace railguard::rendering::init
     PipelineBuilder PipelineBuilder::WithVertexInput(const structs::VertexInputDescription &vertexInputDescription)
     {
         // Empty for now
-        _vertexInputInfo = vk::PipelineVertexInputStateCreateInfo {
+        _vertexInputInfo = VkPipelineVertexInputStateCreateInfo {
             .vertexBindingDescriptionCount   = static_cast<uint32_t>(vertexInputDescription.bindings.size()),
             .pVertexBindingDescriptions      = vertexInputDescription.bindings.data(),
             .vertexAttributeDescriptionCount = static_cast<uint32_t>(vertexInputDescription.attributes.size()),
@@ -40,9 +40,9 @@ namespace railguard::rendering::init
 
         return *this;
     }
-    PipelineBuilder PipelineBuilder::WithAssemblyTopology(vk::PrimitiveTopology topology)
+    PipelineBuilder PipelineBuilder::WithAssemblyTopology(VkPrimitiveTopology topology)
     {
-        _inputAssembly = vk::PipelineInputAssemblyStateCreateInfo {
+        _inputAssembly = VkPipelineInputAssemblyStateCreateInfo {
             .topology               = topology,
             .primitiveRestartEnable = false,
         };
@@ -50,16 +50,16 @@ namespace railguard::rendering::init
 
         return *this;
     }
-    PipelineBuilder PipelineBuilder::WithPolygonMode(vk::PolygonMode polygonMode)
+    PipelineBuilder PipelineBuilder::WithPolygonMode(VkPolygonMode polygonMode)
     {
-        _rasterizer = vk::PipelineRasterizationStateCreateInfo {
+        _rasterizer = VkPipelineRasterizationStateCreateInfo {
             .depthClampEnable = false,
             // Keep the primitive in the rasterization stage
             .rasterizerDiscardEnable = false,
             .polygonMode             = polygonMode,
             // No backface culling
-            .cullMode  = vk::CullModeFlagBits::eNone,
-            .frontFace = vk::FrontFace::eCounterClockwise,
+            .cullMode  = VkCullModeFlagBits::eNone,
+            .frontFace = VkFrontFace::eCounterClockwise,
             // No depth bias
             .depthBiasEnable         = false,
             .depthBiasConstantFactor = 0.0f,
@@ -72,7 +72,7 @@ namespace railguard::rendering::init
 
         return *this;
     }
-    PipelineBuilder PipelineBuilder::WithPipelineLayout(vk::PipelineLayout pipelineLayout)
+    PipelineBuilder PipelineBuilder::WithPipelineLayout(VkPipelineLayout pipelineLayout)
     {
         _pipelineLayout = pipelineLayout;
 #ifdef USE_ADVANCED_CHECKS
@@ -84,9 +84,9 @@ namespace railguard::rendering::init
 
     // Scissors
 
-    PipelineBuilder PipelineBuilder::WithScissors(int32_t xOffset, int32_t yOffset, vk::Extent2D extent)
+    PipelineBuilder PipelineBuilder::WithScissors(int32_t xOffset, int32_t yOffset, VkExtent2D extent)
     {
-        _scissor = vk::Rect2D {
+        _scissor = VkRect2D {
             .offset {
                 .x = xOffset,
                 .y = yOffset,
@@ -99,7 +99,7 @@ namespace railguard::rendering::init
         return *this;
     }
 
-    PipelineBuilder PipelineBuilder::WithScissors(vk::Rect2D scissors)
+    PipelineBuilder PipelineBuilder::WithScissors(VkRect2D scissors)
     {
         _scissor = scissors;
 #ifdef USE_ADVANCED_CHECKS
@@ -108,12 +108,12 @@ namespace railguard::rendering::init
         return *this;
     }
 
-    PipelineBuilder PipelineBuilder::WithDepthTestingSettings(bool doDepthTest, bool doDepthWrite, vk::CompareOp compareOp)
+    PipelineBuilder PipelineBuilder::WithDepthTestingSettings(bool doDepthTest, bool doDepthWrite, VkCompareOp compareOp)
     {
-        _depthStencilCreateInfo = vk::PipelineDepthStencilStateCreateInfo {
+        _depthStencilCreateInfo = VkPipelineDepthStencilStateCreateInfo {
             .depthTestEnable       = doDepthTest,
             .depthWriteEnable      = doDepthWrite,
-            .depthCompareOp        = doDepthTest ? compareOp : vk::CompareOp::eAlways,
+            .depthCompareOp        = doDepthTest ? compareOp : VkCompareOp::eAlways,
             .depthBoundsTestEnable = false,
             .stencilTestEnable     = false,
             .minDepthBounds        = 0.0f,
@@ -128,7 +128,7 @@ namespace railguard::rendering::init
 
     PipelineBuilder PipelineBuilder::WithViewport(float x, float y, float width, float height, float minDepth, float maxDepth)
     {
-        _viewport = vk::Viewport {
+        _viewport = VkViewport {
             .x        = x,
             .y        = y,
             .width    = width,
@@ -142,7 +142,7 @@ namespace railguard::rendering::init
         return *this;
     }
 
-    PipelineBuilder PipelineBuilder::WithViewport(vk::Viewport viewport)
+    PipelineBuilder PipelineBuilder::WithViewport(VkViewport viewport)
     {
         _viewport = viewport;
 #ifdef USE_ADVANCED_CHECKS
@@ -151,7 +151,7 @@ namespace railguard::rendering::init
         return *this;
     }
     // Defaults
-    PipelineBuilder PipelineBuilder::GetDefaultsForExtent(vk::Extent2D windowExtent)
+    PipelineBuilder PipelineBuilder::GetDefaultsForExtent(VkExtent2D windowExtent)
     {
         // Setup a viewport that takes the whole screen
         WithViewport(0.0f, 0.0f, static_cast<float>(windowExtent.width), static_cast<float>(windowExtent.height), 0.0f, 1.0f);
@@ -160,18 +160,18 @@ namespace railguard::rendering::init
         return *this;
     }
 
-    vk::Pipeline PipelineBuilder::Build(vk::Device device, vk::RenderPass pass)
+    VkPipeline PipelineBuilder::Build(VkDevice device, VkRenderPass pass)
     {
         // Set pipeline blend
-        _colorBlendAttachment = vk::PipelineColorBlendAttachmentState {
+        _colorBlendAttachment = VkPipelineColorBlendAttachmentState {
             .blendEnable    = false,
-            .colorWriteMask = vk::ColorComponentFlagBits::eR | vk::ColorComponentFlagBits::eG | vk::ColorComponentFlagBits::eB
-                              | vk::ColorComponentFlagBits::eA,
+            .colorWriteMask = VkColorComponentFlagBits::eR | VkColorComponentFlagBits::eG | VkColorComponentFlagBits::eB
+                              | VkColorComponentFlagBits::eA,
         };
 
         // Set pipeline layout to default
-        _multisampling = vk::PipelineMultisampleStateCreateInfo {
-            .rasterizationSamples  = vk::SampleCountFlagBits::e1,
+        _multisampling = VkPipelineMultisampleStateCreateInfo {
+            .rasterizationSamples  = VkSampleCountFlagBits::e1,
             .sampleShadingEnable   = false,
             .minSampleShading      = 1.0f,
             .pSampleMask           = nullptr,
@@ -181,9 +181,9 @@ namespace railguard::rendering::init
 
         // Apply defaults if needed
         if (!_rasterizerInitialized)
-            WithPolygonMode(vk::PolygonMode::eFill);
+            WithPolygonMode(VkPolygonMode::eFill);
         if (!_inputAssemblyInitialized)
-            WithAssemblyTopology(vk::PrimitiveTopology::eTriangleList);
+            WithAssemblyTopology(VkPrimitiveTopology::eTriangleList);
         if (!_vertexInputInitialized)
             WithVertexInput(structs::VertexInputDescription {
                 .bindings   = {},
@@ -193,16 +193,16 @@ namespace railguard::rendering::init
             WithDepthTestingSettings(false, false);
 
         // Create viewport state from stored viewport and scissors
-        vk::PipelineViewportStateCreateInfo viewportState {
+        VkPipelineViewportStateCreateInfo viewportState {
             .viewportCount = 1,
             .pViewports    = &_viewport,
             .scissorCount  = 1,
             .pScissors     = &_scissor,
         };
         // Create color blending state
-        vk::PipelineColorBlendStateCreateInfo colorBlending {
+        VkPipelineColorBlendStateCreateInfo colorBlending {
             .logicOpEnable   = false,
-            .logicOp         = vk::LogicOp::eCopy,
+            .logicOp         = VkLogicOp::eCopy,
             .attachmentCount = 1,
             .pAttachments    = &_colorBlendAttachment,
         };
@@ -213,7 +213,7 @@ namespace railguard::rendering::init
         ADVANCED_CHECK(_scissorsInitialized, NO_SCISSORS_ERROR);
 
         // Create the pipeline
-        vk::GraphicsPipelineCreateInfo pipelineCreateInfo {
+        VkGraphicsPipelineCreateInfo pipelineCreateInfo {
             .stageCount          = static_cast<uint32_t>(_shaderStages.size()),
             .pStages             = _shaderStages.data(),
             .pVertexInputState   = &_vertexInputInfo,
@@ -233,7 +233,7 @@ namespace railguard::rendering::init
         // Handle result
         switch (result.result)
         {
-            case vk::Result::eSuccess:
+            case VkResult::eSuccess:
                 return result.value;
             // Default returns an exception
             default:

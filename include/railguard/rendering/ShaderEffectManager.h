@@ -1,9 +1,15 @@
 #pragma once
 
 #include <railguard/core/StandaloneManager.h>
-#include <railguard/includes/Vulkan.h>
 #include <railguard/rendering/Ids.h>
 #include <railguard/rendering/enums/ShaderEffectKind.h>
+
+#define VK_DEFINE_HANDLE(object) typedef struct object##_T* object;
+VK_DEFINE_HANDLE(VkDevice)
+VK_DEFINE_HANDLE(VkRenderPass)
+VK_DEFINE_HANDLE(VkPipeline)
+VK_DEFINE_HANDLE(VkCommandBuffer)
+VK_DEFINE_HANDLE(VkPipelineLayout)
 
 namespace railguard
 {
@@ -27,8 +33,8 @@ namespace railguard
          */
         struct ShaderEffectManagerStorage
         {
-            vk::Device vulkanDevice                              = nullptr;
-            vk::RenderPass renderPass                            = nullptr;
+            VkDevice vulkanDevice                              = nullptr;
+            VkRenderPass renderPass                            = nullptr;
             const class ShaderModuleManager *shaderModuleManager = nullptr;
             const core::WindowManager *windowManager             = nullptr;
         };
@@ -44,9 +50,9 @@ namespace railguard
             // Typedef the parent type to make it easier to call from the methods
             typedef core::StandaloneManager<shader_effect_id_t, ShaderEffectManagerStorage> super;
 
-            std::vector<vk::PipelineLayout> _pipelineLayouts;
+            std::vector<VkPipelineLayout> _pipelineLayouts;
             std::vector<std::vector<shader_module_id_t>> _shaderStages;
-            std::vector<vk::Pipeline> _pipelines;
+            std::vector<VkPipeline> _pipelines;
             std::vector<enums::ShaderEffectKind> _effectKinds;
 
             void CleanUp();
@@ -71,7 +77,7 @@ namespace railguard
             [[nodiscard]] core::CompleteMatch<shader_effect_id_t> CreateShaderEffect(const init::ShaderEffectInitInfo &initInfo,
                                                                                      bool buildEffectAfterCreation = false);
 
-            vk::Pipeline BuildEffect(const core::Match &match);
+            VkPipeline BuildEffect(const core::Match &match);
 
             /**
              * @brief Destroys the shader effect pointed by the given match
@@ -80,11 +86,11 @@ namespace railguard
              */
             void DestroyShaderEffect(const core::Match &match);
 
-            void Bind(const core::Match &match, const vk::CommandBuffer &cmd) const;
+            void Bind(const core::Match &match, const VkCommandBuffer &cmd) const;
             [[nodiscard]] std::vector<shader_effect_id_t> GetEffectsOfKind(enums::ShaderEffectKind kind) const;
 
-            [[nodiscard]] vk::PipelineLayout GetPipelineLayout(const core::Match &match) const;
-            [[nodiscard]] vk::Pipeline GetPipeline(const core::Match &match) const;
+            [[nodiscard]] VkPipelineLayout GetPipelineLayout(const core::Match &match) const;
+            [[nodiscard]] VkPipeline GetPipeline(const core::Match &match) const;
             [[nodiscard]] std::vector<shader_module_id_t> GetShaderStages(const core::Match &match) const;
             [[nodiscard]] enums::ShaderEffectKind GetEffectKind(const core::Match &match) const;
         };

@@ -1,40 +1,81 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
-    <generated>
-      <config projectName="railguard" targetName="shaders" />
-      <config projectName="railguard" targetName="vkbootstrap" />
-      <config projectName="railguard" targetName="railguard" />
-    </generated>
-  </component>
   <component name="CMakeSettings">
     <configurations>
-      <configuration PROFILE_NAME="Win64_Debug" ENABLED="true" CONFIG_NAME="Win64_Debug" />
+      <configuration PROFILE_NAME="Debug" ENABLED="true" CONFIG_NAME="Debug" />
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="68aa04f6-66bd-4dbf-9c29-f69781df6134" name="Changes" comment="">
+    <list default="true" id="571434e4-2343-49df-8103-39e7de3ec2f2" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/external/volk" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitmodules" beforeDir="false" afterPath="$PROJECT_DIR$/.gitmodules" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/new_engine.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/new_engine.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/railguard/rendering/MaterialManager.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/railguard/rendering/MaterialManager.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/rendering/MaterialManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/rendering/MaterialManager.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.ideaold/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.ideaold/.name" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.ideaold/deployment.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.ideaold/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.ideaold/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.ideaold/new_engine.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.ideaold/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.vs/CMake Overview" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.vs/ProjectSettings.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.vs/VSWorkspaceState.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.vs/cmake.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.vs/slnx.sqlite" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/railguard/core/StandaloneManager.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/railguard/core/StandaloneManager.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/railguard/core/WindowManager.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/railguard/core/WindowManager.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/railguard/includes/Vulkan.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/railguard/rendering/AllocationManager.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/railguard/rendering/AllocationManager.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/railguard/rendering/FrameManager.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/railguard/rendering/FrameManager.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/railguard/rendering/Ids.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/railguard/rendering/Ids.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/railguard/rendering/ModelManager.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/railguard/rendering/ModelManager.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/railguard/rendering/RenderStageManager.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/railguard/rendering/RenderStageManager.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/railguard/rendering/Renderer.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/railguard/rendering/Renderer.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/railguard/rendering/ShaderEffectManager.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/railguard/rendering/ShaderEffectManager.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/railguard/rendering/ShaderModuleManager.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/railguard/rendering/ShaderModuleManager.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/railguard/rendering/SwapchainCameraManager.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/railguard/rendering/SwapchainCameraManager.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/railguard/rendering/SwapchainManager.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/railguard/rendering/SwapchainManager.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/railguard/rendering/enums/CameraMode.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/railguard/rendering/enums/CameraMode.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/railguard/rendering/init/CameraInitInfo.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/railguard/rendering/init/CameraInitInfo.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/railguard/rendering/init/PipelineBuilder.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/railguard/rendering/init/PipelineBuilder.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/railguard/rendering/init/PipelineLayoutBuilder.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/railguard/rendering/init/PipelineLayoutBuilder.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/railguard/rendering/init/RenderPassBuilder.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/railguard/rendering/init/RenderPassBuilder.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/railguard/rendering/init/ShaderEffectInitInfo.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/railguard/rendering/init/ShaderEffectInitInfo.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/railguard/rendering/init/SwapchainInitInfo.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/railguard/rendering/init/SwapchainInitInfo.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/railguard/rendering/init/VulkanInitInfo.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/railguard/rendering/init/VulkanInitInfo.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/railguard/rendering/structs/AllocatedStructs.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/railguard/rendering/structs/AllocatedStructs.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/railguard/rendering/structs/BuiltTemplate.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/railguard/rendering/structs/BuiltTemplate.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/railguard/rendering/structs/CameraRenderInfo.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/railguard/rendering/structs/CameraRenderInfo.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/railguard/rendering/structs/RenderBatch.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/railguard/rendering/structs/RenderBatch.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/railguard/rendering/structs/Storages.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/railguard/rendering/structs/Storages.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/railguard/rendering/structs/VertexInputDescription.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/railguard/rendering/structs/VertexInputDescription.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/premake5.lua" beforeDir="false" afterPath="$PROJECT_DIR$/premake5.lua" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/WindowManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/WindowManager.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/includes/Vulkan.cpp" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/rendering/RenderStageManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/rendering/RenderStageManager.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/rendering/SwapchainCameraManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/rendering/SwapchainCameraManager.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/rendering/init/PipelineLayoutBuilder.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/rendering/init/PipelineLayoutBuilder.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/rendering/init/RenderPassBuilder.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/rendering/init/RenderPassBuilder.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/rendering/init/VulkanInit.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/rendering/init/VulkanInit.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/rendering/structs/Vertex.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/rendering/structs/Vertex.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Win64_Debug" />
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MacroExpansionManager">
-    <option name="directoryName" value="kj68kwj5" />
+    <option name="directoryName" value="yrb5rxjk" />
   </component>
-  <component name="NamedScopeManager">
-    <scope name="Source" pattern="file[new_engine]:src//*||file[new_engine]:include//*||file[new_engine]:shaders//*" />
-  </component>
-  <component name="ProjectId" id="1wtlPyW0H33bRUHaf9aCD128jlY" />
+  <component name="ProjectId" id="1xMdu1a4yzNCKnOaPHQNQ85XUEn" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -46,71 +87,23 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="RunOnceActivity.cidr.known.project.marker" value="true" />
     <property name="WebServerToolWindowFactoryState" value="true" />
-    <property name="cf.advertisement.text.overridden" value="true" />
     <property name="cf.first.check.clang-format" value="false" />
     <property name="cidr.known.project.marker" value="true" />
-    <property name="cmake.loaded.for.project" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/cmakebuild/CMakeLists.txt" />
-    <property name="settings.editor.selected.configurable" value="project.scopes" />
-  </component>
-  <component name="RunManager" selected="CMake Application.railguard">
-    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="railguard" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="railguard" TARGET_NAME="railguard" CONFIG_NAME="Win64_Debug" RUN_TARGET_PROJECT_NAME="railguard" RUN_TARGET_NAME="railguard">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="shaders" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="railguard" TARGET_NAME="shaders" CONFIG_NAME="Win64_Debug">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="vkbootstrap" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="railguard" TARGET_NAME="vkbootstrap" CONFIG_NAME="Win64_Debug">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="GradleAppRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="com.jetbrains.cidr.cpp.gradle.execution.GradleNativeBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <list>
-      <item itemvalue="CMake Application.railguard" />
-      <item itemvalue="CMake Application.shaders" />
-      <item itemvalue="CMake Application.vkbootstrap" />
-    </list>
+    <property name="settings.editor.selected.configurable" value="MTCustomThemeConfigurable" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="68aa04f6-66bd-4dbf-9c29-f69781df6134" name="Changes" comment="" />
-      <created>1629285746384</created>
+      <changelist id="571434e4-2343-49df-8103-39e7de3ec2f2" name="Changes" comment="" />
+      <created>1630169110363</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1629285746384</updated>
-      <workItem from="1629285749285" duration="1930000" />
-      <workItem from="1629288344085" duration="808000" />
+      <updated>1630169110363</updated>
+      <workItem from="1630169111607" duration="4000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-  </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State />
-          </value>
-        </entry>
-      </map>
-    </option>
-    <option name="oldMeFiltersMigrated" value="true" />
   </component>
 </project>

@@ -1,5 +1,21 @@
 #pragma once
 
+#include <vector>
+
+#include <vulkan/vulkan.h> // Can't forward declare damn enum VkFormat
+
+// #define VK_DEFINE_HANDLE(object) typedef struct object##_T* object;
+// VK_DEFINE_HANDLE(VkDevice)
+// VK_DEFINE_HANDLE(VkPhysicalDevice)
+// VK_DEFINE_HANDLE(VkSurfaceKHR)
+// VK_DEFINE_HANDLE(VkRenderPass)
+// VK_DEFINE_HANDLE(VkSwapchainKHR)
+// VK_DEFINE_HANDLE(VkImage)
+// VK_DEFINE_HANDLE(VkImageView)
+// VK_DEFINE_HANDLE(VkFramebuffer)
+// struct VkExtent2D;
+
+
 namespace railguard::rendering::init
 {
     /**
@@ -12,43 +28,43 @@ namespace railguard::rendering::init
         /**
          * @brief Readonly reference to the vulkan device
          */
-        const vk::Device &device;
+        const VkDevice &device;
         /**
          * @brief Readonly reference to the vulkan physical device
          */
-        const vk::PhysicalDevice &physicalDevice;
+        const VkPhysicalDevice &physicalDevice;
         /**
          * @brief Readonly reference to the surface
          */
-        const vk::SurfaceKHR &surface;
+        const VkSurfaceKHR &surface;
         /**
          * @brief Readonly reference to the extent of the window
          */
-        const vk::Extent2D &windowExtent;
+        const VkExtent2D &windowExtent;
         /**
          * @brief Pointer to the renderpass that should be linked to the framebuffers
          * */
-        const vk::RenderPass &renderPass;
+        const VkRenderPass &renderPass;
         /**
          * @brief Pointer to the destination variable for the swapchain
          */
-        vk::SwapchainKHR *swapchain;
+        VkSwapchainKHR *swapchain;
         /**
          * @brief Pointer to the destination variable of the swapchain images
          */
-        std::vector<vk::Image> *swapchainImages;
+        std::vector<VkImage> *swapchainImages;
         /**
          * @brief Pointer to the destination variable of the swapchain image format
          */
-        vk::Format *swapchainImageFormat;
+        VkFormat *swapchainImageFormat;
         /**
          * @brief Pointer to the destination variable of the swapchain image views
          */
-        std::vector<vk::ImageView> *swapchainImageViews;
+        std::vector<VkImageView> *swapchainImageViews;
         /**
          * @brief Pointer to the destination variable of the framebuffers
          */
-        std::vector<vk::Framebuffer> *swapchainFramebuffers;
+        std::vector<VkFramebuffer> *swapchainFramebuffers;
     };
 
 }

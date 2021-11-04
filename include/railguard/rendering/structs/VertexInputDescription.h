@@ -1,6 +1,11 @@
 #pragma once
 
-#include <railguard/includes/Vulkan.h>
+#include <vector>
+
+struct VkVertexInputBindingDescription;
+struct VkVertexInputAttributeDescription;
+typedef uint32_t VkFlags;
+typedef VkFlags VkPipelineVertexInputStateCreateFlags;
 
 namespace railguard::rendering::structs
 {
@@ -10,9 +15,9 @@ namespace railguard::rendering::structs
      */
     struct VertexInputDescription
     {
-        std::vector<vk::VertexInputBindingDescription> bindings {};
-        std::vector<vk::VertexInputAttributeDescription> attributes {};
-        vk::PipelineVertexInputStateCreateFlags flags {};
+        std::vector<VkVertexInputBindingDescription> bindings {};
+        std::vector<VkVertexInputAttributeDescription> attributes {};
+        VkPipelineVertexInputStateCreateFlags flags {};
     };
 
 } // namespace railguard::rendering::structs

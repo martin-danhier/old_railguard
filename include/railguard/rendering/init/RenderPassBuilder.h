@@ -1,40 +1,55 @@
-#include "railguard/includes/Vulkan.h"
+#include <vector>
+
+
+typedef uint32_t VkFormat;
+typedef int32_t VkAttachmentLoadOp;
+typedef uint32_t VkAttachmentStoreOp;
+typedef uint32_t VkImageLayout;
+typedef uint32_t VkPipelineBindPoint;
+struct VkAttachmentDescription;
+struct VkAttachmentReference;
+struct VkSubpassDescription;
+#define VK_DEFINE_HANDLE(object) typedef struct object##_T* object;
+VK_DEFINE_HANDLE(VkRenderPass)
+VK_DEFINE_HANDLE(VkDevice)
 
 namespace railguard::rendering::init
 {
     class AttachmentBuilder
     {
-    private:
-        vk::Format _format = vk::Format::eUndefined;
-        vk::AttachmentLoadOp _loadOp = vk::AttachmentLoadOp::eDontCare;
-        vk::AttachmentStoreOp _storeOp = vk::AttachmentStoreOp::eDontCare;
-        vk::AttachmentLoadOp _stencilLoadOp = vk::AttachmentLoadOp::eDontCare;
-        vk::AttachmentStoreOp _stencilStoreOp = vk::AttachmentStoreOp::eDontCare;
-        vk::ImageLayout _finalLayout = vk::ImageLayout::eUndefined;
+      private:
+        VkFormat _format;
+        VkAttachmentLoadOp _loadOp;
+        VkAttachmentStoreOp _storeOp;
+        VkAttachmentLoadOp _stencilLoadOp;
+        VkAttachmentStoreOp _stencilStoreOp;
+        VkImageLayout _finalLayout;
 
-    public:
-        AttachmentBuilder SetFormat(vk::Format format);
+      public:
+        AttachmentBuilder SetFormat(VkFormat format);
         AttachmentBuilder ClearOnLoad();
         AttachmentBuilder StoreAtEnd();
         AttachmentBuilder ClearStencilOnLoad();
         AttachmentBuilder StoreStencilAtEnd();
-        AttachmentBuilder SetFinalLayout(vk::ImageLayout layout);
+        AttachmentBuilder SetFinalLayout(VkImageLayout layout);
 
-        [[nodiscard]] vk::AttachmentDescription Build();
+        [[nodiscard]] VkAttachmentDescription Build();
     };
 
     class RenderPassBuilder
     {
-    private:
-        std::vector<vk::AttachmentDescription> _attachments;
-        std::vector<vk::AttachmentReference> _attachmentReferences;
-        vk::SubpassDescription _subpass;
-    public:
-        RenderPassBuilder AddColorAttachment(const vk::AttachmentDescription &attachment);
-        RenderPassBuilder AddDepthAttachment(const vk::AttachmentDescription &attachment);
-        RenderPassBuilder SetPipelineBindPoint(vk::PipelineBindPoint bindPoint);
+      private:
+        std::vector<VkAttachmentDescription> _attachments;
+        std::vector<VkAttachmentReference> _attachmentReferences;
+        VkSubpassDescription *_subpass;
 
-        [[nodiscard]] vk::RenderPass Build(const vk::Device &device);
+      public:
+        RenderPassBuilder AddColorAttachment(const VkAttachmentDescription &attachment);
+        RenderPassBuilder AddDepthAttachment(const VkAttachmentDescription &attachment);
+        RenderPassBuilder SetPipelineBindPoint(VkPipelineBindPoint bindPoint);
+
+        [[nodiscard]] VkRenderPass Build(const VkDevice &device);
+        ~RenderPassBuilder();
     };
 
-}
+} // namespace railguard::rendering::init

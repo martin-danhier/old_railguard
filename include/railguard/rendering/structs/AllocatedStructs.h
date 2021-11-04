@@ -1,13 +1,15 @@
 #pragma once
 
-#include "railguard/includes/Vma.h"
-#include "railguard/includes/Vulkan.h"
+#define VK_DEFINE_HANDLE(object) typedef struct object##_T *object;
+VK_DEFINE_HANDLE(VkBuffer)
+VK_DEFINE_HANDLE(VmaAllocation)
+VK_DEFINE_HANDLE(VkImage)
 
 namespace railguard::rendering::structs
 {
     struct AllocatedBuffer
     {
-        vk::Buffer buffer        = nullptr;
+        VkBuffer buffer          = nullptr;
         VmaAllocation allocation = nullptr;
         size_t size              = 0;
 
@@ -23,7 +25,7 @@ namespace railguard::rendering::structs
 
     struct AllocatedImage
     {
-        vk::Image image = nullptr;
+        VkImage image = nullptr;
         VmaAllocation allocation {};
     };
 } // namespace railguard::rendering::structs

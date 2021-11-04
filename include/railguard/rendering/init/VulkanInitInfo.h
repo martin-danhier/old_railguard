@@ -1,5 +1,17 @@
 #pragma once
 
+#include <cstdint>
+
+#define VK_DEFINE_HANDLE(object) typedef struct object##_T* object;
+VK_DEFINE_HANDLE(VkInstance)
+VK_DEFINE_HANDLE(VkDebugUtilsMessengerEXT)
+VK_DEFINE_HANDLE(VkSurfaceKHR)
+VK_DEFINE_HANDLE(VkPhysicalDevice)
+VK_DEFINE_HANDLE(VkPhysicalDeviceProperties)
+VK_DEFINE_HANDLE(VkDevice)
+VK_DEFINE_HANDLE(VkQueue)
+
+
 namespace railguard
 {
     namespace core
@@ -22,31 +34,31 @@ namespace railguard
             /**
              * @brief Pointer to a variable that will hold the vulkan instance
              */
-            vk::Instance *instance = nullptr;
+            VkInstance *instance = nullptr;
             /**
              * @brief Pointer to a variable that will hold the vulkan debug messenger
              */
-            vk::DebugUtilsMessengerEXT *debugMessenger = nullptr;
+            VkDebugUtilsMessengerEXT *debugMessenger = nullptr;
             /**
              * @brief Pointer to a variable that will hold the vulkan surface
              */
-            vk::SurfaceKHR *surface = nullptr;
+            VkSurfaceKHR *surface = nullptr;
             /**
              * @brief Pointer to a variable that will hold the physical device
              */
-            vk::PhysicalDevice *physicalDevice = nullptr;
+            VkPhysicalDevice *physicalDevice = nullptr;
             /**
              * @brief Pointer to a variable that will hold the physical device properties
              */
-            vk::PhysicalDeviceProperties *physicalDeviceProperties = nullptr;
+            VkPhysicalDeviceProperties *physicalDeviceProperties = nullptr;
             /**
              * @brief Pointer to a variable that will hold the vulkan device
              */
-            vk::Device *device = nullptr;
+            VkDevice *device = nullptr;
             /**
              * @brief Pointer to a variable that will hold the vulkan device
              */
-            vk::Queue *graphicsQueue = nullptr;
+            VkQueue *graphicsQueue = nullptr;
             /**
              * @brief Pointer to a variable that will hold the vulkan device
              */

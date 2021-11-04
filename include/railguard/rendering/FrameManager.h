@@ -1,24 +1,34 @@
 #pragma once
 
-#include "railguard/includes/Vulkan.h"
-#include "railguard/rendering/Settings.h"
+#include <cstdint>
+#include <railguard/rendering/Settings.h>
+
+using std::uint32_t;
+using std::uint64_t;
+#define VK_DEFINE_HANDLE(object) typedef struct object##_T *(object);
+VK_DEFINE_HANDLE(VkCommandPool)
+VK_DEFINE_HANDLE(VkCommandBuffer)
+VK_DEFINE_HANDLE(VkFence)
+VK_DEFINE_HANDLE(VkSemaphore)
+VK_DEFINE_HANDLE(VkDevice)
+VK_DEFINE_HANDLE(VkQueue)
 
 namespace railguard::rendering
 {
     struct FrameData
     {
-        vk::CommandPool commandPool;
-        vk::CommandBuffer commandBuffer;
-        vk::Fence renderFence;
-        vk::Semaphore presentSemaphore;
-        vk::Semaphore renderSemaphore;
+        VkCommandPool commandPool;
+        VkCommandBuffer commandBuffer;
+        VkFence renderFence;
+        VkSemaphore presentSemaphore;
+        VkSemaphore renderSemaphore;
     };
 
     class FrameManager
     {
       private:
         // Ref to device
-        vk::Device _device = nullptr;
+        VkDevice _device = nullptr;
 
         // Counter of frames since the start of the program
         uint64_t _currentFrameNumber = 1;
@@ -26,14 +36,14 @@ namespace railguard::rendering
         // Data itself
         // We use arrays instead of vectors because the size is constant
         // We also don't need to handle ids like in other managers
-        vk::CommandPool _commandPools[NB_OVERLAPPING_FRAMES];
-        vk::CommandBuffer _commandBuffers[NB_OVERLAPPING_FRAMES];
-        vk::Semaphore _presentSemaphores[NB_OVERLAPPING_FRAMES];
-        vk::Semaphore _renderSemaphores[NB_OVERLAPPING_FRAMES];
-        vk::Fence _renderFences[NB_OVERLAPPING_FRAMES];
+        VkCommandPool _commandPools[NB_OVERLAPPING_FRAMES];
+        VkCommandBuffer _commandBuffers[NB_OVERLAPPING_FRAMES];
+        VkSemaphore _presentSemaphores[NB_OVERLAPPING_FRAMES];
+        VkSemaphore _renderSemaphores[NB_OVERLAPPING_FRAMES];
+        VkFence _renderFences[NB_OVERLAPPING_FRAMES];
 
       public:
-        FrameManager(const vk::Device &device, uint32_t graphicsQueueFamily);
+        FrameManager(const VkDevice &device, uint32_t graphicsQueueFamily);
         ~FrameManager();
         /**
          * @brief Ends the current frame and increments the frame number.
@@ -42,28 +52,28 @@ namespace railguard::rendering
          */
         uint64_t FinishFrame();
 
-        void WaitForFence(const vk::Fence &fence) const;
+        void WaitForFence(const VkFence &fence) const;
         void WaitForCurrentFence() const;
         void WaitForAllFences() const;
 
-        [[nodiscard]] vk::CommandBuffer BeginRecording() const;
-        void EndRecordingAndSubmit(const vk::Queue &graphicsQueue) const;
+        [[nodiscard]] VkCommandBuffer BeginRecording() const;
+        void EndRecordingAndSubmit(const VkQueue &graphicsQueue) const;
 
         [[nodiscard]] uint64_t GetFrameNumber() const;
         [[nodiscard]] uint32_t GetCurrentFrameIndex() const;
 
         [[nodiscard]] FrameData GetCurrentFrame() const;
-        [[nodiscard]] vk::CommandPool GetCurrentCommandPool() const;
-        [[nodiscard]] vk::CommandBuffer GetCurrentCommandBuffer() const;
-        [[nodiscard]] vk::Fence GetCurrentRenderFence() const;
-        [[nodiscard]] const vk::Semaphore *GetCurrentRenderSemaphore() const;
-        [[nodiscard]] const vk::Semaphore *GetCurrentPresentSemaphore() const;
+        [[nodiscard]] VkCommandPool GetCurrentCommandPool() const;
+        [[nodiscard]] VkCommandBuffer GetCurrentCommandBuffer() const;
+        [[nodiscard]] VkFence GetCurrentRenderFence() const;
+        [[nodiscard]] const VkSemaphore *GetCurrentRenderSemaphore() const;
+        [[nodiscard]] const VkSemaphore *GetCurrentPresentSemaphore() const;
 
         [[nodiscard]] FrameData GetFrame(uint32_t index) const;
-        [[nodiscard]] vk::CommandPool GetCommandPool(uint32_t index) const;
-        [[nodiscard]] vk::CommandBuffer GetCommandBuffer(uint32_t index) const;
-        [[nodiscard]] vk::Fence GetRenderFence(uint32_t index) const;
-        [[nodiscard]] const vk::Semaphore *GetRenderSemaphore(uint32_t index) const;
-        [[nodiscard]] const vk::Semaphore *GetPresentSemaphore(uint32_t index) const;
+        [[nodiscard]] VkCommandPool GetCommandPool(uint32_t index) const;
+        [[nodiscard]] VkCommandBuffer GetCommandBuffer(uint32_t index) const;
+        [[nodiscard]] VkFence GetRenderFence(uint32_t index) const;
+        [[nodiscard]] const VkSemaphore *GetRenderSemaphore(uint32_t index) const;
+        [[nodiscard]] const VkSemaphore *GetPresentSemaphore(uint32_t index) const;
     };
 } // namespace railguard::rendering

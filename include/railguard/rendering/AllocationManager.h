@@ -1,19 +1,16 @@
 #pragma once
-
-#include "railguard/includes/Vma.h"
+#include <cstdint>
 
 // Forward declarations
-// Avoids a vulkan import in the header
-namespace vk
-{
-    class PhysicalDevice;
-    class Device;
-    class Instance;
-    enum class BufferUsageFlagBits : uint32_t;
-    template<typename T>
-    class Flags;
-    typedef Flags<BufferUsageFlagBits> BufferUsageFlags;
-} // namespace vk
+using std::uint32_t;
+#define VK_DEFINE_HANDLE(object) typedef struct object##_T *(object);
+VK_DEFINE_HANDLE(VmaAllocator)
+VK_DEFINE_HANDLE(VkPhysicalDevice)
+VK_DEFINE_HANDLE(VkDevice)
+VK_DEFINE_HANDLE(VkInstance)
+typedef uint32_t VkFlags;
+typedef VkFlags VkBufferUsageFlags;
+typedef unsigned long VmaMemoryUsage;
 
 namespace railguard::rendering
 {
@@ -28,11 +25,11 @@ namespace railguard::rendering
         VmaAllocator _allocator = nullptr;
 
       public:
-        AllocationManager(const vk::PhysicalDevice &physicalDevice, const vk::Device &device, const vk::Instance &instance);
+        AllocationManager(const VkPhysicalDevice &physicalDevice, const VkDevice &device, const VkInstance &instance);
         ~AllocationManager();
 
         [[nodiscard]] structs::AllocatedBuffer
-            CreateBuffer(size_t allocationSize, vk::BufferUsageFlags bufferUsage, VmaMemoryUsage memoryUsage);
+            CreateBuffer(size_t allocationSize, VkBufferUsageFlags bufferUsage, VmaMemoryUsage memoryUsage);
         void DestroyBuffer(structs::AllocatedBuffer &buffer);
         [[nodiscard]] void *MapBuffer(const structs::AllocatedBuffer &buffer);
         void UnmapBuffer(const structs::AllocatedBuffer &buffer);

@@ -1,8 +1,20 @@
 #pragma once
 
-#include "railguard/core/StandaloneManager.h"
-#include "railguard/includes/Vulkan.h"
-#include "railguard/rendering/Ids.h"
+#include <railguard/core/StandaloneManager.h>
+#include <railguard/rendering/Ids.h>
+
+#define VK_DEFINE_HANDLE(object) typedef struct object##_T* object;
+typedef uint32_t VkFormat;
+struct VkExtent2D;
+VK_DEFINE_HANDLE(VkDevice);
+VK_DEFINE_HANDLE(VkPhysicalDevice);
+VK_DEFINE_HANDLE(VkSwapchainKHR);
+VK_DEFINE_HANDLE(VkImage)
+VK_DEFINE_HANDLE(VkImageView);
+VK_DEFINE_HANDLE(VkFramebuffer);
+VK_DEFINE_HANDLE(VkRenderPass);
+VK_DEFINE_HANDLE(VkQueue);
+VK_DEFINE_HANDLE(VkSurfaceKHR);
 
 namespace railguard
 {
@@ -17,8 +29,8 @@ namespace railguard
         struct SwapchainManagerStorage
         {
           public:
-            vk::Device vulkanDevice                 = nullptr;
-            vk::PhysicalDevice vulkanPhysicalDevice = nullptr;
+            VkDevice vulkanDevice                 = nullptr;
+            VkPhysicalDevice vulkanPhysicalDevice = nullptr;
             const class FrameManager *frameManager  = nullptr;
         };
 
@@ -28,13 +40,13 @@ namespace railguard
             // Typedef the parent type to make it easier to call from the methods
             typedef core::StandaloneManager<swapchain_id_t, SwapchainManagerStorage> super;
 
-            std::vector<vk::SwapchainKHR> _swapchains;
-            std::vector<vk::Format> _swapchainImageFormats;
-            std::vector<vk::Extent2D> _viewportExtents;
-            // std::vector<vk::Format> _depthImageFormat;
-            std::vector<std::vector<vk::Image>> _swapchainsImages;
-            std::vector<std::vector<vk::ImageView>> _swapchainsImageViews;
-            std::vector<std::vector<vk::Framebuffer>> _frameBuffers;
+            std::vector<VkSwapchainKHR> _swapchains;
+            std::vector<VkFormat> _swapchainImageFormats;
+            std::vector<VkExtent2D> _viewportExtents;
+            // std::vector<VkFormat> _depthImageFormat;
+            std::vector<std::vector<VkImage>> _swapchainsImages;
+            std::vector<std::vector<VkImageView>> _swapchainsImageViews;
+            std::vector<std::vector<VkFramebuffer>> _frameBuffers;
             std::vector<uint64_t> _lastTimeSubmitted;
             std::vector<uint32_t> _imageIndex;
 
@@ -53,9 +65,9 @@ namespace railguard
              *
              * @return swapchain_id_t The id of the new swapchain
              */
-            [[nodiscard]] core::CompleteMatch<swapchain_id_t> CreateWindowSwapchain(const vk::SurfaceKHR &surface,
+            [[nodiscard]] core::CompleteMatch<swapchain_id_t> CreateWindowSwapchain(const VkSurfaceKHR &surface,
                                                                                     const core::WindowManager &windowManager,
-                                                                                    const vk::RenderPass &renderPass);
+                                                                                    const VkRenderPass &renderPass);
 
             /**
              * @brief Destroys the swapchain pointed by the given match
@@ -74,9 +86,9 @@ namespace railguard
              * @param windowManager Window manager
              */
             void RecreateWindowSwapchain(const core::Match &match,
-                                         const vk::SurfaceKHR &surface,
-                                         const vk::Extent2D &newExtent,
-                                         const vk::RenderPass &renderPass);
+                                         const VkSurfaceKHR &surface,
+                                         const VkExtent2D &newExtent,
+                                         const VkRenderPass &renderPass);
 
             /**
              * @brief Requests the next image of the given swapchain.
@@ -87,18 +99,18 @@ namespace railguard
              */
             [[nodiscard]] uint32_t RequestNextImageIndex(const core::Match &match);
 
-            void PresentImage(const core::Match &match, const vk::Queue &graphicsQueue);
-            void PresentImage(size_t index, const vk::Queue &graphicsQueue);
-            void PresentUsedImages(const vk::Queue &graphicsQueue);
+            void PresentImage(const core::Match &match, const VkQueue &graphicsQueue);
+            void PresentImage(size_t index, const VkQueue &graphicsQueue);
+            void PresentUsedImages(const VkQueue &graphicsQueue);
 
             // Getters
 
-            [[nodiscard]] vk::SwapchainKHR GetSwapchain(const core::Match &match) const;
-            [[nodiscard]] vk::Format GetSwapchainImageFormat(const core::Match &match) const;
-            [[nodiscard]] std::vector<vk::Image> GetSwapchainImages(const core::Match &match) const;
-            [[nodiscard]] std::vector<vk::ImageView> GetSwapchainImageViews(const core::Match &match) const;
-            [[nodiscard]] std::vector<vk::Framebuffer> GetFramebuffers(const core::Match &match) const;
-            [[nodiscard]] vk::Extent2D GetViewportExtent(const core::Match &match) const;
+            [[nodiscard]] VkSwapchainKHR GetSwapchain(const core::Match &match) const;
+            [[nodiscard]] VkFormat GetSwapchainImageFormat(const core::Match &match) const;
+            [[nodiscard]] std::vector<VkImage> GetSwapchainImages(const core::Match &match) const;
+            [[nodiscard]] std::vector<VkImageView> GetSwapchainImageViews(const core::Match &match) const;
+            [[nodiscard]] std::vector<VkFramebuffer> GetFramebuffers(const core::Match &match) const;
+            [[nodiscard]] VkExtent2D GetViewportExtent(const core::Match &match) const;
         };
     } // namespace rendering
 } // namespace railguard

@@ -1,5 +1,8 @@
 #pragma once
-#include "railguard/includes/Vulkan.h"
+
+#define VK_DEFINE_HANDLE(object) typedef struct object##_T* object;
+VK_DEFINE_HANDLE(VkDevice)
+VK_DEFINE_HANDLE(VkPhysicalDevice)
 
 namespace railguard::rendering::structs
 {
@@ -9,7 +12,7 @@ namespace railguard::rendering::structs
     struct DeviceStorage
     {
       public:
-        vk::Device vulkanDevice = nullptr;
+        VkDevice vulkanDevice = nullptr;
     };
 
     /**
@@ -18,8 +21,8 @@ namespace railguard::rendering::structs
     struct FullDeviceStorage
     {
       public:
-        vk::Device vulkanDevice                 = nullptr;
-        vk::PhysicalDevice vulkanPhysicalDevice = nullptr;
+        VkDevice vulkanDevice                 = nullptr;
+        VkPhysicalDevice vulkanPhysicalDevice = nullptr;
     };
 
 } // namespace railguard::rendering::structs

@@ -2,14 +2,13 @@
 
 #include "EventSender.h"
 
+#define VK_DEFINE_HANDLE(object) typedef struct object##_T* object;
+VK_DEFINE_HANDLE(VkSurfaceKHR);
+VK_DEFINE_HANDLE(VkInstance);
+struct VkExtent2D;
+
 // Forward declarations
 struct SDL_Window;
-
-namespace vk {
-    struct Extent2D;
-    class SurfaceKHR;
-    class Instance;
-}
 
 namespace railguard::core
 {
@@ -26,7 +25,7 @@ namespace railguard::core
         std::string _title;
         
         // Event thrown when the window is resized
-        EventSender<vk::Extent2D> _resizeEvent;
+        EventSender<VkExtent2D> _resizeEvent;
 
     public:
         WindowManager(int defaultWidth, int defaultHeight, std::string defaultTitle);
@@ -36,10 +35,10 @@ namespace railguard::core
         [[nodiscard]] static uint64_t GetPerformanceCounter();
         [[nodiscard]] static uint64_t GetPerformanceFrequency();
         [[nodiscard]] std::vector<const char*> GetRequiredVulkanExtensions() const;
-        [[nodiscard]] vk::SurfaceKHR GetVulkanSurface(vk::Instance instance) const;
-        [[nodiscard]] vk::Extent2D GetWindowExtent() const;
+        [[nodiscard]] VkSurfaceKHR GetVulkanSurface(VkInstance instance) const;
+        [[nodiscard]] VkExtent2D GetWindowExtent() const;
         bool HandleEvents();
 
-        [[nodiscard]] EventSender<vk::Extent2D> &ResizeEvent();
+        [[nodiscard]] EventSender<VkExtent2D> &ResizeEvent();
     };
 } // namespace railguard::core

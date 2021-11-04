@@ -1,10 +1,8 @@
 #pragma once
 
-namespace vk
-{
-    class Device;
-    class PipelineLayout;
-} // namespace vk
+#define VK_DEFINE_HANDLE(object) typedef struct object##_T* object;
+VK_DEFINE_HANDLE(VkPipelineLayout)
+VK_DEFINE_HANDLE(VkDevice)
 
 namespace railguard::rendering::init
 {
@@ -15,6 +13,6 @@ namespace railguard::rendering::init
     {
       private:
       public:
-        [[nodiscard]] static vk::PipelineLayout Build(const vk::Device &vulkanDevice);
+        [[nodiscard]] static VkPipelineLayout Build(const VkDevice &vulkanDevice);
     };
 } // namespace railguard::rendering::init

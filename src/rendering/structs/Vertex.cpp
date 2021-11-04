@@ -1,4 +1,4 @@
-#include <railguard/includes/Vulkan.h>
+
 #include <railguard/rendering/structs/Vertex.h>
 #include <railguard/rendering/structs/VertexInputDescription.h>
 

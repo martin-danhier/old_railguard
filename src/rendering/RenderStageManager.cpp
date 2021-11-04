@@ -1,4 +1,4 @@
-#include <railguard/includes/Vulkan.h>
+
 #include <railguard/rendering/AllocationManager.h>
 #include <railguard/rendering/MaterialManager.h>
 #include <railguard/rendering/ModelManager.h>
@@ -52,12 +52,12 @@ namespace railguard::rendering
             // First, check if the buffer is big enough for our needs
             // If not, we need to resize it.
 
-            constexpr vk::BufferUsageFlags indirectBufferUsageFlags = vk::BufferUsageFlagBits::eTransferDst
-                                                                      | vk::BufferUsageFlagBits::eStorageBuffer
-                                                                      | vk::BufferUsageFlagBits::eIndirectBuffer;
+            constexpr VkBufferUsageFlags indirectBufferUsageFlags = VkBufferUsageFlagBits::eTransferDst
+                                                                      | VkBufferUsageFlagBits::eStorageBuffer
+                                                                      | VkBufferUsageFlagBits::eIndirectBuffer;
             constexpr VmaMemoryUsage indirectBufferMemoryUsage = VMA_MEMORY_USAGE_CPU_TO_GPU;
 
-            const auto requiredIndirectBufferSize = models.size() * sizeof(vk::DrawIndirectCommand);
+            const auto requiredIndirectBufferSize = models.size() * sizeof(VkDrawIndirectCommand);
             auto &currentIndirectBuffer           = _indirectBuffers[stageIndex];
 
             // If it does not exist, create it
@@ -78,7 +78,7 @@ namespace railguard::rendering
             // At this point, we have an indirect buffer big enough to hold the commands we want to register
 
             // Register commands
-            auto drawCommands = static_cast<vk::DrawIndirectCommand *>(_allocationManager->MapBuffer(currentIndirectBuffer));
+            auto drawCommands = static_cast<VkDrawIndirectCommand *>(_allocationManager->MapBuffer(currentIndirectBuffer));
             for (size_t i = 0; i < models.size(); i++)
             {
                 drawCommands[i].vertexCount   = 3; // TODO when mesh is added
@@ -90,7 +90,7 @@ namespace railguard::rendering
         }
     }
 
-    void RenderStageManager::DrawFromCache(vk::CommandBuffer &cmd)
+    void RenderStageManager::DrawFromCache(VkCommandBuffer cmd)
     {
         // For each stage
         for (uint32_t stageIndex = 0; stageIndex < _stages.size(); stageIndex++)
@@ -99,20 +99,20 @@ namespace railguard::rendering
 
             // Get indirect buffer
             auto &currentIndirectBuffer = _indirectBuffers[stageIndex];
-            uint32_t drawStride         = sizeof(vk::DrawIndirectCommand);
+            uint32_t drawStride         = sizeof(VkDrawIndirectCommand);
 
-            vk::Pipeline boundPipeline = nullptr;
+            VkPipeline boundPipeline = nullptr;
 
             for (auto &batch : batches) {
                 
                 // Bind pipeline if needed
                 if (batch.pipeline != boundPipeline) {
-                    cmd.bindPipeline(vk::PipelineBindPoint::eGraphics, batch.pipeline);
+                    cmd.bindPipeline(VkPipelineBindPoint::eGraphics, batch.pipeline);
                     boundPipeline = batch.pipeline;
                 }
 
                 // Draw batch of commands
-                uint32_t drawOffset = sizeof(vk::DrawIndirectCommand) * batch.offset;
+                uint32_t drawOffset = sizeof(VkDrawIndirectCommand) * batch.offset;
                 cmd.drawIndirect(currentIndirectBuffer.buffer, drawOffset, batch.count, drawStride);
             }
 

@@ -1,8 +1,9 @@
-#include "railguard/rendering/init/RenderPassBuilder.h"
+#include <railguard/rendering/init/RenderPassBuilder.h>
+#include <vulkan/vulkan.h>
 
 namespace railguard::rendering::init
 {
-    AttachmentBuilder AttachmentBuilder::SetFormat(vk::Format format)
+    AttachmentBuilder AttachmentBuilder::SetFormat(VkFormat format)
     {
         _format = format;
 
@@ -12,33 +13,33 @@ namespace railguard::rendering::init
 
     AttachmentBuilder AttachmentBuilder::ClearOnLoad()
     {
-        _loadOp = vk::AttachmentLoadOp::eClear;
+        _loadOp = VK_ATTACHMENT_LOAD_OP_CLEAR;
 
         // Return this to be able to chain the calls
         return *this;
     }
     AttachmentBuilder AttachmentBuilder::StoreAtEnd()
     {
-        _storeOp = vk::AttachmentStoreOp::eStore;
+        _storeOp = VK_ATTACHMENT_STORE_OP_STORE;
 
         // Return this to be able to chain the calls
         return *this;
     }
     AttachmentBuilder AttachmentBuilder::ClearStencilOnLoad()
     {
-        _stencilLoadOp = vk::AttachmentLoadOp::eClear;
+        _stencilLoadOp = VK_ATTACHMENT_LOAD_OP_CLEAR;
 
         // Return this to be able to chain the calls
         return *this;
     }
     AttachmentBuilder AttachmentBuilder::StoreStencilAtEnd()
     {
-        _stencilStoreOp = vk::AttachmentStoreOp::eStore;
+        _stencilStoreOp = VK_ATTACHMENT_STORE_OP_STORE;
 
         // Return this to be able to chain the calls
         return *this;
     }
-    AttachmentBuilder AttachmentBuilder::SetFinalLayout(vk::ImageLayout layout)
+    AttachmentBuilder AttachmentBuilder::SetFinalLayout(VkImageLayout layout)
     {
         _finalLayout = layout;
 
@@ -46,30 +47,30 @@ namespace railguard::rendering::init
         return *this;
     }
 
-    vk::AttachmentDescription AttachmentBuilder::Build()
+    VkAttachmentDescription AttachmentBuilder::Build()
     {
-        return vk::AttachmentDescription {
+        return VkAttachmentDescription {
             .format = _format,
             // No multisampling, so 1 sample
             // TODO maybe later
-            .samples        = vk::SampleCountFlagBits::e1,
+            .samples        = VkSampleCountFlagBits::e1,
             .loadOp         = _loadOp,
             .storeOp        = _storeOp,
             .stencilLoadOp  = _stencilLoadOp,
             .stencilStoreOp = _stencilStoreOp,
-            .initialLayout  = vk::ImageLayout::eUndefined,
+            .initialLayout  = VK_IMAGE_LAYOUT_UNDEFINED,
             .finalLayout    = _finalLayout,
         };
     }
 
-    RenderPassBuilder RenderPassBuilder::AddColorAttachment(const vk::AttachmentDescription &attachment)
+    RenderPassBuilder RenderPassBuilder::AddColorAttachment(const VkAttachmentDescription &attachment)
     {
         _attachments.push_back(attachment);
 
         // Save reference to the attachment
-        _attachmentReferences.push_back(vk::AttachmentReference {
+        _attachmentReferences.push_back(VkAttachmentReference {
             .attachment = static_cast<uint32_t>(_attachments.size()) - 1,
-            .layout     = vk::ImageLayout::eColorAttachmentOptimal,
+            .layout     = VkImageLayout::eColorAttachmentOptimal,
         });
 
         // Only allow 1 color attachment for now max.
@@ -79,14 +80,14 @@ namespace railguard::rendering::init
         return *this;
     }
 
-    RenderPassBuilder RenderPassBuilder::AddDepthAttachment(const vk::AttachmentDescription &attachment)
+    RenderPassBuilder RenderPassBuilder::AddDepthAttachment(const VkAttachmentDescription &attachment)
     {
         _attachments.push_back(attachment);
 
         // Save reference to the attachment
-        _attachmentReferences.push_back(vk::AttachmentReference {
+        _attachmentReferences.push_back(VkAttachmentReference {
             .attachment = static_cast<uint32_t>(_attachments.size()) - 1,
-            .layout     = vk::ImageLayout::eDepthStencilAttachmentOptimal,
+            .layout     = VkImageLayout::eDepthStencilAttachmentOptimal,
         });
 
         // Only allow 1 color attachment for now max.
@@ -95,16 +96,16 @@ namespace railguard::rendering::init
         return *this;
     }
 
-    RenderPassBuilder RenderPassBuilder::SetPipelineBindPoint(vk::PipelineBindPoint bindPoint)
+    RenderPassBuilder RenderPassBuilder::SetPipelineBindPoint(VkPipelineBindPoint bindPoint)
     {
         _subpass.pipelineBindPoint = bindPoint;
 
         return *this;
     }
 
-    vk::RenderPass RenderPassBuilder::Build(const vk::Device &device)
+    VkRenderPass RenderPassBuilder::Build(const VkDevice &device)
     {
-        vk::RenderPassCreateInfo renderPassCreateInfo {
+        VkRenderPassCreateInfo renderPassCreateInfo {
             .attachmentCount = static_cast<uint32_t>(_attachments.size()),
             .pAttachments    = _attachments.data(),
             .subpassCount    = 1,

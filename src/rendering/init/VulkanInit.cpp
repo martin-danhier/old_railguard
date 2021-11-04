@@ -1,7 +1,7 @@
 #include "railguard/rendering/init/VulkanInit.h"
 
 #include "railguard/core/WindowManager.h"
-#include "railguard/includes/Vulkan.h"
+
 #include "railguard/rendering/Settings.h"
 #include "railguard/rendering/init/SwapchainInitInfo.h"
 #include "railguard/rendering/init/VulkanInitInfo.h"
@@ -85,7 +85,7 @@ namespace railguard::rendering::init
         // Init swapchain with vk bootstrap
         vkb::SwapchainBuilder swapchainBuilder {initInfo.physicalDevice, initInfo.device, initInfo.surface};
         auto vkbSwapchain = swapchainBuilder.set_desired_format({SWAPCHAIN_FORMAT, SWAPCHAIN_COLOR_SPACE})
-                                .set_desired_present_mode(VK_PRESENT_MODE_FIFO_KHR)
+                                .set_desired_present_mode(VK_PRESENT_MODE_MAILBOX_KHR)
                                 .set_desired_extent(initInfo.windowExtent.width, initInfo.windowExtent.height)
                                 .build()
                                 .value();

@@ -1,11 +1,10 @@
 #include "railguard/core/WindowManager.h"
 
-#include "railguard/includes/Vulkan.h"
-
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_vulkan.h>
 #include <iostream>
 #include <utility>
+#include <vulkan/vulkan.h> // -> For Extent2D. Maybe recreate the type to avoid import ?
 
 namespace railguard::core
 {
@@ -73,13 +72,13 @@ namespace railguard::core
         return sdlRequiredExtensions;
     }
 
-    vk::SurfaceKHR WindowManager::GetVulkanSurface(vk::Instance instance) const
+    VkSurfaceKHR WindowManager::GetVulkanSurface(VkInstance instance) const
     {
         VkSurfaceKHR surface;
         // Generate surface
         if (!SDL_Vulkan_CreateSurface(_window, instance, &surface))
             HandleError();
-        return vk::SurfaceKHR(surface);
+        return VkSurfaceKHR(surface);
     }
 
     bool WindowManager::HandleEvents()
@@ -109,14 +108,14 @@ namespace railguard::core
         return shouldQuit;
     }
 
-    EventSender<vk::Extent2D> &WindowManager::ResizeEvent()
+    EventSender<VkExtent2D> &WindowManager::ResizeEvent()
     {
         return _resizeEvent;
     }
 
-    vk::Extent2D WindowManager::GetWindowExtent() const
+    VkExtent2D WindowManager::GetWindowExtent() const
     {
-        return vk::Extent2D {
+        return VkExtent2D {
             .width  = _width,
             .height = _height,
         };

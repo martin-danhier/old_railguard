@@ -1,7 +1,16 @@
 #pragma once
 
-#include "railguard/includes/Vulkan.h"
 #include "railguard/rendering/Ids.h"
+
+#define VK_DEFINE_HANDLE(object) typedef struct object##_T* object;
+VK_DEFINE_HANDLE(VkInstance)
+VK_DEFINE_HANDLE(VkRenderPass)
+VK_DEFINE_HANDLE(VkDebugUtilsMessengerEXT)
+VK_DEFINE_HANDLE(VkSurfaceKHR)
+VK_DEFINE_HANDLE(VkDevice)
+VK_DEFINE_HANDLE(VkPhysicalDevice)
+VK_DEFINE_HANDLE(VkQueue)
+struct VkPhysicalDeviceProperties;
 
 namespace railguard
 {
@@ -23,19 +32,18 @@ namespace railguard
         {
           private:
             // Vulkan global objects
-            vk::Instance _instance                                 = nullptr;
-            vk::DebugUtilsMessengerEXT _debugMessenger             = nullptr;
-            vk::SurfaceKHR _surface                                = nullptr;
-            vk::PhysicalDevice _physicalDevice                     = nullptr;
-            vk::PhysicalDeviceProperties _physicalDeviceProperties = {};
-            vk::Device _device                                     = nullptr;
-            vk::Queue _graphicsQueue                               = nullptr;
+            VkInstance _instance                                 = nullptr;
+            VkDebugUtilsMessengerEXT _debugMessenger             = nullptr;
+            VkSurfaceKHR _surface                                = nullptr;
+            VkPhysicalDevice _physicalDevice                     = nullptr;
+            VkPhysicalDeviceProperties *physicalDeviceProperties = nullptr;
+            VkDevice _device                                     = nullptr;
+            VkQueue _graphicsQueue                               = nullptr;
             uint32_t _graphicsQueueFamily                          = 0;
-            vk::RenderPass _mainRenderPass                         = nullptr;
+            VkRenderPass _mainRenderPass                         = nullptr;
 
             // Other internal variables
             swapchain_id_t _mainWindowSwapchain = 0;
-            vk::Extent2D _windowExtent;
 
             // Various managers for core objects
             class SwapchainManager *_swapchainManager               = nullptr;

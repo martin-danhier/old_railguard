@@ -4,6 +4,12 @@
 #include "railguard/rendering/Ids.h"
 #include "railguard/rendering/structs/Storages.h"
 
+// Forward references
+#define VK_DEFINE_HANDLE(object) typedef struct object##_T* object;
+VK_DEFINE_HANDLE(VkShaderModule)
+typedef uint32_t VkFlags;
+typedef VkFlags VkShaderStageFlags;
+
 namespace railguard::rendering
 {
     class ShaderModuleManager : public core::StandaloneManager<shader_module_id_t, structs::DeviceStorage>
@@ -12,15 +18,15 @@ namespace railguard::rendering
         // Typedef the parent type to make it easier to call from the methods
         typedef core::StandaloneManager<shader_module_id_t, structs::DeviceStorage> super;
 
-        std::vector<vk::ShaderStageFlagBits> _stages;
-        std::vector<vk::ShaderModule> _modules;
+        std::vector<VkShaderStageFlags> _stages;
+        std::vector<VkShaderModule> _modules;
 
         void CleanUp();
 
       public:
         ShaderModuleManager(structs::DeviceStorage storage, size_t defaultCapacity);
         ~ShaderModuleManager();
-        void Clear() override;
+        void Clear();
 
         /**
          * @brief Creates a shader module from a SPIR-V bytecode passed as an argument.
@@ -30,7 +36,7 @@ namespace railguard::rendering
          * @return core::CompleteMatch<shader_module_id_t> match containing the Id of the created module, to be able to retrieve it
          * later.
          */
-        [[nodiscard]] core::CompleteMatch<shader_module_id_t> LoadShaderModule(vk::ShaderStageFlagBits stage,
+        [[nodiscard]] core::CompleteMatch<shader_module_id_t> LoadShaderModule(VkShaderStageFlags stage,
                                                                                const std::vector<uint32_t> &codeBuffer);
         /**
          * @brief Creates a shader module from a SPIR-V file of which the path is passed as an argument.
@@ -40,7 +46,7 @@ namespace railguard::rendering
          * @return core::CompleteMatch<shader_module_id_t> match containing the Id of the created module, to be able to retrieve it
          * later.
          */
-        [[nodiscard]] core::CompleteMatch<shader_module_id_t> LoadShaderModule(vk::ShaderStageFlagBits stage,
+        [[nodiscard]] core::CompleteMatch<shader_module_id_t> LoadShaderModule(VkShaderStageFlags stage,
                                                                                const std::string &filePath);
 
         /**
@@ -50,7 +56,7 @@ namespace railguard::rendering
          */
         void DestroyShaderModule(const core::Match &match);
 
-        [[nodiscard]] vk::ShaderStageFlagBits GetStage(const core::Match &match) const;
-        [[nodiscard]] vk::ShaderModule GetModule(const core::Match &match) const;
+        [[nodiscard]] VkShaderStageFlags GetStage(const core::Match &match) const;
+        [[nodiscard]] VkShaderModule GetModule(const core::Match &match) const;
     };
 } // namespace railguard::rendering

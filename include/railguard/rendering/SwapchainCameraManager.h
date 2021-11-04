@@ -1,16 +1,13 @@
 #pragma once
 
-#include "railguard/core/ComponentManager.h"
-#include "railguard/rendering/Ids.h"
-
 #include <glm/glm.hpp>
+#include <railguard/core/ComponentManager.h>
+#include <railguard/rendering/Ids.h>
 #include <vector>
 
-namespace vk
-{
-    union ClearValue;
-    class RenderPass;
-} // namespace vk
+#define VK_DEFINE_HANDLE(object) typedef struct object##_T* object;
+VK_DEFINE_HANDLE(VkClearValue);
+VK_DEFINE_HANDLE(VkRenderPass);
 
 namespace railguard::rendering
 {
@@ -99,7 +96,7 @@ namespace railguard::rendering
         /**
          * @brief Color used to clear the image.
          */
-        std::vector<vk::ClearValue> _clearColors;
+        std::vector<VkClearValue> _clearColors;
 
         uint32_t _lastNbOfActiveCameras = 1;
 
@@ -129,7 +126,7 @@ namespace railguard::rendering
         [[nodiscard]] float GetModeParam1(const core::Match &match) const;
         [[nodiscard]] float GetModeParam2(const core::Match &match) const;
         [[nodiscard]] float GetAspectRatio(const core::Match &match) const;
-        [[nodiscard]] vk::ClearValue GetClearColor(const core::Match &match) const;
+        [[nodiscard]] VkClearValue GetClearColor(const core::Match &match) const;
 
         // Others
         [[nodiscard]] glm::mat4 GetProjectionMatrix(const core::Match &match) const;
@@ -143,6 +140,6 @@ namespace railguard::rendering
          * @return A vector containing, for each active camera, a struct containing the data
          * that the Renderer needs to render to this camera.
          */
-        [[nodiscard]] std::vector<structs::CameraRenderInfo> GetRenderInfos(const vk::RenderPass &renderPass);
+        [[nodiscard]] std::vector<structs::CameraRenderInfo> GetRenderInfos(const VkRenderPass &renderPass);
     };
 } // namespace railguard::rendering

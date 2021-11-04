@@ -4,7 +4,7 @@
 #include "railguard/rendering/enums/CameraMode.h"
 #include "railguard/utils/Colors.h"
 
-#include <glm/detail/type_quat.hpp>
+#include <glm/gtc/quaternion.hpp>
 
 namespace railguard::rendering::init
 {

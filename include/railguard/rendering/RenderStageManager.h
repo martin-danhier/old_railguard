@@ -5,9 +5,8 @@
 #include <railguard/rendering/structs/RenderBatch.h>
 #include <vector>
 
-namespace vk {
-  class vk::CommandBuffer;
-}
+#define VK_DEFINE_HANDLE(object) typedef struct object##_T* object;
+VK_DEFINE_HANDLE(VkCommandBuffer)
 
 namespace railguard::rendering
 {
@@ -39,7 +38,7 @@ namespace railguard::rendering
                            AllocationManager *allocationManager);
         ~RenderStageManager();
         void UpdateCache();
-        void DrawFromCache(vk::CommandBuffer &cmd);
+        void DrawFromCache(VkCommandBuffer cmd);
     };
 
 } // namespace railguard::rendering

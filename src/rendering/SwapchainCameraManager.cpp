@@ -1,6 +1,6 @@
 #include "railguard/rendering/SwapchainCameraManager.h"
 
-#include "railguard/includes/Vulkan.h"
+
 #include "railguard/rendering/init/CameraInitInfo.h"
 #include "railguard/rendering/structs/CameraRenderInfo.h"
 #include "railguard/utils/AdvancedCheck.h"

@@ -1,12 +1,18 @@
 #pragma once
-#include <railguard/includes/Vulkan.h>
+
+#include <railguard/rendering/Ids.h>
 #include <railguard/rendering/enums/ShaderEffectKind.h>
+#include <vector>
+
+
+#define VK_DEFINE_HANDLE(object) typedef struct object##_T *object;
+VK_DEFINE_HANDLE(VkPipelineLayout)
 
 namespace railguard::rendering::init
 {
     struct ShaderEffectInitInfo
     {
-        vk::PipelineLayout pipelineLayout;
+        VkPipelineLayout pipelineLayout;
         std::vector<shader_module_id_t> shaderStages;
         enums::ShaderEffectKind effectKind;
     };
